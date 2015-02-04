@@ -1,8 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">DulwichStreetArt</string>
+    <string name="app_name">Dulwich Street Art</string>
+    <string name="title_activity_main">Dulwich Street Art</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_sub">SubActivity</string>
+    <string name="next">Next</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
+    <string-array name="artwork_list">
+        <item>The Three Graces - Agent Provocateur</item>
+        <item>Emanuel Philibert</item>
+        <item>Jesus Carrying the Cross</item>
+        <item>Judgement of Paris</item>
+        <item>Pharaoh\'s Ring</item>
+        <item>St Catherine</item>
+        <item>Conor Harrington</item>
+        <item>Shillinglaw Van Dyke</item>
+        <item>Judith with the Head of Holofernes</item>
+        <item>Europa and the Bull</item>
+        <item>Vase with Flowers</item>
+        <item>The Virgin of the Rosary</item>
+        <item>AP nun\'s Head</item>
+        <item>Jacob with Laban - Pablo Delgrado</item>
+        <item>Nurture of Jupiter - Pablo Delgrado</item>
+        <item>Princess Victoria aged by 4 - Pablo Delgrado</item>
+        <item>The Chaff Cutter - Pablo Delgrado</item>
+        <item>White Horse in a Riding School - Pablo Delgrado</item>
+        <item>Woman Spinning - Pablo Delgrado</item>
+        <item>Triumph of David</item>
+        <item>Europa and the Bull - Reka</item>
+        <item>Girl at a Window - Remi Rough and System</item>
+        <item>Interprets the Dog - ROA</item>
+        <item>St Rita - Run</item>
+        <item>Triumpth of David - Run</item>
+        <item>Dog Hoarding - Run</item>
+        <item>A Couple in a LandScape by Stik</item>
+        <item>Eliza and Mary Davidson</item>
+        <item>Elizabeth and Mary Linley</item>
+        <item>Mrs Moody</item>
+        <item>The Fall of Man</item>
+        <item>The Guardian Angel</item>
+        <item>Three Boys</item>
+        <item>Context - Thierry Noir</item>
+        <item>Finished Wall - Walter Kersher</item>
+    </string-array>
+    <string-array name="tabs">
+        <item>Home</item>
+
+        <item>Gallery</item>
+        <item>Artists</item>
+        <item>Maps</item>
+        <item>Visited</item>
+    </string-array>
+
+    <string name="title_activity_activity_using_tab_library">Dulwich Street Art Festival</string>
+    <string name="action_tabs_using_library">Tabs With Library</string>
+    <string name="title_activity_country">World Econopedia</string>
+    <string name="title_activity_linking_menu">List of Countries</string>
+    <string name="title">Title: </string>
+    <string name="region">Region: </string>
+    <string name="incomeLevel">Income level</string>
+    <string name="capitalCity">capitalCity</string>
+    <string name="longitude">longitude</string>
+    <string name="latitude">latitude</string>
+    <string name="sync_desc">Pull the latest data from World bank For Offline Mode</string>
+    <string name="sync_button_desc">Synchronize data"</string>
+    <string name="world_bank_app">World Bank Project</string>
+    <string name="flag">Flag</string>
+    <string name="capital">Capital: City</string>
+    <string name="population">Population</string>
+    <string name="featured">Art of the week</string>
+    <string name="country_button">View Countries</string>
+    <string name="quiz_text">Econo-pedia Quiz</string>
+    <string name="quiz_button">test</string>
+    <string name="description">World Econo Pedia For Lovers of All Things Economics</string>
+    private String name="";
+    private String region="";
+    private String incomeLevel="";
+    private String capitalCity="";
+    private String longitude="";
+    private String latitude="";    <string name="title_activity_about_us">About Us</string>
+    <string name="title_activity_quiz">QuizActivity</string>
+    <string name="title_activity_quiz_activity_questions">QuizActivityQuestions</string>
+    <string name="pop_history">Dulwich Festival 9-18 May</string>
+    <string name="gdp_title">Gross Domestic Product (GDP)</string>
+    <string name="exports_imports"><![CDATA[Exports & Imports of Goods (% of GDP)]]></string>
+    <string name="overview_title">Overview</string>
+    <string name="total_reserve">Total Reserve</string>
+    <string name="gdp_per_capita_title">GDP Per Capita</string>
+    <string name="debt_title">Government Debt</string>
+    <string name="quiz_button_text_check">Check Answer</string>
+    <string name="quiz_button_text_next">Next Question</string>
+    <string name="date_picker_title">Select Year to Display</string>
+    <string name="about_us_section_1">We are seven students currently studying Computer Science at
+        King\'s College London, University of London. This app was our second group project as part of our
+        studies in software engineering.</string>
+    <string name="about_us_section_1_header">About Us</string>
+    <string name="about_section_2_header">About Econopeia</string>
+    <string name="about_us_section_2">Econopedia is a data visualisation and comparison tool that connects
+        directly to the World Bank country indicator database. It is build with simplicity and elegant design
+        in mind, providing economic data in a beautiful way.</string>
+    <string name="about_us_section_3_header">License Information</string>
+    <string name="about_us_section_3">This application uses MP AndroidChart - Copyright 2014
+        Philipp Jahoda, thank you so much.</string>
+    <string name="about_us_section_4_header">Copyright</string>
+    <string name="about_us_section_4">Copyright SEG TEAM 2A King\'s College London 2014, all rights reserved.</string>
+    <string name="title_activity_splash">SplashActivity</string>
 
 </resources>
