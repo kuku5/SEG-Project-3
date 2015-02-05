@@ -23,46 +23,10 @@ public class ArtistListFragment extends Fragment {
     private TextView textView;
 
     private RecyclerView recyclerView;
-    private ArrayList<String> galleryData;
-    private GalleryAdapter galleryAdapter;
+    private ArrayList<String> artistData;
+    private ArtistListAdapter artistListAdapter;
 
-    private int imageSet[] = {R.drawable.thethreegrace,
-            R.drawable.emanuelphilibert,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.judgementofparis,
-            R.drawable.pharaohsring,
-            R.drawable.stcatherine,
-            R.drawable.conorharrington,
-            R.drawable.davidshillinglawvandyck,
-            R.drawable.judithwiththeheadofholofernes,
-            R.drawable.europaandthebull,
-            R.drawable.vasewithflowers,
-            R.drawable.thevirginoftherosary,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross
 
-    };
 
     public static ArtistListFragment getInstance(int position) {
         ArtistListFragment myGalleryFragmentTab = new ArtistListFragment();
@@ -79,13 +43,13 @@ public class ArtistListFragment extends Fragment {
         recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view_grid);
 
 
-        if (galleryData == null) {
-            galleryData = GalleryData.generateSampleData(getActivity());
+        if (artistData == null) {
+            artistData = GalleryData.GetArtistsData(getActivity());
         }
 
-        galleryAdapter = new GalleryAdapter(getActivity(), galleryData, imageSet);
+        artistListAdapter = new ArtistListAdapter(getActivity(), artistData);
 
-        recyclerView.setAdapter(galleryAdapter);
+        recyclerView.setAdapter(artistListAdapter);
         //recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),1,false));
 

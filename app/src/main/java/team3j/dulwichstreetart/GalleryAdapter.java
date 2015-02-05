@@ -21,6 +21,11 @@ import java.util.ArrayList;
  */
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHolder> {
 
+    /*TODO potentially add a pre lollipop curve to cards
+        or just set up to put a separate grid view for the
+        for lollipop and pre lollipop
+     */
+
     private final LayoutInflater inflater;
     private ArrayList<String> data;
     private Context context;

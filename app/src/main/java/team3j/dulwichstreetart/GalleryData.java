@@ -12,15 +12,26 @@ import java.util.List;
 
 public class GalleryData {
 
-    public static final int NumberOfStreetArt = 35;
 
-    public static ArrayList<String> generateSampleData(Activity context) {
-        final ArrayList<String> data = new ArrayList<String>(NumberOfStreetArt);
-
+    public static ArrayList<String> GetArtWorkData(Activity context) {
+        final ArrayList<String> data = new ArrayList<String>(35);
 
 
-        for (int i = 0; i < NumberOfStreetArt; i++) {
+
+        for (int i = 0; i < 35; i++) {
             data.add( context.getResources().getStringArray(R.array.artwork_list)[i]);
+        }
+
+        return data;
+    }
+
+    public static ArrayList<String> GetArtistsData(Activity context) {
+        final ArrayList<String> data = new ArrayList<String>(18);
+
+
+
+        for (int i = 0; i < 18; i++) {
+            data.add( context.getResources().getStringArray(R.array.artists)[i]);
         }
 
         return data;

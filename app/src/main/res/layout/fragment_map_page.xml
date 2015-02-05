@@ -52,7 +52,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="2dp"
-                        android:text="@string/pop_history"
+                        android:text="@string/dulwich_festival_dates"
                         android:textAllCaps="true"
                         android:textColor="#1f3133"
                         android:textSize="14sp"

@@ -1,6 +1,8 @@
 package team3j.dulwichstreetart;
 
 
+        import android.app.AlertDialog;
+        import android.content.DialogInterface;
         import android.os.Bundle;
         import android.support.annotation.Nullable;
         import android.support.v4.app.Fragment;
@@ -12,6 +14,9 @@ package team3j.dulwichstreetart;
 /**
  * Created by JGill on 25/01/15.
  */
+
+
+
 public class HomePageFragment extends Fragment {
     private TextView textView;
 
@@ -31,6 +36,27 @@ public class HomePageFragment extends Fragment {
         if (bundle != null) {
             textView.setText("Home Page Selected at page  " + bundle.getInt("position"));
         }
+
+        String message=
+                "Here you can locate and navigate to your favourite street artist in Dulwich " +
+                        "and interact with other Street art Enthusiasts ";
+
+
+        new AlertDialog.Builder(getActivity())
+                .setTitle("Welcome to the Dulwich Outdoor Gallery")
+                .setMessage(message)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // continue with delete
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                    }
+                })
+                .setIcon(R.drawable.ic_blob)
+                .show();
 
         return layout;
     }

@@ -11,7 +11,11 @@ import android.view.MenuItem;
 
 /**
  * Created by JGill on 25/01/15.
+ *
+ *
  */
+
+
 public class SplashActivity extends Activity {
 
 

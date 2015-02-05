@@ -87,7 +87,7 @@ public class GalleryFragment extends Fragment {
 
 
         if (gallerData == null) {
-            gallerData = GalleryData.generateSampleData(getActivity());
+            gallerData = GalleryData.GetArtWorkData(getActivity());
         }
 
         galleryAdapter = new GalleryAdapter(getActivity(), gallerData, imageSet);

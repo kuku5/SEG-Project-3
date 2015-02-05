@@ -1,6 +1,8 @@
 package team3j.dulwichstreetart;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -22,6 +24,9 @@ import it.neokree.materialtabs.MaterialTabListener;
  * Created by JGill on 25/01/15.
  */
 
+//TODO This
+
+
 public class MainActivity extends ActionBarActivity implements MaterialTabListener {
 
     private Toolbar toolbar;
@@ -35,6 +40,8 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+
 
 
 
@@ -59,6 +66,8 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
             materialTab.setTextColor(getResources().getColor(R.color.colorPrimaryText));
 
         }
+
+
 
     }
 
@@ -93,7 +102,8 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
     @Override
     public void onTabReselected(MaterialTab materialTab) {
 
-        viewPager.arrowScroll(0);
+
+        //viewPager.arrowScroll(0);
     }
 
     @Override
@@ -103,15 +113,7 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
 
     private class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
-//        int icons[] = {R.drawable.ic_action_home,
-//                R.drawable.ic_action_articles,
-//                R.drawable.ic_action_personal,
-//                R.drawable.ic_action_home,
-//                R.drawable.ic_action_articles,
-//                R.drawable.ic_action_personal,
-//                R.drawable.ic_action_home,
-//                R.drawable.ic_action_articles,
-//                R.drawable.ic_action_personal};
+
 
         public ViewPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);

@@ -27,4 +27,5 @@ dependencies {
     compile 'org.lucasr.dspec:dspec:0.1.1'
     compile 'it.neokree:MaterialTabs:0.11'
     compile 'com.etsy.android.grid:library:1.0.5'
+    compile 'com.squareup.picasso:picasso:2.4.0'
 }

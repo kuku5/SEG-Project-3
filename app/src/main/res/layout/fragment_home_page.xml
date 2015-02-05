@@ -5,27 +5,14 @@
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingRight="3dp"
-    android:paddingLeft="3dp">
-    ///////////////
-    <!--<LinearLayout-->
-    <!--android:orientation="horizontal"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:background="@color/colorAccent">-->
-
-    <!--<TextView-->
-    <!--android:id="@+id/txt_title"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="5dp"-->
-    <!--android:layout_weight="1"-->
-    <!--android:gravity="center" />-->
-
-    <!--</LinearLayout>-->
+    android:paddingLeft="3dp"
+    android:background="@color/superlightgrey"
+    >
 
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@color/colorDivider">
+        android:background="@color/superlightgrey">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -51,7 +38,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="2dp"
-                        android:text="@string/pop_history"
+                        android:text="@string/dulwich_festival_dates"
                         android:textAllCaps="true"
                         android:textColor="#1f3133"
                         android:textSize="14sp"
@@ -67,15 +54,6 @@
 
                         />
 
-
-                    <!-- Card View 1 Fragment Container -->
-                    <!--<FrameLayout-->
-                    <!--android:id="@+id/card_view_1_double_container"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_below="@id/card_view_1_double_title">-->
-
-                    <!--</FrameLayout>-->
 
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
