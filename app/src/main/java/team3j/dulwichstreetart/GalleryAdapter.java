@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,17 +26,22 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
         or just set up to put a separate grid view for the
         for lollipop and pre lollipop
      */
+    private OnItemTouchListener onItemTouchListener;
 
     private final LayoutInflater inflater;
     private ArrayList<String> data;
     private Context context;
     private int[] imageSet;
-    public GalleryAdapter(Context context,ArrayList<String> data,int[] imageSet){
+    public GalleryAdapter(Context context,ArrayList<String> data,int[] imageSet, OnItemTouchListener itemTouchListener){
         this.data=data;
         inflater=LayoutInflater.from(context);
         this.context=context;
         this.imageSet=imageSet;
+        this.onItemTouchListener = itemTouchListener;
+
     }
+
+
 
     @Override
     public GalleryAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -86,7 +92,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
         return 35;
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder{
+    class MyViewHolder extends RecyclerView.ViewHolder  {
         // view holder for each grid  cell
         TextView txtLineOne;
         DynamicHeightImageView dynamicHeightImageView;
@@ -97,7 +103,34 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
             dynamicHeightImageView = (DynamicHeightImageView) itemView.findViewById(R.id.dynamic_imageView);
 
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onItemTouchListener.onCardViewTap(v, getPosition());
+                }
+            });
+
+//            txtLineOne.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    onItemTouchListener.onButton1Click(v, getPosition());
+//                }
+//            });
+//
+//            dynamicHeightImageView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    onItemTouchListener.onButton2Click(v, getPosition());
+//                }
+//            });
+
         }
+    }
+
+    public interface OnItemTouchListener {
+        public void onCardViewTap(View view, int position);
+        public void onButton1Click(View view, int position);
+        public void onButton2Click(View view, int position);
     }
 
 }

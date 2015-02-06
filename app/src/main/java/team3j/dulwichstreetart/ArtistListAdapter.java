@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.etsy.android.grid.util.DynamicHeightImageView;
 
@@ -24,10 +25,12 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
     private final LayoutInflater inflater;
     private ArrayList<String> data;
     private Context context;
-    public ArtistListAdapter(Context context,ArrayList<String> data){
+    private OnArtistItemTouchListener onArtistItemTouchListener;
+    public ArtistListAdapter(Context context,ArrayList<String> data,OnArtistItemTouchListener onArtistItemTouchListener){
         this.data=data;
         inflater=LayoutInflater.from(context);
         this.context=context;
+        this.onArtistItemTouchListener=onArtistItemTouchListener;
     }
 
     @Override
@@ -55,6 +58,7 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
         return 18;
     }
 
+
     class MyViewHolder extends RecyclerView.ViewHolder{
         // view holder for each grid  cell
         TextView title;
@@ -66,8 +70,25 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
             numberOfArt = (TextView) itemView.findViewById(R.id.list_item_number);
 
 
+            title.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onArtistItemTouchListener.onItemClick(v, getPosition());
+                }
+            });
+
         }
+
+
     }
+
+    public interface OnArtistItemTouchListener{
+        public void onItemClick(View view,int position);
+    }
+
+
+
+
 
 }
 

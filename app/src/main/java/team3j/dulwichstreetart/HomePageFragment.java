@@ -37,26 +37,26 @@ public class HomePageFragment extends Fragment {
             textView.setText("Home Page Selected at page  " + bundle.getInt("position"));
         }
 
-        String message=
-                "Here you can locate and navigate to your favourite street artist in Dulwich " +
-                        "and interact with other Street art Enthusiasts ";
-
-
-        new AlertDialog.Builder(getActivity())
-                .setTitle("Welcome to the Dulwich Outdoor Gallery")
-                .setMessage(message)
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // continue with delete
-                    }
-                })
-                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // do nothing
-                    }
-                })
-                .setIcon(R.drawable.ic_blob)
-                .show();
+//        String message=
+//                "Here you can locate and navigate to your favourite street artist in Dulwich " +
+//                        "and interact with other Street art Enthusiasts ";
+//
+//
+//        new AlertDialog.Builder(getActivity())
+//                .setTitle("Welcome to the Dulwich Outdoor Gallery")
+//                .setMessage(message)
+//                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        // continue with delete
+//                    }
+//                })
+//                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        // do nothing
+//                    }
+//                })
+//                .setIcon(R.drawable.ic_blob)
+//                .show();
 
         return layout;
     }

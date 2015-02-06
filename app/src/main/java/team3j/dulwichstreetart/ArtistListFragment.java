@@ -4,12 +4,15 @@ package team3j.dulwichstreetart;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -47,13 +50,25 @@ public class ArtistListFragment extends Fragment {
             artistData = GalleryData.GetArtistsData(getActivity());
         }
 
-        artistListAdapter = new ArtistListAdapter(getActivity(), artistData);
+        ArtistListAdapter.OnArtistItemTouchListener onArtistItemTouchListener= new ArtistListAdapter.OnArtistItemTouchListener() {
+            @Override
+                public void onItemClick(View view, int position) {
+                    //clicked on the entire view add more methods to method to get clicks on other parts
+                Toast.makeText(getActivity(), "Tapped " + position, Toast.LENGTH_SHORT).show();
+
+            }
+        } ;
+
+        artistListAdapter = new ArtistListAdapter(getActivity(), artistData,onArtistItemTouchListener);
+
+
 
         recyclerView.setAdapter(artistListAdapter);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
         //recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),1,false));
 
-
+        // create a instance of the custom onclicklisteners
 
         Bundle bundle = getArguments();
         if (bundle != null) {

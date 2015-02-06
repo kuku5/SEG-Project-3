@@ -10,11 +10,13 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
+import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.etsy.android.grid.StaggeredGridView;
 
@@ -90,11 +92,47 @@ public class GalleryFragment extends Fragment {
             gallerData = GalleryData.GetArtWorkData(getActivity());
         }
 
-        galleryAdapter = new GalleryAdapter(getActivity(), gallerData, imageSet);
+        GalleryAdapter.OnItemTouchListener itemTouchListener = new GalleryAdapter.OnItemTouchListener() {
+            @Override
+            public void onCardViewTap(View view, int position) {
+                //tap the entire view
+                Toast.makeText(getActivity(), "Tapped " + position, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onButton1Click(View view, int position) {
+                Toast.makeText(getActivity(), "Tapped " + position, Toast.LENGTH_SHORT).show();
+
+//                Toast.makeText(getActivity(), "Clicked Button1 in " + mItems.get(position), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onButton2Click(View view, int position) {
+                Toast.makeText(getActivity(), "Tapped " + position, Toast.LENGTH_SHORT).show();
+
+//                Toast.makeText(getActivity(), "Clicked Button2 in " + mItems.get(position), Toast.LENGTH_SHORT).show();
+            }
+        };
+
+
+
+        galleryAdapter = new GalleryAdapter(getActivity(), gallerData, imageSet,itemTouchListener);
 
         recyclerView.setAdapter(galleryAdapter);
         //recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2));
-        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, 1));
+        int screenOrientation = this.getResources().getConfiguration().orientation;
+
+        if (screenOrientation==Surface.ROTATION_0 + 1 ) {
+            //For portrait mode
+            recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, 1));
+
+
+        } else if (screenOrientation==Surface.ROTATION_90 + 1 ) {
+            //For landscape mode
+            recyclerView.setLayoutManager(new StaggeredGridLayoutManager(4, 1));
+
+            }
+
 
 
 
