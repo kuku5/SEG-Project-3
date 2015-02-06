@@ -1,14 +1,18 @@
 package team3j.dulwichstreetart;
 
-/**
- * Created by JGill on 26/01/15.
- */
-
 
 import android.app.Activity;
 
 import java.util.ArrayList;
 import java.util.List;
+
+
+/**
+ * Created by JGill on 26/01/15.
+ *
+ * This returns the data for the specific artwork also stores array of images
+ */
+//TODO maybe change getimages to return bitmaps
 
 public class GalleryData {
 
@@ -35,6 +39,50 @@ public class GalleryData {
         }
 
         return data;
+    }
+
+    public static int[] GetArtWorkImageLocations(Activity context) {
+        // return image location potentially could return bitmaps ready to go into Imageview
+
+        final int imageSet[] = {R.drawable.thethreegrace,
+                R.drawable.emanuelphilibert,
+                R.drawable.jesuscarryingthecross,
+                R.drawable.judgementofparis,
+                R.drawable.pharaohsring,
+                R.drawable.stcatherine,
+                R.drawable.conorharrington,
+                R.drawable.davidshillinglawvandyck,
+                R.drawable.judithwiththeheadofholofernes,
+                R.drawable.europaandthebull,
+                R.drawable.vasewithflowers,
+                R.drawable.thevirginoftherosary,
+                R.drawable.jesuscarryingthecross,
+                R.drawable.jesuscarryingthecross,
+                R.drawable.jesuscarryingthecross,
+                R.drawable.jesuscarryingthecross,
+                R.drawable.jesuscarryingthecross,
+                R.drawable.jesuscarryingthecross,
+                R.drawable.jesuscarryingthecross,
+                R.drawable.jesuscarryingthecross,
+                R.drawable.jesuscarryingthecross,
+                R.drawable.jesuscarryingthecross,
+                R.drawable.jesuscarryingthecross,
+                R.drawable.jesuscarryingthecross,
+                R.drawable.jesuscarryingthecross,
+                R.drawable.jesuscarryingthecross,
+                R.drawable.jesuscarryingthecross,
+                R.drawable.jesuscarryingthecross,
+                R.drawable.jesuscarryingthecross,
+                R.drawable.jesuscarryingthecross,
+                R.drawable.jesuscarryingthecross,
+                R.drawable.jesuscarryingthecross,
+                R.drawable.jesuscarryingthecross,
+                R.drawable.jesuscarryingthecross,
+                R.drawable.jesuscarryingthecross
+
+        };
+
+        return imageSet;
     }
 
 }

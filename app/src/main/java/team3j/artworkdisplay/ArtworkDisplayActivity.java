@@ -1,9 +1,6 @@
-package team3j.dulwichstreetart;
+package team3j.artworkdisplay;
 
-
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.graphics.drawable.Drawable;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -13,46 +10,44 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Switch;
-
 
 import it.neokree.materialtabs.MaterialTab;
 import it.neokree.materialtabs.MaterialTabHost;
 import it.neokree.materialtabs.MaterialTabListener;
-
-/**
- * Created by JGill on 25/01/15.
- */
-
-//TODO This
+import team3j.dulwichstreetart.HomePageFragment;
+import team3j.dulwichstreetart.MapFragment;
+import team3j.dulwichstreetart.R;
 
 
-public class MainActivity extends ActionBarActivity implements MaterialTabListener {
+public class ArtworkDisplayActivity extends ActionBarActivity implements MaterialTabListener {
 
     private Toolbar toolbar;
     private MaterialTabHost tabHost;
     private ViewPager viewPager;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //create view with tab layout on create
         setContentView(R.layout.tab_layout);
 
-        //add custom tool bar and tabs
         toolbar = (Toolbar) findViewById(R.id.app_bar);
+
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-
 
         tabHost = (MaterialTabHost) findViewById(R.id.materialTabHost);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
 
-        //fragment page adapter for the tabs displays a fragment and handles loading of fragments for each tab
+        Intent myIntent = getIntent(); // gets the previously created intent
+        int indexOfArtWork = myIntent.getIntExtra("indexOfArtWork", 0);
 
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), indexOfArtWork);
+
         viewPager.setAdapter(adapter);
+
         viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
@@ -61,7 +56,7 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
         });
 
         for (int i = 0; i < adapter.getCount(); i++) {
-            MaterialTab materialTab=
+            MaterialTab materialTab =
                     tabHost.newTab()
                             .setText(adapter.getPageTitle(i))
                             .setTabListener(this);
@@ -72,14 +67,13 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
         }
 
 
-
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_artwork_display, menu);
         return true;
     }
 
@@ -101,13 +95,12 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
     @Override
     public void onTabSelected(MaterialTab materialTab) {
         viewPager.setCurrentItem(materialTab.getPosition());
+
     }
 
     @Override
     public void onTabReselected(MaterialTab materialTab) {
 
-
-        //viewPager.arrowScroll(0);
     }
 
     @Override
@@ -115,41 +108,37 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
 
     }
 
-    /*
-    ViewPagerAdapter
-    adapter for the tab layout fill each space with a fragment and manages loading
-     */
-
-
     private class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
 
+        int indexOfArtWork;
 
-        public ViewPagerAdapter(FragmentManager fragmentManager) {
+        public ViewPagerAdapter(FragmentManager fragmentManager, int indexOfArtWork) {
             super(fragmentManager);
+            this.indexOfArtWork = indexOfArtWork;
         }
 
 
         public Fragment getItem(int num) {
             /*
-            returns a fragment to place in the tab
+            returns a fragment to place in the tab can put a switch statement to place different
              */
 
 
-            switch(num){
+            switch (num) {
                 case 0:
-                    return HomePageFragment.getInstance(num);
+                    return ArtworkTabOneFragment.getInstance(num,indexOfArtWork);
                 case 1:
-                    return GalleryFragment.getInstance(num);
+                    return ArtworkTabOneFragment.getInstance(num,indexOfArtWork);
                 case 2:
-                    return ArtistListFragment.getInstance(num);
+                    return ArtworkTabOneFragment.getInstance(num,indexOfArtWork);
                 case 3:
-                    return MapFragment.getInstance(num);
+                    return ArtworkTabOneFragment.getInstance(num,indexOfArtWork);
                 case 4:
-                    return MapFragment.getInstance(num);
+                    return ArtworkTabOneFragment.getInstance(num,indexOfArtWork);
 
                 default:
-                return HomePageFragment.getInstance(num);
+                    return ArtworkTabOneFragment.getInstance(num,indexOfArtWork);
 
 
             }
@@ -159,13 +148,13 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
 
         @Override
         public int getCount() {
-            return 5;
+            return 4;
         }
 
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return getResources().getStringArray(R.array.tabs)[position];
+            return getResources().getStringArray(R.array.artworkdisplaytabs)[position];
         }
 
 //        private Drawable getIcon(int position) {
@@ -174,5 +163,6 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
 
 
     }
+
 
 }

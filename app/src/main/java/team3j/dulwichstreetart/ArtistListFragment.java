@@ -1,6 +1,8 @@
 package team3j.dulwichstreetart;
 
 
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -23,6 +25,7 @@ import java.util.ArrayList;
 //TODO
 
 public class ArtistListFragment extends Fragment {
+
     private TextView textView;
 
     private RecyclerView recyclerView;
@@ -55,7 +58,6 @@ public class ArtistListFragment extends Fragment {
                 public void onItemClick(View view, int position) {
                     //clicked on the entire view add more methods to method to get clicks on other parts
                 Toast.makeText(getActivity(), "Tapped " + position, Toast.LENGTH_SHORT).show();
-
             }
         } ;
 

@@ -1,32 +1,29 @@
 package team3j.dulwichstreetart;
 
 
-import android.database.DataSetObserver;
-import android.graphics.drawable.GradientDrawable;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListAdapter;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.etsy.android.grid.StaggeredGridView;
-
 import java.util.ArrayList;
+
+import team3j.artworkdisplay.ArtworkDisplayActivity;
+
 
 /**
  * Created by JGill on 25/01/15.
  */
 
-//TODO
+//TODO maybe add different button to cardviews, also add final images
 
 public class GalleryFragment extends Fragment {
     private TextView textView;
@@ -35,43 +32,7 @@ public class GalleryFragment extends Fragment {
     private ArrayList<String> gallerData;
     private GalleryAdapter galleryAdapter;
 
-    private int imageSet[] = {R.drawable.thethreegrace,
-            R.drawable.emanuelphilibert,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.judgementofparis,
-            R.drawable.pharaohsring,
-            R.drawable.stcatherine,
-            R.drawable.conorharrington,
-            R.drawable.davidshillinglawvandyck,
-            R.drawable.judithwiththeheadofholofernes,
-            R.drawable.europaandthebull,
-            R.drawable.vasewithflowers,
-            R.drawable.thevirginoftherosary,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross,
-            R.drawable.jesuscarryingthecross
 
-    };
 
     public static GalleryFragment getInstance(int position) {
         GalleryFragment myGalleryFragmentTab = new GalleryFragment();
@@ -97,6 +58,11 @@ public class GalleryFragment extends Fragment {
             public void onCardViewTap(View view, int position) {
                 //tap the entire view
                 Toast.makeText(getActivity(), "Tapped " + position, Toast.LENGTH_SHORT).show();
+
+                Intent i = new Intent(getActivity(), ArtworkDisplayActivity.class);
+                i.putExtra("indexOfArtWork",position);
+                startActivity(i);
+
             }
 
             @Override
@@ -114,7 +80,7 @@ public class GalleryFragment extends Fragment {
             }
         };
 
-
+        int imageSet[]=GalleryData.GetArtWorkImageLocations(getActivity());
 
         galleryAdapter = new GalleryAdapter(getActivity(), gallerData, imageSet,itemTouchListener);
 

@@ -52,13 +52,19 @@
     </string-array>
     <string-array name="tabs">
         <item>Home</item>
-
         <item>Gallery</item>
         <item>Artists</item>
         <item>Maps</item>
         <item>Visited</item>
     </string-array>
 
+    <string-array name="artworkdisplaytabs">
+        <item>Home</item>
+        <item>Gallery</item>
+        <item>Artists</item>
+        <item>Maps</item>
+        <item>Visited</item>
+    </string-array>
     <string-array name="artists">
         <item>Agent Provocateur</item>
         <item>Ben Wilson</item>
@@ -81,9 +87,8 @@
     </string-array>
 
     <string name="title_activity_activity_using_tab_library">Dulwich Street Art Festival</string>
-
     <string name="dulwich_festival_dates">Dulwich Festival 9-18 May</string>
-
     <string name="title_activity_splash">Dulwich OutDoor Gallery</string>
+    <string name="title_activity_artwork_display">ArtworkDisplay</string>
 
 </resources>

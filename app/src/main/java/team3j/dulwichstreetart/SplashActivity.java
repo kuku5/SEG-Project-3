@@ -11,7 +11,7 @@ import android.view.MenuItem;
 
 /**
  * Created by JGill on 25/01/15.
- *
+ * This Activity creates displays splash
  *
  */
 
