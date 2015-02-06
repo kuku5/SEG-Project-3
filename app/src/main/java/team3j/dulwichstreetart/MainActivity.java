@@ -3,6 +3,7 @@ package team3j.dulwichstreetart;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -95,6 +96,9 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
             return true;
         }
 
+        if (id == R.id.navigate) {
+            startActivity(new Intent(this, HelpActivity.class));
+        }
         return super.onOptionsItemSelected(item);
     }
 

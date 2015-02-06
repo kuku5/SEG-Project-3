@@ -12,6 +12,9 @@
     <string name="drawer_close">Close</string>
     <string name="art_description">This clever work from the yoloswag movement caught attention from across the globe.
      Bringing together yolo\'ers from around the world  </string>
+    <string name="total_works">Total Artwork: 2</string>
+    <string name="total_favourites">Total Favourites: 100120</string>
+    <string name="total_visits">Total Visits: 1000</string>
 
     <string-array name="artwork_list">
         <item>The Three Graces - Agent Provocateur</item>
@@ -57,7 +60,6 @@
         <item>Maps</item>
         <item>Visited</item>
     </string-array>
-
     <string-array name="artworkdisplaytabs">
         <item>Home</item>
         <item>Gallery</item>
@@ -90,5 +92,6 @@
     <string name="dulwich_festival_dates">Dulwich Festival 9-18 May</string>
     <string name="title_activity_splash">Dulwich OutDoor Gallery</string>
     <string name="title_activity_artwork_display">ArtworkDisplay</string>
+    <string name="title_activity_help">HelpActivity</string>
 
 </resources>

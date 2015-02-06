@@ -50,7 +50,7 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
     public void onBindViewHolder(ArtistListAdapter.MyViewHolder holder, int position) {
         Log.d("test123",data.get(position));
         holder.title.setText(data.get(position));
-        holder.numberOfArt.setText(position+"");
+        holder.numberOfArt.setText("");
     }
 
     @Override
