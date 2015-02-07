@@ -93,5 +93,6 @@
     <string name="title_activity_splash">Dulwich OutDoor Gallery</string>
     <string name="title_activity_artwork_display">ArtworkDisplay</string>
     <string name="title_activity_help">HelpActivity</string>
+    <string name="title_activity_artist_display">ArtistDisplayActivity</string>
 
 </resources>

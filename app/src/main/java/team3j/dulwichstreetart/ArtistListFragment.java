@@ -18,6 +18,9 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import team3j.artistdisplay.ArtistDisplayActivity;
+import team3j.artworkdisplay.ArtworkDisplayActivity;
+
 /**
  * Created by JGill on 25/01/15.
  */
@@ -57,6 +60,13 @@ public class ArtistListFragment extends Fragment {
             @Override
                 public void onItemClick(View view, int position) {
                     //clicked on the entire view add more methods to method to get clicks on other parts
+
+
+                //put the intent here
+                Intent i = new Intent(getActivity(), ArtistDisplayActivity.class);
+                i.putExtra("indexOfArtist",position);
+                startActivity(i);
+
                 Toast.makeText(getActivity(), "Tapped " + position, Toast.LENGTH_SHORT).show();
             }
         } ;
