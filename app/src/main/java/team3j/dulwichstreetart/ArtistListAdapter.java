@@ -35,7 +35,6 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
 
     @Override
     public ArtistListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         //add view to the grid cell for the first time
         //this stores the view in the cache meaning the images dont have to be reloaded over
         //and over mean its should be faster than a Listview/Gridview which does
@@ -70,7 +69,7 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
             numberOfArt = (TextView) itemView.findViewById(R.id.list_item_number);
 
 
-            title.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     onArtistItemTouchListener.onItemClick(v, getPosition());

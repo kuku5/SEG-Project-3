@@ -30,7 +30,6 @@ import team3j.artworkdisplay.ArtworkDisplayActivity;
 public class ArtistListFragment extends Fragment {
 
     private TextView textView;
-
     private RecyclerView recyclerView;
     private ArrayList<String> artistData;
     private ArtistListAdapter artistListAdapter;
@@ -59,10 +58,8 @@ public class ArtistListFragment extends Fragment {
         ArtistListAdapter.OnArtistItemTouchListener onArtistItemTouchListener= new ArtistListAdapter.OnArtistItemTouchListener() {
             @Override
                 public void onItemClick(View view, int position) {
-                    //clicked on the entire view add more methods to method to get clicks on other parts
-
-
-                //put the intent here
+                 //clicked on the entire view add more methods to method to get clicks on other parts
+                 //put the intent here
                 Intent i = new Intent(getActivity(), ArtistDisplayActivity.class);
                 i.putExtra("indexOfArtist",position);
                 startActivity(i);

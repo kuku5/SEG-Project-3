@@ -9,6 +9,8 @@
     <color name="colorSecondaryText">#ffffffff</color>
     <color name="colorDivider">#fffdfdfd</color>
 
+    <color name="white">#ffffffff</color>
+
     <color name="orange">#ffffdc7e</color>
     <color name="superlightgrey">#fffdfdfd</color>
     <color name="grey">#fff4f4f4</color>

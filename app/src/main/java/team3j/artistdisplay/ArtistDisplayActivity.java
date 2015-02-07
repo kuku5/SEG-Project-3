@@ -29,6 +29,7 @@ public class ArtistDisplayActivity extends ActionBarActivity {
 
             textView.setText("Hello World this artist is   " +    artistName );
 
+
         }
 
 
