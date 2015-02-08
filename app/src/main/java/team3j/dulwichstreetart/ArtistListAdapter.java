@@ -69,7 +69,7 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
             numberOfArt = (TextView) itemView.findViewById(R.id.list_item_number);
 
 
-            itemView.setOnClickListener(new View.OnClickListener() {
+            title.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     onArtistItemTouchListener.onItemClick(v, getPosition());

@@ -1,52 +1,73 @@
 package team3j.dulwichstreetart;
 
+import android.graphics.Color;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
+import com.hannesdorfmann.swipeback.Position;
+import com.hannesdorfmann.swipeback.SwipeBack;
 
-public class HelpActivity extends ActionBarActivity {
+public class HelpActivity extends FragmentActivity {
+
+    private ViewPager mViewPager;
+    private int mPagerPosition;
+    private int mPagerOffsetPixels;
+    private SwipeBack swipeBack;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onBackPressed() {
+
+
+        super.onBackPressed();
+
+        overridePendingTransition(R.anim.swipeback_stack_to_front,
+                R.anim.swipeback_stack_right_out);
+
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_help);
 
-        Toolbar toolbar= (Toolbar) findViewById(R.id.app_bar);
-        setSupportActionBar(toolbar);
+         SwipeBack.attach(this, Position.LEFT)
+                .setContentView(R.layout.view_pager)
+                .setSwipeBackView(R.layout.swipeback_default)
+                .setDividerAsSolidColor(Color.WHITE)
+                .setDividerSize(2)
+                .setOnInterceptMoveEventListener(
+                        new SwipeBack.OnInterceptMoveEventListener() {
+                            @Override
+                            public boolean isViewDraggable(View v, int dx,
+                                                           int x, int y) {
+                                if (v == mViewPager) {
+                                    return !(mPagerPosition == 0 && mPagerOffsetPixels == 0)
+                                            || dx < 0;
+                                }
 
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                                return false;
+                            }
+                        });
 
+        mViewPager = (ViewPager) findViewById(R.id.viewPager);
+        mViewPager.setAdapter(new FragmentAdapter(getSupportFragmentManager()));
 
+       // mViewPager.setCurrentItem(4);
+        mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                mPagerPosition = position;
+                mPagerOffsetPixels = positionOffsetPixels;
+            }
+
+        });
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_help, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        if(id==android.R.id.home){
-            NavUtils.navigateUpFromSameTask(this);
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

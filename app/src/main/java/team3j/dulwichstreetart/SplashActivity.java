@@ -32,6 +32,8 @@ public class SplashActivity extends Activity {
             public void run() {
                 Intent i = new Intent(SplashActivity.this, MainActivity.class);
                 startActivity(i);
+               overridePendingTransition(R.anim.swipeback_slide_right_in,
+                        R.anim.swipeback_stack_to_back);
                 finish();
             }
         }, TIMER);
