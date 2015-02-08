@@ -13,6 +13,7 @@ import team3j.dulwichstreetart.R;
 public class ArtistDisplayActivity extends ActionBarActivity {
 
     private TextView textView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,16 +23,13 @@ public class ArtistDisplayActivity extends ActionBarActivity {
 
         int indexOfArtWork = myIntent.getIntExtra("indexOfArtWork", 0);
 
-        String artistName= GalleryData.GetArtistsData(this).get(indexOfArtWork);
-
+        String artistName = GalleryData.GetArtistsData(this).get(indexOfArtWork);
         if (savedInstanceState != null) {
 
 
-            textView.setText("Hello World this artist is   " +    artistName );
-
+            textView.setText("Hello World this artist is   " + artistName);
 
         }
-
 
 
     }
