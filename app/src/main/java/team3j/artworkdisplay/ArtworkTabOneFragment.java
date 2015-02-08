@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import team3j.dulwichstreetart.GalleryData;
@@ -20,6 +21,7 @@ import team3j.dulwichstreetart.R;
 
 public class ArtworkTabOneFragment extends Fragment {
     private TextView textView;
+    private ScrollView scrollView;
     int indexOfArtWork;
     public static ArtworkTabOneFragment getInstance(int position, int indexOfArtWork) {
         ArtworkTabOneFragment myFragmentTab = new ArtworkTabOneFragment();
@@ -32,12 +34,13 @@ public class ArtworkTabOneFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View layout = inflater.inflate(R.layout.fragment_home_page, container, false);
+        View layout = inflater.inflate(R.layout.fragment_artwork_display, container, false);
         textView = (TextView) layout.findViewById(R.id.position);
         Bundle bundle = getArguments();
         indexOfArtWork= bundle.getInt("indexOfArtWork");
         String title=  GalleryData.GetArtWorkData(getActivity()).get(indexOfArtWork);
         getActivity().setTitle(title);
+
         if (bundle != null) {
 
 
