@@ -1,5 +1,6 @@
 package team3j.dulwichstreetart;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
@@ -36,6 +37,9 @@ public class HelpActivity extends FragmentActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Intent myIntent = getIntent(); // gets the previously created intent
+        int indexOfArtWork = myIntent.getIntExtra("indexOfArtWork", 0);
+
          SwipeBack.attach(this, Position.LEFT)
                 .setContentView(R.layout.view_pager)
                 .setSwipeBackView(R.layout.swipeback_default)
@@ -56,7 +60,8 @@ public class HelpActivity extends FragmentActivity {
                         });
 
         mViewPager = (ViewPager) findViewById(R.id.viewPager);
-        mViewPager.setAdapter(new FragmentAdapter(getSupportFragmentManager()));
+        mViewPager.setAdapter(new FragmentAdapter(getSupportFragmentManager(),indexOfArtWork));
+
 
        // mViewPager.setCurrentItem(4);
         mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {

@@ -15,32 +15,39 @@
         android:layout_height="fill_parent"
         android:background="@color/superlightgrey"
         android:animateLayoutChanges="true"
+        android:id="@+id/scroll_view_toscroll"
         >
 
 
 
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:animateLayoutChanges="true"
 
+            android:background="@color/superlightgrey"
+
             >
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@color/colorTertiary"
+                android:background="@color/superlightgrey"
+
                 android:padding="0dp"
                 android:animateLayoutChanges="true"
 
                 >
+                <!--android:background="@color/colorTertiary"-->
 
-                <include
-                    android:id="@+id/app_bar"
-                    layout="@layout/app_bar" />
+
+
+                <!--<include-->
+                    <!--android:id="@+id/app_bar"-->
+                    <!--layout="@layout/app_bar" />-->
                 <!--<android.support.v7.widget.CardView-->
                     <!--xmlns:card_view="http://schemas.android.com/apk/res-auto"-->
                     <!--android:layout_width="fill_parent"-->
@@ -53,16 +60,57 @@
                     <!--card_view:cardBackgroundColor="@android:color/white"-->
                     <!--card_view:cardCornerRadius="0dp">-->
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@color/white"
+                    android:padding="16dp"
+                    >
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:text="@string/hello_world"
+                        android:textAllCaps="true"
+                        android:textColor="#1f3133"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:id="@+id/position"
+                        android:layout_gravity="center|left"
+
+                        android:maxLines="1"
+                        android:layout_weight="0.8" />
+                    <!--<ImageView-->
+                    <!--android:layout_margin="4dp"-->
+
+                    <!--android:layout_width="40dp"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:src="@drawable/googlemaps"-->
+                    <!--android:backgroundTint="@color/colorAccent"-->
+
+                    <!--android:layout_weight="0.2"-->
+                    <!--android:layout_gravity="center|right" />-->
+
+
+                </LinearLayout>
+
+
                     <com.etsy.android.grid.util.DynamicHeightImageView
-                        android:id="@+id/dynamic_imageView"
+                        android:id="@+id/dynamic_imageview_artwork_display"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:src="@drawable/thethreegrace"
+                        android:src="@drawable/thevirginoftherosary"
                         android:layout_centerInParent="true"
                         android:scaleType="fitStart"
                         android:adjustViewBounds="true"
+                        android:background="@color/grey"
 
-                        />
+                        android:layout_marginBottom="4dp"
+
+                       />
+
 
 
 
@@ -78,7 +126,7 @@
 
 
             <android.support.v7.widget.CardView
-                android:id="@+id/card_view_1_double"
+                android:id="@+id/artwork_display_cardview1"
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:layout_width="fill_parent"
                 android:layout_height="400dp"
@@ -87,35 +135,78 @@
                 card_view:cardBackgroundColor="@android:color/white"
                 card_view:cardCornerRadius="8dp">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingLeft="3dp"
-                    android:paddingRight="3dp">
+                <!--<RelativeLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:paddingLeft="3dp"-->
+                    <!--android:paddingRight="3dp">-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_margin="2dp"-->
+                        <!--android:text="@string/description_title"-->
+                        <!--android:textAllCaps="true"-->
+                        <!--android:textColor="#1f3133"-->
+                        <!--android:textSize="14sp"-->
+                        <!--android:textStyle="bold"-->
+                        <!--android:id="@+id/artwork_display_cardview1_title"/>-->
+
+
+                    <!--<TextView-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_margin="2dp"-->
+                        <!--android:text="@string/description_title"-->
+                        <!--android:textColor="#1f3133"-->
+                        <!--android:textSize="14sp"-->
+                        <!--android:layout_below="@+id/artwork_display_cardview1_title"/>-->
+
+
+
+
+                <!--</RelativeLayout>-->
+
+
+                <LinearLayout android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+
+
 
                     <TextView
-                        android:id="@+id/position"
-                        android:layout_width="match_parent"
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="2dp"
-                        android:text="@string/dulwich_festival_dates"
-                        android:textAllCaps="true"
-                        android:textColor="#1f3133"
-                        android:textSize="14sp"
-                        android:textStyle="bold"/>
+                        android:id="@+id/txt_line1"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="1dp"
+                        android:drawableTop="@color/grey"
+                        android:layout_margin="1dp"
+                        android:layout_marginLeft="3dp"
+                        android:autoText="false"
+                        android:text="@string/description_title"
+                        android:textSize="11sp"
+                        />
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="1dp"
+                        android:id="@+id/separator"
+                        android:background="@color/grey"/>
 
-                    <ImageView
-                        android:id="@+id/image"
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
-                        android:scaleType="center"
-                        android:src="@drawable/conorharrington"
-                        android:layout_below="@id/position"
+                    <TextView
+
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/description_textview"
+                        android:paddingBottom="1dp"
+                        android:layout_margin="1dp"
+                        android:layout_marginLeft="3dp"
+                        android:text="@string/art_description"
+                        android:textSize="9sp"
 
                         />
-
-
-                </RelativeLayout>
+                </LinearLayout>
             </android.support.v7.widget.CardView>
 
 

@@ -15,13 +15,15 @@
     <color name="white">#ffffffff</color>
 
     <color name="orange">#ffffdc7e</color>
-    <color name="superlightgrey">#fffdfdfd</color>
+    <color name="superlightgrey">#fffcfcfc</color>
+    <color name="lightgrey">#ffdedede</color>
     <color name="grey">#fff4f4f4</color>
     <color name="green">#ff8dd304</color>
     <color name="blue">#ff82e0ff</color>
     <color name="yellow">#fffffbae</color>
     <color name="red">#fff10800</color>
     <color name="text_grey">#ff2b2b2b</color>
+    <color name="dark_grey">#1f3133</color>
 
     <color name="list_item_pressed">#1A000000</color>
 </resources>
