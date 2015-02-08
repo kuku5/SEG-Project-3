@@ -36,7 +36,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@color/superlightgrey"
+                android:background="@color/colorAccent"
 
                 android:padding="0dp"
                 android:animateLayoutChanges="true"
@@ -106,9 +106,9 @@
                         android:layout_centerInParent="true"
                         android:scaleType="fitStart"
                         android:adjustViewBounds="true"
-                        android:background="@color/grey"
+                        android:background="@color/superlightgrey"
 
-                        android:layout_marginBottom="4dp"
+                        android:layout_marginBottom="3dp"
 
                        />
 
@@ -136,7 +136,7 @@
                 android:layout_marginLeft="0dp"
                 android:layout_marginRight="0dp"
                 card_view:cardBackgroundColor="@android:color/white"
-                card_view:cardCornerRadius="4dp"
+                card_view:cardCornerRadius="0dp"
                 >
 
 
@@ -154,7 +154,7 @@
                         android:id="@+id/artwork_display_cardview1_title"
                         android:paddingTop="8dp"
                         android:paddingBottom="3dp"
-                        android:drawableTop="@color/grey"
+                        android:drawableTop="@color/colorAccent"
                         android:layout_margin="1dp"
                         android:layout_marginLeft="3dp"
                         android:autoText="false"
@@ -192,7 +192,7 @@
                 android:layout_marginLeft="0dp"
                 android:layout_marginRight="0dp"
                 card_view:cardBackgroundColor="@android:color/white"
-                card_view:cardCornerRadius="4dp"
+                card_view:cardCornerRadius="0dp"
                 >
 
 
@@ -210,12 +210,13 @@
                         android:id="@+id/artwork_display_cardview2_title"
                         android:paddingTop="8dp"
                         android:paddingBottom="3dp"
-                        android:drawableTop="@color/grey"
+                        android:drawableTop="@color/colorAccent"
                         android:layout_margin="1dp"
                         android:layout_marginLeft="3dp"
                         android:autoText="false"
                         android:text="Comments"
                         android:textSize="14sp"
+
                         />
                     <View
                         android:layout_width="fill_parent"
@@ -236,7 +237,7 @@
 
                         android:layout_marginBottom="4dp"
 
-                        android:layout_gravity="center_horizontal" />
+                        />
 
                     <!--<TextView-->
 
