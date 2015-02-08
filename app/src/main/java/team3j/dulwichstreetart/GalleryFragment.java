@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Surface;
 import android.view.View;
@@ -29,9 +30,9 @@ public class GalleryFragment extends Fragment {
     private TextView textView;
 
     private RecyclerView recyclerView;
-    private ArrayList<String> gallerData;
+    private ArrayList<String> galleryData;
     private GalleryAdapter galleryAdapter;
-
+    private RecycleViewScrollViewListener recycleViewScrollViewListener;
 
 
     public static GalleryFragment getInstance(int position) {
@@ -49,8 +50,8 @@ public class GalleryFragment extends Fragment {
         recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view_grid);
 
 
-        if (gallerData == null) {
-            gallerData = GalleryData.GetArtWorkData(getActivity());
+        if (galleryData == null) {
+            galleryData = GalleryData.GetArtWorkData(getActivity());
         }
 
         GalleryAdapter.OnItemTouchListener itemTouchListener = new GalleryAdapter.OnItemTouchListener() {
@@ -59,30 +60,63 @@ public class GalleryFragment extends Fragment {
                 //tap the entire view
                 Toast.makeText(getActivity(), "Tapped " + position, Toast.LENGTH_SHORT).show();
 
-                Intent i = new Intent(getActivity(), ArtworkDisplayActivity.class);
+                Intent i = new Intent(getActivity(), HelpActivity.class);
                 i.putExtra("indexOfArtWork",position);
                 startActivity(i);
+                getActivity().overridePendingTransition(R.anim.swipeback_slide_right_in,
+                        R.anim.swipeback_stack_to_back);
 
             }
+
+
+
 
             @Override
             public void onButton1Click(View view, int position) {
                 Toast.makeText(getActivity(), "Tapped " + position, Toast.LENGTH_SHORT).show();
 
-//                Toast.makeText(getActivity(), "Clicked Button1 in " + mItems.get(position), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(), "Clicked Button1 in " + mItems.get(position), Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onButton2Click(View view, int position) {
                 Toast.makeText(getActivity(), "Tapped " + position, Toast.LENGTH_SHORT).show();
 
-//                Toast.makeText(getActivity(), "Clicked Button2 in " + mItems.get(position), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(), "Clicked Button2 in " + mItems.get(position), Toast.LENGTH_SHORT).show();
             }
         };
 
+        recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+
+            }
+
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if(dy<0){
+//                    recycleViewScrollViewListener.ScrollUp(dy);
+
+
+//                    Log.d("scrolling","going up"+dy);
+
+                }else{
+//                    recycleViewScrollViewListener.ScrollDown(dy);
+
+//                    Log.d("scrolling","going down");
+
+                }
+            }
+        });
+
+
         int imageSet[]=GalleryData.GetArtWorkImageLocations(getActivity());
 
-        galleryAdapter = new GalleryAdapter(getActivity(), gallerData, imageSet,itemTouchListener);
+        galleryAdapter = new GalleryAdapter(getActivity(), galleryData, imageSet,itemTouchListener);
 
         recyclerView.setAdapter(galleryAdapter);
         //recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2));
@@ -112,4 +146,17 @@ public class GalleryFragment extends Fragment {
 
         return layout;
     }
+
+    public void setRecycleViewScrollViewListener(RecycleViewScrollViewListener recycleViewScrollViewListener){
+        this.recycleViewScrollViewListener=recycleViewScrollViewListener;
+
+    }
+
+    public interface RecycleViewScrollViewListener {
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy);
+
+        public void ScrollUp(int dy);
+        public void ScrollDown(int dy);
+    }
+
 }

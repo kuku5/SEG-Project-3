@@ -6,6 +6,9 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +31,9 @@ public class HomePageFragment extends Fragment {
         return myFragmentTab;
     }
 
+
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_home_page, container, false);
@@ -37,6 +43,7 @@ public class HomePageFragment extends Fragment {
             textView.setText("Home Page Selected at page  " + bundle.getInt("position"));
         }
 
+        Log.d("loade","loaded"+ bundle.getInt("position"));
 //        String message=
 //                "Here you can locate and navigate to your favourite street artist in Dulwich " +
 //                        "and interact with other Street art Enthusiasts ";
@@ -60,4 +67,9 @@ public class HomePageFragment extends Fragment {
 
         return layout;
     }
+
+
+
+
+
 }
