@@ -9,12 +9,7 @@
     tools:context="team3j.artistdisplay.ArtistDisplayActivity">
 
 
-    <TextView
-        android:id="@+id/test123"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></TextView>
-
-    <ScrollView
+<ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="@color/colorDivider">

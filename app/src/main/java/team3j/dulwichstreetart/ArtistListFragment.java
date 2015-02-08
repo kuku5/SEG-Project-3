@@ -35,7 +35,6 @@ public class ArtistListFragment extends Fragment {
     private ArtistListAdapter artistListAdapter;
 
 
-
     public static ArtistListFragment getInstance(int position) {
         ArtistListFragment myGalleryFragmentTab = new ArtistListFragment();
         Bundle args = new Bundle();
@@ -55,27 +54,26 @@ public class ArtistListFragment extends Fragment {
             artistData = GalleryData.GetArtistsData(getActivity());
         }
 
-        ArtistListAdapter.OnArtistItemTouchListener onArtistItemTouchListener= new ArtistListAdapter.OnArtistItemTouchListener() {
+        ArtistListAdapter.OnArtistItemTouchListener onArtistItemTouchListener = new ArtistListAdapter.OnArtistItemTouchListener() {
             @Override
-                public void onItemClick(View view, int position) {
-                 //clicked on the entire view add more methods to method to get clicks on other parts
-                 //put the intent here
+            public void onItemClick(View view, int position) {
+                //clicked on the entire view add more methods to method to get clicks on other parts
+                //put the intent here
                 Intent i = new Intent(getActivity(), ArtistDisplayActivity.class);
-                i.putExtra("indexOfArtist",position);
+                i.putExtra("indexOfArtist", position);
                 startActivity(i);
 
                 Toast.makeText(getActivity(), "Tapped " + position, Toast.LENGTH_SHORT).show();
             }
-        } ;
+        };
 
-        artistListAdapter = new ArtistListAdapter(getActivity(), artistData,onArtistItemTouchListener);
-
+        artistListAdapter = new ArtistListAdapter(getActivity(), artistData, onArtistItemTouchListener);
 
 
         recyclerView.setAdapter(artistListAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         //recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2));
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),1,false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), 1, false));
 
         // create a instance of the custom onclicklisteners
 
@@ -84,7 +82,6 @@ public class ArtistListFragment extends Fragment {
 
             //textView.setText("The Page Selected Is " + bundle.getInt("position"));
         }
-
 
 
         return layout;

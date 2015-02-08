@@ -17,7 +17,7 @@ public class ArtistDisplayActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_artist_display);
+        setContentView(R.layout.activity_artist_display);
         Intent myIntent = getIntent(); // gets the previously created intent
         //textView = (TextView) findViewById(R.id.test123);
 
@@ -28,7 +28,7 @@ public class ArtistDisplayActivity extends ActionBarActivity {
 
             textView.setText("Hello World this artist is   " + artistName);
 
-           // textView.setText("Hello World this artist is   " +    artistName );
+            // textView.setText("Hello World this artist is   " +    artistName );
 
 
         }
