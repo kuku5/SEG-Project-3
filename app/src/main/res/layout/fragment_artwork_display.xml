@@ -2,10 +2,11 @@
 
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/superlightgrey"
-    >
+    android:background="@color/superlightgrey">
 
 
 
@@ -101,7 +102,7 @@
                         android:id="@+id/dynamic_imageview_artwork_display"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:src="@drawable/thevirginoftherosary"
+                        android:src="@drawable/conorharrington"
                         android:layout_centerInParent="true"
                         android:scaleType="fitStart"
                         android:adjustViewBounds="true"
@@ -124,90 +125,108 @@
                 <!--/>-->
             </LinearLayout>
 
+            <it.neokree.materialtabs.MaterialTabHost
+                android:id="@+id/tab_host_artwork"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@+id/app_bar"
+                app:accentColor="@color/colorAccent"
+                app:hasIcons="false"
+                app:iconColor="@android:color/white"
+                app:primaryColor="@color/colorPrimary"/>
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/artwork_display_cardview1"
-                xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:layout_width="fill_parent"
-                android:layout_height="400dp"
-                android:layout_gravity="center"
-                android:layout_margin="8dp"
-                card_view:cardBackgroundColor="@android:color/white"
-                card_view:cardCornerRadius="8dp">
+            <android.support.v4.view.ViewPager
+                android:id="@+id/view_pager_artwork"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_below="@+id/materialTabHost"
+                android:layout_weight="1" />
 
-                <!--<RelativeLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:paddingLeft="3dp"-->
-                    <!--android:paddingRight="3dp">-->
+
+
+            <!--<android.support.v7.widget.CardView-->
+                <!--android:id="@+id/artwork_display_cardview1"-->
+                <!--xmlns:card_view="http://schemas.android.com/apk/res-auto"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="400dp"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_margin="8dp"-->
+                <!--card_view:cardBackgroundColor="@android:color/white"-->
+                <!--card_view:cardCornerRadius="8dp">-->
+
+                <!--&lt;!&ndash;<RelativeLayout&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:paddingLeft="3dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:paddingRight="3dp">&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_margin="2dp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:text="@string/description_title"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:textAllCaps="true"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:textColor="#1f3133"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:textSize="14sp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:textStyle="bold"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:id="@+id/artwork_display_cardview1_title"/>&ndash;&gt;-->
+
+
+                    <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_margin="2dp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:text="@string/description_title"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:textColor="#1f3133"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:textSize="14sp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_below="@+id/artwork_display_cardview1_title"/>&ndash;&gt;-->
+
+
+
+
+                <!--&lt;!&ndash;</RelativeLayout>&ndash;&gt;-->
+
+
+                <!--<LinearLayout android:orientation="vertical"-->
+                    <!--android:layout_width="fill_parent"-->
+                    <!--android:layout_height="fill_parent">-->
+
+
+
 
                     <!--<TextView-->
-                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_width="fill_parent"-->
                         <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_margin="2dp"-->
+                        <!--android:id="@+id/txt_line1"-->
+                        <!--android:paddingTop="4dp"-->
+                        <!--android:paddingBottom="1dp"-->
+                        <!--android:drawableTop="@color/grey"-->
+                        <!--android:layout_margin="1dp"-->
+                        <!--android:layout_marginLeft="3dp"-->
+                        <!--android:autoText="false"-->
                         <!--android:text="@string/description_title"-->
-                        <!--android:textAllCaps="true"-->
-                        <!--android:textColor="#1f3133"-->
-                        <!--android:textSize="14sp"-->
-                        <!--android:textStyle="bold"-->
-                        <!--android:id="@+id/artwork_display_cardview1_title"/>-->
-
+                        <!--android:textSize="11sp"-->
+                        <!--/>-->
+                    <!--<View-->
+                        <!--android:layout_width="fill_parent"-->
+                        <!--android:layout_height="1dp"-->
+                        <!--android:id="@+id/separator"-->
+                        <!--android:background="@color/grey"/>-->
 
                     <!--<TextView-->
-                        <!--android:layout_width="match_parent"-->
+
+                        <!--android:layout_width="fill_parent"-->
                         <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_margin="2dp"-->
-                        <!--android:text="@string/description_title"-->
-                        <!--android:textColor="#1f3133"-->
-                        <!--android:textSize="14sp"-->
-                        <!--android:layout_below="@+id/artwork_display_cardview1_title"/>-->
+                        <!--android:id="@+id/description_textview"-->
+                        <!--android:paddingBottom="1dp"-->
+                        <!--android:layout_margin="1dp"-->
+                        <!--android:layout_marginLeft="3dp"-->
+                        <!--android:text="@string/art_description"-->
+                        <!--android:textSize="9sp"-->
 
-
-
-
-                <!--</RelativeLayout>-->
-
-
-                <LinearLayout android:orientation="vertical"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent">
-
-
-
-
-                    <TextView
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/txt_line1"
-                        android:paddingTop="4dp"
-                        android:paddingBottom="1dp"
-                        android:drawableTop="@color/grey"
-                        android:layout_margin="1dp"
-                        android:layout_marginLeft="3dp"
-                        android:autoText="false"
-                        android:text="@string/description_title"
-                        android:textSize="11sp"
-                        />
-                    <View
-                        android:layout_width="fill_parent"
-                        android:layout_height="1dp"
-                        android:id="@+id/separator"
-                        android:background="@color/grey"/>
-
-                    <TextView
-
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/description_textview"
-                        android:paddingBottom="1dp"
-                        android:layout_margin="1dp"
-                        android:layout_marginLeft="3dp"
-                        android:text="@string/art_description"
-                        android:textSize="9sp"
-
-                        />
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
+                        <!--/>-->
+                <!--</LinearLayout>-->
+            <!--</android.support.v7.widget.CardView>-->
 
 
         </LinearLayout>
