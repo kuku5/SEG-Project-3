@@ -13,17 +13,29 @@ import team3j.artworkdisplay.ArtworkTabOneFragment;
 
 public class FragmentAdapter extends FragmentPagerAdapter {
 
+    private int indexOfFirstArtwork;
     private final int colors[] = { Color.parseColor("#FA5F67"),
             Color.parseColor("#D973D5"), Color.parseColor("#6D64CC"),
             Color.parseColor("#64CC9D"), Color.parseColor("#E6DD7A") };
 
-    public FragmentAdapter(FragmentManager fm) {
+    public FragmentAdapter(FragmentManager fm,int indexOfFirstArtwork) {
         super(fm);
+
+        this.indexOfFirstArtwork=indexOfFirstArtwork-1;
     }
+
+
 
     @Override
     public Fragment getItem(int i) {
-        return ArtworkTabOneFragment.getInstance(i,0);
+        ++indexOfFirstArtwork;
+        if(indexOfFirstArtwork>=35){
+            indexOfFirstArtwork=0;
+        }
+
+
+        return ArtworkTabOneFragment.getInstance(i,indexOfFirstArtwork);
+
     }
 
     @Override

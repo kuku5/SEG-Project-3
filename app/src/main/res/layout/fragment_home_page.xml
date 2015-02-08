@@ -44,18 +44,55 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="8dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:id="@+id/card_view_1_welcome1"
                 android:animateLayoutChanges="true"
+                android:padding="4dp"
 
                 card_view:cardBackgroundColor="@android:color/white"
                 card_view:cardCornerRadius="4dp">
 
-                <ImageView
 
-                android:layout_width="300dp"
-                android:layout_height="100dp"
-                android:background="@color/white"
-                />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+
+                    >
+
+                    <TextView
+                        android:id="@+id/info_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:text="@string/info_title"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:visibility="invisible"
+                        />
+
+                    <TextView
+                        android:id="@+id/info_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:text="@string/info_description_welcome"
+                        android:textColor="#1f3133"
+                        android:textSize="12sp"
+                        android:visibility="invisible"
+                        />
+
+                    <!--<ImageView-->
+
+                        <!--android:layout_width="300dp"-->
+                        <!--android:layout_height="100dp"-->
+                        <!--android:background="@color/white"-->
+                        <!--/>-->
+
+                    </LinearLayout>
+
 
 
 
