@@ -17,23 +17,14 @@
     <string name="total_visits">Total Visits: 1000</string>
     <string name="info_title">Welcome</string>
     <string name="info_description_welcome">Dulwich OutDoor Gallery is a collection of street art on walls
-    and pavements in the vicinity of Dulwich Picture Gallery. It has been created by some of the top street artist alive
-    </string>
-
-
-
-
-
+    and pavements in the vicinity of Dulwich Picture Gallery. It has been created by some of the top street artist alive</string>
     <string name="description_title">Description:</string>
     <string name="artwork_description">Mrs Elizabeth Mood with her sons Samuel and Thomas by Thomas Gainsborough</string>
-
 
     <string-array name="artwork_descriptions">
         <item>The Three Graces - Agent Provocateur</item>
         <item>The Three Graces - Agent Provocateur</item>
         <item>The Three Graces - Agent Provocateur</item>
-
-
     </string-array>
     <string-array name="artwork_list">
         <item>The Three Graces - Agent Provocateur</item>
@@ -114,5 +105,6 @@
     <string name="title_activity_artwork_display">ArtworkDisplay</string>
     <string name="title_activity_help">HelpActivity</string>
     <string name="title_activity_artist_display">ArtistDisplayActivity</string>
+    <string name="title_activity_full_screen_display">FullScreenDisplay</string>
 
 </resources>

@@ -59,6 +59,9 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
 
         toolbar.setCollapsible(true);
 
+        toolbar.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+        toolbar.setTitleTextColor(getResources().getColor(R.color.white));
+        toolbar.setSubtitleTextColor(getResources().getColor(R.color.white));
         tabHost = (MaterialTabHost) findViewById(R.id.materialTabHost);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
 
@@ -143,6 +146,7 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
@@ -159,9 +163,9 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
             return true;
         }
 
-        if (id == R.id.navigate) {
-            startActivity(new Intent(this, HelpActivity.class));
-        }
+//        if (id == R.id.navigate) {
+//            startActivity(new Intent(this, HelpActivity.class));
+//        }
         return super.onOptionsItemSelected(item);
     }
 

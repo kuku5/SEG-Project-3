@@ -1,6 +1,7 @@
 package team3j.artworkdisplay;
 
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import com.etsy.android.grid.util.DynamicHeightImageView;
 
 import team3j.dulwichstreetart.GalleryData;
+import team3j.dulwichstreetart.HelpActivity;
 import team3j.dulwichstreetart.R;
 
 
@@ -70,6 +72,19 @@ public class ArtworkTabOneFragment extends Fragment {
 
         }
 
+                    dynamicHeightImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Intent i = new Intent(getActivity(), FullScreenDisplay.class);
+                    i.putExtra("indexOfArtWork",indexOfArtWork);
+                    startActivity(i);
+                    getActivity().overridePendingTransition(R.anim.swipeback_slide_right_in,
+                            R.anim.swipeback_stack_to_back);
+
+
+                }
+            });
 
         return layout;
     }

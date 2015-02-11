@@ -35,6 +35,10 @@
             android:name="team3j.artistdisplay.ArtistDisplayActivity"
             android:label="@string/title_activity_artist_display" >
         </activity>
+        <activity
+            android:name="team3j.artworkdisplay.FullScreenDisplay"
+            android:label="@string/title_activity_full_screen_display" >
+        </activity>
     </application>
 
 </manifest>
