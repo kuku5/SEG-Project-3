@@ -1,4 +1,4 @@
-package team3j.dulwichstreetart;
+package team3j.artworkdisplay;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -17,29 +17,25 @@ import com.etsy.android.grid.util.DynamicHeightImageView;
 
 import java.util.ArrayList;
 
+import team3j.dulwichstreetart.R;
+
 /**
  * Created by JGill on 03/02/15.
- *
- * This is the Recycle View Adapter for the Artist List in the artist tab
- *
  */
-public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.MyViewHolder> {
+public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.MyViewHolder> {
 
     private final LayoutInflater inflater;
     private ArrayList<String> data;
     private Context context;
     private OnArtistItemTouchListener onArtistItemTouchListener;
-
-    //constructor
-    public ArtistListAdapter(Context context,ArrayList<String> data,OnArtistItemTouchListener onArtistItemTouchListener){
+    public CommentListAdapter(Context context,ArrayList<String> data){
         this.data=data;
         inflater=LayoutInflater.from(context);
         this.context=context;
-        this.onArtistItemTouchListener=onArtistItemTouchListener;
     }
 
     @Override
-    public ArtistListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CommentListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //add view to the grid cell for the first time
         //this stores the view in the cache meaning the images dont have to be reloaded over
         //and over mean its should be faster than a Listview/Gridview which does
@@ -51,9 +47,7 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
     }
 
     @Override
-    public void onBindViewHolder(ArtistListAdapter.MyViewHolder holder, int position) {
-        //add data to for each layout of the list
-
+    public void onBindViewHolder(CommentListAdapter.MyViewHolder holder, int position) {
         Log.d("test123",data.get(position));
         holder.title.setText(data.get(position));
         holder.numberOfArt.setText("");
@@ -79,7 +73,7 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
             title.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onArtistItemTouchListener.onItemClick(v, getPosition());
+                    //onArtistItemTouchListener.onItemClick(v, getPosition());
                 }
             });
 
