@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import it.neokree.materialtabs.MaterialTab;
 import it.neokree.materialtabs.MaterialTabHost;
@@ -33,10 +34,6 @@ public class ArtworkDisplayActivity extends ActionBarActivity implements Materia
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-
-
-
-
         tabHost = (MaterialTabHost) findViewById(R.id.materialTabHost);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
 
@@ -49,7 +46,7 @@ public class ArtworkDisplayActivity extends ActionBarActivity implements Materia
             }
         });
         for (int i = 0; i < adapter.getCount(); i++) {
-            MaterialTab materialTab=
+            MaterialTab materialTab =
                     tabHost.newTab()
                             .setText(adapter.getPageTitle(i))
                             .setTabListener(this);
@@ -58,13 +55,6 @@ public class ArtworkDisplayActivity extends ActionBarActivity implements Materia
             materialTab.setTextColor(getResources().getColor(R.color.colorPrimaryText));
 
         }
-
-
-
-
-
-
-
 
     }
 
@@ -110,7 +100,6 @@ public class ArtworkDisplayActivity extends ActionBarActivity implements Materia
     private class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
 
-
         public ViewPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
         }
@@ -122,7 +111,7 @@ public class ArtworkDisplayActivity extends ActionBarActivity implements Materia
              */
 
 
-            switch(num){
+            switch (num) {
                 case 0:
                     return HomePageFragment.getInstance(num);
                 case 1:
@@ -160,7 +149,6 @@ public class ArtworkDisplayActivity extends ActionBarActivity implements Materia
 
 
     }
-
 
 
 }

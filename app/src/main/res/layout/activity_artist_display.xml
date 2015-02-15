@@ -9,7 +9,7 @@
     tools:context="team3j.artistdisplay.ArtistDisplayActivity">
 
 
-<ScrollView
+    <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="@color/colorDivider">
@@ -45,53 +45,53 @@
                         android:textStyle="bold" />
 
                     <ImageView
-                        android:id="@+id/image"
+                        android:id="@+id/stikImage"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
                         android:layout_below="@id/position"
+                        android:layout_marginTop="5dp"
                         android:adjustViewBounds="true"
                         android:scaleType="fitStart"
                         android:src="@drawable/stik2012" />
 
                     <ImageView
                         android:id="@+id/shareIcon"
-                        android:src="@drawable/shareicon"
-                        android:layout_below="@id/image"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_alignParentRight="true"
+                        android:layout_below="@id/stikImage"
                         android:layout_marginRight="50dp"
                         android:layout_marginTop="5dp"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp" />
+                        android:src="@drawable/shareicon" />
 
                     <ImageView
                         android:id="@+id/mapIcon"
-                        android:src="@drawable/mapicon"
-                        android:layout_below="@id/image"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_alignParentRight="true"
+                        android:layout_below="@id/stikImage"
                         android:layout_marginRight="5dp"
                         android:layout_marginTop="5dp"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp" />
+                        android:src="@drawable/mapicon" />
 
                     <TextView
                         android:id="@+id/artDescription"
-                        android:text="Description: "
-                        android:textStyle="bold"
-                        android:layout_marginTop="40dp"
-                        android:layout_marginLeft="2dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/image" />
+                        android:layout_below="@id/stikImage"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginTop="40dp"
+                        android:text="Description: "
+                        android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/MoodySamTom"
-                        android:text="Mrs Elizabeth Moody with her sons Samuel and Thomas by Thomas Gainsborough."
-                        android:layout_below="@id/artDescription"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginLeft="2dp"
+                        android:id="@+id/moodySamTom"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/artDescription"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginTop="2dp"
+                        android:text="Mrs Elizabeth Moody with her sons Samuel and Thomas by Thomas Gainsborough." />
 
                 </RelativeLayout>
 
