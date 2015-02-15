@@ -70,7 +70,7 @@ public class HomePageFragment extends Fragment {
 //                    } catch (InterruptedException e) {
 //                        e.printStackTrace();
 //                    }
-                    linearLayout2.setVisibility(View.VISIBLE);
+                    //linearLayout2.setVisibility(View.VISIBLE);
                 }
             });
         }
