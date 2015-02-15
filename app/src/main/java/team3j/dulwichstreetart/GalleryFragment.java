@@ -14,8 +14,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import team3j.dulwichstreetart.GallerySwipeHolder;
-
 
 /**
  * Created by JGill on 25/01/15.

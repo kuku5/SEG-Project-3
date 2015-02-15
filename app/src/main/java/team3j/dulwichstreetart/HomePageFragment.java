@@ -13,7 +13,10 @@ import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
@@ -26,6 +29,8 @@ import android.widget.TextView;
 public class HomePageFragment extends Fragment {
     private TextView textView;
     private CardView cardView;
+    private LinearLayout linearLayout;
+    private LinearLayout linearLayout2;
 
     //return an instance of this Fragment with a bundle into the tab adapter
     public static HomePageFragment getInstance(int position) {
@@ -46,7 +51,10 @@ public class HomePageFragment extends Fragment {
        //creates view that setups what is displayed
         View layout = inflater.inflate(R.layout.fragment_home_page, container, false);
         textView = (TextView) layout.findViewById(R.id.position);
+
         cardView = (CardView) layout.findViewById(R.id.card_view_1_welcome1);
+        linearLayout=(LinearLayout) layout.findViewById(R.id.welcomeView);
+        linearLayout2=(LinearLayout) layout.findViewById(R.id.welcomeView2);
         Bundle bundle = getArguments();
 
         //retrieves the bundle
@@ -56,8 +64,13 @@ public class HomePageFragment extends Fragment {
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    cardView.setVisibility(View.GONE);
-
+                    linearLayout.setVisibility(View.GONE);
+//                    try {
+//                        Thread.sleep(0);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+                    linearLayout2.setVisibility(View.VISIBLE);
                 }
             });
         }
