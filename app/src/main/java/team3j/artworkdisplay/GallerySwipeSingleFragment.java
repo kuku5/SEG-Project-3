@@ -8,17 +8,20 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.etsy.android.grid.util.DynamicHeightImageView;
 
+import java.util.ArrayList;
+
 import team3j.dulwichstreetart.GalleryData;
-import team3j.dulwichstreetart.HelpActivity;
 import team3j.dulwichstreetart.R;
 
 
@@ -27,14 +30,18 @@ import team3j.dulwichstreetart.R;
  */
 
 
-public class ArtworkTabOneFragment extends Fragment {
+public class GallerySwipeSingleFragment extends Fragment {
     private TextView textView;
     int indexOfArtWork;
     private DynamicHeightImageView dynamicHeightImageView;
     private Toolbar toolbar;
+    private RecyclerView recyclerView;
+    private ArrayList<String> artistData;
 
-    public static ArtworkTabOneFragment getInstance(int position, int indexOfArtWork) {
-        ArtworkTabOneFragment myFragmentTab = new ArtworkTabOneFragment();
+    private CommentListAdapter commentListAdapter;
+
+    public static GallerySwipeSingleFragment getInstance(int position, int indexOfArtWork) {
+        GallerySwipeSingleFragment myFragmentTab = new GallerySwipeSingleFragment();
         Bundle args = new Bundle();
         args.putInt("position", position);
         args.putInt("indexOfArtWork", indexOfArtWork);
@@ -85,6 +92,22 @@ public class ArtworkTabOneFragment extends Fragment {
 
                 }
             });
+
+
+
+        //recycle viewer
+        recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view_grid1);
+
+        artistData = GalleryData.GetArtistsData(getActivity());
+
+        commentListAdapter = new CommentListAdapter(getActivity(), artistData);
+
+
+        recyclerView.setAdapter(commentListAdapter);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        //recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), 1, false));
+        //
 
         return layout;
     }

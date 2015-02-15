@@ -34,9 +34,11 @@
             android:orientation="vertical"
             android:background="@color/colorTertiary"
             android:padding="0dp"
+            android:id="@+id/welcomeView"
             android:animateLayoutChanges="true"
 
             >
+
 
             <android.support.v7.widget.CardView
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -66,12 +68,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="2dp"
-                        android:text="@string/info_title"
-                        android:textColor="@color/colorAccent"
+                        android:textColor="@color/text_grey"
+                        android:text="Tap Here"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:visibility="invisible"
                         />
+
+                    <!--android:text="@string/info_title"-->
 
                     <TextView
                         android:id="@+id/info_description"
@@ -105,6 +109,28 @@
                 <!---->
                 <!--/>-->
             </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="60dp"
+                android:background="@color/lightgrey"
+                android:visibility="gone"
+                android:id="@+id/welcomeView2"
+                android:animateLayoutChanges="true"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DULWICH OUTDOOR GALLERY"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+
+
+                    android:layout_gravity="center"
+                    />
+                </LinearLayout>
 
 
             <android.support.v7.widget.CardView

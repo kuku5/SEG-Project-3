@@ -103,7 +103,7 @@
     <string name="Stik12">Stik 2012</string>
     <string name="title_activity_splash">Dulwich Outdoor Gallery</string>
     <string name="title_activity_artwork_display">ArtworkDisplay</string>
-    <string name="title_activity_help">HelpActivity</string>
+    <string name="title_activity_GallerySwipeHolder">GallerySwipeHolder</string>
     <string name="title_activity_artist_display">ArtistDisplayActivity</string>
     <string name="title_activity_full_screen_display">FullScreenDisplay</string>
 

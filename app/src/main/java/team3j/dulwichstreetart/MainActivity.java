@@ -1,7 +1,6 @@
 package team3j.dulwichstreetart;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,16 +8,9 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 
 import it.neokree.materialtabs.MaterialTab;
 import it.neokree.materialtabs.MaterialTabHost;
@@ -26,10 +18,7 @@ import it.neokree.materialtabs.MaterialTabListener;
 
 /**
  * Created by JGill on 25/01/15.
- *
- * This Activity
- *
- *
+ * This is the Main Activity this creates the tabview and adds the fragment for each tab
  *
  */
 
@@ -41,7 +30,6 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
     private Toolbar toolbar;
     private MaterialTabHost tabHost;
     private ViewPager viewPager;
-    private boolean actionBarVisible=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,69 +39,18 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
         setContentView(R.layout.tab_layout);
 
         //add custom tool bar and tabs
-        toolbar = (Toolbar) findViewById(R.id.app_bar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-//        getSupportActionBar().setHideOnContentScrollEnabled(true);
-        getSupportActionBar().setShowHideAnimationEnabled(true);
-
-        toolbar.setCollapsible(true);
-
-        toolbar.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-        toolbar.setTitleTextColor(getResources().getColor(R.color.white));
-        toolbar.setSubtitleTextColor(getResources().getColor(R.color.white));
         tabHost = (MaterialTabHost) findViewById(R.id.materialTabHost);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
+        toolbar = (Toolbar) findViewById(R.id.app_bar);
 
-        ActionBar actionBar = getSupportActionBar();
+        updateToolBarLayout();//update tool bar
+        setUpTabsAdapter();//setup tabs
+    }
 
-        actionBar.hide();
+    public void setUpTabsAdapter(){
         //fragment page adapter for the tabs displays a fragment and handles loading of fragments for each tab
 
-
-//        cardView.setMinimumWidth(width);
-
-
-
-        GalleryFragment.RecycleViewScrollViewListener recycleViewScrollViewListener= new GalleryFragment.RecycleViewScrollViewListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-
-            }
-
-            @Override
-            public void ScrollUp(int dy) {
-//                getSupportActionBar().setHideOffset(dy);
-//                toolbar.setSc
-                if(!actionBarVisible){
-
-//                    ActionBar actionBar = getSupportActionBar();
-//                    actionBar.show();
-////                    actionBarVisible=true;
-                }
-
-//                toolbar.setScrollY(dy);
-//                toolbar.collapseActionView();
-                Log.d("scrolling", "going up" + dy);
-
-            }
-
-            @Override
-            public void ScrollDown(int dy) {
-                if(actionBarVisible){
-////
-                    ActionBar actionBar = getSupportActionBar();
-//                    actionBar.hide();
-//                    tabHost.setVisibility(View.INVISIBLE);
-//                    actionBarVisible=false;
-                }
-                Log.d("scrolling", "going down" + dy);
-
-
-            }
-        };
-
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(),recycleViewScrollViewListener);
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
         viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
@@ -122,8 +59,9 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
             }
         });
 
+        //adds the titles to each tab and changes colors of text
         for (int i = 0; i < adapter.getCount(); i++) {
-            MaterialTab materialTab=
+            MaterialTab materialTab =
                     tabHost.newTab()
                             .setText(adapter.getPageTitle(i))
                             .setTabListener(this);
@@ -131,22 +69,28 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
 
             materialTab.setTextColor(getResources().getColor(R.color.colorAccent));
 
-
         }
+    }
 
+    public void updateToolBarLayout(){
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setShowHideAnimationEnabled(true);
 
+        toolbar.setCollapsible(true);
+        toolbar.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+        toolbar.setTitleTextColor(getResources().getColor(R.color.white));
+        toolbar.setSubtitleTextColor(getResources().getColor(R.color.white));
+        //hide actionbar
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
 
-
-
-
-
-        }
+    }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
@@ -158,14 +102,9 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-
-//        if (id == R.id.navigate) {
-//            startActivity(new Intent(this, HelpActivity.class));
-//        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -177,8 +116,6 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
     @Override
     public void onTabReselected(MaterialTab materialTab) {
 
-
-        //viewPager.arrowScroll(0);
     }
 
     @Override
@@ -191,44 +128,26 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
     adapter for the tab layout fill each space with a fragment and manages loading
      */
 
-
     private class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
-    private GalleryFragment.RecycleViewScrollViewListener recycleViewScrollViewListener;
 
-
-        public ViewPagerAdapter(FragmentManager fragmentManager, GalleryFragment.RecycleViewScrollViewListener recycleViewScrollViewListener) {
+        public ViewPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
 
-            this.recycleViewScrollViewListener=recycleViewScrollViewListener;
         }
 
 
         public Fragment getItem(int num) {
-            /*
-            returns a fragment to place in the tab
-             */
+
+           // this returns a fragment for each tab space
 
 
-            switch(num){
+
+            switch (num) {
                 case 0:
-//                    HomePageFragment homePageFragment=  HomePageFragment.getInstance(num);
-                    //add send through the interface here.
-                   // homePageFragment.addScrollListerner();
-
-
-
-
-
-
                     return HomePageFragment.getInstance(num);
-
                 case 1:
-                    GalleryFragment galleryFragment= GalleryFragment.getInstance(num);
-                    galleryFragment.setRecycleViewScrollViewListener(recycleViewScrollViewListener);
-
-
-                    return galleryFragment;
+                    return GalleryFragment.getInstance(num);
                 case 2:
                     return ArtistListFragment.getInstance(num);
                 case 3:
@@ -237,7 +156,7 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
                     return MapFragment.getInstance(num);
 
                 default:
-                return HomePageFragment.getInstance(num);
+                    return HomePageFragment.getInstance(num);
 
 
             }
@@ -247,22 +166,18 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
 
         @Override
         public int getCount() {
+            //returns the number of tabs to be displayed
             return 5;
         }
 
 
         @Override
         public CharSequence getPageTitle(int position) {
+            //this returns the page title for each tab from the xml strings file
             return getResources().getStringArray(R.array.tabs)[position];
         }
 
-//        private Drawable getIcon(int position) {
-//            return getResources().getDrawable(icons[position]);
-//        }
-
-
     }
-
 
 
 }

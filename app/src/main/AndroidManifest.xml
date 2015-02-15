@@ -20,13 +20,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name="team3j.artworkdisplay.ArtworkDisplayActivity"
-            android:label="@string/title_activity_artwork_display" >
-        </activity>
-        <activity
-            android:name=".HelpActivity"
-            android:label="@string/title_activity_help" >
+            android:name=".GallerySwipeHolder"
+            android:label="@string/title_activity_GallerySwipeHolder" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />

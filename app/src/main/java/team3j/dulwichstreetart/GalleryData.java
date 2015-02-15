@@ -11,6 +11,7 @@ import java.util.List;
  * Created by JGill on 26/01/15.
  *
  * This returns the data for the specific artwork also stores array of images
+ * returns data from xml strings
  */
 //TODO maybe change getimages to return bitmaps
 
@@ -19,8 +20,6 @@ public class GalleryData {
 
     public static ArrayList<String> GetArtWorkData(Activity context) {
         final ArrayList<String> data = new ArrayList<String>(35);
-
-
 
         for (int i = 0; i < 35; i++) {
             data.add( context.getResources().getStringArray(R.array.artwork_list)[i]);

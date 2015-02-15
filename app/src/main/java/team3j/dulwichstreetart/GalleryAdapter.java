@@ -19,6 +19,8 @@ import java.util.ArrayList;
 
 /**
  * Created by JGill on 03/02/15.
+ *This is the adapter that puts elements into the Gallery
+ *
  */
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHolder> {
 
@@ -32,20 +34,19 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
     private ArrayList<String> data;
     private Context context;
     private int[] imageSet;
+
     public GalleryAdapter(Context context,ArrayList<String> data,int[] imageSet, OnItemTouchListener itemTouchListener){
         this.data=data;
-        inflater=LayoutInflater.from(context);
+        this.inflater=LayoutInflater.from(context);
         this.context=context;
         this.imageSet=imageSet;
         this.onItemTouchListener = itemTouchListener;
-
     }
 
 
 
     @Override
     public GalleryAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         //add view to the grid cell for the first time
         //this stores the view in the cache meaning the images dont have to be reloaded over
         //and over mean its should be faster than a Listview/Gridview which does
@@ -58,31 +59,11 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(GalleryAdapter.MyViewHolder holder, int position) {
-
-
-
-
-        //res = getContext().getResources().getDrawable(R.drawable.reka);
+        //add image and description to the view for each gallery item
         Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(),imageSet[position]);
         BitmapDrawable res = new BitmapDrawable(context.getResources(), bitmap);
         holder.dynamicHeightImageView.setImageDrawable(res);
-
-//        double positionHeight = getPositionRatio(position, vh.dynamicHeightImageView);
-//        int backgroundIndex = position >= mBackgroundColors.size() ?
-//                position % mBackgroundColors.size() : position;
-//
-//        // convertView.setBackgroundResource(mBackgroundColors.get(backgroundIndex));
-
-        // Log.d(TAG, "getView position:" + position + " h:" + positionHeight);
-
-        //   vh.txtLineOne.setHeightRatio(positionHeight);
-//        holder.dynamicHeightImageView.setHeightRatio(positionHeight / 2);
-
-
-
-
         holder.txtLineOne.setText(data.get(position));
-//        vh.txtLineOne.setText(getItem(position) + position);
 
 
     }
@@ -92,6 +73,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
         return 35;
     }
 
+    //custom viewHolder for each item in recycle view
     class MyViewHolder extends RecyclerView.ViewHolder  {
         // view holder for each grid  cell
         TextView txtLineOne;
@@ -110,28 +92,14 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
                 }
             });
 
-//            txtLineOne.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    onItemTouchListener.onButton1Click(v, getPosition());
-//                }
-//            });
-//
-//            dynamicHeightImageView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    onItemTouchListener.onButton2Click(v, getPosition());
-//                }
-//            });
 
         }
     }
 
+    //interface need for Recycle Views to handle clicks
     public interface OnItemTouchListener {
         public void onCardViewTap(View view, int position);
-        public void onButton1Click(View view, int position);
-        public void onButton2Click(View view, int position);
-    }
+        }
 
 }
 

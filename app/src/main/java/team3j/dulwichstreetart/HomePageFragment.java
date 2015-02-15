@@ -13,11 +13,15 @@ import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
  * Created by JGill on 25/01/15.
+ * This is the fragment of the Homepage to be displayed in the tab
  */
 
 //TODO incomplete homepage needs a clear idea of design
@@ -25,7 +29,10 @@ import android.widget.TextView;
 public class HomePageFragment extends Fragment {
     private TextView textView;
     private CardView cardView;
+    private LinearLayout linearLayout;
+    private LinearLayout linearLayout2;
 
+    //return an instance of this Fragment with a bundle into the tab adapter
     public static HomePageFragment getInstance(int position) {
         HomePageFragment myFragmentTab = new HomePageFragment();
         Bundle args = new Bundle();
@@ -37,26 +44,56 @@ public class HomePageFragment extends Fragment {
 
 
 
+    //this creates a view
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+       //creates view that setups what is displayed
         View layout = inflater.inflate(R.layout.fragment_home_page, container, false);
         textView = (TextView) layout.findViewById(R.id.position);
+
         cardView = (CardView) layout.findViewById(R.id.card_view_1_welcome1);
+        linearLayout=(LinearLayout) layout.findViewById(R.id.welcomeView);
+        linearLayout2=(LinearLayout) layout.findViewById(R.id.welcomeView2);
         Bundle bundle = getArguments();
+
+        //retrieves the bundle
         if (bundle != null) {
 
             textView.setText("Home Page Selected at page  " + bundle.getInt("position"));
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    cardView.setVisibility(View.GONE);
-
+                    linearLayout.setVisibility(View.GONE);
+//                    try {
+//                        Thread.sleep(0);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+                    //linearLayout2.setVisibility(View.VISIBLE);
                 }
             });
         }
 
 
-        Log.d("loade","loaded"+ bundle.getInt("position"));
+
+        return layout;
+    }
+
+
+
+
+
+}
+
+
+
+
+/*
+
+/// LEAVE THIS MIGHT PUT BACK IN
+
+
 //        String message=
 //                "Here you can locate and navigate to your favourite street artist in Dulwich " +
 //                        "and interact with other Street art Enthusiasts ";
@@ -77,12 +114,5 @@ public class HomePageFragment extends Fragment {
 //                })
 //                .setIcon(R.drawable.ic_blob)
 //                .show();
+ */
 
-        return layout;
-    }
-
-
-
-
-
-}
