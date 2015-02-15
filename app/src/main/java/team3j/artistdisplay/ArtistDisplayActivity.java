@@ -62,10 +62,54 @@ public class ArtistDisplayActivity extends ActionBarActivity {
                 String artDesc = "Art Description: " + artDescription.getText().toString();
                 String artistName = "Artist: " + artist.getText().toString() + "\n";
 
-                Intent artInfoIntent = new Intent(Intent.ACTION_SEND);
-                artInfoIntent.putExtra(Intent.EXTRA_TEXT, artistName + artDesc);
-                artInfoIntent.setType("text/plain");
-                startActivity(artInfoIntent);
+                Bitmap bitmap;
+                OutputStream output;
+
+                // Retrieve the image from the res folder
+                bitmap = BitmapFactory.decodeResource(getResources(),
+                        R.drawable.stik2012);
+
+                // Find the SD Card path
+                File filepath = Environment.getExternalStorageDirectory();
+
+                // Create a new folder AndroidBegin in SD Card
+                File dir = new File(filepath.getAbsolutePath() + "/Dulwich Outdoor Gallery/");
+                dir.mkdirs();
+
+                // Create a name for the saved image
+                File file = new File(dir, "sample_wallpaper.png");
+
+                try {
+
+                    // Share Intent
+                    Intent share = new Intent(Intent.ACTION_SEND_MULTIPLE);
+
+                    // Type of file to share
+                    share.setType("*/*");
+
+
+                    output = new FileOutputStream(file);
+
+                    // Compress into png format image from 0% - 100%
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, output);
+                    output.flush();
+                    output.close();
+
+                    // Locate the image to Share
+                    Uri uri = Uri.fromFile(file);
+
+                    // Pass the image into an Intent
+                    share.putExtra(Intent.EXTRA_STREAM, uri);
+                    // share.putExtra(Intent.EXTRA_TEXT, artistName + artDesc);
+
+                    // Show the social share chooser list
+                    startActivity(Intent.createChooser(share, "Dulwich Outdoor Art"));
+
+
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -77,59 +121,6 @@ public class ArtistDisplayActivity extends ActionBarActivity {
         getMenuInflater().inflate(R.menu.menu_artist_display, menu);
         return true;
     }
-
-    View.OnClickListener shareClicking = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-
-            Bitmap bitmap;
-            OutputStream output;
-
-            // Retrieve the image from the res folder
-            bitmap = BitmapFactory.decodeResource(getResources(),
-                    R.drawable.ic_launcher);
-
-            // Find the SD Card path
-            File filepath = Environment.getExternalStorageDirectory();
-
-            // Create a new folder AndroidBegin in SD Card
-            File dir = new File(filepath.getAbsolutePath() + "/Share Image Tutorial/");
-            dir.mkdirs();
-
-            // Create a name for the saved image
-            File file = new File(dir, "sample_wallpaper.png");
-
-            try {
-
-                // Share Intent
-                Intent share = new Intent(Intent.ACTION_SEND);
-
-                // Type of file to share
-                share.setType("image/jpeg");
-
-                output = new FileOutputStream(file);
-
-                // Compress into png format image from 0% - 100%
-                bitmap.compress(Bitmap.CompressFormat.PNG, 100, output);
-                output.flush();
-                output.close();
-
-                // Locate the image to Share
-                Uri uri = Uri.fromFile(file);
-
-                // Pass the image into an Intent
-                share.putExtra(Intent.EXTRA_STREAM, uri);
-
-                // Show the social share chooser list
-                startActivity(Intent.createChooser(share, "Share Image Tutorial"));
-
-            } catch (Exception e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-    };
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

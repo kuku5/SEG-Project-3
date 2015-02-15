@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="team3j.dulwichstreetart" >
+    package="team3j.dulwichstreetart">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/deskicon"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:uiOptions="splitActionBarWhenNarrow">
+
         </activity>
         <activity
             android:name=".SplashActivity"
-            android:label="@string/title_activity_splash" >
+            android:label="@string/title_activity_splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,19 +27,17 @@
 
         <activity
             android:name=".GallerySwipeHolder"
-            android:label="@string/title_activity_GallerySwipeHolder" >
+            android:label="@string/title_activity_GallerySwipeHolder">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
         <activity
             android:name="team3j.artistdisplay.ArtistDisplayActivity"
-            android:label="@string/title_activity_artist_display" >
-        </activity>
+            android:label="@string/title_activity_artist_display"></activity>
         <activity
             android:name="team3j.artworkdisplay.FullScreenDisplay"
-            android:label="@string/title_activity_full_screen_display" >
-        </activity>
+            android:label="@string/title_activity_full_screen_display"></activity>
     </application>
 
 </manifest>
