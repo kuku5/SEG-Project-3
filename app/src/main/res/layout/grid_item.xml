@@ -27,7 +27,7 @@
                 android:id="@+id/dynamic_imageView"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:src="@drawable/deskicon"
+                android:src="@drawable/reka"
                 android:layout_centerInParent="true"
                 android:scaleType="fitStart"
                 android:adjustViewBounds="true"
