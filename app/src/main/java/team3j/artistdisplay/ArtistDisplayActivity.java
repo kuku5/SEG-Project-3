@@ -14,9 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
@@ -138,3 +135,5 @@ public class ArtistDisplayActivity extends ActionBarActivity {
     }
 
 }
+
+//Code reference for photo sharing - http://www.androidbegin.com/tutorial/share-image-in-android/
