@@ -107,4 +107,7 @@
     <string name="title_activity_artist_display">ArtistDisplayActivity</string>
     <string name="title_activity_full_screen_display">FullScreenDisplay</string>
 
+    <string name="title_maps">Street Art Locations</string>
+
+
 </resources>

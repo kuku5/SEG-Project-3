@@ -14,7 +14,7 @@ import it.neokree.materialtabs.MaterialTab;
 import it.neokree.materialtabs.MaterialTabHost;
 import it.neokree.materialtabs.MaterialTabListener;
 import team3j.dulwichstreetart.HomePageFragment;
-import team3j.dulwichstreetart.MapFragment;
+import team3j.dulwichstreetart.MapFragmentTab;
 import team3j.dulwichstreetart.R;
 
 
@@ -126,13 +126,13 @@ public class ArtworkDisplayActivity extends ActionBarActivity implements Materia
                 case 0:
                     return HomePageFragment.getInstance(num);
                 case 1:
-                    return MapFragment.getInstance(num);
+                    return MapFragmentTab.getInstance(num);
                 case 2:
-                    return MapFragment.getInstance(num);
+                    return MapFragmentTab.getInstance(num);
                 case 3:
-                    return MapFragment.getInstance(num);
+                    return MapFragmentTab.getInstance(num);
                 case 4:
-                    return MapFragment.getInstance(num);
+                    return MapFragmentTab.getInstance(num);
 
                 default:
                     return HomePageFragment.getInstance(num);

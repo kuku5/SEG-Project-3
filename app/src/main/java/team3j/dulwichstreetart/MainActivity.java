@@ -151,9 +151,14 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
                 case 2:
                     return ArtistListFragment.getInstance(num);
                 case 3:
-                    return MapFragment.getInstance(num);
+
+
+                    return GoogleMapFragmentSmall.getInstance(num);
                 case 4:
-                    return MapFragment.getInstance(num);
+
+
+
+                    return HomePageFragment.getInstance(num);
 
                 default:
                     return HomePageFragment.getInstance(num);

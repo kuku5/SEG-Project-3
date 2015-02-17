@@ -28,5 +28,8 @@ dependencies {
     compile 'it.neokree:MaterialTabs:0.11'
     compile 'com.etsy.android.grid:library:1.0.5'
     compile 'com.hannesdorfmann:swipeback:1.0.0'
+    compile 'com.google.android.gms:play-services:6.5.87'
+
     compile project(':facebook')
+
 }

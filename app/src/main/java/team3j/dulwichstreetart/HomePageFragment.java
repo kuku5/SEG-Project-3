@@ -1,23 +1,19 @@
 package team3j.dulwichstreetart;
 
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
-import android.widget.ImageView;
+import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.ViewAnimator;
+
 
 /**
  * Created by JGill on 25/01/15.
@@ -29,8 +25,11 @@ import android.widget.TextView;
 public class HomePageFragment extends Fragment {
     private TextView textView;
     private CardView cardView;
+    private CardView cardView2;
     private LinearLayout linearLayout;
-    private LinearLayout linearLayout2;
+    ViewAnimator viewAnimator;
+
+    Animation slide_in_left, slide_out_right;
 
     //return an instance of this Fragment with a bundle into the tab adapter
     public static HomePageFragment getInstance(int position) {
@@ -50,32 +49,43 @@ public class HomePageFragment extends Fragment {
 
        //creates view that setups what is displayed
         View layout = inflater.inflate(R.layout.fragment_home_page, container, false);
-        textView = (TextView) layout.findViewById(R.id.position);
+        //textView = (TextView) layout.findViewById(R.id.position);
 
         cardView = (CardView) layout.findViewById(R.id.card_view_1_welcome1);
+        cardView2 = (CardView) layout.findViewById(R.id.car_view_22);
         linearLayout=(LinearLayout) layout.findViewById(R.id.welcomeView);
-        linearLayout2=(LinearLayout) layout.findViewById(R.id.welcomeView2);
         Bundle bundle = getArguments();
 
         //retrieves the bundle
         if (bundle != null) {
 
-            textView.setText("Home Page Selected at page  " + bundle.getInt("position"));
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     linearLayout.setVisibility(View.GONE);
-//                    try {
-//                        Thread.sleep(0);
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-                    //linearLayout2.setVisibility(View.VISIBLE);
+
                 }
             });
         }
 
+        //animate the slider
 
+        viewAnimator = (ViewAnimator)layout.findViewById(R.id.viewanimator);
+
+        slide_in_left = AnimationUtils.loadAnimation(getActivity(), android.R.anim.slide_in_left);
+        slide_out_right = AnimationUtils.loadAnimation(getActivity(), android.R.anim.slide_out_right);
+
+        viewAnimator.setInAnimation(slide_in_left);
+        viewAnimator.setOutAnimation(slide_out_right);
+
+        viewAnimator.showNext();
+        cardView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewAnimator.showNext();
+
+            }
+        });
 
         return layout;
     }
