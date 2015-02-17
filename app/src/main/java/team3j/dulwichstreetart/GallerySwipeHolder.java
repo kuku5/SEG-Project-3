@@ -36,6 +36,7 @@ public class GallerySwipeHolder extends FragmentActivity {
         Intent myIntent = getIntent(); // gets the previously created intent
         int indexOfArtWork = myIntent.getIntExtra("indexOfArtWork", 0);
 
+
         //uses library for swiping to create swipe effect
          SwipeBack.attach(this, Position.LEFT)
                 .setContentView(R.layout.view_pager)

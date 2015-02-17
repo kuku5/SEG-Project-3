@@ -115,6 +115,9 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
 
     @Override
     public void onTabReselected(MaterialTab materialTab) {
+        if(viewPager.getCurrentItem()==0){
+
+        };
 
     }
 

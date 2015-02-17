@@ -36,7 +36,8 @@
 
         <activity
             android:name=".GallerySwipeHolder"
-            android:label="@string/title_activity_GallerySwipeHolder">
+            android:label="@string/title_activity_GallerySwipeHolder"
+            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />

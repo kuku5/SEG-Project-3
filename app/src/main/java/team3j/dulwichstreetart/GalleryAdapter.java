@@ -51,9 +51,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
         //this stores the view in the cache meaning the images dont have to be reloaded over
         //and over mean its should be faster than a Listview/Gridview which does
         View view= inflater.inflate(R.layout.grid_item,parent,false);
-
         MyViewHolder myViewHolder= new MyViewHolder(view);
-
         return myViewHolder;
     }
 
