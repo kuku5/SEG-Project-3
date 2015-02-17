@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ViewAnimator;
@@ -26,6 +27,7 @@ public class HomePageFragment extends Fragment {
     private TextView textView;
     private CardView cardView;
     private CardView cardView2;
+    private Button button;
     private LinearLayout linearLayout;
     ViewAnimator viewAnimator;
 
@@ -54,6 +56,7 @@ public class HomePageFragment extends Fragment {
         cardView = (CardView) layout.findViewById(R.id.card_view_1_welcome1);
         cardView2 = (CardView) layout.findViewById(R.id.car_view_22);
         linearLayout=(LinearLayout) layout.findViewById(R.id.welcomeView);
+        button=(Button) layout.findViewById(R.id.button_facebook);
         Bundle bundle = getArguments();
 
         //retrieves the bundle
@@ -67,6 +70,8 @@ public class HomePageFragment extends Fragment {
                 }
             });
         }
+
+
 
         //animate the slider
 
