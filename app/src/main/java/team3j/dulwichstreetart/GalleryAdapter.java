@@ -19,8 +19,7 @@ import java.util.ArrayList;
 
 /**
  * Created by JGill on 03/02/15.
- *This is the adapter that puts elements into the Gallery
- *
+ * This is the adapter that puts elements into the Gallery
  */
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHolder> {
 
@@ -35,14 +34,13 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
     private Context context;
     private int[] imageSet;
 
-    public GalleryAdapter(Context context,ArrayList<String> data,int[] imageSet, OnItemTouchListener itemTouchListener){
-        this.data=data;
-        this.inflater=LayoutInflater.from(context);
-        this.context=context;
-        this.imageSet=imageSet;
+    public GalleryAdapter(Context context, ArrayList<String> data, int[] imageSet, OnItemTouchListener itemTouchListener) {
+        this.data = data;
+        this.inflater = LayoutInflater.from(context);
+        this.context = context;
+        this.imageSet = imageSet;
         this.onItemTouchListener = itemTouchListener;
     }
-
 
 
     @Override
@@ -50,9 +48,9 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
         //add view to the grid cell for the first time
         //this stores the view in the cache meaning the images dont have to be reloaded over
         //and over mean its should be faster than a Listview/Gridview which does
-        View view= inflater.inflate(R.layout.grid_item,parent,false);
+        View view = inflater.inflate(R.layout.grid_item, parent, false);
 
-        MyViewHolder myViewHolder= new MyViewHolder(view);
+        MyViewHolder myViewHolder = new MyViewHolder(view);
 
         return myViewHolder;
     }
@@ -60,7 +58,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
     @Override
     public void onBindViewHolder(GalleryAdapter.MyViewHolder holder, int position) {
         //add image and description to the view for each gallery item
-        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(),imageSet[position]);
+        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), imageSet[position]);
         BitmapDrawable res = new BitmapDrawable(context.getResources(), bitmap);
         holder.dynamicHeightImageView.setImageDrawable(res);
         holder.txtLineOne.setText(data.get(position));
@@ -74,7 +72,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
     }
 
     //custom viewHolder for each item in recycle view
-    class MyViewHolder extends RecyclerView.ViewHolder  {
+    class MyViewHolder extends RecyclerView.ViewHolder {
         // view holder for each grid  cell
         TextView txtLineOne;
         DynamicHeightImageView dynamicHeightImageView;
@@ -99,7 +97,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
     //interface need for Recycle Views to handle clicks
     public interface OnItemTouchListener {
         public void onCardViewTap(View view, int position);
-        }
+    }
 
 }
 
