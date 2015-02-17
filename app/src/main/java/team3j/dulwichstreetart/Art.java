@@ -14,6 +14,7 @@ public class Art {
     String name;
     LatLng loc;
     int pic;
+    int postId;
 
     public Art(String name,LatLng loc,int pic)
     {
@@ -21,6 +22,14 @@ public class Art {
         this.loc = loc;
         this.pic = pic;
     }
+
+    public Art(String name,int postId)
+    {
+        this.name = name;
+        this.postId=postId;
+
+    }
+
 
     public String getName(){
         return name;

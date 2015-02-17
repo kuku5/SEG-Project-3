@@ -6,6 +6,7 @@ import android.app.Activity;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -19,16 +20,19 @@ import java.util.List;
 
 public class GalleryData {
 
-
+    // nandu u need to update this array in xml
     public static ArrayList<String> GetArtWorkData(Activity context) {
         final ArrayList<String> data = new ArrayList<String>(35);
 
         for (int i = 0; i < 35; i++) {
+            //go to this
             data.add( context.getResources().getStringArray(R.array.artwork_list)[i]);
         }
 
         return data;
     }
+
+
 
     public static ArrayList<String> GetArtistsData(Activity context) {
         final ArrayList<String> data = new ArrayList<String>(18);
@@ -41,6 +45,11 @@ public class GalleryData {
 
         return data;
     }
+
+
+
+
+    //nandu change this one below to match the titles
 
     public static int[] GetArtWorkImageLocations(Activity context) {
         // return image location potentially could return bitmaps ready to go into Imageview
