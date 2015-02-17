@@ -9,11 +9,16 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -39,6 +44,7 @@ public class GallerySwipeSingleFragment extends Fragment {
     private RecyclerView recyclerView;
     private ArrayList<String> artistData;
 
+
     private CommentListAdapter commentListAdapter;
 
     public static GallerySwipeSingleFragment getInstance(int position, int indexOfArtWork) {
@@ -51,10 +57,23 @@ public class GallerySwipeSingleFragment extends Fragment {
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_splash, menu);
+
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+    @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
 
         //sort layout
         View layout = inflater.inflate(R.layout.fragment_artwork_display, container, false);
+
+
+
+        //set toolbar appearance
+
+             //getActivity().setActionBar();
         textView = (TextView) layout.findViewById(R.id.position);
         dynamicHeightImageView= (DynamicHeightImageView) layout.findViewById(R.id.dynamic_imageview_artwork_display);
 
@@ -97,6 +116,7 @@ public class GallerySwipeSingleFragment extends Fragment {
 
 
         //recycle viewer
+
         recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view_grid1);
 
         artistData = GalleryData.GetArtistsData(getActivity());
@@ -106,9 +126,8 @@ public class GallerySwipeSingleFragment extends Fragment {
 
         recyclerView.setAdapter(commentListAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        //recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), 1, false));
-        //
+
 
         return layout;
     }

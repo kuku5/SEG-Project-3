@@ -159,10 +159,11 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:orientation="vertical">
-                    <ViewAnimator
-                        android:id="@+id/viewanimator"
+                    <ViewFlipper
+                        android:id="@+id/view_animator"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" >
+                        android:layout_height="wrap_content"
+                        android:autoStart="true">
                         <com.etsy.android.grid.util.DynamicHeightImageView
                             android:id="@+id/dynamic_imageView41"
                             android:layout_width="fill_parent"
@@ -197,7 +198,7 @@
                             android:paddingBottom="2dp" />
 
 
-                    </ViewAnimator>
+                    </ViewFlipper>
 
 
 

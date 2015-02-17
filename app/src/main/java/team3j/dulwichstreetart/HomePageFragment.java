@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ViewAnimator;
+import android.widget.ViewFlipper;
 
 
 /**
@@ -29,7 +30,7 @@ public class HomePageFragment extends Fragment {
     private CardView cardView2;
     private Button button;
     private LinearLayout linearLayout;
-    ViewAnimator viewAnimator;
+    ViewFlipper viewFlipper;
 
     Animation slide_in_left, slide_out_right;
 
@@ -75,19 +76,19 @@ public class HomePageFragment extends Fragment {
 
         //animate the slider
 
-        viewAnimator = (ViewAnimator)layout.findViewById(R.id.viewanimator);
+        viewFlipper = (ViewFlipper)layout.findViewById(R.id.view_animator);
 
         slide_in_left = AnimationUtils.loadAnimation(getActivity(), android.R.anim.slide_in_left);
         slide_out_right = AnimationUtils.loadAnimation(getActivity(), android.R.anim.slide_out_right);
 
-        viewAnimator.setInAnimation(slide_in_left);
-        viewAnimator.setOutAnimation(slide_out_right);
+        viewFlipper.setInAnimation(slide_in_left);
+        viewFlipper.setOutAnimation(slide_out_right);
+        viewFlipper.setFlipInterval(3000);
 
-        viewAnimator.showNext();
         cardView2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                viewAnimator.showNext();
+                viewFlipper.showNext();
 
             }
         });
