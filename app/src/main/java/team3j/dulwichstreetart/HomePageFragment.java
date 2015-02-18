@@ -90,8 +90,8 @@ public class HomePageFragment extends Fragment {
 
         viewFlipper = (ViewFlipper)layout.findViewById(R.id.view_animator);
 
-        slide_in_left = AnimationUtils.loadAnimation(getActivity(), android.R.anim.slide_in_left);
-        slide_out_right = AnimationUtils.loadAnimation(getActivity(), android.R.anim.slide_out_right);
+        slide_in_left = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_in_left_no_fade);
+        slide_out_right = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_out_right_no_fade);
 
         viewFlipper.setInAnimation(slide_in_left);
         viewFlipper.setOutAnimation(slide_out_right);
