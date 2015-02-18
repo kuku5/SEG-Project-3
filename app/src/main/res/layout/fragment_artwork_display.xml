@@ -87,6 +87,7 @@
                 </LinearLayout>
 
 
+
                 <com.etsy.android.grid.util.DynamicHeightImageView
                     android:id="@+id/dynamic_imageview_artwork_display"
                     android:layout_width="fill_parent"
@@ -98,7 +99,7 @@
                     android:scaleType="fitStart"
 
                     android:src="@drawable/conorharrington"
-
+                    android:visibility="gone"
                     />
 
 
@@ -130,20 +131,24 @@
                     android:layout_height="fill_parent"
                     android:orientation="vertical"
                     android:padding="3dp">
+                    <com.daimajia.slider.library.SliderLayout
+                        android:id="@+id/slider1"
+                        android:layout_width="match_parent"
+                        android:layout_height="400dp"
+                        />
 
-
-                    <TextView
-                        android:id="@+id/artwork_display_cardview1_title"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="1dp"
-                        android:layout_marginLeft="3dp"
-                        android:autoText="false"
-                        android:drawableTop="@color/colorAccent"
-                        android:paddingBottom="3dp"
-                        android:paddingTop="8dp"
-                        android:text="@string/description_title"
-                        android:textSize="14sp" />
+                    <!--<TextView-->
+                        <!--android:id="@+id/artwork_display_cardview1_title"-->
+                        <!--android:layout_width="fill_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_margin="1dp"-->
+                        <!--android:layout_marginLeft="3dp"-->
+                        <!--android:autoText="false"-->
+                        <!--android:drawableTop="@color/colorAccent"-->
+                        <!--android:paddingBottom="3dp"-->
+                        <!--android:paddingTop="8dp"-->
+                        <!--android:text="@string/description_title"-->
+                        <!--android:textSize="14sp" />-->
 
                     <View
                         android:id="@+id/separator"

@@ -296,6 +296,7 @@ public class HomePageFragment extends Fragment {
         url_maps.put("Game of Thrones", "http://images.boomsbeat.com/data/images/full/19640/game-of-thrones-season-4-jpg.jpg");
 
         HashMap<String,Integer> file_maps = new HashMap<String, Integer>();
+
         file_maps.put("Conor Harrington",R.drawable.lowresconorharrington);
         file_maps.put("Walter Landscape",R.drawable.lowreswalterlandscape);
         file_maps.put("Conor Harrington",R.drawable.lowresconorharrington);
@@ -305,6 +306,7 @@ public class HomePageFragment extends Fragment {
         for(String name : file_maps.keySet()){
             TextSliderView textSliderView = new TextSliderView(getActivity());
             // initialize a SliderLayout
+
             textSliderView
                     .description(name)
                     .image(file_maps.get(name))
@@ -317,8 +319,10 @@ public class HomePageFragment extends Fragment {
 
             mDemoSlider.addSlider(textSliderView);
         }
-        mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Accordion);
-        mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+
+        mDemoSlider.setPresetTransformer(SliderLayout.Transformer.FlipHorizontal);
+        //mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Tablet);
+        //mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         mDemoSlider.setCustomAnimation(new DescriptionAnimation());
         mDemoSlider.setDuration(4000);
 
