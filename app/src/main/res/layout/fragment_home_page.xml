@@ -391,11 +391,10 @@
                         android:orientation="vertical">
 
 
-                        <Button
+                        <com.facebook.widget.LoginButton
                             android:id="@+id/button_facebook"
                             android:layout_width="fill_parent"
                             android:layout_height="100dp"
-                            android:background="@drawable/facebooklogo"
                             android:layout_centerInParent="true"
                             android:scaleType="centerCrop"
                             android:adjustViewBounds="true"

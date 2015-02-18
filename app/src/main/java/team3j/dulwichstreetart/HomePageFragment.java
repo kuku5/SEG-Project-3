@@ -29,6 +29,7 @@ import com.facebook.Request;
 import com.facebook.Response;
 import com.facebook.Session;
 import com.facebook.SessionState;
+import com.facebook.widget.LoginButton;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -45,7 +46,7 @@ public class HomePageFragment extends Fragment {
     private TextView textView;
     private CardView cardView;
     private CardView cardView2;
-    private Button button;
+    private LoginButton button;
     private LinearLayout linearLayout;
     ViewFlipper viewFlipper;
 
@@ -72,7 +73,7 @@ public class HomePageFragment extends Fragment {
         cardView = (CardView) layout.findViewById(R.id.card_view_1_welcome1);
         cardView2 = (CardView) layout.findViewById(R.id.car_view_22);
         linearLayout=(LinearLayout) layout.findViewById(R.id.welcomeView);
-        button=(Button) layout.findViewById(R.id.button_facebook);
+        button=(LoginButton) layout.findViewById(R.id.button_facebook);
         Bundle bundle = getArguments();
 
         button.setOnClickListener(new View.OnClickListener() {
