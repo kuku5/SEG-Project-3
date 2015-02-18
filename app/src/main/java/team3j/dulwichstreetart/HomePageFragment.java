@@ -62,20 +62,23 @@ public class HomePageFragment extends Fragment {
         return myFragmentTab;
     }
 
-    //this creates a view
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-       //creates view that setups what is displayed
+        //non facebook setup
         View layout = inflater.inflate(R.layout.fragment_home_page, container, false);
-        //textView = (TextView) layout.findViewById(R.id.position);
-        isLoggedIn = false;
-        cardView = (CardView) layout.findViewById(R.id.card_view_1_welcome1);
-        cardView2 = (CardView) layout.findViewById(R.id.car_view_22);
-        linearLayout=(LinearLayout) layout.findViewById(R.id.welcomeView);
+        setupOnScreenElements(layout);
+        setupAnimations(layout);
+
+        //facebook setup
+        //setup xml elements
         button=(Button) layout.findViewById(R.id.button_facebook);
-        Bundle bundle = getArguments();
+
+       //facebook work
+        isLoggedIn = false;
+
         checkIfActiveSession();
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,37 +88,8 @@ public class HomePageFragment extends Fragment {
         button.setText("Log In");
 
 
-        //retrieves the bundle
-        if (bundle != null) {
-
-            cardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    linearLayout.setVisibility(View.GONE);
-
-                }
-            });
-        }
-
-        //animate the slider
-
-        viewFlipper = (ViewFlipper)layout.findViewById(R.id.view_animator);
-
-        slide_in_left = AnimationUtils.loadAnimation(getActivity(), android.R.anim.slide_in_left);
-        slide_out_right = AnimationUtils.loadAnimation(getActivity(), android.R.anim.slide_out_right);
-
-        viewFlipper.setInAnimation(slide_in_left);
-        viewFlipper.setOutAnimation(slide_out_right);
-
-        cardView2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                viewFlipper.showNext();
 
 
-            }
-        });
         // ---------- KEYHASH GENERATOR -----------//
 //
 //       try {
@@ -137,6 +111,9 @@ public class HomePageFragment extends Fragment {
 
         return layout;
     }
+
+
+
     //Acts like the an Observer who looks for Session changes and invokes onSessionStateChanged
     private Session.StatusCallback statusCallback = new Session.StatusCallback() {
         @Override
@@ -236,6 +213,50 @@ public class HomePageFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode,resultCode,data);
         Session.getActiveSession().onActivityResult(getActivity(), requestCode, resultCode, data);
+
+    }
+
+    private void setupOnScreenElements(View layout) {
+        cardView = (CardView) layout.findViewById(R.id.card_view_1_welcome1);
+        cardView2 = (CardView) layout.findViewById(R.id.car_view_22);
+        linearLayout=(LinearLayout) layout.findViewById(R.id.welcomeView);
+
+
+    }
+
+    public void setupAnimations(View layout){
+
+        Bundle bundle = getArguments();
+
+        if (bundle != null) {
+
+            cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    linearLayout.setVisibility(View.GONE);
+
+                }
+            });
+        }
+
+
+        viewFlipper = (ViewFlipper)layout.findViewById(R.id.view_animator);
+
+        slide_in_left = AnimationUtils.loadAnimation(getActivity(), android.R.anim.slide_in_left);
+        slide_out_right = AnimationUtils.loadAnimation(getActivity(), android.R.anim.slide_out_right);
+
+        viewFlipper.setInAnimation(slide_in_left);
+        viewFlipper.setOutAnimation(slide_out_right);
+
+        cardView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                viewFlipper.showNext();
+
+
+            }
+        });
 
     }
 
