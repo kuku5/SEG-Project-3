@@ -72,6 +72,8 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
         }
     }
 
+
+
     public void updateToolBarLayout(){
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);

@@ -64,18 +64,17 @@ public class GoogleMapFragmentSmall extends Fragment {
     mMapView.onResume();// needed to get the map to display immediately
 
 
-//        try {
-//            MapsInitializer.initialize(getActivity().getApplicationContext());
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        try {
+            MapsInitializer.initialize(getActivity().getApplicationContext());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        locStart = new LatLng(51.454013, -0.080496);
 
-    //    if(googleMap!=null) {
+//       if(googleMap!=null) {
 
             setUpMap();
-       // }
+//       }
 
         // Perform any camera updates here
         return v;
@@ -109,6 +108,7 @@ public class GoogleMapFragmentSmall extends Fragment {
         final Art arts[] = GalleryData.getMapArtwork(getActivity());
 
         googleMap = mMapView.getMap();
+        locStart = new LatLng(51.454013, -0.080496);
 
         CameraUpdate update = CameraUpdateFactory.newLatLngZoom(locStart, 13);
         googleMap.animateCamera(update);
