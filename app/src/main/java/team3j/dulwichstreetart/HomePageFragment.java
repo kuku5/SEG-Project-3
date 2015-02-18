@@ -43,9 +43,6 @@ public class HomePageFragment extends Fragment {
         return myFragmentTab;
     }
 
-
-
-
     //this creates a view
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -71,8 +68,6 @@ public class HomePageFragment extends Fragment {
                 }
             });
         }
-
-
 
         //animate the slider
 

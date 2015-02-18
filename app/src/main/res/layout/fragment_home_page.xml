@@ -165,36 +165,63 @@
                         android:layout_height="wrap_content"
                         android:autoStart="true">
                         <com.etsy.android.grid.util.DynamicHeightImageView
-                            android:id="@+id/dynamic_imageView41"
+                            android:id="@+id/rekaSlide"
                             android:layout_width="fill_parent"
                             android:layout_height="160dp"
                             android:src="@drawable/reka"
                             android:layout_centerInParent="true"
                             android:scaleType="centerCrop"
                             android:adjustViewBounds="true"
-
                             android:paddingBottom="2dp" />
 
                         <com.etsy.android.grid.util.DynamicHeightImageView
-                            android:id="@+id/dynamic_imageView42"
-                            android:layout_width="fill_parent"
-                            android:layout_height="160dp"
-                            android:src="@drawable/reka"
-                            android:layout_centerInParent="true"
-                            android:scaleType="centerCrop"
-                            android:adjustViewBounds="true"
-
-                            android:paddingBottom="2dp" />
-
-                        <com.etsy.android.grid.util.DynamicHeightImageView
-                            android:id="@+id/dynamic_imageView43"
+                            android:id="@+id/virginWomanSlide"
                             android:layout_width="fill_parent"
                             android:layout_height="160dp"
                             android:src="@drawable/thevirginoftherosary"
                             android:layout_centerInParent="true"
                             android:scaleType="centerCrop"
                             android:adjustViewBounds="true"
+                            android:paddingBottom="2dp" />
 
+                        <com.etsy.android.grid.util.DynamicHeightImageView
+                            android:id="@+id/coupleStikSlide"
+                            android:layout_width="fill_parent"
+                            android:layout_height="160dp"
+                            android:src="@drawable/stikthreeboys"
+                            android:layout_centerInParent="true"
+                            android:scaleType="centerCrop"
+                            android:adjustViewBounds="true"
+                            android:paddingBottom="2dp" />
+
+                        <com.etsy.android.grid.util.DynamicHeightImageView
+                            android:id="@+id/europaSlide"
+                            android:layout_width="fill_parent"
+                            android:layout_height="160dp"
+                            android:src="@drawable/lowreseuropaandthebull"
+                            android:layout_centerInParent="true"
+                            android:scaleType="centerCrop"
+                            android:adjustViewBounds="true"
+                            android:paddingBottom="2dp" />
+
+                        <com.etsy.android.grid.util.DynamicHeightImageView
+                            android:id="@+id/phlegmSlide"
+                            android:layout_width="fill_parent"
+                            android:layout_height="160dp"
+                            android:src="@drawable/lowresphlegm"
+                            android:layout_centerInParent="true"
+                            android:scaleType="centerCrop"
+                            android:adjustViewBounds="true"
+                            android:paddingBottom="2dp" />
+
+                        <com.etsy.android.grid.util.DynamicHeightImageView
+                            android:id="@+id/conorSlide"
+                            android:layout_width="fill_parent"
+                            android:layout_height="160dp"
+                            android:src="@drawable/lowresconorharrington"
+                            android:layout_centerInParent="true"
+                            android:scaleType="centerCrop"
+                            android:adjustViewBounds="true"
                             android:paddingBottom="2dp" />
 
 
