@@ -391,14 +391,16 @@
                         android:orientation="vertical">
 
 
-                        <com.facebook.widget.LoginButton
+                        <Button
                             android:id="@+id/button_facebook"
                             android:layout_width="fill_parent"
                             android:layout_height="100dp"
                             android:layout_centerInParent="true"
                             android:scaleType="centerCrop"
                             android:adjustViewBounds="true"
-                            android:paddingBottom="2dp" />
+                            android:paddingBottom="2dp"
+
+                            />
 
                         <TextView
                             android:id="@+id/title_map1s"

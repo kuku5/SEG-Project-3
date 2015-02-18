@@ -46,7 +46,7 @@ public class HomePageFragment extends Fragment {
     private TextView textView;
     private CardView cardView;
     private CardView cardView2;
-    private LoginButton button;
+    private Button button;
     private LinearLayout linearLayout;
     ViewFlipper viewFlipper;
 
@@ -73,15 +73,16 @@ public class HomePageFragment extends Fragment {
         cardView = (CardView) layout.findViewById(R.id.card_view_1_welcome1);
         cardView2 = (CardView) layout.findViewById(R.id.car_view_22);
         linearLayout=(LinearLayout) layout.findViewById(R.id.welcomeView);
-        button=(LoginButton) layout.findViewById(R.id.button_facebook);
+        button=(Button) layout.findViewById(R.id.button_facebook);
         Bundle bundle = getArguments();
-
+        checkIfActiveSession();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onClickLogin();
             }
         });
+        button.setText("Log In");
 
 
         //retrieves the bundle
@@ -147,8 +148,8 @@ public class HomePageFragment extends Fragment {
     //handler for the log in button
     public void onClickLogin() {
         Session session = Session.getActiveSession();
-        if (!isLoggedIn) {
 
+        if (!isLoggedIn) {
             System.out.println("SKEENNNNNNN" + Session.openActiveSession(getActivity(),this, true, statusCallback));
             checkIfActiveSession();
         } else if(isLoggedIn){
