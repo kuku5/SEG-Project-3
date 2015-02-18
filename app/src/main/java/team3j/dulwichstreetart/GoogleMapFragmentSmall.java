@@ -63,85 +63,19 @@ public class GoogleMapFragmentSmall extends Fragment {
 
     mMapView.onResume();// needed to get the map to display immediately
 
-        final Art arts[] = GalleryData.getMapArtwork(getActivity());
 
-        try {
-            MapsInitializer.initialize(getActivity().getApplicationContext());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            MapsInitializer.initialize(getActivity().getApplicationContext());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
-          locStart = new LatLng(51.454013, -0.080496);
-        Bitmap bitmap = BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.art0);
-        BitmapDrawable res = new BitmapDrawable(getActivity().getResources(), BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.art0));
+        locStart = new LatLng(51.454013, -0.080496);
 
+    //    if(googleMap!=null) {
 
-        googleMap = mMapView.getMap();
-
-        CameraUpdate update = CameraUpdateFactory.newLatLngZoom(locStart, 13);
-        googleMap.animateCamera(update);
-        googleMap.setMyLocationEnabled(true);
-        imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CameraUpdate update = CameraUpdateFactory.newLatLngZoom(locStart, 13);
-                googleMap.animateCamera(update);
-            }
-        });
-
-        for(int i=0; i< arts.length; i++)
-        {
-            int pos=i+1;
-            String title = pos + ". " ;
-            if(i==14)
-            {
-                googleMap.addMarker(new MarkerOptions().position(arts[i].getLoc()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)).title(title));
-            }else {
-
-                googleMap.addMarker(new MarkerOptions().position(arts[i].getLoc()).title(title));
-
-            }
-        }
-
-
-        googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
-
-            // Use default InfoWindow frame
-            @Override
-            public View getInfoWindow(Marker arg0) {
-                return null;
-            }
-
-            // Defines the contents of the InfoWindow
-            @Override
-            public View getInfoContents(Marker arg0) {
-
-
-                View v = getActivity().getLayoutInflater().inflate(R.layout.infowindow, null);
-
-
-                LatLng latLng = arg0.getPosition();
-                for(int i=0; i<arts.length; i++)
-                {
-                    if(latLng.equals(arts[i].getLoc()))
-                    {
-
-                        ImageView picView = (ImageView) v.findViewById(R.id.pic);
-                        Bitmap bitmap = BitmapFactory.decodeResource(getActivity().getResources(),arts[i].getPic());
-                        BitmapDrawable res = new BitmapDrawable(getActivity().getResources(), bitmap);
-                        picView.setImageDrawable(res);
-                        TextView txtView = (TextView) v.findViewById(R.id.name);
-                        txtView.setText((i+1) + ". "+arts[i].getName());
-
-                    }
-                }
-
-
-                return v;
-
-            }
-        });
-
+            setUpMap();
+       // }
 
         // Perform any camera updates here
         return v;
@@ -171,4 +105,69 @@ public class GoogleMapFragmentSmall extends Fragment {
         mMapView.onLowMemory();
     }
 
+    public void setUpMap(){
+        final Art arts[] = GalleryData.getMapArtwork(getActivity());
+
+        googleMap = mMapView.getMap();
+
+        CameraUpdate update = CameraUpdateFactory.newLatLngZoom(locStart, 13);
+        googleMap.animateCamera(update);
+        googleMap.setMyLocationEnabled(true);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CameraUpdate update = CameraUpdateFactory.newLatLngZoom(locStart, 13);
+                googleMap.animateCamera(update);
+            }
+        });
+
+        for (int i = 0; i < arts.length; i++) {
+            int pos = i + 1;
+            String title = pos + ". ";
+            if (i == 14) {
+                googleMap.addMarker(new MarkerOptions().position(arts[i].getLoc()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)).title(title));
+            } else {
+
+                googleMap.addMarker(new MarkerOptions().position(arts[i].getLoc()).title(title));
+
+            }
+        }
+
+
+        googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+
+            // Use default InfoWindow frame
+            @Override
+            public View getInfoWindow(Marker arg0) {
+                return null;
+            }
+
+            // Defines the contents of the InfoWindow
+            @Override
+            public View getInfoContents(Marker arg0) {
+
+
+                View v = getActivity().getLayoutInflater().inflate(R.layout.infowindow, null);
+
+
+                LatLng latLng = arg0.getPosition();
+                for (int i = 0; i < arts.length; i++) {
+                    if (latLng.equals(arts[i].getLoc())) {
+
+                        ImageView picView = (ImageView) v.findViewById(R.id.pic);
+                        Bitmap bitmap = BitmapFactory.decodeResource(getActivity().getResources(), arts[i].getPic());
+                        BitmapDrawable res = new BitmapDrawable(getActivity().getResources(), bitmap);
+                        picView.setImageDrawable(res);
+                        TextView txtView = (TextView) v.findViewById(R.id.name);
+                        txtView.setText((i + 1) + ". " + arts[i].getName());
+
+                    }
+                }
+
+
+                return v;
+
+            }
+        });
+    }
 }
