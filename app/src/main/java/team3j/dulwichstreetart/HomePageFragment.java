@@ -10,6 +10,8 @@ import android.content.pm.Signature;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
 import android.util.Base64;
 import android.util.Log;
@@ -69,6 +71,7 @@ public class HomePageFragment extends Fragment {
         View layout = inflater.inflate(R.layout.fragment_home_page, container, false);
         setupOnScreenElements(layout);
         setupAnimations(layout);
+        setupGoogleMapsCard(layout);
 
         //facebook setup
         //setup xml elements
@@ -111,6 +114,7 @@ public class HomePageFragment extends Fragment {
 
         return layout;
     }
+
 
 
 
@@ -261,6 +265,15 @@ public class HomePageFragment extends Fragment {
     }
 
 
+    private void setupGoogleMapsCard(View layout) {
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+
+        GoogleMapFragmentSmall fragmentSmall = GoogleMapFragmentSmall.getInstance(0);
+        ft.replace(R.id.small_map, fragmentSmall);
+        ft.commit();
+
+    }
 
 }
 

@@ -418,6 +418,7 @@
                     </LinearLayout>
 
                 </android.support.v7.widget.CardView>
+
                 <android.support.v7.widget.CardView
                     android:id="@+id/card22"
                     xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -471,8 +472,36 @@
 
 
         </LinearLayout>
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_2_double34"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|top"
+                android:layout_margin="4dp"
+                card_view:cardBackgroundColor="@android:color/white"
+                card_view:cardCornerRadius="4dp"
+                card_view:cardPreventCornerOverlap="false"
+                >
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical">
 
-            </LinearLayout>
+
+                    <FrameLayout
+                        android:id="@+id/small_map"
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        class="com.google.android.gms.maps.SupportMapFragment"
+                        >
+
+                    </FrameLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+          </LinearLayout>
     </ScrollView>
 
 </LinearLayout>
