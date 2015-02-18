@@ -20,12 +20,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ViewAnimator;
 import android.widget.ViewFlipper;
 
+import com.daimajia.slider.library.Animations.DescriptionAnimation;
+import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.facebook.HttpMethod;
 import com.facebook.Request;
 import com.facebook.Response;
@@ -35,6 +41,7 @@ import com.facebook.widget.LoginButton;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
 
 
 /**
@@ -51,6 +58,8 @@ public class HomePageFragment extends Fragment {
     private Button button;
     private LinearLayout linearLayout;
     ViewFlipper viewFlipper;
+
+    private SliderLayout mDemoSlider;
 
     Animation slide_in_left, slide_out_right;
     private boolean isLoggedIn;
@@ -72,6 +81,7 @@ public class HomePageFragment extends Fragment {
         setupOnScreenElements(layout);
         setupAnimations(layout);
         setupGoogleMapsCard(layout);
+        setupLibraryAnimations(layout);
 
         //facebook setup
         //setup xml elements
@@ -266,14 +276,58 @@ public class HomePageFragment extends Fragment {
 
 
     private void setupGoogleMapsCard(View layout) {
-        FragmentManager fm = getFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-
-        GoogleMapFragmentSmall fragmentSmall = GoogleMapFragmentSmall.getInstance(0);
-        ft.replace(R.id.small_map, fragmentSmall);
-        ft.commit();
+//        FragmentManager fm = getFragmentManager();
+//        FragmentTransaction ft = fm.beginTransaction();
+//
+//        GoogleMapFragmentSmall fragmentSmall = GoogleMapFragmentSmall.getInstance(0);
+//        ft.replace(R.id.small_map, fragmentSmall);
+//        ft.commit();
 
     }
+
+    private void setupLibraryAnimations(View layout) {
+
+        mDemoSlider = (SliderLayout)layout.findViewById(R.id.slider);
+
+        HashMap<String,String> url_maps = new HashMap<String, String>();
+        url_maps.put("Hannibal", "http://static2.hypable.com/wp-content/uploads/2013/12/hannibal-season-2-release-date.jpg");
+        url_maps.put("Big Bang Theory", "http://tvfiles.alphacoders.com/100/hdclearart-10.png");
+        url_maps.put("House of Cards", "http://cdn3.nflximg.net/images/3093/2043093.jpg");
+        url_maps.put("Game of Thrones", "http://images.boomsbeat.com/data/images/full/19640/game-of-thrones-season-4-jpg.jpg");
+
+        HashMap<String,Integer> file_maps = new HashMap<String, Integer>();
+        file_maps.put("Conor Harrington",R.drawable.lowresconorharrington);
+        file_maps.put("Walter Landscape",R.drawable.lowreswalterlandscape);
+        file_maps.put("Conor Harrington",R.drawable.lowresconorharrington);
+        file_maps.put("Walter Landscape",R.drawable.lowreswalterlandscape);
+
+
+        for(String name : file_maps.keySet()){
+            TextSliderView textSliderView = new TextSliderView(getActivity());
+            // initialize a SliderLayout
+            textSliderView
+                    .description(name)
+                    .image(file_maps.get(name))
+                    .setScaleType(BaseSliderView.ScaleType.Fit)
+                    .setOnSliderClickListener(new OnSliderClickListener());
+
+            //add your extra information
+            textSliderView.getBundle()
+                    .putString("extra",name);
+
+            mDemoSlider.addSlider(textSliderView);
+        }
+        mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Accordion);
+        mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+        mDemoSlider.setCustomAnimation(new DescriptionAnimation());
+        mDemoSlider.setDuration(4000);
+
+       // mDemoSlider.setPresetTransformer(((TextView) view).getText().toString());
+
+
+
+    }
+
 
 }
 
@@ -306,4 +360,13 @@ public class HomePageFragment extends Fragment {
 //                .setIcon(R.drawable.ic_blob)
 //                .show();
  */
+class OnSliderClickListener implements BaseSliderView.OnSliderClickListener{
+
+
+    @Override
+    public void onSliderClick(BaseSliderView baseSliderView) {
+
+
+    }
+}
 

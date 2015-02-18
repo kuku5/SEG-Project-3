@@ -29,6 +29,10 @@ dependencies {
     compile 'com.etsy.android.grid:library:1.0.5'
     compile 'com.hannesdorfmann:swipeback:1.0.0'
     compile 'com.google.android.gms:play-services:6.5.87'
+    compile "com.android.support:support-v4:+"
+    compile 'com.squareup.picasso:picasso:2.3.2'
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.daimajia.slider:library:1.1.2@aar'
 
     compile project(':facebook')
 
