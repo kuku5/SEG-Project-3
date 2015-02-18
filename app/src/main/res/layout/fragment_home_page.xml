@@ -368,11 +368,10 @@
                             android:id="@+id/button_facebook"
                             android:layout_width="fill_parent"
                             android:layout_height="100dp"
-                            android:src="@drawable/com_facebook_loginbutton_silver"
+                            android:background="@drawable/facebooklogo"
                             android:layout_centerInParent="true"
                             android:scaleType="centerCrop"
                             android:adjustViewBounds="true"
-
                             android:paddingBottom="2dp" />
 
                         <TextView
@@ -413,11 +412,10 @@
                             android:id="@+id/dynamic_imageVie111w"
                             android:layout_width="fill_parent"
                             android:layout_height="100dp"
-                            android:src="@drawable/mapbannersquare"
+                            android:src="@drawable/dulwichpicturegallery"
                             android:layout_centerInParent="true"
                             android:scaleType="centerCrop"
                             android:adjustViewBounds="true"
-
                             android:paddingBottom="2dp" />
 
                         <TextView
@@ -425,7 +423,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="4dp"
-                            android:text="Locate Nearest ArtWork"
+                            android:text="About Dulwich Picture Gallery"
                             android:textAllCaps="true"
                             android:textColor="#1f3133"
                             android:textSize="14sp"
