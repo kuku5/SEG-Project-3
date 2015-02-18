@@ -70,7 +70,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return 5;
     }
 
     //custom viewHolder for each item in recycle view
