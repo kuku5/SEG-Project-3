@@ -66,10 +66,6 @@ public class GalleryData {
                 R.drawable.lowresapnunshead,
                 R.drawable.lowrespureevilnunshead,
                 R.drawable.lowresoldnunsheadmurals,
-                R.drawable.lowresemmanuelphilibert,
-                R.drawable.lowresjesuscarryingthecross,
-                R.drawable.lowresjudgementofparis,
-                R.drawable.lowrespharaohsring,
                 R.drawable.lowresstcatherinefloor,
                 R.drawable.lowresstcatherinestone,
                 R.drawable.lowresdavidshillinglaw,
@@ -91,7 +87,11 @@ public class GalleryData {
                 R.drawable.lowresstikfallofman,
                 R.drawable.lowresagentprovocateur,
                 R.drawable.lowresnoir,
-                R.drawable.lowreswalterlandscape
+                R.drawable.lowreswalterlandscape,
+                R.drawable.lowresemmanuelphilibert,
+                R.drawable.lowresjesuscarryingthecross,
+                R.drawable.lowresjudgementofparis,
+                R.drawable.lowrespharaohsring
 
         };
 

@@ -38,10 +38,6 @@
         <item>AP nun\'s Head</item>
         <item>Pure Evil Nun\'s Head</item>
         <item>Old Nun\'s Head Mural</item>
-        <item>Emanuel Philibert</item>
-        <item>Jesus Carrying the Cross - Ben Wilson</item>
-        <item>Judgement of Paris - Ben Wilson</item>
-        <item>Pharaoh\'s Ring - Ben Wilson</item>
         <item>St Catherine - Ben Wilson</item>
         <item>St Catherine - Ben Wilson</item>
         <item>David Shillinglaw</item>
@@ -61,10 +57,14 @@
         <item>Eliza and Mary Davidson - Stik</item>
         <item>Elizabeth and Mary Linley - Stik</item>
         <item>Mrs Moody - Stik</item>
-        <item>The Fall of Man - Stik</item>
+        <item>The Fall of Man</item>
         <item>The Three Graces - Agent Provocateur</item>
         <item>Context - Thierry Noir</item>
         <item>Finished Wall - Walter Kersher</item>
+        <item>Emanuel Philibert</item>
+        <item>Jesus Carrying the Cross - Ben Wilson</item>
+        <item>Judgement of Paris - Ben Wilson</item>
+        <item>Pharaoh\'s Ring - Ben Wilson</item>
     </string-array>
     <string-array name="tabs">
         <item>Home</item>
