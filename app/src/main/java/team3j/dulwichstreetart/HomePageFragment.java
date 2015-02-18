@@ -1,10 +1,12 @@
 package team3j.dulwichstreetart;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ViewAnimator;
 import android.widget.ViewFlipper;
+
+import com.facebook.HttpMethod;
+import com.facebook.Request;
+import com.facebook.Response;
+import com.facebook.Session;
+import com.facebook.SessionState;
 
 
 /**
@@ -33,6 +41,7 @@ public class HomePageFragment extends Fragment {
     ViewFlipper viewFlipper;
 
     Animation slide_in_left, slide_out_right;
+    private boolean isLoggedIn;
 
     //return an instance of this Fragment with a bundle into the tab adapter
     public static HomePageFragment getInstance(int position) {
@@ -50,12 +59,20 @@ public class HomePageFragment extends Fragment {
        //creates view that setups what is displayed
         View layout = inflater.inflate(R.layout.fragment_home_page, container, false);
         //textView = (TextView) layout.findViewById(R.id.position);
-
+        isLoggedIn = false;
         cardView = (CardView) layout.findViewById(R.id.card_view_1_welcome1);
         cardView2 = (CardView) layout.findViewById(R.id.car_view_22);
         linearLayout=(LinearLayout) layout.findViewById(R.id.welcomeView);
         button=(Button) layout.findViewById(R.id.button_facebook);
         Bundle bundle = getArguments();
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickLogin();
+            }
+        });
+
 
         //retrieves the bundle
         if (bundle != null) {
@@ -90,7 +107,105 @@ public class HomePageFragment extends Fragment {
 
         return layout;
     }
+    //Acts like the an Observer who looks for Session changes and invokes onSessionStateChanged
+    private Session.StatusCallback statusCallback = new Session.StatusCallback() {
+        @Override
+        public void call(Session session, SessionState state,
+                         Exception exception) {
+            onSessionStateChange(session, state, exception);
+        }
+    };
 
+    //handler for the log in button
+    public void onClickLogin() {
+        Session session = Session.getActiveSession();
+        if (!isLoggedIn) {
+            Session.openActiveSession(getActivity(), true, statusCallback);
+            checkIfActiveSession();
+        } else if(isLoggedIn){
+            session.close();
+        }
+    }
+
+    //checks to see if there is already a session open.
+    public void checkIfActiveSession(){
+        Session session = Session.getActiveSession();
+        if (session != null && (session.isOpened() || session.isClosed()) ) {
+            onSessionStateChange(session, session.getState(), null);
+            System.out.println("There is already a open session");
+        }
+    }
+    public void onResume() {
+        super.onResume();
+        //checkIfActiveSession();
+    }
+    //Display different things depending on if the user is logged in
+    private void onSessionStateChange(Session session, SessionState state, Exception exception) {
+        if (state.isOpened()) {
+            //If logged in, show this
+            Log.i("MainActivity", "Logged in...");
+            //test.setText("");
+            retrieveInfo(session);
+            button.setText("Log Out");
+            isLoggedIn = true;
+
+
+        } else if (state.isClosed()) {
+            //If logged out, show this
+            Log.i("MainActivity","Logged out...");
+            //test.setText("");
+            button.setText("Log In");
+            isLoggedIn = false;
+
+        }
+    }
+    //Method used to retrieve fb data
+    public void retrieveInfo(Session session){
+        //test.setText("Logged in as ");
+        //Get the profile of the person logged in
+        Bundle b1 = new Bundle();
+        b1.putBoolean("summary", true);     //includes a summary in the request
+        b1.putString("filter", "stream");   //gets the chronological order of comments
+        b1.putString("limit","100");        //gets max of 100
+        new Request(session, "726958990741991/comments", b1, HttpMethod.GET,
+                new Request.Callback() {
+                    public void onCompleted(Response response)  {
+                        if(response !=null) {
+                            try {
+                                System.out.println(response.getGraphObject().toString());
+                                System.out.println(response.getGraphObject().getInnerJSONObject().getJSONObject("summary").toString());
+                                int x = response.getGraphObject().getInnerJSONObject().getJSONArray("data").length();
+                                System.out.println(x);
+                                for(int i = 0; i<61; i++){
+                                    System.out.println(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("message"));
+                                }
+                            } catch (Exception e){
+
+                            }
+                        }
+                    }
+                }).executeAsync();
+
+        // Get total number of likes on a post
+        Bundle b = new Bundle();
+        b.putBoolean("summary", true);
+        new Request(session,"798332966914164/likes",b,HttpMethod.GET,
+                new Request.Callback() {
+                    public void onCompleted(Response response) {
+                        try {
+                            //test.append(" \n Total like count on 798332966914164 is "+response.getGraphObject().getInnerJSONObject().getJSONObject("summary").get("total_count").toString());
+                        } catch (Exception e){
+                            System.out.println(e);
+                        }
+                    }
+                }).executeAsync();
+    }
+
+    //Handles the web log in
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+        Session.getActiveSession().onActivityResult(getActivity(), requestCode, resultCode, data);
+    }
 
 
 
