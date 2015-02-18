@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.Signature;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -42,6 +43,8 @@ import com.facebook.widget.LoginButton;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 /**
@@ -57,7 +60,8 @@ public class HomePageFragment extends Fragment {
     private CardView cardView2;
     private Button button;
     private LinearLayout linearLayout;
-    ViewFlipper viewFlipper;
+    private ViewFlipper viewFlipper;
+    private Timer timer;
 
     private SliderLayout mDemoSlider;
 
@@ -85,9 +89,9 @@ public class HomePageFragment extends Fragment {
 
         //facebook setup
         //setup xml elements
-        button=(Button) layout.findViewById(R.id.button_facebook);
+        button = (Button) layout.findViewById(R.id.button_facebook);
 
-       //facebook work
+        //facebook work
         isLoggedIn = false;
 
         checkIfActiveSession();
@@ -99,8 +103,6 @@ public class HomePageFragment extends Fragment {
             }
         });
         button.setText("Log In");
-
-
 
 
         // ---------- KEYHASH GENERATOR -----------//
@@ -120,12 +122,9 @@ public class HomePageFragment extends Fragment {
 //
 //        }
 
-
-
+      slideDown();
         return layout;
     }
-
-
 
 
     //Acts like the an Observer who looks for Session changes and invokes onSessionStateChanged
@@ -142,25 +141,27 @@ public class HomePageFragment extends Fragment {
         Session session = Session.getActiveSession();
 
         if (!isLoggedIn) {
-            System.out.println("SKEENNNNNNN" + Session.openActiveSession(getActivity(),this, true, statusCallback));
+            System.out.println("SKEENNNNNNN" + Session.openActiveSession(getActivity(), this, true, statusCallback));
             checkIfActiveSession();
-        } else if(isLoggedIn){
+        } else if (isLoggedIn) {
             session.close();
         }
     }
 
     //checks to see if there is already a session open.
-    public void checkIfActiveSession(){
+    public void checkIfActiveSession() {
         Session session = Session.getActiveSession();
-        if (session != null && (session.isOpened() || session.isClosed()) ) {
+        if (session != null && (session.isOpened() || session.isClosed())) {
             onSessionStateChange(session, session.getState(), null);
             System.out.println("There is already a open session");
         }
     }
+
     public void onResume() {
         super.onResume();
         //checkIfActiveSession();
     }
+
     //Display different things depending on if the user is logged in
     private void onSessionStateChange(Session session, SessionState state, Exception exception) {
         if (state.isOpened()) {
@@ -174,34 +175,35 @@ public class HomePageFragment extends Fragment {
 
         } else if (state.isClosed()) {
             //If logged out, show this
-            Log.i("MainActivity","Logged out...");
+            Log.i("MainActivity", "Logged out...");
             //test.setText("");
             button.setText("Log In");
             isLoggedIn = false;
 
         }
     }
+
     //Method used to retrieve fb data
-    public void retrieveInfo(Session session){
+    public void retrieveInfo(Session session) {
         //test.setText("Logged in as ");
         //Get the profile of the person logged in
         Bundle b1 = new Bundle();
         b1.putBoolean("summary", true);     //includes a summary in the request
         b1.putString("filter", "stream");   //gets the chronological order of comments
-        b1.putString("limit","100");        //gets max of 100
+        b1.putString("limit", "100");        //gets max of 100
         new Request(session, "726958990741991/comments", b1, HttpMethod.GET,
                 new Request.Callback() {
-                    public void onCompleted(Response response)  {
-                        if(response !=null) {
+                    public void onCompleted(Response response) {
+                        if (response != null) {
                             try {
                                 System.out.println(response.getGraphObject().toString());
                                 System.out.println(response.getGraphObject().getInnerJSONObject().getJSONObject("summary").toString());
                                 int x = response.getGraphObject().getInnerJSONObject().getJSONArray("data").length();
                                 System.out.println(x);
-                                for(int i = 0; i<61; i++){
+                                for (int i = 0; i < 61; i++) {
                                     System.out.println(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("message"));
                                 }
-                            } catch (Exception e){
+                            } catch (Exception e) {
 
                             }
                         }
@@ -211,12 +213,12 @@ public class HomePageFragment extends Fragment {
         // Get total number of likes on a post
         Bundle b = new Bundle();
         b.putBoolean("summary", true);
-        new Request(session,"798332966914164/likes",b,HttpMethod.GET,
+        new Request(session, "798332966914164/likes", b, HttpMethod.GET,
                 new Request.Callback() {
                     public void onCompleted(Response response) {
                         try {
                             //test.append(" \n Total like count on 798332966914164 is "+response.getGraphObject().getInnerJSONObject().getJSONObject("summary").get("total_count").toString());
-                        } catch (Exception e){
+                        } catch (Exception e) {
                             System.out.println(e);
                         }
                     }
@@ -225,7 +227,7 @@ public class HomePageFragment extends Fragment {
 
     //Handles the web log in
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode,resultCode,data);
+        super.onActivityResult(requestCode, resultCode, data);
         Session.getActiveSession().onActivityResult(getActivity(), requestCode, resultCode, data);
 
     }
@@ -233,12 +235,14 @@ public class HomePageFragment extends Fragment {
     private void setupOnScreenElements(View layout) {
         cardView = (CardView) layout.findViewById(R.id.card_view_1_welcome1);
         cardView2 = (CardView) layout.findViewById(R.id.car_view_22);
-        linearLayout=(LinearLayout) layout.findViewById(R.id.welcomeView);
+        linearLayout = (LinearLayout) layout.findViewById(R.id.welcomeView);
 
 
     }
 
-    public void setupAnimations(View layout){
+    public void setupAnimations(View layout) {
+
+
 
         Bundle bundle = getArguments();
 
@@ -254,7 +258,7 @@ public class HomePageFragment extends Fragment {
         }
 
 
-        viewFlipper = (ViewFlipper)layout.findViewById(R.id.view_animator);
+        viewFlipper = (ViewFlipper) layout.findViewById(R.id.view_animator);
 
         slide_in_left = AnimationUtils.loadAnimation(getActivity(), android.R.anim.slide_in_left);
         slide_out_right = AnimationUtils.loadAnimation(getActivity(), android.R.anim.slide_out_right);
@@ -287,23 +291,23 @@ public class HomePageFragment extends Fragment {
 
     private void setupLibraryAnimations(View layout) {
 
-        mDemoSlider = (SliderLayout)layout.findViewById(R.id.slider);
+        mDemoSlider = (SliderLayout) layout.findViewById(R.id.slider);
 
-        HashMap<String,String> url_maps = new HashMap<String, String>();
+        HashMap<String, String> url_maps = new HashMap<String, String>();
         url_maps.put("Hannibal", "http://static2.hypable.com/wp-content/uploads/2013/12/hannibal-season-2-release-date.jpg");
         url_maps.put("Big Bang Theory", "http://tvfiles.alphacoders.com/100/hdclearart-10.png");
         url_maps.put("House of Cards", "http://cdn3.nflximg.net/images/3093/2043093.jpg");
         url_maps.put("Game of Thrones", "http://images.boomsbeat.com/data/images/full/19640/game-of-thrones-season-4-jpg.jpg");
 
-        HashMap<String,Integer> file_maps = new HashMap<String, Integer>();
+        HashMap<String, Integer> file_maps = new HashMap<String, Integer>();
 
-        file_maps.put("Conor Harrington",R.drawable.lowresconorharrington);
-        file_maps.put("Walter Landscape",R.drawable.lowreswalterlandscape);
-        file_maps.put("Conor Harrington",R.drawable.lowresconorharrington);
-        file_maps.put("Walter Landscape",R.drawable.lowreswalterlandscape);
+        file_maps.put("Conor Harrington", R.drawable.lowresconorharrington);
+        file_maps.put("Walter Landscape", R.drawable.lowreswalterlandscape);
+        file_maps.put("Conor Harrington", R.drawable.lowresconorharrington);
+        file_maps.put("Walter Landscape", R.drawable.lowreswalterlandscape);
 
 
-        for(String name : file_maps.keySet()){
+        for (String name : file_maps.keySet()) {
             TextSliderView textSliderView = new TextSliderView(getActivity());
             // initialize a SliderLayout
 
@@ -315,7 +319,7 @@ public class HomePageFragment extends Fragment {
 
             //add your extra information
             textSliderView.getBundle()
-                    .putString("extra",name);
+                    .putString("extra", name);
 
             mDemoSlider.addSlider(textSliderView);
         }
@@ -326,15 +330,24 @@ public class HomePageFragment extends Fragment {
         mDemoSlider.setCustomAnimation(new DescriptionAnimation());
         mDemoSlider.setDuration(4000);
 
-       // mDemoSlider.setPresetTransformer(((TextView) view).getText().toString());
-
+        // mDemoSlider.setPresetTransformer(((TextView) view).getText().toString());
 
 
     }
 
+    public void slideDown() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // your code here
+                linearLayout.setVisibility(View.VISIBLE);
+
+            }
+        }, 1500/* 1sec delay */);
+
+    }
 
 }
-
 
 
 

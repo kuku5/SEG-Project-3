@@ -99,7 +99,7 @@
                     android:scaleType="fitStart"
 
                     android:src="@drawable/conorharrington"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     />
 
 
