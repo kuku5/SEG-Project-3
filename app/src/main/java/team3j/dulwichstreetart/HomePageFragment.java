@@ -2,10 +2,16 @@ package team3j.dulwichstreetart;
 
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.content.pm.Signature;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +29,9 @@ import com.facebook.Request;
 import com.facebook.Response;
 import com.facebook.Session;
 import com.facebook.SessionState;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 
 /**
@@ -104,6 +113,24 @@ public class HomePageFragment extends Fragment {
 
             }
         });
+        // ---------- KEYHASH GENERATOR -----------//
+//
+//       try {
+//            PackageInfo info = getActivity().getPackageManager().getPackageInfo(
+//                    "team3j.dulwichstreetart",
+//                    PackageManager.GET_SIGNATURES);
+//            for (Signature signature : info.signatures) {
+//                MessageDigest md = MessageDigest.getInstance("SHA");
+//                md.update(signature.toByteArray());
+//                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+//            }
+//        } catch (PackageManager.NameNotFoundException e) {
+//
+//        } catch (NoSuchAlgorithmException e) {
+//
+//        }
+
+
 
         return layout;
     }
@@ -120,7 +147,8 @@ public class HomePageFragment extends Fragment {
     public void onClickLogin() {
         Session session = Session.getActiveSession();
         if (!isLoggedIn) {
-            Session.openActiveSession(getActivity(), true, statusCallback);
+
+            System.out.println("SKEENNNNNNN" + Session.openActiveSession(getActivity(),this, true, statusCallback));
             checkIfActiveSession();
         } else if(isLoggedIn){
             session.close();
@@ -205,8 +233,8 @@ public class HomePageFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode,resultCode,data);
         Session.getActiveSession().onActivityResult(getActivity(), requestCode, resultCode, data);
-    }
 
+    }
 
 
 
