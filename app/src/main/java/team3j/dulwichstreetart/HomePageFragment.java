@@ -127,7 +127,7 @@ public class HomePageFragment extends Fragment {
         }
     }
 
-    //checks to see if there is already a session open
+    //checks to see if there is already a session open.
     public void checkIfActiveSession(){
         Session session = Session.getActiveSession();
         if (session != null && (session.isOpened() || session.isClosed()) ) {
