@@ -1,4 +1,6 @@
 package team3j.dulwichstreetart;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -60,8 +62,7 @@ public class GoogleMapFragmentSmall extends Fragment {
         imageButton= (ImageButton) v.findViewById(R.id.fab_image_button);
 
 
-
-    mMapView.onResume();// needed to get the map to display immediately
+         mMapView.onResume();// needed to get the map to display immediately
 
 
         try {
@@ -71,7 +72,7 @@ public class GoogleMapFragmentSmall extends Fragment {
         }
 
 
-       if(googleMap!=null) {
+       if(isGoogleMapsInstalled()) {
 
             setUpMap();
        }
@@ -80,6 +81,18 @@ public class GoogleMapFragmentSmall extends Fragment {
         return v;
     }
 
+    public boolean isGoogleMapsInstalled()
+    {
+        try
+        {
+            ApplicationInfo info = getActivity().getPackageManager().getApplicationInfo("com.google.android.apps.maps", 0 );
+            return true;
+        }
+        catch(PackageManager.NameNotFoundException e)
+        {
+            return false;
+        }
+    }
     @Override
     public void onResume() {
         super.onResume();
@@ -108,11 +121,8 @@ public class GoogleMapFragmentSmall extends Fragment {
         final Art arts[] = GalleryData.getMapArtwork(getActivity());
 
         googleMap = mMapView.getMap();
-        locStart = new LatLng(51.454013, -0.080496);
-
-        CameraUpdate update = CameraUpdateFactory.newLatLngZoom(locStart, 13);
-        googleMap.animateCamera(update);
-        googleMap.setMyLocationEnabled(true);
+        zoom();
+           googleMap.setMyLocationEnabled(true);
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -170,4 +180,14 @@ public class GoogleMapFragmentSmall extends Fragment {
             }
         });
     }
+
+    public void zoom(){
+        locStart = new LatLng(51.454013, -0.080496);
+
+        CameraUpdate update = CameraUpdateFactory.newLatLngZoom(locStart, 13);
+        googleMap.animateCamera(update);
+
+
+    }
+
 }

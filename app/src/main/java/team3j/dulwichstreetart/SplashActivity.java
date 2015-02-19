@@ -19,7 +19,7 @@ import android.view.MenuItem;
 public class SplashActivity extends Activity {
 
 
-    private long TIMER=500;
+    private long TIMER=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

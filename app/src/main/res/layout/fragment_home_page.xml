@@ -199,22 +199,76 @@
                     <ViewFlipper
                         android:id="@+id/view_animator"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="60dp"
                         android:autoStart="true"
                         >
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:orientation="horizontal">
 
-                        <TextView
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/twitter_name"
+                                android:textSize="12sp"
+                                android:textStyle="bold"
+                                />
+                            <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/tweet1"
-                            android:textSize="8sp"/>
+                            android:text="@string/twitter_hashtag"
+                            android:textSize="11sp"
+                            android:textStyle="bold"
+                                android:id="@+id/atsymbol"
+                            /></LinearLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/tweet1"
+                                android:textSize="8sp"/>
 
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/tweet1"
-                            android:textSize="8sp"/>
+                            </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:orientation="vertical">
+                            <LinearLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/twitter_name"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold"
+                                    />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/twitter_hashtag"
+                                    android:textSize="11sp"
+                                    android:textStyle="bold"
+                                    android:id="@+id/atsymbol2"
+                                    /></LinearLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/tweet1"
+                                android:textSize="8sp"/>
+
+
+                        </LinearLayout>
+
+
 
                         <!--<com.etsy.android.grid.util.DynamicHeightImageView-->
                             <!--android:id="@+id/rekaSlide"-->
@@ -317,7 +371,7 @@
 
 
                     <com.etsy.android.grid.util.DynamicHeightImageView
-                        android:id="@+id/dynamic_imageView"
+                        android:id="@+id/map_image"
                         android:layout_width="fill_parent"
                         android:layout_height="100dp"
                         android:src="@drawable/mapbannersquare"
@@ -325,7 +379,8 @@
                         android:scaleType="centerCrop"
                         android:adjustViewBounds="true"
 
-                        android:paddingBottom="2dp" />
+                        android:paddingBottom="2dp"
+                        />
 
                     <TextView
                         android:id="@+id/title_maps"

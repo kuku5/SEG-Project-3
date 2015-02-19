@@ -2,49 +2,35 @@ package team3j.dulwichstreetart;
 
 
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.content.pm.Signature;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
-import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.ViewAnimator;
 import android.widget.ViewFlipper;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
+import com.etsy.android.grid.util.DynamicHeightImageView;
 import com.facebook.HttpMethod;
 import com.facebook.Request;
 import com.facebook.Response;
 import com.facebook.Session;
 import com.facebook.SessionState;
-import com.facebook.widget.LoginButton;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Timer;
-import java.util.TimerTask;
 
 
 /**
@@ -63,10 +49,13 @@ public class HomePageFragment extends Fragment {
     private ViewFlipper viewFlipper;
     private Timer timer;
 
+    private TextView name;
     private SliderLayout mDemoSlider;
 
     Animation slide_in_left, slide_out_right;
     private boolean isLoggedIn;
+    private DynamicHeightImageView mapButton;
+    private OnClickInsideFragment onClickInsideFragment;
 
     //return an instance of this Fragment with a bundle into the tab adapter
     public static HomePageFragment getInstance(int position) {
@@ -236,8 +225,16 @@ public class HomePageFragment extends Fragment {
         cardView = (CardView) layout.findViewById(R.id.card_view_1_welcome1);
         cardView2 = (CardView) layout.findViewById(R.id.car_view_22);
         linearLayout = (LinearLayout) layout.findViewById(R.id.welcomeView);
+        name=(TextView) layout.findViewById(R.id.atsymbol);
+        name.setText("    @DulwichGallery      14h");
+        mapButton=(DynamicHeightImageView) layout.findViewById(R.id.map_image);
 
-
+        mapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               // onClickInsideFragment.onCardViewTap();
+            }
+        });
     }
 
     public void setupAnimations(View layout) {
@@ -346,6 +343,13 @@ public class HomePageFragment extends Fragment {
             }
         }, 1500/* 1sec delay */);
 
+    }
+
+    public void setupClickInsideFragment(OnClickInsideFragment onClickInsideFragment){
+        this.onClickInsideFragment=onClickInsideFragment;
+    }
+    public interface OnClickInsideFragment {
+        public void onCardViewTap();
     }
 
 }

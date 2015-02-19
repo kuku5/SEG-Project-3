@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -31,6 +32,9 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
     private MaterialTabHost tabHost;
     private ViewPager viewPager;
 
+    private HomePageFragment.OnClickInsideFragment onClickInsideFragment;
+    private GoogleMapFragmentSmall googleMapFragmentSmall;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,14 +47,24 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         toolbar = (Toolbar) findViewById(R.id.app_bar);
 
+
         updateToolBarLayout();//update tool bar
         setUpTabsAdapter();//setup tabs
+
+        onClickInsideFragment= new HomePageFragment.OnClickInsideFragment() {
+            @Override
+            public void onCardViewTap() {
+                viewPager.setCurrentItem(3);
+
+            }
+        };
+
     }
 
     public void setUpTabsAdapter(){
         //fragment page adapter for the tabs displays a fragment and handles loading of fragments for each tab
 
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(),onClickInsideFragment);
         viewPager.setAdapter(adapter);
         viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
@@ -58,6 +72,8 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
                 tabHost.setSelectedNavigationItem(position);
             }
         });
+        viewPager.setOffscreenPageLimit(3);
+
 
         //adds the titles to each tab and changes colors of text
         for (int i = 0; i < adapter.getCount(); i++) {
@@ -110,16 +126,27 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
         return super.onOptionsItemSelected(item);
     }
 
+
     @Override
     public void onTabSelected(MaterialTab materialTab) {
         viewPager.setCurrentItem(materialTab.getPosition());
+        Log.d("testing2", "opened tab " + materialTab.getPosition());
+
+        if(viewPager.getCurrentItem()==3){
+//            if(googleMapFragmentSmall.isGoogleMapsInstalled()){
+//                googleMapFragmentSmall.zoom();
+//            }
+
+        };
+
+
     }
+
+
 
     @Override
     public void onTabReselected(MaterialTab materialTab) {
-        if(viewPager.getCurrentItem()==0){
 
-        };
 
     }
 
@@ -136,7 +163,7 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
     private class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
 
-        public ViewPagerAdapter(FragmentManager fragmentManager) {
+        public ViewPagerAdapter(FragmentManager fragmentManager,HomePageFragment.OnClickInsideFragment onClickInsideFragment1) {
             super(fragmentManager);
 
         }
@@ -148,17 +175,22 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
 
 
 
+
             switch (num) {
                 case 0:
-                    return HomePageFragment.getInstance(num);
+                    HomePageFragment homePageFragment= HomePageFragment.getInstance(num);
+                    homePageFragment.setupClickInsideFragment(onClickInsideFragment);
+
+                    return homePageFragment;
                 case 1:
                     return GalleryFragment.getInstance(num);
                 case 2:
                     return ArtistListFragment.getInstance(num);
                 case 3:
 
+                     googleMapFragmentSmall= GoogleMapFragmentSmall.getInstance(num);
 
-                    return GoogleMapFragmentSmall.getInstance(num);
+                    return googleMapFragmentSmall;
                 case 4:
 
 

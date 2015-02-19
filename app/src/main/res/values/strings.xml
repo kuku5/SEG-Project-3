@@ -2,6 +2,8 @@
 <resources>
     <string name="app_id">846031908768354</string>
     <string name="app_name">Dulwich Outdoor Gallery</string>
+    <string name="twitter_name">Dulwich Pic Gallery</string>
+    <string name="twitter_hashtag">DulwichGallery</string>
     <string name="title_activity_main">Dulwich Outdoor Gallery</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
