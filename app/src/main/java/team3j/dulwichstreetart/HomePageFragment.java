@@ -232,6 +232,7 @@ public class HomePageFragment extends Fragment {
         mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                MainActivity.viewPager.setCurrentItem(3,true);
                // onClickInsideFragment.onCardViewTap();
             }
         });

@@ -30,10 +30,12 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
 
     private Toolbar toolbar;
     private MaterialTabHost tabHost;
-    private ViewPager viewPager;
+    public static ViewPager viewPager;
 
     private HomePageFragment.OnClickInsideFragment onClickInsideFragment;
     private GoogleMapFragmentSmall googleMapFragmentSmall;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
