@@ -20,6 +20,9 @@
     and pavements in the vicinity of Dulwich Picture Gallery. It has been created by some of the top street artist alive</string>
     <string name="description_title">Description:</string>
     <string name="artwork_description">Mrs Elizabeth Mood with her sons Samuel and Thomas by Thomas Gainsborough</string>
+    <string name="tweet1">
+        Many great painters copied the work of old masters, &amp; so can you! Come &amp; have a go this wkend! http://bit.ly/1ywwhN1
+    </string>
 
     <string-array name="artwork_descriptions">
         <item>The Three Graces - Agent Provocateur</item>

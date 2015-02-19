@@ -200,66 +200,81 @@
                         android:id="@+id/view_animator"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:autoStart="true">
-                        <com.etsy.android.grid.util.DynamicHeightImageView
-                            android:id="@+id/rekaSlide"
-                            android:layout_width="fill_parent"
-                            android:layout_height="160dp"
-                            android:src="@drawable/lowresreka"
-                            android:layout_centerInParent="true"
-                            android:scaleType="centerCrop"
-                            android:adjustViewBounds="true"
-                            android:paddingBottom="2dp" />
+                        android:autoStart="true"
+                        >
 
-                        <com.etsy.android.grid.util.DynamicHeightImageView
-                            android:id="@+id/virginWomanSlide"
-                            android:layout_width="fill_parent"
-                            android:layout_height="160dp"
-                            android:src="@drawable/lowresreka"
-                            android:layout_centerInParent="true"
-                            android:scaleType="centerCrop"
-                            android:adjustViewBounds="true"
-                            android:paddingBottom="2dp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tweet1"
+                            android:textSize="8sp"/>
 
-                        <com.etsy.android.grid.util.DynamicHeightImageView
-                            android:id="@+id/coupleStikSlide"
-                            android:layout_width="fill_parent"
-                            android:layout_height="160dp"
-                            android:src="@drawable/lowresreka"
-                            android:layout_centerInParent="true"
-                            android:scaleType="centerCrop"
-                            android:adjustViewBounds="true"
-                            android:paddingBottom="2dp" />
 
-                        <com.etsy.android.grid.util.DynamicHeightImageView
-                            android:id="@+id/europaSlide"
-                            android:layout_width="fill_parent"
-                            android:layout_height="160dp"
-                            android:src="@drawable/lowresreka"
-                            android:layout_centerInParent="true"
-                            android:scaleType="centerCrop"
-                            android:adjustViewBounds="true"
-                            android:paddingBottom="2dp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tweet1"
+                            android:textSize="8sp"/>
 
-                        <com.etsy.android.grid.util.DynamicHeightImageView
-                            android:id="@+id/phlegmSlide"
-                            android:layout_width="fill_parent"
-                            android:layout_height="160dp"
-                            android:src="@drawable/lowresreka"
-                            android:layout_centerInParent="true"
-                            android:scaleType="centerCrop"
-                            android:adjustViewBounds="true"
-                            android:paddingBottom="2dp" />
+                        <!--<com.etsy.android.grid.util.DynamicHeightImageView-->
+                            <!--android:id="@+id/rekaSlide"-->
+                            <!--android:layout_width="fill_parent"-->
+                            <!--android:layout_height="160dp"-->
+                            <!--android:src="@drawable/lowresreka"-->
+                            <!--android:layout_centerInParent="true"-->
+                            <!--android:scaleType="centerCrop"-->
+                            <!--android:adjustViewBounds="true"-->
+                            <!--android:paddingBottom="2dp" />-->
 
-                        <com.etsy.android.grid.util.DynamicHeightImageView
-                            android:id="@+id/conorSlide"
-                            android:layout_width="fill_parent"
-                            android:layout_height="160dp"
-                            android:src="@drawable/lowresreka"
-                            android:layout_centerInParent="true"
-                            android:scaleType="centerCrop"
-                            android:adjustViewBounds="true"
-                            android:paddingBottom="2dp" />
+                        <!--<com.etsy.android.grid.util.DynamicHeightImageView-->
+                            <!--android:id="@+id/virginWomanSlide"-->
+                            <!--android:layout_width="fill_parent"-->
+                            <!--android:layout_height="160dp"-->
+                            <!--android:src="@drawable/lowresreka"-->
+                            <!--android:layout_centerInParent="true"-->
+                            <!--android:scaleType="centerCrop"-->
+                            <!--android:adjustViewBounds="true"-->
+                            <!--android:paddingBottom="2dp" />-->
+
+                        <!--<com.etsy.android.grid.util.DynamicHeightImageView-->
+                            <!--android:id="@+id/coupleStikSlide"-->
+                            <!--android:layout_width="fill_parent"-->
+                            <!--android:layout_height="160dp"-->
+                            <!--android:src="@drawable/lowresreka"-->
+                            <!--android:layout_centerInParent="true"-->
+                            <!--android:scaleType="centerCrop"-->
+                            <!--android:adjustViewBounds="true"-->
+                            <!--android:paddingBottom="2dp" />-->
+
+                        <!--<com.etsy.android.grid.util.DynamicHeightImageView-->
+                            <!--android:id="@+id/europaSlide"-->
+                            <!--android:layout_width="fill_parent"-->
+                            <!--android:layout_height="160dp"-->
+                            <!--android:src="@drawable/lowresreka"-->
+                            <!--android:layout_centerInParent="true"-->
+                            <!--android:scaleType="centerCrop"-->
+                            <!--android:adjustViewBounds="true"-->
+                            <!--android:paddingBottom="2dp" />-->
+
+                        <!--<com.etsy.android.grid.util.DynamicHeightImageView-->
+                            <!--android:id="@+id/phlegmSlide"-->
+                            <!--android:layout_width="fill_parent"-->
+                            <!--android:layout_height="160dp"-->
+                            <!--android:src="@drawable/lowresreka"-->
+                            <!--android:layout_centerInParent="true"-->
+                            <!--android:scaleType="centerCrop"-->
+                            <!--android:adjustViewBounds="true"-->
+                            <!--android:paddingBottom="2dp" />-->
+
+                        <!--<com.etsy.android.grid.util.DynamicHeightImageView-->
+                            <!--android:id="@+id/conorSlide"-->
+                            <!--android:layout_width="fill_parent"-->
+                            <!--android:layout_height="160dp"-->
+                            <!--android:src="@drawable/lowresreka"-->
+                            <!--android:layout_centerInParent="true"-->
+                            <!--android:scaleType="centerCrop"-->
+                            <!--android:adjustViewBounds="true"-->
+                            <!--android:paddingBottom="2dp" />-->
 
 
                     </ViewFlipper>
@@ -272,7 +287,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="4dp"
-                        android:text="Featured Art Today"
+                        android:text="Latest Updates from Dulwich Gallery"
                         android:textAllCaps="true"
                         android:textColor="#1f3133"
                         android:textSize="14sp"

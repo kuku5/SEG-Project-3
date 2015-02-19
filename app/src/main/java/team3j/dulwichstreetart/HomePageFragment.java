@@ -122,7 +122,7 @@ public class HomePageFragment extends Fragment {
 //
 //        }
 
-      slideDown();
+      //slideDown();
         return layout;
     }
 
@@ -259,6 +259,7 @@ public class HomePageFragment extends Fragment {
 
 
         viewFlipper = (ViewFlipper) layout.findViewById(R.id.view_animator);
+        viewFlipper.setFlipInterval(3500);
 
         slide_in_left = AnimationUtils.loadAnimation(getActivity(), android.R.anim.slide_in_left);
         slide_out_right = AnimationUtils.loadAnimation(getActivity(), android.R.anim.slide_out_right);
@@ -328,7 +329,7 @@ public class HomePageFragment extends Fragment {
         //mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Tablet);
         //mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         mDemoSlider.setCustomAnimation(new DescriptionAnimation());
-        mDemoSlider.setDuration(4000);
+        mDemoSlider.setDuration(5000);
 
         // mDemoSlider.setPresetTransformer(((TextView) view).getText().toString());
 
