@@ -71,10 +71,10 @@ public class GoogleMapFragmentSmall extends Fragment {
         }
 
 
-//       if(googleMap!=null) {
+       if(googleMap!=null) {
 
             setUpMap();
-//       }
+       }
 
         // Perform any camera updates here
         return v;
