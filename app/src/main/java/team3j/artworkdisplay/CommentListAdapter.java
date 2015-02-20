@@ -1,19 +1,11 @@
 package team3j.artworkdisplay;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.etsy.android.grid.util.DynamicHeightImageView;
 
 import java.util.ArrayList;
 
@@ -25,10 +17,10 @@ import team3j.dulwichstreetart.R;
 public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.MyViewHolder> {
 
     private final LayoutInflater inflater;
-    private ArrayList<String> data;
+    private ArrayList<Comment> data;
     private Context context;
     private OnArtistItemTouchListener onArtistItemTouchListener;
-    public CommentListAdapter(Context context,ArrayList<String> data){
+    public CommentListAdapter(Context context,ArrayList<Comment> data){
         this.data=data;
         inflater=LayoutInflater.from(context);
         this.context=context;
@@ -40,7 +32,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         //add view to the grid cell for the first time
         //this stores the view in the cache meaning the images dont have to be reloaded over
         //and over mean its should be faster than a Listview/Gridview which does
-        View view= inflater.inflate(R.layout.artist_list_item,parent,false);
+        View view= inflater.inflate(R.layout.comment_item,parent,false);
 
         MyViewHolder myViewHolder= new MyViewHolder(view);
 
@@ -50,28 +42,31 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
     @Override
     public void onBindViewHolder(CommentListAdapter.MyViewHolder holder, int position) {
         //Log.d("test123",data.get(position));
-        //holder.title.setText(data.get(position));
-        //holder.numberOfArt.setText("");
+        //holder.posterName.setText(data.get(position));
+        //holder.message.setText("");
+        Comment commentInfo = data.get(position);
+        holder.posterName.setText(commentInfo.getPosterName());
+        holder.message.setText(commentInfo.getMessage());
     }
 
     @Override
     public int getItemCount() {
-        return 18;
+        return data.size();
     }
 
 
     class MyViewHolder extends RecyclerView.ViewHolder{
         // view holder for each grid  cell
-        TextView title;
-        TextView numberOfArt;
+        TextView posterName;
+        TextView message;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            title = (TextView) itemView.findViewById(R.id.list_item_title);
-            numberOfArt = (TextView) itemView.findViewById(R.id.list_item_number);
+            posterName = (TextView) itemView.findViewById(R.id.name);
+            message = (TextView) itemView.findViewById(R.id.comment);
 
 
-            title.setOnClickListener(new View.OnClickListener() {
+            posterName.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //onArtistItemTouchListener.onItemClick(v, getPosition());

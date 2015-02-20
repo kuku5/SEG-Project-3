@@ -58,7 +58,7 @@ public class GallerySwipeSingleFragment extends Fragment {
     private LinearLayout image1;
     private LinearLayout image2;
 
-    private ArrayList<String> comments;
+    private ArrayList<Comment> comments;
 
     private boolean firstImage=true;
     private CommentListAdapter commentListAdapter;
@@ -155,7 +155,7 @@ public class GallerySwipeSingleFragment extends Fragment {
 
         //recycle viewer
         final Session session = Session.getActiveSession();
-        comments = new ArrayList<String>();
+        comments = new ArrayList<Comment>();
         Thread getComments = new Thread(){
             public void run(){
                 Bundle b1 = new Bundle();
@@ -168,12 +168,18 @@ public class GallerySwipeSingleFragment extends Fragment {
                                 if (response != null) {
                                     try {
                                         //System.out.println(response.getGraphObject().toString());
-                                        //System.out.println(response.getGraphObject().getInnerJSONObject().getJSONObject("summary").toString());
+                                        //System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" +response.getGraphObject().getInnerJSONObject().getJSONObject("summary").toString());
+
                                         int x = response.getGraphObject().getInnerJSONObject().getJSONArray("data").length();
                                         System.out.println(x);
+                                        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" +response.getGraphObject().getInnerJSONObject().getJSONArray("data"));
                                         for (int i = 0; i < x; i++) {
                                             //System.out.println(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("message"));
-                                            comments.add(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("message").toString());
+                                            Comment commentInfo = new Comment();
+                                            commentInfo.setPosterName(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).getJSONObject("from").get("name").toString());
+                                            commentInfo.setMessage(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("message").toString());
+                                            comments.add(commentInfo);
+
                                         }
                                     } catch (Exception e) {
                                         System.out.println(e);
@@ -202,7 +208,7 @@ public class GallerySwipeSingleFragment extends Fragment {
             commentListAdapter = new CommentListAdapter(getActivity(), comments);
         }
         else {
-            commentListAdapter = new CommentListAdapter(getActivity(), artistData);
+            //commentListAdapter = new CommentListAdapter(getActivity(), artistData);
         }
 
 
