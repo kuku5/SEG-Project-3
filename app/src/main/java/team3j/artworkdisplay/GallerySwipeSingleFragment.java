@@ -185,7 +185,7 @@ public class GallerySwipeSingleFragment extends Fragment {
             }
         };
 
-        if(session.isOpened()) {
+        if(!(session==null) && session.isOpened()) {
             getComments.start();
             try {
                 getComments.join();
