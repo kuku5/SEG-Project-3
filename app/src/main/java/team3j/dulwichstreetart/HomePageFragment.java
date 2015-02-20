@@ -158,7 +158,7 @@ public class HomePageFragment extends Fragment {
             //If logged in, show this
             Log.i("MainActivity", "Logged in...");
             //test.setText("");
-            retrieveInfo(session);
+            //retrieveInfo(session);
             isLoggedIn = true;
             Request.newMeRequest(session, new Request.GraphUserCallback() {
                 // callback after Graph API response with user object

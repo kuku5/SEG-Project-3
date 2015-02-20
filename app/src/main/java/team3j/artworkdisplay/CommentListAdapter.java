@@ -32,6 +32,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         this.data=data;
         inflater=LayoutInflater.from(context);
         this.context=context;
+        System.out.println(data);
     }
 
     @Override
@@ -48,9 +49,9 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
     @Override
     public void onBindViewHolder(CommentListAdapter.MyViewHolder holder, int position) {
-        Log.d("test123",data.get(position));
-        holder.title.setText(data.get(position));
-        holder.numberOfArt.setText("");
+        //Log.d("test123",data.get(position));
+        //holder.title.setText(data.get(position));
+        //holder.numberOfArt.setText("");
     }
 
     @Override
