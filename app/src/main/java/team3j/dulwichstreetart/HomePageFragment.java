@@ -45,6 +45,7 @@ public class HomePageFragment extends Fragment {
     private TextView textView;
     private CardView cardView;
     private CardView cardView2;
+    private TextView facebookCardText;
     private Button button;
     private LinearLayout linearLayout;
     private ViewFlipper viewFlipper;
@@ -80,7 +81,8 @@ public class HomePageFragment extends Fragment {
         //facebook setup
         //setup xml elements
         button = (Button) layout.findViewById(R.id.button_facebook);
-
+        facebookCardText = (TextView) layout.findViewById(R.id.facebookCardText);
+        facebookCardText.setText("Log in via\nFacebook");
         //facebook work
         isLoggedIn = false;
 
@@ -92,7 +94,7 @@ public class HomePageFragment extends Fragment {
                 onClickLogin();
             }
         });
-        button.setText("Log In");
+        //button.setText("Log In");
 
 
         // ---------- KEYHASH GENERATOR -----------//
@@ -165,7 +167,7 @@ public class HomePageFragment extends Fragment {
                 @Override
                 public void onCompleted(GraphUser user, Response response) {
                     if (user != null) {
-                        button.setText("Logged in as "+user.getName()+", Log Out.");
+                        facebookCardText.setText(user.getFirstName()+"\nLog Out.");
                     }
                 }
             }).executeAsync();
@@ -174,7 +176,7 @@ public class HomePageFragment extends Fragment {
             //If logged out, show this
             Log.i("MainActivity", "Logged out...");
             //test.setText("");
-            button.setText("Log In");
+            facebookCardText.setText("Log In via\nFacebook");
             isLoggedIn = false;
 
         }

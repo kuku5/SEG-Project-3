@@ -525,11 +525,11 @@
                             />
 
                         <TextView
-                            android:id="@+id/title_map1s"
+                            android:id="@+id/facebookCardText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="4dp"
-                            android:text="Facebook"
+                            android:text=""
                             android:textAllCaps="true"
                             android:textColor="#1f3133"
                             android:textSize="14sp"
