@@ -28,6 +28,7 @@ import com.facebook.Request;
 import com.facebook.Response;
 import com.facebook.Session;
 import com.facebook.SessionState;
+import com.facebook.model.GraphUser;
 
 import java.util.HashMap;
 import java.util.Timer;
@@ -158,9 +159,16 @@ public class HomePageFragment extends Fragment {
             Log.i("MainActivity", "Logged in...");
             //test.setText("");
             retrieveInfo(session);
-            button.setText("Log Out");
             isLoggedIn = true;
-
+            Request.newMeRequest(session, new Request.GraphUserCallback() {
+                // callback after Graph API response with user object
+                @Override
+                public void onCompleted(GraphUser user, Response response) {
+                    if (user != null) {
+                        button.setText("Logged in as "+user.getName()+", Log Out.");
+                    }
+                }
+            }).executeAsync();
 
         } else if (state.isClosed()) {
             //If logged out, show this
