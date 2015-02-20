@@ -21,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
@@ -50,8 +51,10 @@ public class GallerySwipeSingleFragment extends Fragment {
     private RecyclerView recyclerView;
     private ArrayList<String> artistData;
     private SliderLayout mDemoSlider;
+    private LinearLayout image1;
+    private LinearLayout image2;
 
-
+    private boolean firstImage=true;
     private CommentListAdapter commentListAdapter;
 
     public static GallerySwipeSingleFragment getInstance(int position, int indexOfArtWork) {
@@ -69,6 +72,7 @@ public class GallerySwipeSingleFragment extends Fragment {
 
         super.onCreateOptionsMenu(menu, inflater);
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
@@ -77,18 +81,20 @@ public class GallerySwipeSingleFragment extends Fragment {
         View layout = inflater.inflate(R.layout.fragment_artwork_display, container, false);
 
 
-
         //set toolbar appearance
 
-             //getActivity().setActionBar();
+        //getActivity().setActionBar();
         textView = (TextView) layout.findViewById(R.id.position);
-        dynamicHeightImageView= (DynamicHeightImageView) layout.findViewById(R.id.dynamic_imageview_artwork_display);
-
+//        dynamicHeightImageView = (DynamicHeightImageView) layout.findViewById(R.id.dynamic_imageView);
+        dynamicHeightImageView = (DynamicHeightImageView) layout.findViewById(R.id.dynamic_imageview_artwork_display);
+        image1 = (LinearLayout) layout.findViewById(R.id.image1);
+        image2 = (LinearLayout) layout.findViewById(R.id.image2);
 
         //get arguments passed in and handle
         Bundle bundle = getArguments();
-        indexOfArtWork= bundle.getInt("indexOfArtWork");
-        String title=  GalleryData.GetArtWorkData(getActivity()).get(indexOfArtWork);
+
+        indexOfArtWork = bundle.getInt("indexOfArtWork");
+        String title = GalleryData.GetArtWorkData(getActivity()).get(indexOfArtWork);
 
 
         //update imageview
@@ -99,26 +105,45 @@ public class GallerySwipeSingleFragment extends Fragment {
 
         //update textview
         if (bundle != null) {
-            textView.setText( title );
-
+            textView.setText(title);
             dynamicHeightImageView.setImageDrawable(res);
-
 
         }
 
-                    dynamicHeightImageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+        image1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-                    Intent i = new Intent(getActivity(), FullScreenDisplay.class);
-                    i.putExtra("indexOfArtWork",indexOfArtWork);
-                    startActivity(i);
-                    getActivity().overridePendingTransition(R.anim.swipeback_slide_right_in,
-                            R.anim.swipeback_stack_to_back);
+                image1.setVisibility(View.GONE);
 
-
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
-            });
+                image2.setVisibility(View.VISIBLE);
+
+
+
+            }
+        });
+
+        image2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                image2.setVisibility(View.GONE);
+
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                image1.setVisibility(View.VISIBLE);
+
+
+            }
+        });
 
 
 
@@ -134,58 +159,11 @@ public class GallerySwipeSingleFragment extends Fragment {
         recyclerView.setAdapter(commentListAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), 1, false));
-      //  setupLibraryAnimations(layout);
 
         return layout;
     }
-    private void setupLibraryAnimations(View layout) {
 
-        mDemoSlider = (SliderLayout)layout.findViewById(R.id.slider1);
-
-        HashMap<String,String> url_maps = new HashMap<String, String>();
-        url_maps.put("Hannibal", "http://static2.hypable.com/wp-content/uploads/2013/12/hannibal-season-2-release-date.jpg");
-        url_maps.put("Big Bang Theory", "http://tvfiles.alphacoders.com/100/hdclearart-10.png");
-        url_maps.put("House of Cards", "http://cdn3.nflximg.net/images/3093/2043093.jpg");
-        url_maps.put("Game of Thrones", "http://images.boomsbeat.com/data/images/full/19640/game-of-thrones-season-4-jpg.jpg");
-
-        HashMap<String,Integer> file_maps = new HashMap<String, Integer>();
-
-        file_maps.put("Conor Harrington",R.drawable.lowresconorharrington);
-        file_maps.put("Walter Landscape",R.drawable.lowreswalterlandscape);
-        file_maps.put("Conor Harrington",R.drawable.lowresconorharrington);
-        file_maps.put("Walter Landscape",R.drawable.lowreswalterlandscape);
-
-
-        for(String name : file_maps.keySet()){
-            TextSliderView textSliderView = new TextSliderView(getActivity());
-            // initialize a SliderLayout
-
-            textSliderView
-                    .description(name)
-                    .image(file_maps.get(name))
-                    .setScaleType(BaseSliderView.ScaleType.Fit)
-                    .setOnSliderClickListener(new OnSliderClickListener());
-
-            //add your extra information
-            textSliderView.getBundle()
-                    .putString("extra",name);
-
-            mDemoSlider.addSlider(textSliderView);
-        }
-
-        mDemoSlider.setPresetTransformer(SliderLayout.Transformer.FlipHorizontal);
-        //mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Tablet);
-        //mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-        mDemoSlider.setCustomAnimation(new DescriptionAnimation());
-        mDemoSlider.setDuration(4000);
-
-        // mDemoSlider.setPresetTransformer(((TextView) view).getText().toString());
-
-
-
-    }
 }
-
 class OnSliderClickListener implements BaseSliderView.OnSliderClickListener{
 
 

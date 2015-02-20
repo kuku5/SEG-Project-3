@@ -315,7 +315,6 @@ public class HomePageFragment extends Fragment {
                     .image(file_maps.get(name))
                     .setScaleType(BaseSliderView.ScaleType.Fit)
                     .setOnSliderClickListener(new OnSliderClickListener());
-
             //add your extra information
             textSliderView.getBundle()
                     .putString("extra", name);
@@ -334,17 +333,7 @@ public class HomePageFragment extends Fragment {
 
     }
 
-    public void slideDown() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                // your code here
-                linearLayout.setVisibility(View.VISIBLE);
 
-            }
-        }, 1500/* 1sec delay */);
-
-    }
 
     public void setupClickInsideFragment(OnClickInsideFragment onClickInsideFragment){
         this.onClickInsideFragment=onClickInsideFragment;

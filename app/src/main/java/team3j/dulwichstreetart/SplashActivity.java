@@ -4,10 +4,16 @@ package team3j.dulwichstreetart;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Handler;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.daimajia.slider.library.Animations.DescriptionAnimation;
+import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.daimajia.slider.library.SliderTypes.TextSliderView;
+
+import java.util.HashMap;
 
 /**
  * Created by JGill on 25/01/15.
@@ -19,13 +25,17 @@ import android.view.MenuItem;
 public class SplashActivity extends Activity {
 
 
-    private long TIMER=0;
+    private long TIMER=500;
+    private SliderLayout sliderLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_splash);
 
+        // sliderLayout = (SliderLayout) findViewById(R.id.slider_splash);
+        // setupAnimationSplash();
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -38,6 +48,45 @@ public class SplashActivity extends Activity {
             }
         }, TIMER);
 
+
+    }
+
+    private void setupAnimationSplash() {
+
+
+        HashMap<String, String> url_maps = new HashMap<String, String>();
+        url_maps.put("Hannibal", "http://static2.hypable.com/wp-content/uploads/2013/12/hannibal-season-2-release-date.jpg");
+        url_maps.put("Big Bang Theory", "http://tvfiles.alphacoders.com/100/hdclearart-10.png");
+
+        HashMap<String, Integer> file_maps = new HashMap<String, Integer>();
+
+        file_maps.put("Conor Harrington", R.drawable.logobig);
+        file_maps.put("Walter Landscape", R.drawable.logobig);
+
+        for (String name : file_maps.keySet()) {
+
+            TextSliderView textSliderView = new TextSliderView(this);
+
+            // initialize a SliderLayout
+            textSliderView
+                    .image(file_maps.get(name))
+                    .setScaleType(BaseSliderView.ScaleType.Fit)
+                    .setOnSliderClickListener(new OnSliderClickListener());
+
+            //add your extra information
+            textSliderView.getBundle()
+                    .putString("extra", name);
+
+            sliderLayout.addSlider(textSliderView);
+        }
+
+        sliderLayout.setPresetTransformer(SliderLayout.Transformer.FlipHorizontal);
+        //sliderLayout.setPresetTransformer(SliderLayout.Transformer.Tablet);
+        //sliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+        sliderLayout.setCustomAnimation(new DescriptionAnimation());
+        sliderLayout.setDuration(1000);
+
+        // sliderLayout.setPresetTransformer(((TextView) view).getText().toString());
 
     }
 
