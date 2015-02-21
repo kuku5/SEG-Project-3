@@ -21,6 +21,7 @@ public class GallerySwipeHolder extends FragmentActivity {
     private ViewPager viewPager;
     private int mPagerPosition;
     private int mPagerOffsetPixels;
+    private int indexOfArtWork;
 
     @Override
     public void onBackPressed() {
@@ -35,7 +36,7 @@ public class GallerySwipeHolder extends FragmentActivity {
         super.onCreate(savedInstanceState);
 
         Intent myIntent = getIntent(); // gets the previously created intent
-        int indexOfArtWork = myIntent.getIntExtra("indexOfArtWork", 0);
+         indexOfArtWork = myIntent.getIntExtra("indexOfArtWork", 0);
 
 
 //        uses library for swiping to create swipe effect
@@ -65,38 +66,25 @@ public class GallerySwipeHolder extends FragmentActivity {
         viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                mPagerPosition = position;
+             if(position>2){
+                 mPagerPosition=0;
+             }
+
+            //  mPagerPosition = position-2;
                 mPagerOffsetPixels = positionOffsetPixels;
-                                Log.d("page","sss");
+                Log.d("page","sss"+positionOffsetPixels);
 
             }
 
         });
 
-//        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-//            @Override
-//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-//                Log.d("page","");
-//
-//            }
-//
-//            @Override
-//            public void onPageSelected(int position) {
-//                Log.d("page","");
-//
-//            }
-//
-//            @Override
-//            public void onPageScrollStateChanged(int state) {
-//                Log.d("state","");
-//
-//            }
-//        });
+
         System.out.println(viewPager.getCurrentItem() + "sss");
         Log.d("page","");
 
         viewPager.setOffscreenPageLimit(2);
         viewPager.setCurrentItem(indexOfArtWork,true);
+        mPagerPosition=0;
     }
 
 
