@@ -9,10 +9,13 @@ package team3j.dulwichstreetart;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.util.Log;
+import android.view.View;
 
 import team3j.artworkdisplay.GallerySwipeSingleFragment;
 
-public class FragmentAdapter extends FragmentPagerAdapter {
+public class FragmentAdapter extends FragmentStatePagerAdapter {
 
     private int indexOfFirstArtwork;
 
@@ -24,17 +27,24 @@ public class FragmentAdapter extends FragmentPagerAdapter {
 
 
 
+
     @Override
     public Fragment getItem(int i) {
-        ++indexOfFirstArtwork;
-        if(indexOfFirstArtwork>=35){
-            indexOfFirstArtwork=0;
-        }
+//        ++indexOfFirstArtwork;
+//        if(indexOfFirstArtwork>=35){
+//            indexOfFirstArtwork=0;
+//        }
 
+//        if(indexOfFirstArtwork>=35){
+//            indexOfFirstArtwork=0;
+//        }
+//
 
-        return GallerySwipeSingleFragment.getInstance(i, indexOfFirstArtwork);
+        return GallerySwipeSingleFragment.getInstance(i, i);
 
     }
+
+
 
     @Override
     public int getCount() {

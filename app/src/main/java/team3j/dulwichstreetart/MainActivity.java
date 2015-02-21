@@ -133,15 +133,6 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
     public void onTabSelected(MaterialTab materialTab) {
         viewPager.setCurrentItem(materialTab.getPosition());
         Log.d("testing2", "opened tab " + materialTab.getPosition());
-
-        if(viewPager.getCurrentItem()==3){
-//            if(googleMapFragmentSmall.isGoogleMapsInstalled()){
-//                googleMapFragmentSmall.zoom();
-//            }
-
-        };
-
-
     }
 
 

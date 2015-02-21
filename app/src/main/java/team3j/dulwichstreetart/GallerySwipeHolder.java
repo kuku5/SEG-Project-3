@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 
 import com.hannesdorfmann.swipeback.Position;
@@ -60,16 +61,42 @@ public class GallerySwipeHolder extends FragmentActivity {
         //creates fragment adapter to display all images
         viewPager = (ViewPager) findViewById(R.id.viewPager);
 
-
         viewPager.setAdapter(new FragmentAdapter(getSupportFragmentManager(),indexOfArtWork));
         viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 mPagerPosition = position;
                 mPagerOffsetPixels = positionOffsetPixels;
+                                Log.d("page","sss");
+
             }
 
         });
+
+//        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//            @Override
+//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//                Log.d("page","");
+//
+//            }
+//
+//            @Override
+//            public void onPageSelected(int position) {
+//                Log.d("page","");
+//
+//            }
+//
+//            @Override
+//            public void onPageScrollStateChanged(int state) {
+//                Log.d("state","");
+//
+//            }
+//        });
+        System.out.println(viewPager.getCurrentItem() + "sss");
+        Log.d("page","");
+
+        viewPager.setOffscreenPageLimit(2);
+        viewPager.setCurrentItem(indexOfArtWork,true);
     }
 
 
