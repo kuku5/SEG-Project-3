@@ -91,10 +91,8 @@ public class GallerySwipeSingleFragment extends Fragment {
 
         //getActivity().setActionBar();
         textView = (TextView) layout.findViewById(R.id.position);
-//        dynamicHeightImageView = (DynamicHeightImageView) layout.findViewById(R.id.dynamic_imageView);
+        //dynamicHeightImageView = (DynamicHeightImageView) layout.findViewById(R.id.dynamic_imageView);
         dynamicHeightImageView = (DynamicHeightImageView) layout.findViewById(R.id.dynamic_imageview_artwork_display);
-        image1 = (LinearLayout) layout.findViewById(R.id.image1);
-        image2 = (LinearLayout) layout.findViewById(R.id.image2);
 
         //get arguments passed in and handle
         Bundle bundle = getArguments();
@@ -116,40 +114,6 @@ public class GallerySwipeSingleFragment extends Fragment {
 
         }
 
-        image1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                image1.setVisibility(View.GONE);
-
-                try {
-                    Thread.sleep(50);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                image2.setVisibility(View.VISIBLE);
-
-
-
-            }
-        });
-
-        image2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                image2.setVisibility(View.GONE);
-
-                try {
-                    Thread.sleep(50);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                image1.setVisibility(View.VISIBLE);
-
-
-            }
-        });
 
 
 
@@ -205,11 +169,14 @@ public class GallerySwipeSingleFragment extends Fragment {
 
         artistData = GalleryData.GetArtistsData(getActivity());
         if(!comments.isEmpty()){
+
             commentListAdapter = new CommentListAdapter(getActivity(), comments);
         }
         else {
+            //set view Recycle view
             //commentListAdapter = new CommentListAdapter(getActivity(), artistData);
         }
+
 
 
         recyclerView.setAdapter(commentListAdapter);

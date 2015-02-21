@@ -1,26 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/card_view"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    card_view:cardCornerRadius="4dp"
-    android:layout_margin="5dp">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_height="fill_parent"
+    android:layout_width="fill_parent"
+    android:orientation="horizontal"
+    >
+
+    <!--<com.facebook.widget.ProfilePictureView-->
+        <!--android:layout_width="80dp"-->
+        <!--android:layout_height="wrap_content"-->
+
+        <!--android:gravity="center"-->
+        <!--android:padding="4dp"-->
+
+
+        <!--></com.facebook.widget.ProfilePictureView>-->
+
+
+
+<RelativeLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+
+android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="7dp">
 
         <TextView
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="20dp"
-            android:background="@color/background_floating_material_dark"
             android:text="name"
             android:gravity="center_vertical"
-            android:textColor="@android:color/holo_orange_light"
-            android:textSize="14dp"/>
+            android:textColor="@color/com_facebook_blue"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            />
 
         <TextView
             android:id="@+id/comment"
@@ -40,19 +57,20 @@
             android:text="Like"
             android:gravity="center_vertical"
             android:textSize="10dp"
-            android:textColor="@android:color/holo_orange_light"
+            android:textColor="@color/com_facebook_blue"
             android:layout_below="@id/comment"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="5dp"/>
+            android:layout_marginLeft="5dp"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="x seconds/minutes/hours ago."
+            android:text="Yesterday at 11:33"
             android:gravity="center_vertical"
             android:textSize="10dp"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@color/lightgrey"
             android:layout_below="@id/comment"
             android:layout_toRightOf="@id/like"
             android:layout_marginTop="10dp"
@@ -60,4 +78,4 @@
 
 
     </RelativeLayout>
-</android.support.v7.widget.CardView>
+</LinearLayout>

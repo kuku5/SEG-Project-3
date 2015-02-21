@@ -24,7 +24,8 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:orientation="horizontal"
-        android:padding="16dp">
+        android:padding="16dp"
+        >
 
         <!--<ImageView-->
         <!--android:layout_margin="2dp"-->
@@ -49,7 +50,9 @@
             android:textAllCaps="true"
             android:textColor="#1f3133"
             android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+        />
+
         <!--android:textColor="#1f3133"-->
 
         <!--<ImageView-->
@@ -65,7 +68,12 @@
 
 
     </LinearLayout>
-
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:id="@+id/separator"
+        android:visibility="visible"
+        android:background="@color/colorAccent" />
     <ScrollView
         android:id="@+id/scroll_view_toscroll"
         android:layout_width="fill_parent"
@@ -113,7 +121,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:animateLayoutChanges="true"
-                android:background="@color/colorAccent"
+                android:background="@color/superlightgrey"
                 android:orientation="vertical"
                 android:padding="0dp"
                 android:id="@+id/image2"
@@ -148,10 +156,33 @@
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
+                    android:orientation="horizontal"
+                    android:padding="3dp">
+                    <com.etsy.android.grid.util.DynamicHeightImageView
+                        android:id="@+id/inspiration_artwork"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="0dp"
+                        android:adjustViewBounds="true"
+                        android:background="@color/superlightgrey"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/conorharrington"
+                        android:visibility="visible"/>
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
                     android:orientation="vertical"
                     android:padding="3dp">
-
-
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Title"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="AP is the only stencil artist in this project.  Once cut, stencil paintings can be reproduced easily, by anyone.  The work of art AP chose to interpret was a sketch by Rubens, highly prized because it is by him alone, whereas the finished piece would have had a great deal of workshop input.  "
+                        android:textSize="11sp" />
+                    </LinearLayout>
 
                 </LinearLayout>
             </android.support.v7.widget.CardView>
@@ -175,13 +206,29 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:orientation="vertical"
-                    android:padding="3dp">
+                    android:padding="0dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="30 Comments"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginBottom="6dp"
+                        android:textStyle="bold"/>
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="1dp"
+                        android:id="@+id/bottombarline"
+                        android:visibility="visible"
+                        android:background="@color/grey" />
+
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/recycler_view_grid1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:padding="4dp">
+                        android:padding="0dp">
 
 
                     </android.support.v7.widget.RecyclerView>

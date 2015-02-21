@@ -37,7 +37,7 @@ public class GallerySwipeHolder extends FragmentActivity {
         int indexOfArtWork = myIntent.getIntExtra("indexOfArtWork", 0);
 
 
-        //uses library for swiping to create swipe effect
+//        uses library for swiping to create swipe effect
          SwipeBack.attach(this, Position.LEFT)
                 .setContentView(R.layout.view_pager)
                 .setSwipeBackView(R.layout.swipeback_default)
@@ -59,6 +59,8 @@ public class GallerySwipeHolder extends FragmentActivity {
 
         //creates fragment adapter to display all images
         viewPager = (ViewPager) findViewById(R.id.viewPager);
+
+
         viewPager.setAdapter(new FragmentAdapter(getSupportFragmentManager(),indexOfArtWork));
         viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override

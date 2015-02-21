@@ -19,6 +19,7 @@ public class FragmentAdapter extends FragmentPagerAdapter {
     public FragmentAdapter(FragmentManager fm,int indexOfFirstArtwork) {
         super(fm);
         this.indexOfFirstArtwork=indexOfFirstArtwork-1;
+
     }
 
 

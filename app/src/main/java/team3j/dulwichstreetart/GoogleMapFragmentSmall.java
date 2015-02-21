@@ -33,7 +33,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class GoogleMapFragmentSmall extends Fragment {
 
-    MapView mMapView;
+    public static MapView mMapView;
     private GoogleMap googleMap;
     private LinearLayout linearLayout2;
     private CardView cardView;
@@ -102,7 +102,7 @@ public class GoogleMapFragmentSmall extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        mMapView.onPause();
+    //    mMapView.onPause();
     }
 
     @Override
