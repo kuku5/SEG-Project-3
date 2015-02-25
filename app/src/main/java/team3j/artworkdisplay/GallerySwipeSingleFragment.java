@@ -95,7 +95,7 @@ public class GallerySwipeSingleFragment extends Fragment {
         //set toolbar appearance
 
 //        //getActivity().setActionBar();
-//        textView = (TextView) layout.findViewById(R.id.position);
+        textView = (TextView) layout.findViewById(R.id.position);
 //        //dynamicHeightImageView = (DynamicHeightImageView) layout.findViewById(R.id.dynamic_imageView);
 //        dynamicHeightImageView = (DynamicHeightImageView) layout.findViewById(R.id.dynamic_imageview_artwork_display);
 //
