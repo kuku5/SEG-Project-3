@@ -90,7 +90,7 @@ public class GallerySwipeSingleFragment extends Fragment {
         //sort layout
         View layout = inflater.inflate(R.layout.fragment_artwork_display, container, false);
 
-        TextView commentAmount = (TextView) layout.findViewById(R.id.commentAmount);
+        String commentAmount = null;
 
         //set toolbar appearance
 
@@ -150,13 +150,13 @@ public class GallerySwipeSingleFragment extends Fragment {
             getComments.start();
             try {
                 getComments.join();
-                commentAmount.setText(comments.size() + " comments");
+                commentAmount = comments.size() + " comments";
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
         else {
-            commentAmount.setText("Please log in to Facebook to view comments");
+            commentAmount = "Please log in to Facebook to view comments";
 
         }
 
@@ -189,7 +189,7 @@ public class GallerySwipeSingleFragment extends Fragment {
 
 
 
-        commentListAdapter = new CommentListAdapter(getActivity(), comments,indexOfArtWork);
+        commentListAdapter = new CommentListAdapter(getActivity(), comments,indexOfArtWork, commentAmount);
 
 
         recyclerView.setAdapter(commentListAdapter);

@@ -60,14 +60,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <TextView
-                    android:id="@+id/commentAmount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/commentAmount"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginBottom="6dp"
-                    android:textStyle="bold"/>
+
 
                     <View
                     android:layout_width="fill_parent"

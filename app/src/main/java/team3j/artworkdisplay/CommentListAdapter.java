@@ -24,10 +24,14 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
     private final LayoutInflater inflater;
     private final int indexOfArtwork;
+    private String commentAmount;
     private ArrayList<Comment> data;
     private Context context;
     private OnArtistItemTouchListener onArtistItemTouchListener;
-    public CommentListAdapter(Context context,ArrayList<Comment> data,int position){
+
+
+    public CommentListAdapter(Context context,ArrayList<Comment> data,int position, String commentAmount){
+        this.commentAmount = commentAmount;
         this.data=data;
         inflater=LayoutInflater.from(context);
         this.context=context;
@@ -80,16 +84,16 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             BitmapDrawable res = new BitmapDrawable(context.getResources(), bitmap);
 
 
-            //update textview
+            //update header
             holder.dynamicHeightImageView.setImageDrawable(res);
-
+            holder.commentTitle.setText(commentAmount);
 
 
 
 
         }else{
 
-            Comment commentInfo = data.get(position);
+            Comment commentInfo = data.get(position-1);
             holder.posterName.setText(commentInfo.getPosterName());
             holder.message.setText(commentInfo.getMessage());
             holder.timestamp.setText(commentInfo.getTime());
@@ -104,7 +108,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         if(data.size()==0){
             return 1;
         }else{
-            return data.size();
+            return data.size()+1;
         }
     }
 
@@ -114,7 +118,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         TextView posterName;
         TextView message;
         TextView timestamp;
-        private TextView textView;
+        private TextView commentTitle;
         private DynamicHeightImageView dynamicHeightImageView;
 
         public MyViewHolder(View itemView,int viewType) {
@@ -132,10 +136,9 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                 });
             }
             else{
-
+                // for the header view
                 dynamicHeightImageView = (DynamicHeightImageView) itemView.findViewById(R.id.dynamic_imageview_artwork_display);
-
-
+                commentTitle = (TextView) itemView.findViewById(R.id.commentAmount);
 
 
             }
