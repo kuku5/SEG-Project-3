@@ -117,6 +117,7 @@
     <string name="title_activity_full_screen_display">FullScreenDisplay</string>
 
     <string name="title_maps">Street Art Locations</string>
+    <string name="commentAmount">Comments</string>
 
 
 </resources>

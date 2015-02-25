@@ -90,6 +90,7 @@ public class GallerySwipeSingleFragment extends Fragment {
         //sort layout
         View layout = inflater.inflate(R.layout.fragment_artwork_display, container, false);
 
+        TextView commentAmount = (TextView) layout.findViewById(R.id.commentAmount);
 
         //set toolbar appearance
 
@@ -164,13 +165,19 @@ public class GallerySwipeSingleFragment extends Fragment {
             getComments.start();
             try {
                 getComments.join();
+                commentAmount.setText(comments.size() + " comments");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+        else {
+            commentAmount.setText("Please log in to Facebook to view comments");
+
+        }
 
 
         recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view_grid1);
+
 
         artistData = GalleryData.GetArtistsData(getActivity());
         ArrayList<String> artistData = GalleryData.GetArtistsData(getActivity());

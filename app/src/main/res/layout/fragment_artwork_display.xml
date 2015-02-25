@@ -71,9 +71,10 @@
                     android:orientation="vertical">
 
                     <TextView
+                    android:id="@+id/commentAmount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="30 Comments"
+                    android:text="@string/commentAmount"
                     android:layout_marginTop="6dp"
                     android:layout_marginBottom="6dp"
                     android:textStyle="bold"/>
