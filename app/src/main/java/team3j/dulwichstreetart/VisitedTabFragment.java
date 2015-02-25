@@ -43,7 +43,7 @@ public class VisitedTabFragment extends Fragment {
 
         //get Image Locations and descriptions
         ArrayList<String> galleryData = GalleryData.GetArtWorkData(getActivity());
-        int imageSet[] = GalleryData.GetArtWorkImageLocations(getActivity());
+        int imageSet[] = GalleryData.GetArtWorkImageLocations();
 
         //create recycle view Adapter
 

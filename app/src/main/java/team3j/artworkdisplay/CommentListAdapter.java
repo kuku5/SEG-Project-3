@@ -1,14 +1,20 @@
 package team3j.artworkdisplay;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.etsy.android.grid.util.DynamicHeightImageView;
+
 import java.util.ArrayList;
 
+import team3j.dulwichstreetart.GalleryData;
 import team3j.dulwichstreetart.R;
 
 /**
@@ -17,13 +23,15 @@ import team3j.dulwichstreetart.R;
 public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.MyViewHolder> {
 
     private final LayoutInflater inflater;
+    private final int indexOfArtwork;
     private ArrayList<Comment> data;
     private Context context;
     private OnArtistItemTouchListener onArtistItemTouchListener;
-    public CommentListAdapter(Context context,ArrayList<Comment> data){
+    public CommentListAdapter(Context context,ArrayList<Comment> data,int position){
         this.data=data;
         inflater=LayoutInflater.from(context);
         this.context=context;
+        this.indexOfArtwork=position;
         System.out.println(data);
     }
 
@@ -31,12 +39,10 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
     public int getItemViewType(int position) {
         int viewType=0; // view type = 0 is a comment
 
-//        switch(position){
-//            case 0:viewType=1; break;//firstCard
-//            case -1:viewType=1; break;//secondCard
-//            case -2:viewType=1; break;
-//
-//        }
+        if(position==0){
+            viewType=1;
+
+        }
 
         return viewType;
 
@@ -48,27 +54,58 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         //this stores the view in the cache meaning the images dont have to be reloaded over
         //and over mean its should be faster than a Listview/Gridview which does
         View view= inflater.inflate(R.layout.comment_item,parent,false);
+        MyViewHolder myViewHolder;
 
-        MyViewHolder myViewHolder= new MyViewHolder(view);
+        if(viewType==1){
+            view= inflater.inflate(R.layout.swipe_fragment_header,parent,false);
+
+
+        }else{
+            view= inflater.inflate(R.layout.comment_item,parent,false);
+
+
+        }
+        myViewHolder= new MyViewHolder(view,viewType);
 
         return myViewHolder;
     }
 
     @Override
     public void onBindViewHolder(CommentListAdapter.MyViewHolder holder, int position) {
-        //Log.d("test123",data.get(position));
-        //holder.posterName.setText(data.get(position));
-        //holder.message.setText("");
 
-        Comment commentInfo = data.get(position);
-        holder.posterName.setText(commentInfo.getPosterName());
-        holder.message.setText(commentInfo.getMessage());
-        holder.timestamp.setText(commentInfo.getTime());
+        if(position==0) {
+
+
+            Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), GalleryData.GetArtWorkImageLocations()[indexOfArtwork]);
+            BitmapDrawable res = new BitmapDrawable(context.getResources(), bitmap);
+
+
+            //update textview
+            holder.dynamicHeightImageView.setImageDrawable(res);
+
+
+
+
+
+        }else{
+
+            Comment commentInfo = data.get(position);
+            holder.posterName.setText(commentInfo.getPosterName());
+            holder.message.setText(commentInfo.getMessage());
+            holder.timestamp.setText(commentInfo.getTime());
+
+
+        }
+
     }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        if(data.size()==0){
+            return 1;
+        }else{
+            return data.size();
+        }
     }
 
 
@@ -77,40 +114,38 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         TextView posterName;
         TextView message;
         TextView timestamp;
+        private TextView textView;
+        private DynamicHeightImageView dynamicHeightImageView;
 
-        public MyViewHolder(View itemView) {
+        public MyViewHolder(View itemView,int viewType) {
             super(itemView);
-            posterName = (TextView) itemView.findViewById(R.id.name);
-            message = (TextView) itemView.findViewById(R.id.comment);
-            timestamp = (TextView) itemView.findViewById(R.id.time);
+            if(viewType==0) {
+                posterName = (TextView) itemView.findViewById(R.id.name);
+                message = (TextView) itemView.findViewById(R.id.comment);
+                timestamp = (TextView) itemView.findViewById(R.id.time);
 
-            posterName.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //onArtistItemTouchListener.onItemClick(v, getPosition());
-                }
-            });
+                posterName.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //onArtistItemTouchListener.onItemClick(v, getPosition());
+                    }
+                });
+            }
+            else{
 
+                dynamicHeightImageView = (DynamicHeightImageView) itemView.findViewById(R.id.dynamic_imageview_artwork_display);
+
+
+
+
+            }
         }
 
 
     }
 
-    class MyViewHolder1 extends RecyclerView.ViewHolder{
-        // view holder for each grid  cell
-        TextView posterName;
-        TextView message;
-
-        public MyViewHolder1(View itemView) {
-            super(itemView);
-
-            posterName = (TextView) itemView.findViewById(R.id.name);
 
 
-        }
-
-
-    }
     public interface OnArtistItemTouchListener{
         public void onItemClick(View view,int position);
     }

@@ -2,6 +2,7 @@ package team3j.dulwichstreetart;
 
 
 import android.app.Activity;
+import android.content.Context;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -34,6 +35,7 @@ public class GalleryData {
 
 
 
+
     public static ArrayList<String> GetArtistsData(Activity context) {
         final ArrayList<String> data = new ArrayList<String>(18);
 
@@ -51,10 +53,10 @@ public class GalleryData {
 
     //nandu change this one below to match the titles
 
-    public static int[] GetArtWorkImageLocations(Activity context) {
+    public static int[] GetArtWorkImageLocations() {
         // return image location potentially could return bitmaps ready to go into Imageview
 
-         final int imageSet[] = {
+        final int imageSet[] = {
                 R.drawable.lowresstikguardianangel,
                 R.drawable.lowresstikthreeboys,
                 R.drawable.lowresdogrun,
@@ -98,8 +100,10 @@ public class GalleryData {
         return imageSet;
     }
 
+
+
     public static Art[] getMapArtwork(Activity context) {
-       final Art arts[] = new Art[19];
+        final Art arts[] = new Art[19];
 
         arts[0] = new Art("Roa 2013",(new LatLng(51.467224, -0.072160)),R.drawable.art0);
         arts[1] = new Art("Remi Rough & System 2013",(new LatLng(51.461675, -0.079872)),R.drawable.art0) ;

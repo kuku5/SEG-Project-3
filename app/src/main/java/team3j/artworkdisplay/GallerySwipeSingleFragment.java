@@ -104,6 +104,7 @@ public class GallerySwipeSingleFragment extends Fragment {
 
         indexOfArtWork = bundle.getInt("indexOfArtWork");
         String title = GalleryData.GetArtWorkData(getActivity()).get(indexOfArtWork);
+         textView.setText(title);
 
 
         //update imageview
@@ -204,7 +205,7 @@ public class GallerySwipeSingleFragment extends Fragment {
 
 
 
-        commentListAdapter = new CommentListAdapter(getActivity(), comments);
+        commentListAdapter = new CommentListAdapter(getActivity(), comments,indexOfArtWork);
 
 
         recyclerView.setAdapter(commentListAdapter);
