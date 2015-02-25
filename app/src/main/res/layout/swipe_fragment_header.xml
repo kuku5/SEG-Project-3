@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        android:background="@color/colorAccent"
+        android:orientation="vertical"
+        android:padding="0dp"
+        android:id="@+id/image1">
+
+        <com.etsy.android.grid.util.DynamicHeightImageView
+            android:id="@+id/dynamic_imageview_artwork_display"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="0dp"
+            android:adjustViewBounds="true"
+            android:background="@color/superlightgrey"
+            android:scaleType="fitStart"
+
+            android:src="@drawable/conorharrington"
+            android:visibility="visible"
+            />
+
+
+
+    </LinearLayout>
+
+
+
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/artwork_display_description"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        card_view:cardBackgroundColor="@android:color/white"
+        card_view:cardCornerRadius="0dp">
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal"
+            android:padding="3dp">
+            <com.etsy.android.grid.util.DynamicHeightImageView
+                android:id="@+id/inspiration_artwork"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:adjustViewBounds="true"
+                android:background="@color/superlightgrey"
+                android:scaleType="fitStart"
+                android:src="@drawable/conorharrington"
+                android:visibility="visible"/>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical"
+                android:padding="3dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Title"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="AP is the only stencil artist in this project.  Once cut, stencil paintings can be reproduced easily, by anyone.  The work of art AP chose to interpret was a sketch by Rubens, highly prized because it is by him alone, whereas the finished piece would have had a great deal of workshop input.  "
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="30 Comments"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:textStyle="bold"/>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:id="@+id/bottombarline"
+            android:visibility="visible"
+            android:background="@color/grey" />
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>

@@ -228,6 +228,9 @@
                                 android:id="@+id/atsymbol"
 
                             /></LinearLayout>
+
+
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -236,6 +239,7 @@
 
 
                             </LinearLayout>
+
 
                         <LinearLayout
                             android:layout_width="fill_parent"
@@ -272,67 +276,6 @@
 
                         </LinearLayout>
 
-
-
-                        <!--<com.etsy.android.grid.util.DynamicHeightImageView-->
-                            <!--android:id="@+id/rekaSlide"-->
-                            <!--android:layout_width="fill_parent"-->
-                            <!--android:layout_height="160dp"-->
-                            <!--android:src="@drawable/lowresreka"-->
-                            <!--android:layout_centerInParent="true"-->
-                            <!--android:scaleType="centerCrop"-->
-                            <!--android:adjustViewBounds="true"-->
-                            <!--android:paddingBottom="2dp" />-->
-
-                        <!--<com.etsy.android.grid.util.DynamicHeightImageView-->
-                            <!--android:id="@+id/virginWomanSlide"-->
-                            <!--android:layout_width="fill_parent"-->
-                            <!--android:layout_height="160dp"-->
-                            <!--android:src="@drawable/lowresreka"-->
-                            <!--android:layout_centerInParent="true"-->
-                            <!--android:scaleType="centerCrop"-->
-                            <!--android:adjustViewBounds="true"-->
-                            <!--android:paddingBottom="2dp" />-->
-
-                        <!--<com.etsy.android.grid.util.DynamicHeightImageView-->
-                            <!--android:id="@+id/coupleStikSlide"-->
-                            <!--android:layout_width="fill_parent"-->
-                            <!--android:layout_height="160dp"-->
-                            <!--android:src="@drawable/lowresreka"-->
-                            <!--android:layout_centerInParent="true"-->
-                            <!--android:scaleType="centerCrop"-->
-                            <!--android:adjustViewBounds="true"-->
-                            <!--android:paddingBottom="2dp" />-->
-
-                        <!--<com.etsy.android.grid.util.DynamicHeightImageView-->
-                            <!--android:id="@+id/europaSlide"-->
-                            <!--android:layout_width="fill_parent"-->
-                            <!--android:layout_height="160dp"-->
-                            <!--android:src="@drawable/lowresreka"-->
-                            <!--android:layout_centerInParent="true"-->
-                            <!--android:scaleType="centerCrop"-->
-                            <!--android:adjustViewBounds="true"-->
-                            <!--android:paddingBottom="2dp" />-->
-
-                        <!--<com.etsy.android.grid.util.DynamicHeightImageView-->
-                            <!--android:id="@+id/phlegmSlide"-->
-                            <!--android:layout_width="fill_parent"-->
-                            <!--android:layout_height="160dp"-->
-                            <!--android:src="@drawable/lowresreka"-->
-                            <!--android:layout_centerInParent="true"-->
-                            <!--android:scaleType="centerCrop"-->
-                            <!--android:adjustViewBounds="true"-->
-                            <!--android:paddingBottom="2dp" />-->
-
-                        <!--<com.etsy.android.grid.util.DynamicHeightImageView-->
-                            <!--android:id="@+id/conorSlide"-->
-                            <!--android:layout_width="fill_parent"-->
-                            <!--android:layout_height="160dp"-->
-                            <!--android:src="@drawable/lowresreka"-->
-                            <!--android:layout_centerInParent="true"-->
-                            <!--android:scaleType="centerCrop"-->
-                            <!--android:adjustViewBounds="true"-->
-                            <!--android:paddingBottom="2dp" />-->
 
 
                     </ViewFlipper>

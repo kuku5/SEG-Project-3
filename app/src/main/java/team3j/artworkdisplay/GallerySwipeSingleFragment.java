@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
@@ -37,6 +38,8 @@ import com.facebook.Session;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import team3j.artistdisplay.ArtistDisplayActivity;
+import team3j.dulwichstreetart.ArtistListAdapter;
 import team3j.dulwichstreetart.GalleryData;
 import team3j.dulwichstreetart.HomePageFragment;
 import team3j.dulwichstreetart.R;
@@ -62,6 +65,7 @@ public class GallerySwipeSingleFragment extends Fragment {
 
     private boolean firstImage=true;
     private CommentListAdapter commentListAdapter;
+    private ArtistListAdapter artistListAdapter;
 
     public static GallerySwipeSingleFragment getInstance(int position, int indexOfArtWork) {
         GallerySwipeSingleFragment myFragmentTab = new GallerySwipeSingleFragment();
@@ -89,12 +93,12 @@ public class GallerySwipeSingleFragment extends Fragment {
 
         //set toolbar appearance
 
-        //getActivity().setActionBar();
-        textView = (TextView) layout.findViewById(R.id.position);
-        //dynamicHeightImageView = (DynamicHeightImageView) layout.findViewById(R.id.dynamic_imageView);
-        dynamicHeightImageView = (DynamicHeightImageView) layout.findViewById(R.id.dynamic_imageview_artwork_display);
-
-        //get arguments passed in and handle
+//        //getActivity().setActionBar();
+//        textView = (TextView) layout.findViewById(R.id.position);
+//        //dynamicHeightImageView = (DynamicHeightImageView) layout.findViewById(R.id.dynamic_imageView);
+//        dynamicHeightImageView = (DynamicHeightImageView) layout.findViewById(R.id.dynamic_imageview_artwork_display);
+//
+//        //get arguments passed in and handle
         Bundle bundle = getArguments();
 
         indexOfArtWork = bundle.getInt("indexOfArtWork");
@@ -103,17 +107,17 @@ public class GallerySwipeSingleFragment extends Fragment {
 
         //update imageview
 
-        Bitmap bitmap = BitmapFactory.decodeResource(getActivity().getResources(), GalleryData.GetArtWorkImageLocations(getActivity())[indexOfArtWork]);
-        BitmapDrawable res = new BitmapDrawable(getActivity().getResources(), bitmap);
-
-
-        //update textview
-        if (bundle != null) {
-            textView.setText(title);
-            dynamicHeightImageView.setImageDrawable(res);
-
-        }
-
+//        Bitmap bitmap = BitmapFactory.decodeResource(getActivity().getResources(), GalleryData.GetArtWorkImageLocations(getActivity())[indexOfArtWork]);
+//        BitmapDrawable res = new BitmapDrawable(getActivity().getResources(), bitmap);
+//
+//
+//        //update textview
+//        if (bundle != null) {
+//            textView.setText(title);
+//            dynamicHeightImageView.setImageDrawable(res);
+//
+//        }
+//
 
 
 
@@ -169,15 +173,31 @@ public class GallerySwipeSingleFragment extends Fragment {
         recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view_grid1);
 
         artistData = GalleryData.GetArtistsData(getActivity());
-        if(!comments.isEmpty()){
+        ArrayList<String> artistData = GalleryData.GetArtistsData(getActivity());
+//
+//        ArtistListAdapter.OnArtistItemTouchListener onArtistItemTouchListener = new ArtistListAdapter.OnArtistItemTouchListener() {
+//            @Override
+//            public void onItemClick(View view, int position) {
+//                //clicked on the entire view add more methods to method to get clicks on other parts
+//                //put the intent here
+//                Intent i = new Intent(getActivity(), ArtistDisplayActivity.class);
+//                i.putExtra("indexOfArtist", position);
+//                startActivity(i);
+//
+//                Toast.makeText(getActivity(), "Tapped " + position, Toast.LENGTH_SHORT).show();
+//            }
+//        };
+//        //get Adapter
+//        artistListAdapter = new ArtistListAdapter(getActivity(), artistData, onArtistItemTouchListener);
+//
+//        //setup recycleView
+//        recyclerView.setAdapter(artistListAdapter);
 
-            commentListAdapter = new CommentListAdapter(getActivity(), comments);
-        }
-        else {
-            //set view Recycle view
-            //commentListAdapter = new CommentListAdapter(getActivity(), artistData);
-        }
 
+
+
+
+        commentListAdapter = new CommentListAdapter(getActivity(), comments);
 
 
         recyclerView.setAdapter(commentListAdapter);
@@ -187,13 +207,4 @@ public class GallerySwipeSingleFragment extends Fragment {
         return layout;
     }
 
-}
-class OnSliderClickListener implements BaseSliderView.OnSliderClickListener{
-
-
-    @Override
-    public void onSliderClick(BaseSliderView baseSliderView) {
-
-
-    }
 }

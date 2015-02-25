@@ -4,39 +4,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/superlightgrey"
     android:orientation="vertical">
 
-    <!--<android.support.v7.widget.Toolbar-->
-    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--android:id="@+id/toolbar"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:background="?attr/colorPrimaryDark"/>-->
-    <!--<include-->
-    <!--android:id="@+id/app_bar_swipe"-->
-
-    <!--layout="@layout/app_bar" />-->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:orientation="horizontal"
-        android:padding="16dp">
+        android:padding="16dp"
+        >
 
-        <!--<ImageView-->
-        <!--android:layout_margin="2dp"-->
-
-        <!--android:layout_width="25dp"-->
-        <!--android:layout_height="25dp"-->
-        <!--android:src="@android:drawable/ic_menu_revert"-->
-        <!--android:backgroundTint="@color/colorAccent"-->
-
-        <!--android:layout_weight="0.2"-->
-        <!--android:layout_gravity="center|right" />-->
-        <TextView
+              <TextView
 
             android:id="@+id/position"
             android:layout_width="wrap_content"
@@ -49,29 +30,20 @@
             android:textAllCaps="true"
             android:textColor="#1f3133"
             android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+        />
+
         <!--android:textColor="#1f3133"-->
 
-        <!--<ImageView-->
-             <!--android:layout_margin="2dp"-->
-
-             <!--android:layout_width="25dp"-->
-             <!--android:layout_height="25dp"-->
-             <!--android:src="@drawable/googlemaps"-->
-             <!--android:backgroundTint="@color/colorAccent"-->
-
-             <!--android:layout_weight="0.2"-->
-             <!--android:layout_gravity="center|right" />-->
 
 
     </LinearLayout>
-
-    <ScrollView
-        android:id="@+id/scroll_view_toscroll"
+    <View
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:animateLayoutChanges="true"
-        android:background="@color/superlightgrey">
+        android:layout_height="0dp"
+        android:id="@+id/separator"
+        android:visibility="visible"
+        android:background="@color/colorAccent" />
 
 
 
@@ -82,117 +54,59 @@
             android:background="@color/superlightgrey"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:animateLayoutChanges="true"
-                android:background="@color/colorAccent"
-                android:orientation="vertical"
-                android:padding="0dp"
-                android:id="@+id/image1">
 
-                <com.etsy.android.grid.util.DynamicHeightImageView
-                    android:id="@+id/dynamic_imageview_artwork_display"
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/artwork_display_description"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        card_view:cardBackgroundColor="@android:color/white"
+        card_view:cardCornerRadius="0dp">
+
+
+    <LinearLayout
                     android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_centerInParent="true"
-                    android:layout_marginBottom="0dp"
-                    android:adjustViewBounds="true"
-                    android:background="@color/superlightgrey"
-                    android:scaleType="fitStart"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                    android:src="@drawable/conorharrington"
+                    <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="30 Comments"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="6dp"
+                    android:textStyle="bold"/>
+
+                    <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:id="@+id/bottombarline"
                     android:visibility="visible"
-                    />
+                    android:background="@color/grey" />
 
 
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:animateLayoutChanges="true"
-                android:background="@color/colorAccent"
-                android:orientation="vertical"
-                android:padding="0dp"
-                android:id="@+id/image2"
-                android:visibility="gone">
-
-                <com.etsy.android.grid.util.DynamicHeightImageView
-                    android:id="@+id/dynamic_imageview_artwork_display2"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_centerInParent="true"
-                    android:layout_marginBottom="0dp"
-                    android:adjustViewBounds="true"
-                    android:background="@color/superlightgrey"
-                    android:scaleType="fitStart"
-                    android:src="@drawable/conorharrington"
-                    android:visibility="visible"/>
-
-
-
-            </LinearLayout>
-
-            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/artwork_display_description"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-               android:layout_margin="10dp"
-                card_view:cardBackgroundColor="@android:color/white"
-                card_view:cardCornerRadius="0dp">
-
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:orientation="vertical"
-                    android:padding="3dp">
-
-
-
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-
-
-
-
-            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/artwork_display_cardview3"
-                android:layout_width="fill_parent"
-                android:layout_height="1000dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="0dp"
-                android:layout_marginRight="0dp"
-                android:layout_marginTop="10dp"
-                card_view:cardBackgroundColor="@android:color/white"
-                card_view:cardCornerRadius="0dp">
-
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:orientation="vertical"
-                    android:padding="3dp">
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/recycler_view_grid1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:padding="4dp">
-
+                        android:padding="0dp">
 
                     </android.support.v7.widget.RecyclerView>
-
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
 
 
 
+
+
         </LinearLayout>
-    </ScrollView>
+
+
+
+
+
 
 </LinearLayout>

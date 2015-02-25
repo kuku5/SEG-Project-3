@@ -79,6 +79,7 @@ public class HomePageFragment extends Fragment {
 
         //non facebook setup
         View layout = inflater.inflate(R.layout.fragment_home_page, container, false);
+
         setupOnScreenElements(layout);
         setupAnimations(layout);
         setupGoogleMapsCard(layout);

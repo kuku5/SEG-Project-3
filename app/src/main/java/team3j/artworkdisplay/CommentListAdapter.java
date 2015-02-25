@@ -28,6 +28,21 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
     }
 
     @Override
+    public int getItemViewType(int position) {
+        int viewType=0; // view type = 0 is a comment
+
+//        switch(position){
+//            case 0:viewType=1; break;//firstCard
+//            case -1:viewType=1; break;//secondCard
+//            case -2:viewType=1; break;
+//
+//        }
+
+        return viewType;
+
+    }
+
+    @Override
     public CommentListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //add view to the grid cell for the first time
         //this stores the view in the cache meaning the images dont have to be reloaded over
@@ -44,6 +59,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         //Log.d("test123",data.get(position));
         //holder.posterName.setText(data.get(position));
         //holder.message.setText("");
+
         Comment commentInfo = data.get(position);
         holder.posterName.setText(commentInfo.getPosterName());
         holder.message.setText(commentInfo.getMessage());
@@ -80,6 +96,21 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
     }
 
+    class MyViewHolder1 extends RecyclerView.ViewHolder{
+        // view holder for each grid  cell
+        TextView posterName;
+        TextView message;
+
+        public MyViewHolder1(View itemView) {
+            super(itemView);
+
+            posterName = (TextView) itemView.findViewById(R.id.name);
+
+
+        }
+
+
+    }
     public interface OnArtistItemTouchListener{
         public void onItemClick(View view,int position);
     }
