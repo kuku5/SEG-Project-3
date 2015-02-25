@@ -10,6 +10,7 @@ public class Comment implements Parcelable {
 
     private String message;
     private String posterName;
+    private String time;
     private int icon;
 
     public void setIcon(int icon) {
@@ -26,6 +27,10 @@ public class Comment implements Parcelable {
         this.posterName = posterName;
 
     }
+    public void setTime(String time) {
+        this.time = time;
+
+    }
 
     public String getMessage() {
         return message;
@@ -34,6 +39,10 @@ public class Comment implements Parcelable {
 
     public String getPosterName() {
         return posterName;
+
+    }
+    public String getTime() {
+        return time;
 
     }
 

@@ -47,6 +47,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         Comment commentInfo = data.get(position);
         holder.posterName.setText(commentInfo.getPosterName());
         holder.message.setText(commentInfo.getMessage());
+        holder.timestamp.setText(commentInfo.getTime());
     }
 
     @Override
@@ -59,12 +60,13 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         // view holder for each grid  cell
         TextView posterName;
         TextView message;
+        TextView timestamp;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             posterName = (TextView) itemView.findViewById(R.id.name);
             message = (TextView) itemView.findViewById(R.id.comment);
-
+            timestamp = (TextView) itemView.findViewById(R.id.time);
 
             posterName.setOnClickListener(new View.OnClickListener() {
                 @Override

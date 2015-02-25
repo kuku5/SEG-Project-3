@@ -142,6 +142,7 @@ public class GallerySwipeSingleFragment extends Fragment {
                                             Comment commentInfo = new Comment();
                                             commentInfo.setPosterName(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).getJSONObject("from").get("name").toString());
                                             commentInfo.setMessage(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("message").toString());
+                                            commentInfo.setTime(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("created_time").toString());
                                             comments.add(commentInfo);
 
                                         }

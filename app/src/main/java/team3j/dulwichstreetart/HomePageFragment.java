@@ -104,7 +104,7 @@ public class HomePageFragment extends Fragment {
 
 
       //  ---------- KEYHASH GENERATOR -----------//
-
+        /*
        try {
             PackageInfo info = getActivity().getPackageManager().getPackageInfo(
                     "team3j.dulwichstreetart",
@@ -119,6 +119,7 @@ public class HomePageFragment extends Fragment {
         } catch (NoSuchAlgorithmException e) {
 
         }
+        */
 
       //slideDown();
         return layout;
