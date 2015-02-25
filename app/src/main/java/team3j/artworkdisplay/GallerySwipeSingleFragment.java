@@ -94,12 +94,9 @@ public class GallerySwipeSingleFragment extends Fragment {
 
         //set toolbar appearance
 
-//        //getActivity().setActionBar();
         textView = (TextView) layout.findViewById(R.id.position);
-//        //dynamicHeightImageView = (DynamicHeightImageView) layout.findViewById(R.id.dynamic_imageView);
-//        dynamicHeightImageView = (DynamicHeightImageView) layout.findViewById(R.id.dynamic_imageview_artwork_display);
-//
-//        //get arguments passed in and handle
+
+        //get arguments passed in and handle
         Bundle bundle = getArguments();
 
         indexOfArtWork = bundle.getInt("indexOfArtWork");
@@ -107,19 +104,6 @@ public class GallerySwipeSingleFragment extends Fragment {
          textView.setText(title);
 
 
-        //update imageview
-
-//        Bitmap bitmap = BitmapFactory.decodeResource(getActivity().getResources(), GalleryData.GetArtWorkImageLocations(getActivity())[indexOfArtWork]);
-//        BitmapDrawable res = new BitmapDrawable(getActivity().getResources(), bitmap);
-//
-//
-//        //update textview
-//        if (bundle != null) {
-//            textView.setText(title);
-//            dynamicHeightImageView.setImageDrawable(res);
-//
-//        }
-//
 
 
 
