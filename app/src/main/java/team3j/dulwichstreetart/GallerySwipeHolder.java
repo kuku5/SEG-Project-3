@@ -40,27 +40,27 @@ public class GallerySwipeHolder extends FragmentActivity {
 
 
          // uses library for swiping to create swipe effect
-//         SwipeBack.attach(this, Position.LEFT)
-//                .setContentView(R.layout.view_pager)
-//                .setSwipeBackView(R.layout.swipeback_default)
-//                .setDividerAsSolidColor(Color.WHITE)
-//                .setDividerSize(2)
-//                .setOnInterceptMoveEventListener(
-//                        new SwipeBack.OnInterceptMoveEventListener() {
-//                            @Override
-//                            public boolean isViewDraggable(View v, int dx,
-//                                                           int x, int y) {
-//                                if (v == viewPager) {
-//                                    return !(mPagerPosition == 0 && mPagerOffsetPixels == 0)
-//                                            || dx < 0;
-//                                }
-//
-//                                return false;
-//                            }
-//                        });
+         SwipeBack.attach(this, Position.LEFT)
+                .setContentView(R.layout.view_pager)
+                .setSwipeBackView(R.layout.swipeback_default)
+                .setDividerAsSolidColor(Color.WHITE)
+                .setDividerSize(2)
+                .setOnInterceptMoveEventListener(
+                        new SwipeBack.OnInterceptMoveEventListener() {
+                            @Override
+                            public boolean isViewDraggable(View v, int dx,
+                                                           int x, int y) {
+                                if (v == viewPager) {
+                                    return !(mPagerPosition == 0 && mPagerOffsetPixels == 0)
+                                            || dx < 0;
+                                }
+
+                                return false;
+                            }
+                        });
 
 
-                setContentView(R.layout.view_pager);
+          //      setContentView(R.layout.view_pager);
 
         //creates fragment adapter to display all images
         viewPager = (ViewPager) findViewById(R.id.viewPager);
@@ -75,12 +75,19 @@ public class GallerySwipeHolder extends FragmentActivity {
 
 
                 }
-
+                mPagerPosition=indexOfArtWork;
 
 
             //  mPagerPosition = position-2;
                 mPagerOffsetPixels = positionOffsetPixels;
-                Log.d("page","sss"+position);
+                Log.d("page",""+position);
+                if(position==indexOfArtWork){
+                    mPagerPosition=0;
+                    mPagerOffsetPixels = 0;
+
+
+                }
+                Log.d("page","index"+indexOfArtWork);
 
             }
 
@@ -92,7 +99,7 @@ public class GallerySwipeHolder extends FragmentActivity {
 
         viewPager.setOffscreenPageLimit(2);
         viewPager.setCurrentItem(indexOfArtWork,true);
-        mPagerPosition=0;
+      //  mPagerPosition=0;
     }
 
 
