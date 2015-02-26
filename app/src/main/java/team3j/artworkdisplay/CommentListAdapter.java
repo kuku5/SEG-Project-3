@@ -32,6 +32,8 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import team3j.dulwichstreetart.GalleryData;
+import team3j.dulwichstreetart.GoogleMapFragmentSmall;
+import team3j.dulwichstreetart.MainActivity;
 import team3j.dulwichstreetart.R;
 
 /**
@@ -45,6 +47,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
     private ArrayList<Comment> data;
     private Context context;
     private ImageView shareButton;
+    private ImageView mapButton;
     private Bitmap bitmap;
 
     private final int Header_View_Type = 1;
@@ -204,7 +207,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                     dynamicHeightImageView = (DynamicHeightImageView) itemView.findViewById(R.id.dynamic_imageview_artwork_display);
                     commentTitle = (TextView) itemView.findViewById(R.id.commentAmount);
                     shareButton = (ImageView) itemView.findViewById(R.id.shareIcon);
-
+                    mapButton = (ImageView) itemView.findViewById(R.id.mapIcon);
                     shareButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -258,6 +261,9 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
 
                     });
+
+                 
+
                     break;
             }
 
