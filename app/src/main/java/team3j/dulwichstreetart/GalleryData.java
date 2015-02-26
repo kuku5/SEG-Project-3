@@ -21,7 +21,10 @@ import java.util.List;
 
 public class GalleryData {
 
-    // nandu u need to update this array in xml
+
+    public static ArrayList<Art> visited = new ArrayList<>();
+    public static ArrayList<Art> toVisit = new ArrayList<>();
+
     public static ArrayList<String> GetArtWorkData(Activity context) {
         final ArrayList<String> data = new ArrayList<String>(35);
 

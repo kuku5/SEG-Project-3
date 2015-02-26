@@ -43,9 +43,7 @@ public class GoogleMapFragmentSmall extends Fragment {
     private CardView cardView;
     private ImageButton imageButton;
     private LatLng locStart;
-    public static ArrayList<Art> visited = new ArrayList<Art>();
-    public static ArrayList<Art> toVisit = new ArrayList<Art>();
-    private Art[] arts;
+       private Art[] arts;
 
     public static GoogleMapFragmentSmall getInstance(int position) {
         GoogleMapFragmentSmall myFragmentTab = new GoogleMapFragmentSmall();
@@ -103,12 +101,12 @@ public class GoogleMapFragmentSmall extends Fragment {
                             if((googleMap.getMyLocation().getLongitude()<= artLoc.longitude + tolerance) &&(googleMap.getMyLocation().getLongitude()>= artLoc.longitude - tolerance) )
                             {
                                 //if the user is at the street art
-                                for(int j=0; j<toVisit.size(); j++)
+                                for(int j=0; j<GalleryData.toVisit.size(); j++)
                                 {
-                                    if(toVisit.get(j)== arts[i])
+                                    if(GalleryData.toVisit.get(j)== arts[i])
                                     {
-                                        visited.add(arts[i]);
-                                        toVisit.remove(j);
+                                        GalleryData.visited.add(arts[i]);
+                                        GalleryData.toVisit.remove(j);
                                     }
                                 }
 
@@ -146,7 +144,7 @@ public class GoogleMapFragmentSmall extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-       mMapView.onPause();
+//       mMapView.onPause();
     }
 
     @Override

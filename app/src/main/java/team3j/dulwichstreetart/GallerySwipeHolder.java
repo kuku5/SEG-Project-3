@@ -70,21 +70,13 @@ public class GallerySwipeHolder extends FragmentActivity {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-                if(viewPager.getAdapter().getItemPosition(viewPager.getCurrentItem())==indexOfArtWork){
-                    mPagerPosition=0;
 
-
-                }
-                mPagerPosition=indexOfArtWork;
-
-
-            //  mPagerPosition = position-2;
-                mPagerOffsetPixels = positionOffsetPixels;
+                mPagerPosition=position;
+                mPagerOffsetPixels = 90;
                 Log.d("page",""+position);
                 if(position==indexOfArtWork){
                     mPagerPosition=0;
                     mPagerOffsetPixels = 0;
-
 
                 }
                 Log.d("page","index"+indexOfArtWork);

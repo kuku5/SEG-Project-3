@@ -22,6 +22,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
@@ -87,7 +88,9 @@ public class HomePageFragment extends Fragment {
         setupAnimations(layout);
         setupGoogleMapsCard(layout);
         setupLibraryAnimations(layout);
-
+//        Toast.makeText(getActivity(), GalleryData.toVisit.size() +
+//                        "this is my Toast message!!! =)",
+//                Toast.LENGTH_LONG).show();
         //facebook setup
         //setup xml elements
         button = (Button) layout.findViewById(R.id.button_facebook);

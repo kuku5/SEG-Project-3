@@ -188,7 +188,7 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
 
 
 
-                    return HomePageFragment.getInstance(num);
+                    return VisitedTabFragment.getInstance(num);
 
                 default:
                     return HomePageFragment.getInstance(num);

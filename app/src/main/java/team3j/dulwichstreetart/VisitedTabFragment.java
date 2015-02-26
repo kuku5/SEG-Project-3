@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
@@ -12,6 +13,8 @@ import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 
@@ -42,36 +45,40 @@ public class VisitedTabFragment extends Fragment {
         View layout = inflater.inflate(R.layout.fragment_visited_tab, container, false);
         recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view_visited);
 
-        GoogleMapFragmentSmall.toVisit.size();
-        //get Image Locations and descriptions
-        ArrayList<String> galleryData = GalleryData.GetArtWorkData(getActivity());
-        int imageSet[] = GalleryData.GetArtWorkImageLocations();
+        //kevin this is fake added data
+
+        GalleryData.toVisit.add(new Art("Roa 2013",(new LatLng(51.467224, -0.072160)),R.drawable.art0));
+        GalleryData.toVisit.add(new Art("Roa 2013",(new LatLng(51.467224, -0.072160)),R.drawable.art0));
+        GalleryData.toVisit.add(new Art("Roa 2013",(new LatLng(51.467224, -0.072160)),R.drawable.art0));
+
+        GalleryData.visited.size();
 
         //create recycle view Adapter
 
         //set adapter
-        recyclerView.setAdapter(new GalleryAdapter(getActivity(), galleryData, imageSet, getGalleryClickListener()));
+        recyclerView.setAdapter(new VisitedAdapter(getActivity(), getVisitedClickListener()));
 
-        //adapt view for the Screen orientation
-        updateLayoutForRotation();
+        //Set Layout Animation
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), 1, false));
+
 
         return layout;
     }
 
 
     //return a Click Listener for the Recycle View
-    public GalleryAdapter.OnItemTouchListener getGalleryClickListener(){
-        GalleryAdapter.OnItemTouchListener itemTouchListener = new GalleryAdapter.OnItemTouchListener() {
+    public VisitedAdapter.OnItemTouchListener getVisitedClickListener(){
+        VisitedAdapter.OnItemTouchListener itemTouchListener = new VisitedAdapter.OnItemTouchListener() {
             @Override
             public void onCardViewTap(View view, int position) {
                 //tap the entire view
                 Toast.makeText(getActivity(), "Tapped " + position, Toast.LENGTH_SHORT).show();
                 //open Activity to display for Artwork Display
-                Intent i = new Intent(getActivity(), GallerySwipeHolder.class);
-                i.putExtra("indexOfArtWork", position);
-                startActivity(i);
-                getActivity().overridePendingTransition(R.anim.swipeback_slide_right_in,
-                        R.anim.swipeback_stack_to_back);
+//                Intent i = new Intent(getActivity(), GallerySwipeHolder.class);
+//                i.putExtra("indexOfArtWork", position);
+//                startActivity(i);
+//                getActivity().overridePendingTransition(R.anim.swipeback_slide_right_in,
+//                        R.anim.swipeback_stack_to_back);
 
             }
         };
@@ -80,22 +87,8 @@ public class VisitedTabFragment extends Fragment {
 
     }
 
-    //adapt recycle view for the Screen Rotation
-    public void updateLayoutForRotation(){
-        int screenOrientation = this.getResources().getConfiguration().orientation;
-
-        if (screenOrientation == Surface.ROTATION_0 + 1) {
-            //For portrait mode
-            recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, 1));
 
 
-        } else if (screenOrientation == Surface.ROTATION_90 + 1) {
-            //For landscape mode
-            recyclerView.setLayoutManager(new StaggeredGridLayoutManager(4, 1));
-
-        }
-
-    }
 
 
 }

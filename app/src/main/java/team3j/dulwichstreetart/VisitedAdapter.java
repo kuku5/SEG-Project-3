@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.etsy.android.grid.util.DynamicHeightImageView;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 
@@ -31,15 +32,11 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
     private OnItemTouchListener onItemTouchListener;
 
     private final LayoutInflater inflater;
-    private ArrayList<String> data;
     private Context context;
-    private int[] imageSet;
 
-    public VisitedAdapter(Context context,ArrayList<String> data,int[] imageSet, OnItemTouchListener itemTouchListener){
-        this.data=data;
+    public VisitedAdapter(Context context, OnItemTouchListener itemTouchListener){
         this.inflater=LayoutInflater.from(context);
         this.context=context;
-        this.imageSet=imageSet;
         this.onItemTouchListener = itemTouchListener;
     }
 
@@ -50,7 +47,7 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
         //add view to the grid cell for the first time
         //this stores the view in the cache meaning the images dont have to be reloaded over
         //and over mean its should be faster than a Listview/Gridview which does
-        View view= inflater.inflate(R.layout.grid_item,parent,false);
+        View view= inflater.inflate(R.layout.visited_list_item,parent,false);
 
         MyViewHolderVisited myViewHolder= new MyViewHolderVisited(view);
 
@@ -59,36 +56,31 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(VisitedAdapter.MyViewHolderVisited holder, int position) {
-        //add image and description to the view for each gallery item
-        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(),imageSet[position]);
-        BitmapDrawable res = new BitmapDrawable(context.getResources(), bitmap);
-        holder.dynamicHeightImageView.setImageDrawable(res);
-        holder.txtLineOne.setText(data.get(position));
-
-
+            //add image and description to the view for each gallery item
+            holder.txtLineOne.setText(""+GalleryData.toVisit.get(position).getName());
     }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return GalleryData.toVisit.size()+GalleryData.visited.size();
     }
 
     //custom viewHolder for each item in recycle view
     class MyViewHolderVisited extends RecyclerView.ViewHolder  {
         // view holder for each grid  cell
         TextView txtLineOne;
-        DynamicHeightImageView dynamicHeightImageView;
 
         public MyViewHolderVisited(View itemView) {
             super(itemView);
-            txtLineOne = (TextView) itemView.findViewById(R.id.txt_line1);
-            dynamicHeightImageView = (DynamicHeightImageView) itemView.findViewById(R.id.dynamic_imageView);
+            txtLineOne = (TextView) itemView.findViewById(R.id.textview_visited_item);
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     onItemTouchListener.onCardViewTap(v, getPosition());
+                    GalleryData.toVisit.add(new Art("Roa ssss",(new LatLng(51.467224, -0.072160)),R.drawable.art0));
+                    notifyDataSetChanged();
                 }
             });
 
