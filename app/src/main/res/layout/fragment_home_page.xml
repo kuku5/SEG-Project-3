@@ -503,7 +503,7 @@
 
 
                         <com.etsy.android.grid.util.DynamicHeightImageView
-                            android:id="@+id/dynamic_imageVie111w"
+                            android:id="@+id/aboutDulwich"
                             android:layout_width="fill_parent"
                             android:layout_height="100dp"
                             android:src="@drawable/dulwichpicturegallery"

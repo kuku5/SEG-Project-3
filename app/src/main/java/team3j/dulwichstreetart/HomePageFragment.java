@@ -1,6 +1,8 @@
 package team3j.dulwichstreetart;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -56,6 +58,7 @@ public class HomePageFragment extends Fragment {
     private LinearLayout linearLayout;
     private ViewFlipper viewFlipper;
     private Timer timer;
+    private com.etsy.android.grid.util.DynamicHeightImageView aboutDulwich;
 
     private TextView name;
     private SliderLayout mDemoSlider;
@@ -104,7 +107,7 @@ public class HomePageFragment extends Fragment {
         //button.setText("Log In");
 
 
-      //  ---------- KEYHASH GENERATOR -----------//
+        //  ---------- KEYHASH GENERATOR -----------//
         /*
        try {
             PackageInfo info = getActivity().getPackageManager().getPackageInfo(
@@ -122,7 +125,7 @@ public class HomePageFragment extends Fragment {
         }
         */
 
-      //slideDown();
+        //slideDown();
         return layout;
     }
 
@@ -175,7 +178,7 @@ public class HomePageFragment extends Fragment {
                 @Override
                 public void onCompleted(GraphUser user, Response response) {
                     if (user != null) {
-                        facebookCardText.setText(user.getFirstName()+"\nLog Out.");
+                        facebookCardText.setText(user.getFirstName() + "\nLog Out.");
                     }
                 }
             }).executeAsync();
@@ -243,21 +246,27 @@ public class HomePageFragment extends Fragment {
         cardView = (CardView) layout.findViewById(R.id.card_view_1_welcome1);
         cardView2 = (CardView) layout.findViewById(R.id.car_view_22);
         linearLayout = (LinearLayout) layout.findViewById(R.id.welcomeView);
-        name=(TextView) layout.findViewById(R.id.atsymbol);
+        name = (TextView) layout.findViewById(R.id.atsymbol);
         name.setText("    @DulwichGallery      14h");
-        mapButton=(DynamicHeightImageView) layout.findViewById(R.id.map_image);
+        mapButton = (DynamicHeightImageView) layout.findViewById(R.id.map_image);
 
         mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.viewPager.setCurrentItem(3,true);
-               // onClickInsideFragment.onCardViewTap();
+                MainActivity.viewPager.setCurrentItem(3, true);
+                // onClickInsideFragment.onCardViewTa p();
+            }
+        });
+        aboutDulwich = (DynamicHeightImageView) layout.findViewById(R.id.aboutDulwich);
+        aboutDulwich.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showMessage();
             }
         });
     }
 
     public void setupAnimations(View layout) {
-
 
 
         Bundle bundle = getArguments();
@@ -352,16 +361,30 @@ public class HomePageFragment extends Fragment {
     }
 
 
-
-    public void setupClickInsideFragment(OnClickInsideFragment onClickInsideFragment){
-        this.onClickInsideFragment=onClickInsideFragment;
+    public void setupClickInsideFragment(OnClickInsideFragment onClickInsideFragment) {
+        this.onClickInsideFragment = onClickInsideFragment;
     }
+
     public interface OnClickInsideFragment {
         public void onCardViewTap();
     }
 
-}
+    private void showMessage() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("About Dulwich Outdoor Gallery");
+        builder.setMessage(R.string.art_gallery_about);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
 
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.getWindow().setLayout(400, 400);
+        dialog.show();
+    }
+
+}
 
 
 /*
@@ -390,7 +413,7 @@ public class HomePageFragment extends Fragment {
 //                .setIcon(R.drawable.ic_blob)
 //                .show();
  */
-class OnSliderClickListener implements BaseSliderView.OnSliderClickListener{
+class OnSliderClickListener implements BaseSliderView.OnSliderClickListener {
 
 
     @Override

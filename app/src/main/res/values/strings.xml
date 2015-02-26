@@ -28,7 +28,7 @@
     <string name="tweet1">
         Many great painters copied the work of old masters, &amp; so can you! Come &amp; have a go this wkend! http://bit.ly/1ywwhN1
     </string>
-
+    <string name="art_gallery_about" > Dulwich Outdoor Gallery is a collection of murals painted by some of the top street artists alive today who based their work on Baroque era paintings in the permanent collection at Dulwich Picture Gallery.\n\nThese carefully selected artists, from all over the world, are top class representatives of probably the world\'s biggest current international art movement - street art.\n\nThey were invited to study Dulwich Picture Gallery\'s permanent collection and choose a painting as an inspiration for their works. The style and subject matter of the murals were carefully matched to the location of the walls. It is hoped these murals will be permanent.\n\nEngland\'s oldest public art gallery has been an inspiration to its newest.</string>
     <string-array name="artwork_descriptions">
         <item>The Three Graces - Agent Provocateur</item>
         <item>The Three Graces - Agent Provocateur</item>
