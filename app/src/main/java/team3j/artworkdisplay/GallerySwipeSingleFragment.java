@@ -1,17 +1,9 @@
 package team3j.artworkdisplay;
 
 
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,14 +13,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
-import com.daimajia.slider.library.SliderTypes.BaseSliderView;
-import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.etsy.android.grid.util.DynamicHeightImageView;
 import com.facebook.HttpMethod;
 import com.facebook.Request;
@@ -36,12 +26,9 @@ import com.facebook.Response;
 import com.facebook.Session;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
-import team3j.artistdisplay.ArtistDisplayActivity;
 import team3j.dulwichstreetart.ArtistListAdapter;
 import team3j.dulwichstreetart.GalleryData;
-import team3j.dulwichstreetart.HomePageFragment;
 import team3j.dulwichstreetart.R;
 
 
@@ -53,19 +40,14 @@ import team3j.dulwichstreetart.R;
 public class GallerySwipeSingleFragment extends Fragment {
     private TextView textView;
     int indexOfArtWork;
-    private DynamicHeightImageView dynamicHeightImageView;
     private Toolbar toolbar;
     private RecyclerView recyclerView;
-    private ArrayList<String> artistData;
-    private SliderLayout mDemoSlider;
-    private LinearLayout image1;
-    private LinearLayout image2;
+
+    private ImageButton backButton;
 
     private ArrayList<Comment> comments;
 
-    private boolean firstImage=true;
     private CommentListAdapter commentListAdapter;
-    private ArtistListAdapter artistListAdapter;
 
     public static GallerySwipeSingleFragment getInstance(int position, int indexOfArtWork) {
         GallerySwipeSingleFragment myFragmentTab = new GallerySwipeSingleFragment();
@@ -101,10 +83,24 @@ public class GallerySwipeSingleFragment extends Fragment {
 
         indexOfArtWork = bundle.getInt("indexOfArtWork");
         String title = GalleryData.GetArtWorkData(getActivity()).get(indexOfArtWork);
-         textView.setText(title);
+        textView.setText(title);
 
+        backButton=(ImageButton) layout.findViewById(R.id.back_button);
 
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                getActivity().onBackPressed();
+            }
+        });
+
+//
+//        toolbar= (Toolbar) layout.findViewById(R.id.toolbar_gallery);
+//        toolbar.setTitle(title);
+//
+//        toolbar.setTitleTextColor(getActivity().getResources().getColor(R.color.dark_grey));
+//
 
 
         //recycle viewer
@@ -163,34 +159,7 @@ public class GallerySwipeSingleFragment extends Fragment {
 
         recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view_grid1);
 
-
-        artistData = GalleryData.GetArtistsData(getActivity());
-        ArrayList<String> artistData = GalleryData.GetArtistsData(getActivity());
-//
-//        ArtistListAdapter.OnArtistItemTouchListener onArtistItemTouchListener = new ArtistListAdapter.OnArtistItemTouchListener() {
-//            @Override
-//            public void onItemClick(View view, int position) {
-//                //clicked on the entire view add more methods to method to get clicks on other parts
-//                //put the intent here
-//                Intent i = new Intent(getActivity(), ArtistDisplayActivity.class);
-//                i.putExtra("indexOfArtist", position);
-//                startActivity(i);
-//
-//                Toast.makeText(getActivity(), "Tapped " + position, Toast.LENGTH_SHORT).show();
-//            }
-//        };
-//        //get Adapter
-//        artistListAdapter = new ArtistListAdapter(getActivity(), artistData, onArtistItemTouchListener);
-//
-//        //setup recycleView
-//        recyclerView.setAdapter(artistListAdapter);
-
-
-
-
-
         commentListAdapter = new CommentListAdapter(getActivity(), comments,indexOfArtWork, commentAmount);
-
 
         recyclerView.setAdapter(commentListAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());

@@ -37,8 +37,9 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
     private String commentAmount;
     private ArrayList<Comment> data;
     private Context context;
-    private OnArtistItemTouchListener onArtistItemTouchListener;
 
+    private final int Header_View_Type=1;
+    private final int Comment_View_Type=0;
 
     public CommentListAdapter(Context context,ArrayList<Comment> data,int position, String commentAmount){
         this.commentAmount = commentAmount;
@@ -49,13 +50,13 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         System.out.println(data);
     }
 
+
     @Override
     public int getItemViewType(int position) {
-        int viewType=0; // view type = 0 is a comment
+        int viewType=Comment_View_Type;
 
         if(position==0){
-            viewType=1;
-
+            viewType=Header_View_Type;
         }
 
         return viewType;
@@ -70,13 +71,12 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         View view= inflater.inflate(R.layout.comment_item,parent,false);
         MyViewHolder myViewHolder;
 
-        if(viewType==1){
+        if(viewType==Header_View_Type){
             view= inflater.inflate(R.layout.swipe_fragment_header,parent,false);
 
 
         }else{
             view= inflater.inflate(R.layout.comment_item,parent,false);
-
 
         }
         myViewHolder= new MyViewHolder(view,viewType);
@@ -97,9 +97,6 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             //update header
             holder.dynamicHeightImageView.setImageDrawable(res);
             holder.commentTitle.setText(commentAmount);
-
-
-
 
         }else{
 
@@ -176,44 +173,47 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         TextView posterName;
         TextView message;
         TextView timestamp;
+
         private TextView commentTitle;
         private DynamicHeightImageView dynamicHeightImageView;
 
         public MyViewHolder(View itemView,int viewType) {
             super(itemView);
-            if(viewType==0) {
-                posterName = (TextView) itemView.findViewById(R.id.name);
-                message = (TextView) itemView.findViewById(R.id.comment);
-                timestamp = (TextView) itemView.findViewById(R.id.time);
 
-                posterName.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //onArtistItemTouchListener.onItemClick(v, getPosition());
-                    }
-                });
+            switch(viewType){
+                case Comment_View_Type:
+                    //setup comment view elements
+                    posterName = (TextView) itemView.findViewById(R.id.name);
+                    message = (TextView) itemView.findViewById(R.id.comment);
+                    timestamp = (TextView) itemView.findViewById(R.id.time);
+                    posterName.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            //onArtistItemTouchListener.onItemClick(v, getPosition());
+                        }
+                    });
+
+
+                    break;
+
+                case Header_View_Type:
+                    // setup the header view elements
+                    dynamicHeightImageView = (DynamicHeightImageView) itemView.findViewById(R.id.dynamic_imageview_artwork_display);
+                    commentTitle = (TextView) itemView.findViewById(R.id.commentAmount);
+
+
+
+                    break;
+
+
+
+
             }
-            else{
-                // for the header view
-                dynamicHeightImageView = (DynamicHeightImageView) itemView.findViewById(R.id.dynamic_imageview_artwork_display);
-                commentTitle = (TextView) itemView.findViewById(R.id.commentAmount);
 
-
-            }
         }
 
 
     }
-
-
-
-    public interface OnArtistItemTouchListener{
-        public void onItemClick(View view,int position);
-    }
-
-
-
-
 
 }
 
