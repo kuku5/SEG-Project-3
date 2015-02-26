@@ -262,7 +262,6 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
                     });
 
-                 
 
                     break;
             }

@@ -375,8 +375,14 @@ public class HomePageFragment extends Fragment {
     private void showMessage() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("About Dulwich Outdoor Gallery");
-        builder.setMessage(R.string.art_gallery_about);
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        builder.setMessage(R.string.art_outdoor_gallery_about);
+        builder.setPositiveButton("NEXT", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                showMessagePictureGallery();
+            }
+        });
+        builder.setNegativeButton("CLOSE", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
@@ -385,6 +391,28 @@ public class HomePageFragment extends Fragment {
         AlertDialog dialog = builder.create();
         dialog.getWindow().setLayout(400, 400);
         dialog.show();
+    }
+    private void showMessagePictureGallery() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("About Dulwich Picture Gallery");
+        builder.setMessage(R.string.art_picture_gallery_about);
+        builder.setPositiveButton("OK",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        builder.setNegativeButton("BACK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                showMessage();
+            }
+        });
+
+        AlertDialog box = builder.create();
+        box.getWindow().setLayout(400,400);
+        box.show();
     }
 
 }

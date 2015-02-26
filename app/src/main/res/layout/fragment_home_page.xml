@@ -517,7 +517,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="4dp"
-                            android:text="About Dulwich Picture Gallery"
+                            android:text="About Us"
                             android:textAllCaps="true"
                             android:textColor="#1f3133"
                             android:textSize="14sp"
