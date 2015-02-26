@@ -27,6 +27,7 @@ public class VisitedTabFragment extends Fragment {
     private RecyclerView recyclerView;
 
 
+
     public static VisitedTabFragment getInstance(int position) {
         VisitedTabFragment visitedTabFragment = new VisitedTabFragment();
         Bundle args = new Bundle();
@@ -41,6 +42,7 @@ public class VisitedTabFragment extends Fragment {
         View layout = inflater.inflate(R.layout.fragment_visited_tab, container, false);
         recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view_visited);
 
+        GoogleMapFragmentSmall.toVisit.size();
         //get Image Locations and descriptions
         ArrayList<String> galleryData = GalleryData.GetArtWorkData(getActivity());
         int imageSet[] = GalleryData.GetArtWorkImageLocations();
