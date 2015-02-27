@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.etsy.android.grid.util.DynamicHeightImageView;
+import com.facebook.Session;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -43,6 +44,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
     private final LayoutInflater inflater;
     private final int indexOfArtwork;
+    private GallerySwipeSingleFragment gallerySwipeSingleFragment;
     private String commentAmount;
     private ArrayList<Comment> data;
     private Context context;
@@ -53,13 +55,16 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
     private final int Header_View_Type = 1;
     private final int Comment_View_Type = 0;
 
-    public CommentListAdapter(Context context, ArrayList<Comment> data, int position, String commentAmount) {
+
+
+    public CommentListAdapter(GallerySwipeSingleFragment gallerySwipeSingleFragment, Context context, ArrayList<Comment> data, int position, String commentAmount) {
         this.commentAmount = commentAmount;
         this.data = data;
         inflater = LayoutInflater.from(context);
         this.context = context;
         this.indexOfArtwork = position;
         System.out.println(data);
+        this.gallerySwipeSingleFragment = gallerySwipeSingleFragment;
     }
 
 
@@ -156,6 +161,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         }
     }
 
+
     //Calculates difference between two dates and returns as Map containing keys for DAY, HOURS, MINUTES, SECONDS, MILLISECONDS etc etc...
     public Map<TimeUnit, Long> getTimeDifference(Date date1, Date date2) {
         long diffInMill = date2.getTime() - date1.getTime();
@@ -208,6 +214,14 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                     commentTitle = (TextView) itemView.findViewById(R.id.commentAmount);
                     shareButton = (ImageView) itemView.findViewById(R.id.shareIcon);
                     mapButton = (ImageView) itemView.findViewById(R.id.mapIcon);
+                    commentTitle.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            gallerySwipeSingleFragment.onClickLogin();
+                        }
+                    });
+
+
                     shareButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

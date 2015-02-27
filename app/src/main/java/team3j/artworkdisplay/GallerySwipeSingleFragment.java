@@ -8,6 +8,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,6 +25,8 @@ import com.facebook.HttpMethod;
 import com.facebook.Request;
 import com.facebook.Response;
 import com.facebook.Session;
+import com.facebook.SessionState;
+import com.facebook.model.GraphUser;
 
 import java.util.ArrayList;
 
@@ -159,13 +162,57 @@ public class GallerySwipeSingleFragment extends Fragment {
 
         recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view_grid1);
 
-        commentListAdapter = new CommentListAdapter(getActivity(), comments,indexOfArtWork, commentAmount);
+        commentListAdapter = new CommentListAdapter(this,getActivity(), comments,indexOfArtWork, commentAmount);
 
         recyclerView.setAdapter(commentListAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), 1, false));
 
         return layout;
+    }
+    //Acts like the an Observer who looks for Session changes and invokes onSessionStateChanged
+    private Session.StatusCallback statusCallback = new Session.StatusCallback() {
+        @Override
+        public void call(Session session, SessionState state,
+                         Exception exception) {
+            onSessionStateChange(session, state, exception);
+        }
+    };
+
+    //handler for the log in button
+    public void onClickLogin() {
+        Session session = Session.getActiveSession();
+
+            Session.openActiveSession(getActivity(), this, true, statusCallback);
+
+    }
+
+    //Display different things depending on if the user is logged in
+    private void onSessionStateChange(Session session, SessionState state, Exception exception) {
+        if (state.isOpened()) {
+            //If logged in, show this
+            Log.i("MainActivity", "Logged in...");
+            //test.setText("");
+            //retrieveInfo(session);
+            //isLoggedIn = true;
+            Request.newMeRequest(session, new Request.GraphUserCallback() {
+                // callback after Graph API response with user object
+                @Override
+                public void onCompleted(GraphUser user, Response response) {
+                    if (user != null) {
+                        //facebookCardText.setText(user.getFirstName() + "\nLog Out.");
+                    }
+                }
+            }).executeAsync();
+
+        } else if (state.isClosed()) {
+            //If logged out, show this
+            Log.i("MainActivity", "Logged out...");
+            //test.setText("");
+            //facebookCardText.setText("Log In via\nFacebook");
+           // isLoggedIn = false;
+
+        }
     }
 
 }
