@@ -164,7 +164,6 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             holder.message.setText(commentInfo.getMessage());
 
 
-
             int year = Integer.parseInt(commentInfo.getTime().substring(0, 4));
             int month = Integer.parseInt(commentInfo.getTime().substring(5, 7)) - 1;
             int day = Integer.parseInt(commentInfo.getTime().substring(8, 10));
