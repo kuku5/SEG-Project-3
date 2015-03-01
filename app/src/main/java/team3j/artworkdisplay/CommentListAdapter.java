@@ -2,12 +2,15 @@ package team3j.artworkdisplay;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -131,9 +134,33 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
 
         else {
+            final Comment commentInfo = data.get(position - 2);
 
-            Comment commentInfo = data.get(position - 2);
+//            if (holder.posterName != null) {
+//                holder.posterName.setText(Html.fromHtml("<a href=\"http://www.facebook.com/"+commentInfo.getPosterURL()+"\">"+commentInfo.getPosterName()+"</a> "));
+//                holder.posterName.setMovementMethod(LinkMovementMethod.getInstance());
+//            }
             holder.posterName.setText(commentInfo.getPosterName());
+            holder.posterName.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String facebookUrl = "https://www.facebook.com/"+commentInfo.getPosterURL();
+                    try {
+                        int versionCode = context.getPackageManager().getPackageInfo("com.facebook.katana", 0).versionCode;
+                        if (versionCode >= 3002850) {
+                            Uri uri = Uri.parse("fb://facewebmodal/f?href=" + facebookUrl);
+                            context.startActivity(new Intent(Intent.ACTION_VIEW, uri));;
+                        } else {
+                            // open the Facebook app using the old method (fb://profile/id or fb://page/id)
+                            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/"+commentInfo.getPosterURL())));
+                        }
+                    } catch (PackageManager.NameNotFoundException e) {
+                        // Facebook is not installed. Open the browser
+                        context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(facebookUrl)));
+                    }
+                }
+            });
+
             holder.message.setText(commentInfo.getMessage());
 
 
@@ -143,15 +170,20 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             int day = Integer.parseInt(commentInfo.getTime().substring(8, 10));
             int hour = Integer.parseInt(commentInfo.getTime().substring(11, 13));
             int minute = Integer.parseInt(commentInfo.getTime().substring(14, 16));
-            System.out.println("TEEEEEEEEEEEEST   " + year + "   " + month + "   " + day + "   " + hour + "   " + minute);
+            //System.out.println("TEEEEEEEEEEEEST   " + year + "   " + month + "   " + day + "   " + hour + "   " + minute);
             Calendar postDate = GregorianCalendar.getInstance();
             postDate.set(year, month, day, hour, minute);
             Map<TimeUnit, Long> timeSincePost = getTimeDifference(postDate.getTime(), new Date()); // new Date = current
-            System.out.println(commentInfo.getTime());
-            System.out.println("MONTH " + month + "  HOUR " + hour + " MINUTE " + minute);
-            System.out.println(postDate.getTime());
+            //System.out.println(commentInfo.getTime());
+            //System.out.println("MONTH " + month + "  HOUR " + hour + " MINUTE " + minute);
+            //System.out.println(postDate.getTime());
             if (timeSincePost.get(TimeUnit.DAYS) > 0 && timeSincePost.get(TimeUnit.DAYS) < 8) {
-                holder.timestamp.setText(timeSincePost.get(TimeUnit.DAYS) + " days ago");
+                if (timeSincePost.get(TimeUnit.DAYS) == 1) {
+                    holder.timestamp.setText("One day ago");
+                }
+                else {
+                    holder.timestamp.setText(timeSincePost.get(TimeUnit.DAYS) + " days ago");
+                }
             } else if (timeSincePost.get(TimeUnit.DAYS) > 7) {
                 holder.timestamp.setText(postDate.getTime().toString().substring(4, 10) + " at " + postDate.getTime().toString().substring(11, 16));
             } else if (timeSincePost.get(TimeUnit.DAYS) == 0) {
