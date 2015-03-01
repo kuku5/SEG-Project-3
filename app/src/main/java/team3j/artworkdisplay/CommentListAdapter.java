@@ -2,6 +2,7 @@ package team3j.artworkdisplay;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -117,12 +118,33 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
         } else {
 
-            Comment commentInfo = data.get(position - 1);
+            final Comment commentInfo = data.get(position - 1);
 
-            if (holder.posterName != null) {
-                holder.posterName.setText(Html.fromHtml("<a href=\"http://www.facebook.com/"+commentInfo.getPosterURL()+"\">"+commentInfo.getPosterName()+"</a> "));
-                holder.posterName.setMovementMethod(LinkMovementMethod.getInstance());
-            }
+//            if (holder.posterName != null) {
+//                holder.posterName.setText(Html.fromHtml("<a href=\"http://www.facebook.com/"+commentInfo.getPosterURL()+"\">"+commentInfo.getPosterName()+"</a> "));
+//                holder.posterName.setMovementMethod(LinkMovementMethod.getInstance());
+//            }
+            holder.posterName.setText(commentInfo.getPosterName());
+            holder.posterName.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String facebookUrl = "https://www.facebook.com/"+commentInfo.getPosterURL();
+                    try {
+                        int versionCode = context.getPackageManager().getPackageInfo("com.facebook.katana", 0).versionCode;
+                        if (versionCode >= 3002850) {
+                            Uri uri = Uri.parse("fb://facewebmodal/f?href=" + facebookUrl);
+                            context.startActivity(new Intent(Intent.ACTION_VIEW, uri));;
+                        } else {
+                            // open the Facebook app using the old method (fb://profile/id or fb://page/id)
+                            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/"+commentInfo.getPosterURL())));
+                        }
+                    } catch (PackageManager.NameNotFoundException e) {
+                        // Facebook is not installed. Open the browser
+                        context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(facebookUrl)));
+                    }
+                }
+            });
+
             holder.message.setText(commentInfo.getMessage());
             int year = Integer.parseInt(commentInfo.getTime().substring(0, 4));
             int month = Integer.parseInt(commentInfo.getTime().substring(5, 7)) - 1;
