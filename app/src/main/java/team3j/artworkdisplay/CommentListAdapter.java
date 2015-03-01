@@ -151,15 +151,20 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             int day = Integer.parseInt(commentInfo.getTime().substring(8, 10));
             int hour = Integer.parseInt(commentInfo.getTime().substring(11, 13));
             int minute = Integer.parseInt(commentInfo.getTime().substring(14, 16));
-            System.out.println("TEEEEEEEEEEEEST   " + year + "   " + month + "   " + day + "   " + hour + "   " + minute);
+            //System.out.println("TEEEEEEEEEEEEST   " + year + "   " + month + "   " + day + "   " + hour + "   " + minute);
             Calendar postDate = GregorianCalendar.getInstance();
             postDate.set(year, month, day, hour, minute);
             Map<TimeUnit, Long> timeSincePost = getTimeDifference(postDate.getTime(), new Date()); // new Date = current
-            System.out.println(commentInfo.getTime());
-            System.out.println("MONTH " + month + "  HOUR " + hour + " MINUTE " + minute);
-            System.out.println(postDate.getTime());
+            //System.out.println(commentInfo.getTime());
+            //System.out.println("MONTH " + month + "  HOUR " + hour + " MINUTE " + minute);
+            //System.out.println(postDate.getTime());
             if (timeSincePost.get(TimeUnit.DAYS) > 0 && timeSincePost.get(TimeUnit.DAYS) < 8) {
-                holder.timestamp.setText(timeSincePost.get(TimeUnit.DAYS) + " days ago");
+                if (timeSincePost.get(TimeUnit.DAYS) == 1) {
+                    holder.timestamp.setText("One day ago");
+                }
+                else {
+                    holder.timestamp.setText(timeSincePost.get(TimeUnit.DAYS) + " days ago");
+                }
             } else if (timeSincePost.get(TimeUnit.DAYS) > 7) {
                 holder.timestamp.setText(postDate.getTime().toString().substring(4, 10) + " at " + postDate.getTime().toString().substring(11, 16));
             } else if (timeSincePost.get(TimeUnit.DAYS) == 0) {
