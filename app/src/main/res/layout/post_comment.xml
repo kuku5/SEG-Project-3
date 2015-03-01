@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_height="fill_parent"
+    android:layout_width="fill_parent"
+    android:orientation="horizontal"
+    >
+
+    <!--<com.facebook.widget.ProfilePictureView-->
+        <!--android:layout_width="80dp"-->
+        <!--android:layout_height="wrap_content"-->
+
+        <!--android:gravity="center"-->
+        <!--android:padding="4dp"-->
+
+
+        <!--></com.facebook.widget.ProfilePictureView>-->
+
+
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="7dp">
+
+        <TextView
+            android:id="@+id/commenter_name"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="name"
+            android:gravity="center_vertical"
+            android:textColor="@color/com_facebook_blue"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            />
+
+        <!--<TextView-->
+            <!--android:id="@+id/comment"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Comment is here."-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:textSize="12dp"-->
+            <!--android:layout_below="@id/name"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:layout_marginLeft="5dp"/>-->
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/post_box"
+            android:gravity="center_vertical"
+            android:textSize="20dp"
+            android:layout_below="@id/commenter_name"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"/>
+
+
+
+        <!--<TextView-->
+            <!--android:id="@+id/time"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text=""-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:textSize="10dp"-->
+            <!--android:textColor="@color/lightgrey"-->
+            <!--android:layout_below="@id/comment"-->
+            <!--android:layout_toRightOf="@id/like"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:layout_marginLeft="20dp"/>-->
+
+
+    </RelativeLayout>
+</LinearLayout>

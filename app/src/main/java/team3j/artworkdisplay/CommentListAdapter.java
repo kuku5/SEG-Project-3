@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -54,6 +55,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
     private final int Header_View_Type = 1;
     private final int Comment_View_Type = 0;
+    private final int Post_View_Type = 2;
 
 
 
@@ -76,6 +78,10 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             viewType = Header_View_Type;
         }
 
+        if (position == 1) {
+            viewType = Post_View_Type;
+        }
+
         return viewType;
 
     }
@@ -91,7 +97,12 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         if (viewType == Header_View_Type) {
             view = inflater.inflate(R.layout.swipe_fragment_header, parent, false);
 
-        } else {
+        } else if (viewType == Post_View_Type) {
+
+            view = inflater.inflate(R.layout.post_comment, parent, false);
+        }
+
+        else {
             view = inflater.inflate(R.layout.comment_item, parent, false);
 
         }
@@ -113,11 +124,20 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             holder.dynamicHeightImageView.setImageDrawable(res);
             holder.commentTitle.setText(commentAmount);
 
-        } else {
+        } else if (position == 1) {
 
-            Comment commentInfo = data.get(position - 1);
+            holder.commenterName.setText("User's name");
+        }
+
+
+        else {
+
+            Comment commentInfo = data.get(position - 2);
             holder.posterName.setText(commentInfo.getPosterName());
             holder.message.setText(commentInfo.getMessage());
+
+
+
             int year = Integer.parseInt(commentInfo.getTime().substring(0, 4));
             int month = Integer.parseInt(commentInfo.getTime().substring(5, 7)) - 1;
             int day = Integer.parseInt(commentInfo.getTime().substring(8, 10));
@@ -157,7 +177,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         if (data.size() == 0) {
             return 1;
         } else {
-            return data.size() + 1;
+            return data.size() + 2;
         }
     }
 
@@ -181,6 +201,8 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
 
     class MyViewHolder extends RecyclerView.ViewHolder {
+        EditText postBox;
+        TextView commenterName;
         // view holder for each grid  cell
         TextView posterName;
         TextView message;
@@ -205,6 +227,13 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                         }
                     });
 
+
+                    break;
+
+                case Post_View_Type:
+                    //setup comment box elements
+                    commenterName = (TextView) itemView.findViewById(R.id.commenter_name);
+                    postBox = (EditText) itemView.findViewById(R.id.post_box);
 
                     break;
 
