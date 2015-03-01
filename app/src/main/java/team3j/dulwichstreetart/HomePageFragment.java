@@ -290,10 +290,29 @@ public class HomePageFragment extends Fragment {
 
         HashMap<String, Integer> file_maps = new HashMap<String, Integer>();
 
+        file_maps.put("Agent Provocateur", R.drawable.lowresagentprovocateur);
+
+        file_maps.put("Ben Wilson", R.drawable.judgementofparis);
+        file_maps.put("Ben Wilson", R.drawable.lowrespharaohsring);
+        file_maps.put("Ben Wilson", R.drawable.stcatherine);
+
         file_maps.put("Conor Harrington", R.drawable.lowresconorharrington);
-        file_maps.put("Walter Landscape", R.drawable.lowreswalterlandscape);
-        file_maps.put("Conor Harrington", R.drawable.lowresconorharrington);
-        file_maps.put("Walter Landscape", R.drawable.lowreswalterlandscape);
+        file_maps.put("David Shillinglaw", R.drawable.lowresdavidshillinglaw);
+        file_maps.put("Faith47", R.drawable.lowreseuropaandthebull);
+
+        file_maps.put("Pablo Delgado", R.drawable.lowrespablodelgadoone);
+
+        file_maps.put("REKA", R.drawable.lowresreka);
+        file_maps.put("Remi Rough & System", R.drawable.lowresremiroughandsystem);
+        file_maps.put("ROA", R.drawable.lowresdoginlandscape);
+
+        file_maps.put("RUN - St Rita", R.drawable.lowresrunstrita);
+        file_maps.put("RUN - Triumph Of David - Triumph of David Lordship Lane", R.drawable.runtriumphofdavid);
+
+        file_maps.put("STIK - Eliza and Mary Davidson", R.drawable.lowresstikelizaandmarydavidsontilly);
+        file_maps.put("STIK - Three Boys", R.drawable.lowresstikthreeboys);
+
+        file_maps.put("Walter Kershaw", R.drawable.lowreswalterlandscape);
 
 
         for (String name : file_maps.keySet()) {
@@ -352,11 +371,12 @@ public class HomePageFragment extends Fragment {
         dialog.getWindow().setLayout(400, 400);
         dialog.show();
     }
+
     private void showMessagePictureGallery() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("About Dulwich Picture Gallery");
         builder.setMessage(R.string.art_picture_gallery_about);
-        builder.setPositiveButton("OK",new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
@@ -371,7 +391,7 @@ public class HomePageFragment extends Fragment {
         });
 
         AlertDialog box = builder.create();
-        box.getWindow().setLayout(400,400);
+        box.getWindow().setLayout(400, 400);
         box.show();
     }
 
