@@ -8,6 +8,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -116,7 +118,11 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         } else {
 
             Comment commentInfo = data.get(position - 1);
-            holder.posterName.setText(commentInfo.getPosterName());
+
+            if (holder.posterName != null) {
+                holder.posterName.setText(Html.fromHtml("<a href=\"http://www.facebook.com/"+commentInfo.getPosterURL()+"\">"+commentInfo.getPosterName()+"</a> "));
+                holder.posterName.setMovementMethod(LinkMovementMethod.getInstance());
+            }
             holder.message.setText(commentInfo.getMessage());
             int year = Integer.parseInt(commentInfo.getTime().substring(0, 4));
             int month = Integer.parseInt(commentInfo.getTime().substring(5, 7)) - 1;
