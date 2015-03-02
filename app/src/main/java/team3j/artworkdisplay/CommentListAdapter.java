@@ -317,20 +317,19 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                     commentTitle.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-//                            if (commentAmount.equals("Click here to view comments")) {
-//                                //if logged in just get the comments and show
-//                                data = gallerySwipeSingleFragment.onClickLogin();
-//                                notifyDataSetChanged();
-//                            }
-//                            else {
-//                                // if not logged in show dialog box telling them what happens if they log in
-//                                showLoginDialog();
-//                            }
-                            data = gallerySwipeSingleFragment.onClickLogin();
+                            if (commentAmount.equals("Click here to view comments")) {
+                                //if logged in just get the comments and show
+                                data = gallerySwipeSingleFragment.onClickLogin();
+                                notifyDataSetChanged();
+                            }
+                            else {
+                                // if not logged in show dialog box telling them what happens if they log in
+                                showLoginDialog();
+                            }
+                            //data = gallerySwipeSingleFragment.onClickLogin();
                             System.out.println("CommentsListAdapter" + data);
 
-                            notifyDataSetChanged();
-
+                            //notifyDataSetChanged();
                         }
                     });
 
