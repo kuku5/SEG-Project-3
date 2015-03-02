@@ -63,10 +63,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
 
 
-    public CommentListAdapter(GallerySwipeSingleFragment gallerySwipeSingleFragment, Context context//, ArrayList<Comment> data
-            , int position
-            //, String commentAmount
-            ) {
+    public CommentListAdapter(GallerySwipeSingleFragment gallerySwipeSingleFragment, Context context, int position) {
         //this.commentAmount = commentAmount;
         data = new ArrayList<Comment>();
         //this.data = data;
@@ -138,6 +135,9 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             else {
                 commentAmount = "Please log in to Facebook to view comments";
 
+            }
+            if(data.size() > 0){
+                commentAmount = data.size() + "comments";
             }
             holder.commentTitle.setText(commentAmount);
 
@@ -295,7 +295,8 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                         @Override
                         public void onClick(View v) {
                             data = gallerySwipeSingleFragment.onClickLogin();
-                            System.out.println(data);
+                            System.out.println("CommentsListAdapter" + data);
+
                             notifyDataSetChanged();
                         }
                     });

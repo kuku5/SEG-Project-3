@@ -107,69 +107,9 @@ public class GallerySwipeSingleFragment extends Fragment {
 //        toolbar.setTitleTextColor(getActivity().getResources().getColor(R.color.dark_grey));
 //
 
-
-        //recycle viewer
-        //final Session session = Session.getActiveSession();
-
-//        comments = new ArrayList<Comment>();
-//        Thread getComments = new Thread(){
-//            public void run(){
-//                Bundle b1 = new Bundle();
-//                b1.putBoolean("summary", true);     //includes a summary in the request
-//                b1.putString("filter", "stream");   //gets the chronological order of comments
-//                b1.putString("limit", "100");        //gets max of 100
-//                new Request(session, "726958990741991/comments", b1, HttpMethod.GET,
-//                        new Request.Callback() {
-//                            public void onCompleted(Response response) {
-//                                if (response != null) {
-//                                    try {
-//                                        //System.out.println(response.getGraphObject().toString());
-//                                        //System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" +response.getGraphObject().getInnerJSONObject().getJSONObject("summary").toString());
-//
-//                                        int x = response.getGraphObject().getInnerJSONObject().getJSONArray("data").length();
-//                                        System.out.println(x);
-//                                        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" +response.getGraphObject().getInnerJSONObject().getJSONArray("data"));
-//                                        for (int i = 0; i < x; i++) {
-//                                            //System.out.println(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("message"));
-//                                            Comment commentInfo = new Comment();
-//                                            commentInfo.setPosterURL(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).getJSONObject("from").get("id").toString());
-//                                            commentInfo.setPosterName(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).getJSONObject("from").get("name").toString());
-//                                            commentInfo.setMessage(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("message").toString());
-//                                            commentInfo.setTime(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("created_time").toString());
-//                                            comments.add(commentInfo);
-//
-//                                        }
-//                                    } catch (Exception e) {
-//                                        System.out.println(e);
-//                                    }
-//                                }
-//                            }
-//                        }).executeAndWait();
-//
-//            }
-//        };
-
-//        if(!(session==null) && session.isOpened()) {
-//            getComments.start();
-//            try {
-//                getComments.join();
-//                commentAmount = comments.size() + " comments";
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        else {
-//            commentAmount = "Please log in to Facebook to view comments";
-//
-//        }
-
-
         recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view_grid1);
 
-        commentListAdapter = new CommentListAdapter(this,getActivity()//, comments
-                ,indexOfArtWork
-                //, commentAmount
-                );
+        commentListAdapter = new CommentListAdapter(this,getActivity() ,indexOfArtWork);
 
         recyclerView.setAdapter(commentListAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -186,7 +126,8 @@ public class GallerySwipeSingleFragment extends Fragment {
         }
     };
 
-    public ArrayList<Comment> getFbData(final Session session) {
+    public void getFbData() {
+
         comments = new ArrayList<Comment>();
         Thread getComments = new Thread(){
             public void run(){
@@ -194,7 +135,7 @@ public class GallerySwipeSingleFragment extends Fragment {
                 b1.putBoolean("summary", true);     //includes a summary in the request
                 b1.putString("filter", "stream");   //gets the chronological order of comments
                 b1.putString("limit", "100");        //gets max of 100
-                new Request(session, "726958990741991/comments", b1, HttpMethod.GET,
+                new Request(Session.getActiveSession(), "726958990741991/comments", b1, HttpMethod.GET,
                         new Request.Callback() {
                             public void onCompleted(Response response) {
                                 if (response != null) {
@@ -216,7 +157,7 @@ public class GallerySwipeSingleFragment extends Fragment {
 
                                         }
                                     } catch (Exception e) {
-                                        System.out.println(e);
+                                        e.printStackTrace();
                                     }
                                 }
                             }
@@ -231,23 +172,20 @@ public class GallerySwipeSingleFragment extends Fragment {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        //System.out.println("FBdata" + comments);
 
-        return  comments;
 
     }
 
     //handler for the log in button
     public ArrayList<Comment> onClickLogin() {
         Session session = Session.getActiveSession();
-        if(!(session==null) && session.isOpened()) {
-
-        }
-        else {
-
+        if((session==null) || session.isClosed()) {
             Session.openActiveSession(getActivity(), this, true, statusCallback);
         }
-        getFbData(session);
-        ArrayList<Comment> comments = getFbData(session);
+
+        getFbData();
+        //System.out.println("onClickLogin" + comments);
         return comments;
 
     }
@@ -261,15 +199,15 @@ public class GallerySwipeSingleFragment extends Fragment {
             //test.setText("");
             //retrieveInfo(session);
             //isLoggedIn = true;
-            Request.newMeRequest(session, new Request.GraphUserCallback() {
-                // callback after Graph API response with user object
-                @Override
-                public void onCompleted(GraphUser user, Response response) {
-                    if (user != null) {
-                       // HomePageFragment.facebookCardText.setText(user.getFirstName() + "\nLog Out.");
-                    }
-                }
-            }).executeAsync();
+//            Request.newMeRequest(session, new Request.GraphUserCallback() {
+//                // callback after Graph API response with user object
+//                @Override
+//                public void onCompleted(GraphUser user, Response response) {
+//                    if (user != null) {
+//                       // HomePageFragment.facebookCardText.setText(user.getFirstName() + "\nLog Out.");
+//                    }
+//                }
+//            }).executeAsync();
 
         } else if (state.isClosed()) {
             //If logged out, show this
