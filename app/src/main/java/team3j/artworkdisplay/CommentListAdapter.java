@@ -1,6 +1,8 @@
 package team3j.artworkdisplay;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -39,6 +41,7 @@ import java.util.concurrent.TimeUnit;
 
 import team3j.dulwichstreetart.GalleryData;
 import team3j.dulwichstreetart.GoogleMapFragmentSmall;
+import team3j.dulwichstreetart.HomePageFragment;
 import team3j.dulwichstreetart.MainActivity;
 import team3j.dulwichstreetart.R;
 
@@ -130,10 +133,10 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
             Session session = Session.getActiveSession();
             if(!(session==null) && session.isOpened()) {
-               commentAmount = "Show comments";
+               commentAmount = "Click here to view comments";
             }
             else {
-                commentAmount = "Please log in to Facebook to view comments";
+                commentAmount = "Click here to log in to Facebook to view comments";
 
             }
             if(data.size() > 0){
@@ -143,7 +146,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
         } else if (position == 1) {
 
-            holder.commenterName.setText("User's name");
+
         }
 
 
@@ -247,10 +250,30 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         return result;
     }
 
+    private void showLoginDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(gallerySwipeSingleFragment.getActivity());
+        builder.setTitle("Login to Facebook");
+        builder.setMessage(R.string.log_in_fb_about);
+        builder.setPositiveButton("Login", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                data = gallerySwipeSingleFragment.onClickLogin();
+                notifyDataSetChanged();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.getWindow().setLayout(400, 400);
+        dialog.show();
+    }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         EditText postBox;
-        TextView commenterName;
         // view holder for each grid  cell
         TextView posterName;
         TextView message;
@@ -280,7 +303,6 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
                 case Post_View_Type:
                     //setup comment box elements
-                    commenterName = (TextView) itemView.findViewById(R.id.commenter_name);
                     postBox = (EditText) itemView.findViewById(R.id.post_box);
 
                     break;
@@ -291,13 +313,24 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                     commentTitle = (TextView) itemView.findViewById(R.id.commentAmount);
                     shareButton = (ImageView) itemView.findViewById(R.id.shareIcon);
                     mapButton = (ImageView) itemView.findViewById(R.id.mapIcon);
+
                     commentTitle.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+//                            if (commentAmount.equals("Click here to view comments")) {
+//                                //if logged in just get the comments and show
+//                                data = gallerySwipeSingleFragment.onClickLogin();
+//                                notifyDataSetChanged();
+//                            }
+//                            else {
+//                                // if not logged in show dialog box telling them what happens if they log in
+//                                showLoginDialog();
+//                            }
                             data = gallerySwipeSingleFragment.onClickLogin();
                             System.out.println("CommentsListAdapter" + data);
 
                             notifyDataSetChanged();
+
                         }
                     });
 

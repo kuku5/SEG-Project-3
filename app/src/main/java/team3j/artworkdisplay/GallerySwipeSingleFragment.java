@@ -213,7 +213,6 @@ public class GallerySwipeSingleFragment extends Fragment {
             //If logged out, show this
             Log.i("GallerySwipeFragment", "Logged out...");
 
-
         }
     }
 
