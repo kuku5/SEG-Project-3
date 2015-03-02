@@ -137,7 +137,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
             }
             if(data.size() > 0){
-                commentAmount = data.size() + "comments";
+                commentAmount = data.size() + " comments";
             }
             holder.commentTitle.setText(commentAmount);
 

@@ -156,17 +156,25 @@ public class HomePageFragment extends Fragment {
 
     //checks to see if there is already a session open.
     public void checkIfActiveSession() {
+        System.out.println("Checking session");
         Session session = Session.getActiveSession();
         if (session != null && (session.isOpened() || session.isClosed())) {
             onSessionStateChange(session, session.getState(), null);
             System.out.println("There is already a open session");
         }
+        else{
+            System.out.println("Session logged out");
+            facebookCardText.setText("Log In via\nFacebook");
+            isLoggedIn = false;
+        }
+
     }
 
 
     public void onResume() {
         super.onResume();
         checkIfActiveSession();
+
     }
 
     //Display different things depending on if the user is logged in
@@ -189,7 +197,7 @@ public class HomePageFragment extends Fragment {
 
         } else if (state.isClosed()) {
             //If logged out, show this
-            Log.i("MainActivity", "Logged out...");
+            Log.i("HomePageFragment", "Logged out...");
             //test.setText("");
             facebookCardText.setText("Log In via\nFacebook");
             isLoggedIn = false;

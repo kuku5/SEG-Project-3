@@ -211,10 +211,8 @@ public class GallerySwipeSingleFragment extends Fragment {
 
         } else if (state.isClosed()) {
             //If logged out, show this
-            Log.i("MainActivity", "Logged out...");
-            //test.setText("");
-            //facebookCardText.setText("Log In via\nFacebook");
-           // isLoggedIn = false;
+            Log.i("GallerySwipeFragment", "Logged out...");
+
 
         }
     }
