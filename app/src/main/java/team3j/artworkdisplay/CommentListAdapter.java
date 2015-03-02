@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.etsy.android.grid.util.DynamicHeightImageView;
 import com.facebook.Session;
@@ -49,7 +50,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
     private final LayoutInflater inflater;
     private final int indexOfArtwork;
     private GallerySwipeSingleFragment gallerySwipeSingleFragment;
-    private String commentAmount;
+    private String commentAmount = null;
     private ArrayList<Comment> data;
     private Context context;
     private ImageView shareButton;
@@ -62,13 +63,17 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
 
 
-    public CommentListAdapter(GallerySwipeSingleFragment gallerySwipeSingleFragment, Context context, ArrayList<Comment> data, int position, String commentAmount) {
-        this.commentAmount = commentAmount;
-        this.data = data;
+    public CommentListAdapter(GallerySwipeSingleFragment gallerySwipeSingleFragment, Context context//, ArrayList<Comment> data
+            , int position
+            //, String commentAmount
+            ) {
+        //this.commentAmount = commentAmount;
+        data = new ArrayList<Comment>();
+        //this.data = data;
         inflater = LayoutInflater.from(context);
         this.context = context;
         this.indexOfArtwork = position;
-        System.out.println(data);
+        //System.out.println(data);
         this.gallerySwipeSingleFragment = gallerySwipeSingleFragment;
     }
 
@@ -125,6 +130,15 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             BitmapDrawable res = new BitmapDrawable(context.getResources(), bitmap);
             //update header
             holder.dynamicHeightImageView.setImageDrawable(res);
+
+            Session session = Session.getActiveSession();
+            if(!(session==null) && session.isOpened()) {
+               commentAmount = "Show comments";
+            }
+            else {
+                commentAmount = "Please log in to Facebook to view comments";
+
+            }
             holder.commentTitle.setText(commentAmount);
 
         } else if (position == 1) {
@@ -134,6 +148,8 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
 
         else {
+
+
             final Comment commentInfo = data.get(position - 2);
 
 //            if (holder.posterName != null) {
@@ -147,6 +163,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                     String facebookUrl = "https://www.facebook.com/"+commentInfo.getPosterURL();
                     try {
                         int versionCode = context.getPackageManager().getPackageInfo("com.facebook.katana", 0).versionCode;
+                        System.out.println("VERSION CODE HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE "+versionCode);
                         if (versionCode >= 3002850) {
                             Uri uri = Uri.parse("fb://facewebmodal/f?href=" + facebookUrl);
                             context.startActivity(new Intent(Intent.ACTION_VIEW, uri));;
@@ -277,7 +294,9 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                     commentTitle.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            gallerySwipeSingleFragment.onClickLogin();
+                            data = gallerySwipeSingleFragment.onClickLogin();
+                            System.out.println(data);
+                            notifyDataSetChanged();
                         }
                     });
 

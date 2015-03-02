@@ -18,6 +18,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.daimajia.slider.library.SliderLayout;
 import com.etsy.android.grid.util.DynamicHeightImageView;
@@ -32,6 +33,7 @@ import java.util.ArrayList;
 
 import team3j.dulwichstreetart.ArtistListAdapter;
 import team3j.dulwichstreetart.GalleryData;
+import team3j.dulwichstreetart.HomePageFragment;
 import team3j.dulwichstreetart.R;
 
 
@@ -107,7 +109,84 @@ public class GallerySwipeSingleFragment extends Fragment {
 
 
         //recycle viewer
-        final Session session = Session.getActiveSession();
+        //final Session session = Session.getActiveSession();
+
+//        comments = new ArrayList<Comment>();
+//        Thread getComments = new Thread(){
+//            public void run(){
+//                Bundle b1 = new Bundle();
+//                b1.putBoolean("summary", true);     //includes a summary in the request
+//                b1.putString("filter", "stream");   //gets the chronological order of comments
+//                b1.putString("limit", "100");        //gets max of 100
+//                new Request(session, "726958990741991/comments", b1, HttpMethod.GET,
+//                        new Request.Callback() {
+//                            public void onCompleted(Response response) {
+//                                if (response != null) {
+//                                    try {
+//                                        //System.out.println(response.getGraphObject().toString());
+//                                        //System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" +response.getGraphObject().getInnerJSONObject().getJSONObject("summary").toString());
+//
+//                                        int x = response.getGraphObject().getInnerJSONObject().getJSONArray("data").length();
+//                                        System.out.println(x);
+//                                        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" +response.getGraphObject().getInnerJSONObject().getJSONArray("data"));
+//                                        for (int i = 0; i < x; i++) {
+//                                            //System.out.println(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("message"));
+//                                            Comment commentInfo = new Comment();
+//                                            commentInfo.setPosterURL(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).getJSONObject("from").get("id").toString());
+//                                            commentInfo.setPosterName(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).getJSONObject("from").get("name").toString());
+//                                            commentInfo.setMessage(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("message").toString());
+//                                            commentInfo.setTime(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("created_time").toString());
+//                                            comments.add(commentInfo);
+//
+//                                        }
+//                                    } catch (Exception e) {
+//                                        System.out.println(e);
+//                                    }
+//                                }
+//                            }
+//                        }).executeAndWait();
+//
+//            }
+//        };
+
+//        if(!(session==null) && session.isOpened()) {
+//            getComments.start();
+//            try {
+//                getComments.join();
+//                commentAmount = comments.size() + " comments";
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        else {
+//            commentAmount = "Please log in to Facebook to view comments";
+//
+//        }
+
+
+        recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view_grid1);
+
+        commentListAdapter = new CommentListAdapter(this,getActivity()//, comments
+                ,indexOfArtWork
+                //, commentAmount
+                );
+
+        recyclerView.setAdapter(commentListAdapter);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), 1, false));
+
+        return layout;
+    }
+    //Acts like the an Observer who looks for Session changes and invokes onSessionStateChanged
+    private Session.StatusCallback statusCallback = new Session.StatusCallback() {
+        @Override
+        public void call(Session session, SessionState state,
+                         Exception exception) {
+            onSessionStateChange(session, state, exception);
+        }
+    };
+
+    public ArrayList<Comment> getFbData(final Session session) {
         comments = new ArrayList<Comment>();
         Thread getComments = new Thread(){
             public void run(){
@@ -145,51 +224,37 @@ public class GallerySwipeSingleFragment extends Fragment {
 
             }
         };
+        getComments.start();
+        try {
+            getComments.join();
 
-        if(!(session==null) && session.isOpened()) {
-            getComments.start();
-            try {
-                getComments.join();
-                commentAmount = comments.size() + " comments";
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        else {
-            commentAmount = "Please log in to Facebook to view comments";
-
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
 
+        return  comments;
 
-        recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view_grid1);
-
-        commentListAdapter = new CommentListAdapter(this,getActivity(), comments,indexOfArtWork, commentAmount);
-
-        recyclerView.setAdapter(commentListAdapter);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), 1, false));
-
-        return layout;
     }
-    //Acts like the an Observer who looks for Session changes and invokes onSessionStateChanged
-    private Session.StatusCallback statusCallback = new Session.StatusCallback() {
-        @Override
-        public void call(Session session, SessionState state,
-                         Exception exception) {
-            onSessionStateChange(session, state, exception);
-        }
-    };
 
     //handler for the log in button
-    public void onClickLogin() {
+    public ArrayList<Comment> onClickLogin() {
         Session session = Session.getActiveSession();
+        if(!(session==null) && session.isOpened()) {
+
+        }
+        else {
 
             Session.openActiveSession(getActivity(), this, true, statusCallback);
+        }
+        getFbData(session);
+        ArrayList<Comment> comments = getFbData(session);
+        return comments;
 
     }
 
     //Display different things depending on if the user is logged in
-    private void onSessionStateChange(Session session, SessionState state, Exception exception) {
+    private void onSessionStateChange(Session session,
+                                      SessionState state, Exception exception) {
         if (state.isOpened()) {
             //If logged in, show this
             Log.i("MainActivity", "Logged in...");
@@ -201,7 +266,7 @@ public class GallerySwipeSingleFragment extends Fragment {
                 @Override
                 public void onCompleted(GraphUser user, Response response) {
                     if (user != null) {
-                        //facebookCardText.setText(user.getFirstName() + "\nLog Out.");
+                       // HomePageFragment.facebookCardText.setText(user.getFirstName() + "\nLog Out.");
                     }
                 }
             }).executeAsync();

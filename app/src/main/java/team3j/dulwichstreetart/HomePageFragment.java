@@ -166,7 +166,7 @@ public class HomePageFragment extends Fragment {
 
     public void onResume() {
         super.onResume();
-        //checkIfActiveSession();
+        checkIfActiveSession();
     }
 
     //Display different things depending on if the user is logged in
