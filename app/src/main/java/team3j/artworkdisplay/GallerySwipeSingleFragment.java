@@ -18,6 +18,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.daimajia.slider.library.SliderLayout;
 import com.etsy.android.grid.util.DynamicHeightImageView;
@@ -32,6 +33,7 @@ import java.util.ArrayList;
 
 import team3j.dulwichstreetart.ArtistListAdapter;
 import team3j.dulwichstreetart.GalleryData;
+import team3j.dulwichstreetart.HomePageFragment;
 import team3j.dulwichstreetart.R;
 
 
@@ -105,9 +107,27 @@ public class GallerySwipeSingleFragment extends Fragment {
 //        toolbar.setTitleTextColor(getActivity().getResources().getColor(R.color.dark_grey));
 //
 
+        recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view_grid1);
 
-        //recycle viewer
-        final Session session = Session.getActiveSession();
+        commentListAdapter = new CommentListAdapter(this,getActivity() ,indexOfArtWork);
+
+        recyclerView.setAdapter(commentListAdapter);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), 1, false));
+
+        return layout;
+    }
+    //Acts like the an Observer who looks for Session changes and invokes onSessionStateChanged
+    private Session.StatusCallback statusCallback = new Session.StatusCallback() {
+        @Override
+        public void call(Session session, SessionState state,
+                         Exception exception) {
+            onSessionStateChange(session, state, exception);
+        }
+    };
+
+    public void getFbData() {
+
         comments = new ArrayList<Comment>();
         Thread getComments = new Thread(){
             public void run(){
@@ -115,7 +135,7 @@ public class GallerySwipeSingleFragment extends Fragment {
                 b1.putBoolean("summary", true);     //includes a summary in the request
                 b1.putString("filter", "stream");   //gets the chronological order of comments
                 b1.putString("limit", "100");        //gets max of 100
-                new Request(session, "726958990741991/comments", b1, HttpMethod.GET,
+                new Request(Session.getActiveSession(), "726958990741991/comments", b1, HttpMethod.GET,
                         new Request.Callback() {
                             public void onCompleted(Response response) {
                                 if (response != null) {
@@ -137,7 +157,7 @@ public class GallerySwipeSingleFragment extends Fragment {
 
                                         }
                                     } catch (Exception e) {
-                                        System.out.println(e);
+                                        e.printStackTrace();
                                     }
                                 }
                             }
@@ -145,73 +165,54 @@ public class GallerySwipeSingleFragment extends Fragment {
 
             }
         };
+        getComments.start();
+        try {
+            getComments.join();
 
-        if(!(session==null) && session.isOpened()) {
-            getComments.start();
-            try {
-                getComments.join();
-                commentAmount = comments.size() + " comments";
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
-        else {
-            commentAmount = "Please log in to Facebook to view comments";
-
-        }
+        //System.out.println("FBdata" + comments);
 
 
-        recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view_grid1);
-
-        commentListAdapter = new CommentListAdapter(this,getActivity(), comments,indexOfArtWork, commentAmount);
-
-        recyclerView.setAdapter(commentListAdapter);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), 1, false));
-
-        return layout;
     }
-    //Acts like the an Observer who looks for Session changes and invokes onSessionStateChanged
-    private Session.StatusCallback statusCallback = new Session.StatusCallback() {
-        @Override
-        public void call(Session session, SessionState state,
-                         Exception exception) {
-            onSessionStateChange(session, state, exception);
-        }
-    };
 
     //handler for the log in button
-    public void onClickLogin() {
+    public ArrayList<Comment> onClickLogin() {
         Session session = Session.getActiveSession();
-
+        if((session==null) || session.isClosed()) {
             Session.openActiveSession(getActivity(), this, true, statusCallback);
+        }
+
+        getFbData();
+        //System.out.println("onClickLogin" + comments);
+        return comments;
 
     }
 
     //Display different things depending on if the user is logged in
-    private void onSessionStateChange(Session session, SessionState state, Exception exception) {
+    private void onSessionStateChange(Session session,
+                                      SessionState state, Exception exception) {
         if (state.isOpened()) {
             //If logged in, show this
             Log.i("MainActivity", "Logged in...");
             //test.setText("");
             //retrieveInfo(session);
             //isLoggedIn = true;
-            Request.newMeRequest(session, new Request.GraphUserCallback() {
-                // callback after Graph API response with user object
-                @Override
-                public void onCompleted(GraphUser user, Response response) {
-                    if (user != null) {
-                        //facebookCardText.setText(user.getFirstName() + "\nLog Out.");
-                    }
-                }
-            }).executeAsync();
+//            Request.newMeRequest(session, new Request.GraphUserCallback() {
+//                // callback after Graph API response with user object
+//                @Override
+//                public void onCompleted(GraphUser user, Response response) {
+//                    if (user != null) {
+//                       // HomePageFragment.facebookCardText.setText(user.getFirstName() + "\nLog Out.");
+//                    }
+//                }
+//            }).executeAsync();
 
         } else if (state.isClosed()) {
             //If logged out, show this
-            Log.i("MainActivity", "Logged out...");
-            //test.setText("");
-            //facebookCardText.setText("Log In via\nFacebook");
-           // isLoggedIn = false;
+            Log.i("GallerySwipeFragment", "Logged out...");
+
 
         }
     }
