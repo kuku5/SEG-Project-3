@@ -430,6 +430,7 @@ class OnSliderClickListener implements BaseSliderView.OnSliderClickListener {
     @Override
     public void onSliderClick(BaseSliderView baseSliderView) {
 
+        
 
     }
 }
