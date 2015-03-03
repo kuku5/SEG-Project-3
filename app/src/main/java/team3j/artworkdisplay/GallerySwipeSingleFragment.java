@@ -226,6 +226,8 @@ public class GallerySwipeSingleFragment extends Fragment {
             //vince put it here
 
 
+            //I have found that the setUserVisibleHint method gets called BEFORE
+            //the onCreateView gets called and this makes it difficult to track any initialization. so do some null checks
 
         }
         else {  }
