@@ -63,7 +63,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
     private final int Header_View_Type = 1;
     private final int Comment_View_Type = 0;
     private final int Post_View_Type = 2;
-
+    private boolean checkIfLogIn = false;
 
 
     public CommentListAdapter(GallerySwipeSingleFragment gallerySwipeSingleFragment, Context context, int position) {
@@ -133,16 +133,23 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
             Session session = Session.getActiveSession();
             if(!(session==null) && session.isOpened()) {
-               commentAmount = "Click here to view comments";
+                String viewComment = "View comments";
+                String htmlTextView = viewComment.replace("View", "<font color = '#ffb74d'> View </font>");
+                commentAmount = htmlTextView;
+                checkIfLogIn = true;
             }
             else {
-                commentAmount = "Click here to log in to Facebook to view comments";
 
+                String login = "Log in to Facebook to view comments";
+                String htmlTextLog = login.replace("Log in", "<font color = '#ffb74d'> Log in </font>");
+                commentAmount = htmlTextLog;
+                checkIfLogIn = false;
             }
             if(data.size() > 0){
                 commentAmount = data.size() + " comments";
             }
-            holder.commentTitle.setText(commentAmount);
+            //holder.commentTitle.setText(commentAmount);
+            holder.commentTitle.setText(Html.fromHtml(commentAmount));
 
         } else if (position == 1) {
 
@@ -317,12 +324,12 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                     commentTitle.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            if (commentAmount.equals("Click here to view comments")) {
+                            if (checkIfLogIn == true) {
                                 //if logged in just get the comments and show
                                 data = gallerySwipeSingleFragment.onClickLogin();
                                 notifyDataSetChanged();
                             }
-                            else if (commentAmount.equals("Click here to log in to Facebook to view comments")){
+                            else if (checkIfLogIn == false){
                                 // if not logged in show dialog box telling them what happens if they log in
                                 showLoginDialog();
                             }
