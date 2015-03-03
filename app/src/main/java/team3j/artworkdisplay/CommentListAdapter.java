@@ -322,7 +322,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                                 data = gallerySwipeSingleFragment.onClickLogin();
                                 notifyDataSetChanged();
                             }
-                            else {
+                            else if (commentAmount.equals("Click here to log in to Facebook to view comments")){
                                 // if not logged in show dialog box telling them what happens if they log in
                                 showLoginDialog();
                             }
