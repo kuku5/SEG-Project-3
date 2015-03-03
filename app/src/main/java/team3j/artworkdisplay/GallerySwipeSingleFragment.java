@@ -216,17 +216,19 @@ public class GallerySwipeSingleFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        Log.i("GallerySwipeFragment", "Pause"+indexOfArtWork);
 
-    }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        Log.i("GallerySwipeFragment", "Resume"+indexOfArtWork);
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            Log.i("GallerySwipeFragment", "Visible"+indexOfArtWork);
+            //vince put it here
 
+
+
+        }
+        else {  }
     }
+
 }

@@ -81,7 +81,7 @@ public class GallerySwipeHolder extends FragmentActivity {
                     mPagerOffsetPixels = 0;
 
                 }
-                Log.d("page","index"+indexOfArtWork+" positionOffsetPixels="+positionOffsetPixels);
+              //  Log.d("page","index"+indexOfArtWork+" positionOffsetPixels="+positionOffsetPixels);
 
             }
 
@@ -89,8 +89,8 @@ public class GallerySwipeHolder extends FragmentActivity {
         });
 
 
-        System.out.println(viewPager.getCurrentItem() + "sss");
-        Log.d("page","");
+       // System.out.println(viewPager.getCurrentItem() + "sss");
+       // Log.d("page","");
 
         viewPager.setCurrentItem(indexOfArtWork,true);
       //  mPagerPosition=0;
