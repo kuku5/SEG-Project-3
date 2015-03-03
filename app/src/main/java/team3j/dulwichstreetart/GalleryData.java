@@ -60,49 +60,49 @@ public class GalleryData {
         //The Struggle was real
         ArrayList<Art> artArrayList=new ArrayList<>();
 
-        artArrayList.add(new Art("The Guardian Angel","Stik","The Guardian Angel","Stik","Marcantonio Franceschini",R.drawable.lowresstikguardianangel,R.drawable.lowresstikguardianangel));
-        artArrayList.add(new Art("Three Boys","Stik","Three Boys","Bartolomé Esteban Murillo","",R.drawable.lowresstikthreeboys,R.drawable.lowresstikthreeboys));
-        artArrayList.add(new Art("Triumph of David Village","RUN","Triumph of David","Nicolas Poussin","",R.drawable.lowresdogrun,R.drawable.lowresdogrun));
+        artArrayList.add(new Art("The Guardian Angel","Stik","The Guardian Angel","Stik","Marcantonio Franceschini",R.drawable.lowresstikguardianangel,R.drawable.lowresinspiredtheguardianangel));
+        artArrayList.add(new Art("Three Boys","Stik","Three Boys","Bartolomé Esteban Murillo","",R.drawable.lowresstikthreeboys,R.drawable.lowresinspiredthreeboys));
+        artArrayList.add(new Art("Triumph of David Village","RUN","Triumph of David","Nicolas Poussin","",R.drawable.lowresdogrun,R.drawable.lowresinspiredtriumphofdavid));
         ///Phlegm
-        artArrayList.add(new Art("The Triumph of David 2013","Phlegm","The Triumph of David 1628,31","Nicolas Poussin","The 9 year old son of the owner of the wall helped Phlegm paint his picture.  His mum said, ‘My son loved giving him a hand and I am so grateful to him for letting him have an input.  He feels proud to be part of it and now feels very protective towards the wall.’ ",R.drawable.lowresphlegm,R.drawable.lowresphlegm));
+        artArrayList.add(new Art("The Triumph of David 2013","Phlegm","The Triumph of David 1628,31","Nicolas Poussin","The 9 year old son of the owner of the wall helped Phlegm paint his picture.  His mum said, ‘My son loved giving him a hand and I am so grateful to him for letting him have an input.  He feels proud to be part of it and now feels very protective towards the wall.’ ",R.drawable.lowresphlegm,R.drawable.lowresinspiredtriumphofdavid));
 
         //Mear One
-        artArrayList.add(new Art("New World Revolution 2013","Mear One","The Madonna of The Rosary 1670-80","Bartolomé Esteban Murillo","Mear One modernised Murillo’s delicate Virgin of the Rosary by turning her and her child into powerful, mixed race  characters giving power salutes. ‘Equality’ is inscribed on her halo.  ",R.drawable.lowresmearone,R.drawable.lowresmearone));
+        artArrayList.add(new Art("New World Revolution 2013","Mear One","The Madonna of The Rosary 1670-80","Bartolomé Esteban Murillo","Mear One modernised Murillo’s delicate Virgin of the Rosary by turning her and her child into powerful, mixed race  characters giving power salutes. ‘Equality’ is inscribed on her halo.  ",R.drawable.lowresmearone,R.drawable.lowresinspiredthevirginoftherosaryjpg));
 
         //Conor Harrington
-        artArrayList.add(new Art("Fight Club","Conor Harrington","The Massacre of The Innocents","Charles Le Brun","Harrington’s fighting men in Regency costume continue their fight on 4 more walls in the USA and Costa Rica.  The bald guy wins.",R.drawable.lowresconorharrington,R.drawable.lowresconorharrington));
+        artArrayList.add(new Art("Fight Club","Conor Harrington","The Massacre of The Innocents","Charles Le Brun","Harrington’s fighting men in Regency costume continue their fight on 4 more walls in the USA and Costa Rica.  The bald guy wins.",R.drawable.lowresconorharrington,R.drawable.lowresinspiredthemassacreoftheinnocentsbycharleslebrun));
 
         //Agent Provocateur
-        artArrayList.add(new Art("Happy Hour","Agent Provocateur","The Three Graces","Sir Peter Paul Rubens ","AP is the only stencil artist in this project.  Once cut, stencil paintings can be reproduced easily, by anyone.  The work of art AP chose to interpret was a sketch by Rubens, highly prized because it is by him alone, whereas the finished piece would have had a great deal of workshop input.",R.drawable.lowresagentprovocateur,R.drawable.lowresagentprovocateur));
+        artArrayList.add(new Art("Happy Hour","Agent Provocateur","The Three Graces","Sir Peter Paul Rubens ","AP is the only stencil artist in this project.  Once cut, stencil paintings can be reproduced easily, by anyone.  The work of art AP chose to interpret was a sketch by Rubens, highly prized because it is by him alone, whereas the finished piece would have had a great deal of workshop input.",R.drawable.lowresagentprovocateur,R.drawable.lowresinspiredthethreegracesbysirpeterpaulrubens));
         //Ben Wilson
-        artArrayList.add(new Art("Saint Catherine","Ben Wilson","St Catherine of Siena","Carlo Dolci","",R.drawable.lowresstcatherinestone,R.drawable.lowresstcatherinestone));
+        artArrayList.add(new Art("Saint Catherine","Ben Wilson","St Catherine of Siena","Carlo Dolci","",R.drawable.lowresstcatherinestone,R.drawable.lowresinspiredstcatherineofsienabycarlodolci));
 
         //David Shillinglaw
-        artArrayList.add(new Art("Samson and Delilah 2013","David Shillinglaw","Samson and Delilah 1618","Anthony van Dyck","",R.drawable.lowresdavidshillinglaw,R.drawable.lowresdavidshillinglaw));
+        artArrayList.add(new Art("Samson and Delilah 2013","David Shillinglaw","Samson and Delilah 1618","Anthony van Dyck","",R.drawable.lowresdavidshillinglaw,R.drawable.lowresinspiredsamsonanddelilahbyanthonyvandyckinterpretedbydavidshillinglaw));
         //Faith47
-        artArrayList.add(new Art("Europa and the Winged Bird","Faith47","Europa and the Bull","Guido Reni","The absence of the bull and the introduction of a guiding bird are suggestive of a premonition of the abduction to come, her inner emotions and thoughts or perhaps a new interpretation of the ancient fable. ",R.drawable.lowreseuropaandthebull,R.drawable.lowreseuropaandthebull));
+        artArrayList.add(new Art("Europa and the Winged Bird","Faith47","Europa and the Bull","Guido Reni","The absence of the bull and the introduction of a guiding bird are suggestive of a premonition of the abduction to come, her inner emotions and thoughts or perhaps a new interpretation of the ancient fable. ",R.drawable.lowreseuropaandthebull,R.drawable.lowresinspiredeuropaandthebullbyguidoreni));
         //Inkie, Pure Evil, AP is going to have custom view for each for zoomed in view of each artist  NEEDS A CUSTOM setup
-        artArrayList.add(new Art("Old Nun's Head Mural","Inkie, Pure Evil and AP","St Catherine of Siena","Carlo Dolci","Three different internationally renowned street artists have painted a panel each on The Old Nun’s Head pub in Nunhead.  They have taken their inspiration from the same painting in Dulwich Picture Gallery, one of a nun’s head, St Catherine of Siena, painted in 1665 by Carlo Dolci. ",R.drawable.lowresoldnunsheadmurals,R.drawable.lowresoldnunsheadmurals));
+        artArrayList.add(new Art("Old Nun's Head Mural","Inkie, Pure Evil and AP","St Catherine of Siena","Carlo Dolci","Three different internationally renowned street artists have painted a panel each on The Old Nun’s Head pub in Nunhead.  They have taken their inspiration from the same painting in Dulwich Picture Gallery, one of a nun’s head, St Catherine of Siena, painted in 1665 by Carlo Dolci. ",R.drawable.lowresoldnunsheadmurals,R.drawable.lowresinspiredstcatherineofsienabycarlodolci));
         //MadC need better scaled image may crop width    NEEDS A CUSTOM setup
-        artArrayList.add(new Art("Vase With Flowers 2013","MadC","Vase with Flowers c1720","Jan van Huysum","One of only two female artist in the project, MadC, took elements from a 17th century Dutch flower painting, the insects, tulips and butterflies, and added them to her tag, creating an astonishingly beautiful back to a tennis practice wall in Belair Park.  ",R.drawable.lowresmadc,R.drawable.lowresmadc));
+        artArrayList.add(new Art("Vase With Flowers 2013","MadC","Vase with Flowers c1720","Jan van Huysum","One of only two female artist in the project, MadC, took elements from a 17th century Dutch flower painting, the insects, tulips and butterflies, and added them to her tag, creating an astonishingly beautiful back to a tennis practice wall in Belair Park.  ",R.drawable.lowresmadc,R.drawable.lowresinspiredvasewithflowersbyjanvanhuysum));
          //Reka
-        artArrayList.add(new Art("Europa and the Bull c1700","Reka","Europa and the Bull 2013","Guido Reni","Reka’s  Europa from Reni’s ‘Europa and the Bull’ beautifies a wall of a South London pub.  Her hair curls delicately around its windows.",R.drawable.lowresreka,R.drawable.lowresreka));
+        artArrayList.add(new Art("Europa and the Bull c1700","Reka","Europa and the Bull 2013","Guido Reni","Reka’s  Europa from Reni’s ‘Europa and the Bull’ beautifies a wall of a South London pub.  Her hair curls delicately around its windows.",R.drawable.lowresreka,R.drawable.lowresinspiredeuropaandthebull));
         //Remi Rough and System // NEEDS A CUSTOM setup
-        artArrayList.add(new Art("Girl at a Window 2013","Remi Rough and System","Girl at a Window 1645","Rembrandt van Rijn","System’s modernised ‘Girl at a Window’ by Rembrandt, leans out from Remi Roughs abstraction of ‘The Triumph of David’ by Poussin.  This ordinary young girl in a hoodie and cap with spray cans at her elbow, parallels Rembrandt’s 17th century serving girl.  ",R.drawable.lowresremiroughandsystem,R.drawable.lowresremiroughandsystem));
+        artArrayList.add(new Art("Girl at a Window 2013","Remi Rough and System","Girl at a Window 1645","Rembrandt van Rijn","System’s modernised ‘Girl at a Window’ by Rembrandt, leans out from Remi Roughs abstraction of ‘The Triumph of David’ by Poussin.  This ordinary young girl in a hoodie and cap with spray cans at her elbow, parallels Rembrandt’s 17th century serving girl.  ",R.drawable.lowresremiroughandsystem,R.drawable.lowresinspiredgirlatthewindow));
         //ROA
-        artArrayList.add(new Art("Landscape with Sportsmen and Game 2013","ROA","Landscape with Sportsmen and Game c.1665","Adam Pynacker","ROA chose a detail of Pynacker’s ‘Sportsman with Game’ - a shitting dog that Pynacker placed in the foreground of his painting.  ROA’s version has provoked some criticism, people being more shockable in the 21st century than in the 17th century.",R.drawable.lowresdoginlandscape,R.drawable.lowresdoginlandscape));
+        artArrayList.add(new Art("Landscape with Sportsmen and Game 2013","ROA","Landscape with Sportsmen and Game c.1665","Adam Pynacker","ROA chose a detail of Pynacker’s ‘Sportsman with Game’ - a shitting dog that Pynacker placed in the foreground of his painting.  ROA’s version has provoked some criticism, people being more shockable in the 21st century than in the 17th century.",R.drawable.lowresdoginlandscape,R.drawable.lowresinspiredlandscapewithsportsman));
         //RUN
-        artArrayList.add(new Art("The Translation of Saint Rita of Cascia","RUN","The Translation of Saint Rita of Cascia c1630","Nicolas Poussin","",R.drawable.lowresrunstrita,R.drawable.lowresrunstrita));
+        artArrayList.add(new Art("The Translation of Saint Rita of Cascia","RUN","The Translation of Saint Rita of Cascia c1630","Nicolas Poussin","",R.drawable.lowresrunstrita,R.drawable.lowresinspiredtranslationofstrita));
         //STIK
-        artArrayList.add(new Art("The Fall of Man","Stik","The Fall of Man","Pieter Coecke van Aelst"," ",R.drawable.lowresstikfallofman,R.drawable.lowresstikfallofman));
-        artArrayList.add(new Art("Eliza and Mary Davidson","Stik","Eliza and Mary Davidson","Tilly Kettlesm"," ",R.drawable.lowresstikelizaandmarydavidsontilly,R.drawable.lowresstikelizaandmarydavidsontilly));
-        artArrayList.add(new Art("Eliza and Mary Linley","Stik","Eliza and Mary Linley","Thomas Gainsborough"," ",R.drawable.lowresstikelizabethandmary,R.drawable.lowresstikelizabethandmary));
-        artArrayList.add(new Art("A Couple in a Landscape","Stik","A Couple in a Landscape","Thomas Gainsborough"," ",R.drawable.lowresdoginlandscape,R.drawable.lowresdoginlandscape));
+        artArrayList.add(new Art("The Fall of Man","Stik","The Fall of Man","Pieter Coecke van Aelst"," ",R.drawable.lowresstikfallofman,R.drawable.lowresinspiredfallofman));
+        artArrayList.add(new Art("Eliza and Mary Davidson","Stik","Eliza and Mary Davidson","Tilly Kettlesm"," ",R.drawable.lowresstikelizaandmarydavidsontilly,R.drawable.lowresinspiredelizaandmarydavidson));
+        artArrayList.add(new Art("Eliza and Mary Linley","Stik","Eliza and Mary Linley","Thomas Gainsborough"," ",R.drawable.lowresstikelizabethandmary,R.drawable.lowresinspiredelizabethandlinley));
+        artArrayList.add(new Art("A Couple in a Landscape","Stik","A Couple in a Landscape","Thomas Gainsborough"," ",R.drawable.lowresstikacoupleinlandscape,R.drawable.lowresinspiredacoupleinalandscape));
 
         //Thierry Noir
-        artArrayList.add(new Art("Context","Thierry Noir","Joseph Receiving Pharaoh’s Ring","Giambattista Tiepolo"," ",R.drawable.lowresnoir,R.drawable.lowresnoir));
+        artArrayList.add(new Art("Context","Thierry Noir","Joseph Receiving Pharaoh’s Ring","Giambattista Tiepolo"," ",R.drawable.lowresnoir,R.drawable.lowresinspiredthierrynoir));
         //Walter Kershaw
-        artArrayList.add(new Art("Finished Wall","Walter Kershaw","Landscape with Windmills Near Haarlem","Jacob Van Ruisdael"," ",R.drawable.lowreswalterlandscape,R.drawable.lowreswalterlandscape));
+        artArrayList.add(new Art("Finished Wall","Walter Kershaw","Landscape with Windmills Near Haarlem","Jacob Van Ruisdael"," ",R.drawable.lowreswalterlandscape,R.drawable.lowresinspiredlandscapewithwindmill));
 
 
 
