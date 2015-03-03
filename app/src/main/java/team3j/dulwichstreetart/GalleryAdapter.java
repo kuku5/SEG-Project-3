@@ -64,6 +64,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
         BitmapDrawable res = new BitmapDrawable(context.getResources(), bitmap);
         holder.dynamicHeightImageView.setImageDrawable(res);
         holder.txtLineOne.setText(galleryData.get(position).getName());
+        holder.descriptionTextView.setText(galleryData.get(position).getDesc());
 
 
     }
@@ -77,13 +78,14 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
     class MyViewHolder extends RecyclerView.ViewHolder  {
         // view holder for each grid  cell
         TextView txtLineOne;
+        TextView descriptionTextView;
         DynamicHeightImageView dynamicHeightImageView;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             txtLineOne = (TextView) itemView.findViewById(R.id.txt_line1);
             dynamicHeightImageView = (DynamicHeightImageView) itemView.findViewById(R.id.dynamic_imageView);
-
+            descriptionTextView = (TextView) itemView.findViewById(R.id.description_textview);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

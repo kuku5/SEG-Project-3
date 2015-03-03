@@ -126,10 +126,18 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
         if (position == 0) {
 
-            bitmap = BitmapFactory.decodeResource(context.getResources(), GalleryData.GetArtWorkImageLocations()[indexOfArtwork]);
+            bitmap = BitmapFactory.decodeResource(context.getResources(), GalleryData.GetGalleryData().get(indexOfArtwork).getPic());
             BitmapDrawable res = new BitmapDrawable(context.getResources(), bitmap);
-            //update header
+
+                //update header
             holder.dynamicHeightImageView.setImageDrawable(res);
+            bitmap = BitmapFactory.decodeResource(context.getResources(), GalleryData.GetGalleryData().get(indexOfArtwork).getInspiredPic());
+            res = new BitmapDrawable(context.getResources(), bitmap);
+
+            holder.inspirationArtworkImageView.setImageDrawable(res);
+
+            holder.descriptionTitle.setText(GalleryData.GetGalleryData().get(indexOfArtwork).getInspirationTitle());
+            holder.description.setText(GalleryData.GetGalleryData().get(indexOfArtwork).getDesc());
 
             Session session = Session.getActiveSession();
             if(!(session==null) && session.isOpened()) {
@@ -278,9 +286,12 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         TextView posterName;
         TextView message;
         TextView timestamp;
+        TextView description;
+        TextView descriptionTitle;
 
         private TextView commentTitle;
         private DynamicHeightImageView dynamicHeightImageView;
+        private DynamicHeightImageView inspirationArtworkImageView;
 
         public MyViewHolder(View itemView, int viewType) {
             super(itemView);
@@ -298,7 +309,6 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                         }
                     });
 
-
                     break;
 
                 case Post_View_Type:
@@ -310,6 +320,11 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                 case Header_View_Type:
                     // setup the header view elements
                     dynamicHeightImageView = (DynamicHeightImageView) itemView.findViewById(R.id.dynamic_imageview_artwork_display);
+                    inspirationArtworkImageView = (DynamicHeightImageView) itemView.findViewById(R.id.inspiration_artwork);
+                    description = (TextView) itemView.findViewById(R.id.description);
+                    descriptionTitle = (TextView) itemView.findViewById(R.id.description_title_single);
+
+
                     commentTitle = (TextView) itemView.findViewById(R.id.commentAmount);
                     shareButton = (ImageView) itemView.findViewById(R.id.shareIcon);
                     mapButton = (ImageView) itemView.findViewById(R.id.mapIcon);

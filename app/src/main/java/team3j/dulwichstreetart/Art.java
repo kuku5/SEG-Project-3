@@ -46,13 +46,23 @@ public class Art {
     public String getName(){
         return name;
     }
+
     public LatLng getLoc()
     {
         return loc;
     }
+
     public int getPic(){
         return pic;
     }
 
+    public int getInspiredPic() {return inspiredPic;}
 
+    public String getDesc() {return desc;}
+
+    public String getInspirationTitle() {return inspirationTitle;}
+
+    public String getArtistName() {return artistName;}
+
+    public String getInspirationArtist() { return inspirationArtist;}
 }
