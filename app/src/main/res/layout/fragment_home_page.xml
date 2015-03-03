@@ -206,39 +206,40 @@
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
-                        <LinearLayout
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
-                            android:orientation="horizontal">
+                            <LinearLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/twitter_name"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold"
+
+                                    />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=""
+                                    android:textSize="11sp"
+                                    android:textStyle="bold"
+                                    android:id="@+id/atsymbol"
+
+                                    /></LinearLayout>
+
+
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/twitter_name"
-                                android:textSize="12sp"
-                                android:textStyle="bold"
-
-                                />
-                            <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/twitter_hashtag"
-                            android:textSize="11sp"
-                            android:textStyle="bold"
-                                android:id="@+id/atsymbol"
-
-                            /></LinearLayout>
+                                android:text="WELCOME TO DULWICH !"
+                                android:id = "@+id/DisplayTweet2"
+                                android:textSize="10sp"/>
 
 
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/tweet1"
-                                android:textSize="9sp"/>
-
-
-                            </LinearLayout>
+                        </LinearLayout>
 
 
                         <LinearLayout
@@ -261,7 +262,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@string/twitter_hashtag"
+                                    android:text=""
                                     android:textSize="11sp"
                                     android:textStyle="bold"
                                     android:id="@+id/atsymbol2"
@@ -270,13 +271,12 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/tweet1"
-                                android:textSize="9sp"/>
+                                android:text="WELCOME TO DULWICH"
+                                android:id = "@+id/DisplayTweet1"
+                                android:textSize="10sp"/>
 
 
                         </LinearLayout>
-
-
 
                     </ViewFlipper>
 

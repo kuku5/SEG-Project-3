@@ -39,8 +39,16 @@ import com.facebook.model.GraphUser;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Timer;
+
+import twitter4j.Status;
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
+import twitter4j.conf.ConfigurationBuilder;
 
 
 /**
@@ -51,6 +59,7 @@ import java.util.Timer;
 //TODO incomplete homepage needs a clear idea of design
 
 public class HomePageFragment extends Fragment {
+
     private TextView textView;
     private CardView cardView;
     private CardView cardView2;
@@ -69,6 +78,10 @@ public class HomePageFragment extends Fragment {
     private DynamicHeightImageView mapButton;
     private OnClickInsideFragment onClickInsideFragment;
 
+    private ArrayList<String> todaysTweets = new ArrayList<>();
+    private TextView twitView1;
+    private TextView twitView2;
+
     //return an instance of this Fragment with a bundle into the tab adapter
     public static HomePageFragment getInstance(int position) {
         HomePageFragment myFragmentTab = new HomePageFragment();
@@ -80,6 +93,8 @@ public class HomePageFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        getTweets(); //Get Today's Tweets
 
         //non facebook setup
         View layout = inflater.inflate(R.layout.fragment_home_page, container, false);
@@ -217,8 +232,8 @@ public class HomePageFragment extends Fragment {
         cardView = (CardView) layout.findViewById(R.id.card_view_1_welcome1);
         cardView2 = (CardView) layout.findViewById(R.id.car_view_22);
         linearLayout = (LinearLayout) layout.findViewById(R.id.welcomeView);
-        name = (TextView) layout.findViewById(R.id.atsymbol);
-        name.setText("    @DulwichGallery      14h");
+        //name = (TextView) layout.findViewById(R.id.atsymbol);
+        //name.setText("    @DulwichGallery      14h");
         mapButton = (DynamicHeightImageView) layout.findViewById(R.id.map_image);
 
         mapButton.setOnClickListener(new View.OnClickListener() {
@@ -239,6 +254,8 @@ public class HomePageFragment extends Fragment {
 
     public void setupAnimations(View layout) {
 
+        twitView1 = (TextView) layout.findViewById(R.id.DisplayTweet1);
+        twitView2 = (TextView) layout.findViewById(R.id.DisplayTweet2);
 
         Bundle bundle = getArguments();
 
@@ -262,6 +279,34 @@ public class HomePageFragment extends Fragment {
 
         viewFlipper.setInAnimation(slide_in_left);
         viewFlipper.setOutAnimation(slide_out_right);
+
+        viewFlipper.getInAnimation().setAnimationListener(new Animation.AnimationListener() {
+            int i = 0;
+            boolean t1 = false;
+
+            public void onAnimationStart(Animation animation) {
+                if(i==todaysTweets.size()) i=0;
+
+                if(t1==false) {
+                    twitView1.setText(todaysTweets.get(i));
+                    t1=true;
+                    i++;
+                }
+                else {
+                    twitView2.setText(todaysTweets.get(i));
+                    t1=false;
+                    i++;
+                }
+            }
+
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+
+            public void onAnimationEnd(Animation animation) {
+
+            }
+        });
 
         cardView2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -401,6 +446,49 @@ public class HomePageFragment extends Fragment {
         AlertDialog box = builder.create();
         box.getWindow().setLayout(400, 400);
         box.show();
+    }
+
+    public void getTweets() {
+
+        Thread thread = new Thread(new Runnable(){
+            @Override
+            public void run() {
+
+                //Date currentDate = new Date();
+                ConfigurationBuilder cb = new ConfigurationBuilder();
+                cb.setDebugEnabled(true) //authentication:
+                        .setOAuthConsumerKey("5ZSHBFnviFgB1IVwBwO0ownXl")
+                        .setOAuthConsumerSecret("WxwEzdsEhj9zH2b7OlYmPgcEZrFjt7DetEWeTRroc5cDJFpSFJ")
+                        .setOAuthAccessToken("52824349-KOrBaGvCDvOZKcfFCeizpBsaeTINR7EmVJImGMmWN")
+                        .setOAuthAccessTokenSecret("bgEDzmYOaeVZIImuEjhHilJEezHl6Fz1xSqitsmvxE0Hs");
+                TwitterFactory tf = new TwitterFactory(cb.build());
+                Twitter twitter = tf.getInstance();
+                try {
+                    List<Status> statuses = twitter.getUserTimeline("DulwichGallery");
+                    Log.i("Status Count", statuses.size() + " Feeds");
+
+                    String status;
+                    int i = 0;
+                    int c = 0;
+
+                    do {
+                        status = statuses.get(i).getText();
+                        if(!status.substring(0,2).equals("RT")) {
+                            todaysTweets.add(status);
+                            c++;
+                        }
+                        i++;
+                    } while (i<20 && c<5); //statuses.get(i).getCreatedAt().equals(currentDate)
+
+                } catch (TwitterException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+        thread.start();
+
     }
 
 }

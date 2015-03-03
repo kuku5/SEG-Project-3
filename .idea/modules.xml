@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SEG3.iml" filepath="$PROJECT_DIR$/SEG3.iml" />
       <module fileurl="file://$PROJECT_DIR$/SEG351.iml" filepath="$PROJECT_DIR$/SEG351.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SEG3project.iml" filepath="$PROJECT_DIR$/SEG3project.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/facebook/facebook.iml" filepath="$PROJECT_DIR$/facebook/facebook.iml" />
     </modules>
