@@ -64,6 +64,7 @@ public class GallerySwipeHolder extends FragmentActivity {
 
         //creates fragment adapter to display all images
         viewPager = (ViewPager) findViewById(R.id.viewPager);
+        viewPager.setOffscreenPageLimit(1);
 
         viewPager.setAdapter(new FragmentAdapter(getSupportFragmentManager(),indexOfArtWork));
         viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
@@ -71,6 +72,7 @@ public class GallerySwipeHolder extends FragmentActivity {
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
 
+                viewPager.getCurrentItem();
                 mPagerPosition=position;
                 mPagerOffsetPixels = 90;
                 Log.d("page",""+position);
@@ -79,9 +81,10 @@ public class GallerySwipeHolder extends FragmentActivity {
                     mPagerOffsetPixels = 0;
 
                 }
-                Log.d("page","index"+indexOfArtWork);
+                Log.d("page","index"+indexOfArtWork+" positionOffsetPixels="+positionOffsetPixels);
 
             }
+
 
         });
 
@@ -89,7 +92,6 @@ public class GallerySwipeHolder extends FragmentActivity {
         System.out.println(viewPager.getCurrentItem() + "sss");
         Log.d("page","");
 
-        viewPager.setOffscreenPageLimit(2);
         viewPager.setCurrentItem(indexOfArtWork,true);
       //  mPagerPosition=0;
     }

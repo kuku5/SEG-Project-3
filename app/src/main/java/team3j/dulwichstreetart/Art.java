@@ -11,16 +11,28 @@ import com.google.android.gms.maps.model.LatLng;
 public class Art {
 
 
-    String name;
-    LatLng loc;
-    int pic;
-    int postId;
+    private String desc;
+    private String inspirationTitle;
+    private String inspirationArtist;
+    private String name;
+    private String artistName;
+    private LatLng loc;
+    private int pic;
+    private int inspiredPic;
+    private int postId;
 
     public Art(String name,LatLng loc,int pic)
     {
         this.name = name;
         this.loc = loc;
         this.pic = pic;
+    }
+    public Art(String name,String artistName,String inspirationTitle,String inspirationArtist,String desc,int pic,int inspiredPic){
+        this.name=name;
+        this.desc=desc;
+        this.inspirationTitle=inspirationTitle;
+        this.pic=pic;
+        this.inspiredPic=inspiredPic;
     }
 
     public Art(String name,int postId)

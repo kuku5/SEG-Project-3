@@ -32,10 +32,44 @@
     <string name="log_in_fb_about">Logging into Facebook will allow you to view and post comments. \n\nYou will also be able to view the profile of those in the comments.</string>
    <string name="art_picture_gallery_about">Dulwich Picture Gallery is the world\’s first purpose-built public art gallery: it was founded in 1811 when Sir Francis Bourgeois RA bequeathed his collection of old masters “for the inspection of the public”\n\nToday the Gallery is a vibrant cultural hub hosting some of the UK\’s leading exhibitions alongside its Permanent Collection of Baroque masterpieces while staging a wide-ranging programme of public events, practical art and community engagement..</string>
     <string-array name="artwork_descriptions">
-        <item>The Three Graces - Agent Provocateur</item>
-        <item>The Three Graces - Agent Provocateur</item>
-        <item>The Three Graces - Agent Provocateur</item>
-    </string-array>
+        <item>The Guardian Angel</item>
+        <item>Three Boys</item>
+        <item>Interprets the Dog</item>
+        <item>Phlegm</item>
+        <item>Triumph of David</item>
+        <item>The Chaff Cutter</item>
+        <item>The Virgin of the Rosary</item>
+        <item>Conor Harrington</item>
+        <item>AP nun\'s Head</item>
+        <item>Pure Evil Nun\'s Head</item>
+        <item>Old Nun\'s Head Mural</item>
+        <item>Wilson beautifies the disgusting old bits of chewing gum trodden into pavements.  He took the sad St Catherine of Siena and cheered her up by giving her a vision of a banana.</item>
+        <item>David Shillinglaw</item>
+        <item>Europa and the Bull</item>
+        <item>Vase with Flowers</item>
+        <item>Jacob with Laban</item>
+        <item>Nurture of Jupiter</item>
+        <item>Princess Victoria aged by 4</item>
+        <item>White Horse in a Riding School</item>
+        <item>Woman Spinning</item>
+        <item>Triumph of David</item>
+        <item>Europa and the Bull</item>
+        <item>Girl at a Window</item>
+        <item>St Rita</item>
+        <item>Dog Hoarding</item>
+        <item>A Couple in a Landscape</item>
+        <item>Eliza and Mary Davidson</item>
+        <item>Elizabeth and Mary Linley</item>
+        <item>Mrs Moody</item>
+        <item>The Fall of Man</item>
+        <item>The Three Graces</item>
+        <item>Context</item>
+        <item>Finished Wall</item>
+        <item>Emanuel Philibert</item>
+        <item>Jesus Carrying the Cross</item>
+        <item>Judgement of Paris</item>
+        <item>Pharaoh\'s Ring</item>
+     </string-array>
     <string-array name="artwork_list">
         <item>The Guardian Angel</item>
         <item>Three Boys</item>
@@ -48,8 +82,7 @@
         <item>AP nun\'s Head</item>
         <item>Pure Evil Nun\'s Head</item>
         <item>Old Nun\'s Head Mural</item>
-        <item>St Catherine Floor</item>
-        <item>St Catherine Stone</item>
+        <item>St Catherine</item>
         <item>David Shillinglaw</item>
         <item>Europa and the Bull</item>
         <item>Vase with Flowers</item>
@@ -76,6 +109,9 @@
         <item>Judgement of Paris</item>
         <item>Pharaoh\'s Ring</item>
     </string-array>
+
+
+
     <string-array name="tabs">
         <item>Home</item>
         <item>Gallery</item>

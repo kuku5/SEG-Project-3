@@ -74,7 +74,7 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
                 tabHost.setSelectedNavigationItem(position);
             }
         });
-        viewPager.setOffscreenPageLimit(3);
+        viewPager.setOffscreenPageLimit(1);
 
 
         //adds the titles to each tab and changes colors of text

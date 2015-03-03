@@ -25,6 +25,8 @@ public class GalleryData {
     public static ArrayList<Art> visited = new ArrayList<>();
     public static ArrayList<Art> toVisit = new ArrayList<>();
 
+
+
     public static ArrayList<String> GetArtWorkData(Activity context) {
         final ArrayList<String> data = new ArrayList<String>(35);
 
@@ -53,6 +55,44 @@ public class GalleryData {
 
 
 
+    public static ArrayList<Art> GetGalleryImage(){
+
+        //The Struggle was real
+        ArrayList<Art> artArrayList=new ArrayList<>();
+        artArrayList.add(new Art("","","","","",R.drawable.lowresstcatherinestone,R.drawable.lowresstcatherinestone));
+        //Agent Provocateur
+        artArrayList.add(new Art("Happy Hour","Agent Provocateur","The Three Graces","Sir Peter Paul Rubens ","AP is the only stencil artist in this project.  Once cut, stencil paintings can be reproduced easily, by anyone.  The work of art AP chose to interpret was a sketch by Rubens, highly prized because it is by him alone, whereas the finished piece would have had a great deal of workshop input.",R.drawable.lowresagentprovocateur,R.drawable.lowresagentprovocateur));
+        //Ben Wilson
+        artArrayList.add(new Art("Saint Catherine","Ben Wilson","St Catherine of Siena","Carlo Dolci","",R.drawable.lowresstcatherinestone,R.drawable.lowresstcatherinestone));
+        //Conor Harrington
+        artArrayList.add(new Art("Fight Club","Conor Harrington","The Massacre of The Innocents","Charles Le Brun","Harrington’s fighting men in Regency costume continue their fight on 4 more walls in the USA and Costa Rica.  The bald guy wins.",R.drawable.lowresconorharrington,R.drawable.lowresconorharrington));
+        //David Shillinglaw
+        artArrayList.add(new Art("Samson and Delilah 2013","David Shillinglaw","Samson and Delilah 1618","Anthony van Dyck","",R.drawable.lowresdavidshillinglaw,R.drawable.lowresdavidshillinglaw));
+        //Faith47
+        artArrayList.add(new Art("Europa and the Winged Bird","Faith47","Europa and the Bull","Guido Reni","The absence of the bull and the introduction of a guiding bird are suggestive of a premonition of the abduction to come, her inner emotions and thoughts or perhaps a new interpretation of the ancient fable. ",R.drawable.lowreseuropaandthebull,R.drawable.lowreseuropaandthebull));
+        //Inkie, Pure Evil, AP is going to have custom view for each for zoomed in view of each artist  NEEDS A CUSTOM setup
+        artArrayList.add(new Art("Old Nun's Head Mural","Inkie, Pure Evil and AP","St Catherine of Siena","Carlo Dolci","Three different internationally renowned street artists have painted a panel each on The Old Nun’s Head pub in Nunhead.  They have taken their inspiration from the same painting in Dulwich Picture Gallery, one of a nun’s head, St Catherine of Siena, painted in 1665 by Carlo Dolci. ",R.drawable.lowresoldnunsheadmurals,R.drawable.lowresoldnunsheadmurals));
+        //MadC need better scaled image may crop width    NEEDS A CUSTOM setup
+        artArrayList.add(new Art("Vase With Flowers 2013","MadC","Vase with Flowers c1720","Jan van Huysum","One of only two female artist in the project, MadC, took elements from a 17th century Dutch flower painting, the insects, tulips and butterflies, and added them to her tag, creating an astonishingly beautiful back to a tennis practice wall in Belair Park.  ",R.drawable.lowresmadc,R.drawable.lowresmadc));
+        //Mear One
+        artArrayList.add(new Art("New World Revolution 2013","Mear One","The Madonna of The Rosary 1670-80","Bartolomé Esteban Murillo","Mear One modernised Murillo’s delicate Virgin of the Rosary by turning her and her child into powerful, mixed race  characters giving power salutes. ‘Equality’ is inscribed on her halo.  ",R.drawable.lowresmearone,R.drawable.lowresmearone));
+        ///Phlegm
+        artArrayList.add(new Art("The Triumph of David 2013","Phlegm","The Triumph of David 1628,31","Nicolas Poussin","The 9 year old son of the owner of the wall helped Phlegm paint his picture.  His mum said, ‘My son loved giving him a hand and I am so grateful to him for letting him have an input.  He feels proud to be part of it and now feels very protective towards the wall.’ ",R.drawable.lowresphlegm,R.drawable.lowresphlegm));
+        //Reka
+        artArrayList.add(new Art("Europa and the Bull c1700","Reka","Europa and the Bull 2013","Guido Reni","Reka’s  Europa from Reni’s ‘Europa and the Bull’ beautifies a wall of a South London pub.  Her hair curls delicately around its windows.",R.drawable.lowresreka,R.drawable.lowresreka));
+        //Remi Rough and System // NEEDS A CUSTOM setup
+        artArrayList.add(new Art("Girl at a Window 2013","Remi Rough and System","Girl at a Window 1645","Rembrandt van Rijn","System’s modernised ‘Girl at a Window’ by Rembrandt, leans out from Remi Roughs abstraction of ‘The Triumph of David’ by Poussin.  This ordinary young girl in a hoodie and cap with spray cans at her elbow, parallels Rembrandt’s 17th century serving girl.  ",R.drawable.lowresremiroughandsystem,R.drawable.lowresremiroughandsystem));
+        //ROA
+        artArrayList.add(new Art("Landscape with Sportsmen and Game 2013","ROA","Landscape with Sportsmen and Game c.1665","Adam Pynacker","ROA chose a detail of Pynacker’s ‘Sportsman with Game’ - a shitting dog that Pynacker placed in the foreground of his painting.  ROA’s version has provoked some criticism, people being more shockable in the 21st century than in the 17th century.",R.drawable.lowresstcatherinestone,R.drawable.lowresstcatherinestone));
+        //RUN
+        artArrayList.add(new Art("","","","","",R.drawable.lowresdogrun,R.drawable.lowresdogrun));
+        artArrayList.add(new Art("The Translation of Saint Rita of Cascia","RUN","The Translation of Saint Rita of Cascia c1630","Nicolas Poussin","",R.drawable.lowresstcatherinestone,R.drawable.lowresstcatherinestone));
+
+
+
+        return artArrayList;
+    }
+
 
     //nandu change this one below to match the titles
 
@@ -71,7 +111,6 @@ public class GalleryData {
                 R.drawable.lowresapnunshead,
                 R.drawable.lowrespureevilnunshead,
                 R.drawable.lowresoldnunsheadmurals,
-                R.drawable.lowresstcatherinefloor,
                 R.drawable.lowresstcatherinestone,
                 R.drawable.lowresdavidshillinglaw,
                 R.drawable.lowreseuropaandthebull,

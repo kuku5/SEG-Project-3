@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.etsy.android.grid.util.DynamicHeightImageView;
@@ -33,6 +34,10 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
 
     private final LayoutInflater inflater;
     private Context context;
+    private final int Visited_Title_View_Type = 1;
+    private final int Place_View_Type = 0;
+    private final int To_Visit_Title_View_Type = 2;
+
 
     public VisitedAdapter(Context context, OnItemTouchListener itemTouchListener){
         this.inflater=LayoutInflater.from(context);
@@ -47,42 +52,123 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
         //add view to the grid cell for the first time
         //this stores the view in the cache meaning the images dont have to be reloaded over
         //and over mean its should be faster than a Listview/Gridview which does
-        View view= inflater.inflate(R.layout.visited_list_item,parent,false);
+        View view = inflater.inflate(R.layout.visited_list_item, parent, false);
 
-        MyViewHolderVisited myViewHolder= new MyViewHolderVisited(view);
+        if (viewType == Visited_Title_View_Type) {
+
+            view = inflater.inflate(R.layout.visited_title, parent, false);
+
+
+        } else if (viewType == To_Visit_Title_View_Type) {
+
+            view = inflater.inflate(R.layout.to_visit_title, parent, false);
+
+        }
+
+        MyViewHolderVisited myViewHolder = new MyViewHolderVisited(view, viewType);
 
         return myViewHolder;
     }
 
     @Override
+    public int getItemViewType(int position) {
+        int viewType = Place_View_Type;
+
+        if (position == 0) {
+            viewType = Visited_Title_View_Type;
+        }
+
+        if (position == 20) {
+            viewType = To_Visit_Title_View_Type;
+        }
+
+        return viewType;
+
+    }
+
+    @Override
     public void onBindViewHolder(VisitedAdapter.MyViewHolderVisited holder, int position) {
             //add image and description to the view for each gallery item
-            holder.txtLineOne.setText(""+GalleryData.toVisit.get(position).getName());
+
+        if (position == 0) {
+
+
+            // holder.txtLineOne.setText(""+GalleryData.toVisit.get(position).getName());
+
+        }else if (position == 20) {
+
+
+        }
+        else{
+
+            holder.txtLineOne.setText("" + GalleryData.toVisit.get(0).getName());
+
+        }
+
+
     }
 
     @Override
     public int getItemCount() {
-        return GalleryData.toVisit.size()+GalleryData.visited.size();
+        return GalleryData.toVisit.size()+GalleryData.visited.size()+2;
     }
 
     //custom viewHolder for each item in recycle view
     class MyViewHolderVisited extends RecyclerView.ViewHolder  {
         // view holder for each grid  cell
+        TextView title;
         TextView txtLineOne;
+        LinearLayout expandArea;
 
-        public MyViewHolderVisited(View itemView) {
+        boolean expanded=false;
+        public MyViewHolderVisited(View itemView, int viewType) {
             super(itemView);
-            txtLineOne = (TextView) itemView.findViewById(R.id.textview_visited_item);
+
+            switch(viewType){
+                case Visited_Title_View_Type:
+
+                    title = (TextView) itemView.findViewById(R.id.textview_visited_item);
 
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onItemTouchListener.onCardViewTap(v, getPosition());
-                    GalleryData.toVisit.add(new Art("Roa ssss",(new LatLng(51.467224, -0.072160)),R.drawable.art0));
-                    notifyDataSetChanged();
-                }
-            });
+
+                    break;
+                case To_Visit_Title_View_Type:
+
+                    title = (TextView) itemView.findViewById(R.id.textview_visited_item);
+
+                    break;
+
+                    default:
+
+                        txtLineOne = (TextView) itemView.findViewById(R.id.textview_visited_item);
+                        expandArea = (LinearLayout) itemView.findViewById(R.id.expand_area);
+
+                        itemView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if(expanded){
+                                    expandArea.setVisibility(View.GONE);
+
+                                    expanded=false;
+                                }else{
+                                    expandArea.setVisibility(View.VISIBLE);
+                                    expanded=true;
+
+                                }
+//
+//                                onItemTouchListener.onCardViewTap(v, getPosition());
+//                                GalleryData.toVisit.add(new Art("Roa ssss",(new LatLng(51.467224, -0.072160)),R.drawable.art0));
+//                                notifyDataSetChanged();
+                            }
+                        });
+
+
+                        break;
+
+            }
+          //  txtLineOne = (TextView) itemView.findViewById(R.id.textview_visited_item);
+
+
 
 
         }

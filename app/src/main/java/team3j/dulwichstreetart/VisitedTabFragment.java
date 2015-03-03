@@ -47,9 +47,11 @@ public class VisitedTabFragment extends Fragment {
 
         //kevin this is fake added data
 
-        GalleryData.toVisit.add(new Art("Roa 2013",(new LatLng(51.467224, -0.072160)),R.drawable.art0));
-        GalleryData.toVisit.add(new Art("Roa 2013",(new LatLng(51.467224, -0.072160)),R.drawable.art0));
-        GalleryData.toVisit.add(new Art("Roa 2013",(new LatLng(51.467224, -0.072160)),R.drawable.art0));
+        Art[] arts = GalleryData.getMapArtwork(getActivity());
+        int size = arts.length;
+        for(int i = 0; i< size; ++i){
+            GalleryData.toVisit.add(arts[i]);
+        }
 
         GalleryData.visited.size();
 
