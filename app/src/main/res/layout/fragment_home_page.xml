@@ -234,10 +234,9 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/tweet1"
-                            android:textSize="9sp"
+                                android:text="WELCOME TO DULWICH !"
                                 android:id = "@+id/DisplayTweet2"
-                                />
+                                android:textSize="10sp"/>
 
 
                         </LinearLayout>
@@ -272,10 +271,9 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/tweet1"
-                                android:textSize="9sp"
+                                android:text="WELCOME TO DULWICH"
                                 android:id = "@+id/DisplayTweet1"
-                               />
+                                android:textSize="10sp"/>
 
 
                         </LinearLayout>

@@ -47,13 +47,13 @@ public class VisitedTabFragment extends Fragment {
 
         //kevin this is fake added data
 
-if(GalleryData.toVisit.size()==0) {
-    Art[] arts = GalleryData.getMapArtwork(getActivity());
-    int size = arts.length;
-    for (int i = 0; i < size; ++i) {
-        GalleryData.toVisit.add(arts[i]);
-    }
-}
+        Art[] arts = GalleryData.getMapArtwork(getActivity());
+        int size = arts.length;
+        for(int i = 0; i< size; ++i){
+            GalleryData.toVisit.add(arts[i]);
+        }
+
+        GalleryData.visited.size();
 
         //create recycle view Adapter
 

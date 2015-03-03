@@ -47,7 +47,6 @@
                 android:autoText="false"
                 android:text="@string/art_description"
                 android:textSize="9dp"
-                android:maxLines="4"
 
                 />
 
