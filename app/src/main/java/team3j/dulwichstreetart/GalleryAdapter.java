@@ -32,14 +32,14 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
 
     private final LayoutInflater inflater;
     private ArrayList<String> data;
+    private ArrayList<Art> galleryData;
     private Context context;
     private int[] imageSet;
 
-    public GalleryAdapter(Context context,ArrayList<String> data,int[] imageSet, OnItemTouchListener itemTouchListener){
-        this.data=data;
+    public GalleryAdapter(Context context,ArrayList<Art> galleryData, OnItemTouchListener itemTouchListener){
         this.inflater=LayoutInflater.from(context);
         this.context=context;
-        this.imageSet=imageSet;
+        this.galleryData=galleryData;
         this.onItemTouchListener = itemTouchListener;
     }
 
@@ -60,17 +60,17 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
     @Override
     public void onBindViewHolder(GalleryAdapter.MyViewHolder holder, int position) {
         //add image and description to the view for each gallery item
-        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(),imageSet[position]);
+        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(),galleryData.get(position).getPic());
         BitmapDrawable res = new BitmapDrawable(context.getResources(), bitmap);
         holder.dynamicHeightImageView.setImageDrawable(res);
-        holder.txtLineOne.setText(data.get(position));
+        holder.txtLineOne.setText(galleryData.get(position).getName());
 
 
     }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return galleryData.size();
     }
 
     //custom viewHolder for each item in recycle view

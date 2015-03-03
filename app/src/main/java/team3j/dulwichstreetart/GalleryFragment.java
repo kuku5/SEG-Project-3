@@ -42,14 +42,13 @@ public class GalleryFragment extends Fragment {
         recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view_grid);
 
         //get Image Locations and descriptions
-        ArrayList<String> galleryData = GalleryData.GetArtWorkData(getActivity());
-        int imageSet[] = GalleryData.GetArtWorkImageLocations();
-
+        ArrayList<Art> galleryData= GalleryData.GetGalleryData();
         //create recycle view Adapter
 
 
+
         //set adapter
-        recyclerView.setAdapter(new GalleryAdapter(getActivity(), galleryData, imageSet, getGalleryClickListener()));
+        recyclerView.setAdapter(new GalleryAdapter(getActivity(), galleryData, getGalleryClickListener()));
 
         //adapt view for the Screen orientation
         updateLayoutForRotation();
