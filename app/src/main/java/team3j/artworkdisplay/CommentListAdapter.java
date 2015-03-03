@@ -134,14 +134,14 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             Session session = Session.getActiveSession();
             if(!(session==null) && session.isOpened()) {
                 String viewComment = "View comments";
-                String htmlTextView = viewComment.replace("View", "<font color = '#ffb74d'> View </font>");
+                String htmlTextView = viewComment.replace("View", "<font color = '#009672'> View </font>");
                 commentAmount = htmlTextView;
                 checkIfLogIn = true;
             }
             else {
 
                 String login = "Log in to Facebook to view comments";
-                String htmlTextLog = login.replace("Log in", "<font color = '#ffb74d'> Log in </font>");
+                String htmlTextLog = login.replace("Log in", "<font color = '#009672'> Log in </font>");
                 commentAmount = htmlTextLog;
                 checkIfLogIn = false;
             }
