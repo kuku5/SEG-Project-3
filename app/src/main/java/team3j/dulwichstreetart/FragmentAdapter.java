@@ -30,15 +30,6 @@ public class FragmentAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int i) {
-//        ++indexOfFirstArtwork;
-//        if(indexOfFirstArtwork>=35){
-//            indexOfFirstArtwork=0;
-//        }
-
-//        if(indexOfFirstArtwork>=35){
-//            indexOfFirstArtwork=0;
-//        }
-//
 
         return GallerySwipeSingleFragment.getInstance(i, i);
 

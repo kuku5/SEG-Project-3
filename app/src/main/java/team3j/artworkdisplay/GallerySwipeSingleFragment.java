@@ -224,8 +224,9 @@ public class GallerySwipeSingleFragment extends Fragment {
         if (isVisibleToUser) {
             Log.i("GallerySwipeFragment", "Visible"+indexOfArtWork);
             //vince put it here
-
-
+if(recyclerView!=null) {
+    recyclerView.getAdapter().notifyDataSetChanged();
+}
             //I have found that the setUserVisibleHint method gets called BEFORE
             //the onCreateView gets called and this makes it difficult to track any initialization. so do some null checks
 
