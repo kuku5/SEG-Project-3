@@ -49,9 +49,7 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
 
     @Override
     public VisitedAdapter.MyViewHolderVisited onCreateViewHolder(ViewGroup parent, int viewType) {
-        //add view to the grid cell for the first time
-        //this stores the view in the cache meaning the images dont have to be reloaded over
-        //and over mean its should be faster than a Listview/Gridview which does
+        //inflates the correct view
         View view = inflater.inflate(R.layout.visited_list_item, parent, false);
 
         if (viewType == Visited_Title_View_Type) {
@@ -78,7 +76,7 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
             viewType = Visited_Title_View_Type;
         }
 
-        if (position == 20) {
+        if (position == GalleryData.toVisit.size()+1) {
             viewType = To_Visit_Title_View_Type;
         }
 
@@ -95,13 +93,13 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
 
             // holder.txtLineOne.setText(""+GalleryData.toVisit.get(position).getName());
 
-        }else if (position == 20) {
+        }else if (position == GalleryData.toVisit.size()+1) {
 
 
         }
         else{
 
-            holder.txtLineOne.setText("" + GalleryData.toVisit.get(0).getName());
+            holder.txtLineOne.setText("" + GalleryData.toVisit.get(position-1).getName());
 
         }
 
@@ -138,7 +136,7 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
 
                     break;
 
-                    default:
+                default:
 
                         txtLineOne = (TextView) itemView.findViewById(R.id.textview_visited_item);
                         expandArea = (LinearLayout) itemView.findViewById(R.id.expand_area);
@@ -158,7 +156,7 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
 //
 //                                onItemTouchListener.onCardViewTap(v, getPosition());
 //                                GalleryData.toVisit.add(new Art("Roa ssss",(new LatLng(51.467224, -0.072160)),R.drawable.art0));
-//                                notifyDataSetChanged();
+                           //     notifyDataSetChanged();
                             }
                         });
 
