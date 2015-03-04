@@ -177,52 +177,6 @@ public class GalleryData {
 
     //nandu change this one below to match the titles
 
-    public static int[] GetArtWorkImageLocations() {
-        // return image location potentially could return bitmaps ready to go into Imageview
-
-        final int imageSet[] = {
-                R.drawable.lowresstikguardianangel,
-                R.drawable.lowresstikthreeboys,
-                R.drawable.lowresdogrun,
-                R.drawable.lowresphlegm,
-                R.drawable.lowresruntriumphofdavid,
-                R.drawable.lowrespablodelgadoseven,
-                R.drawable.lowresmearone,
-                R.drawable.lowresconorharrington,
-                R.drawable.lowresapnunshead,
-                R.drawable.lowrespureevilnunshead,
-                R.drawable.lowresoldnunsheadmurals,
-                R.drawable.lowresstcatherinestone,
-                R.drawable.lowresdavidshillinglaw,
-                R.drawable.lowreseuropaandthebull,
-                R.drawable.lowresmadc,
-                R.drawable.lowrespablodelgadoone,
-                R.drawable.lowrespablodelgadothree,
-                R.drawable.lowrespablodelgadosix,
-                R.drawable.lowresjesuscarryingthecross,
-                R.drawable.lowrespablodelgadofour,
-                R.drawable.lowreseuropaandthebull,
-                R.drawable.lowresremiroughandsystem,
-                R.drawable.lowresdoginlandscape,
-                R.drawable.lowresrunstrita,
-                R.drawable.lowresstikacoupleinlandscape,
-                R.drawable.lowresstikelizaandmarydavidsontilly,
-                R.drawable.lowresstikelizabethandmary,
-                R.drawable.lowresstikmoodyandsons,
-                R.drawable.lowresstikfallofman,
-                R.drawable.lowresagentprovocateur,
-                R.drawable.lowresnoir,
-                R.drawable.lowreswalterlandscape,
-                R.drawable.lowresemmanuelphilibert,
-                R.drawable.lowresjesuscarryingthecross,
-                R.drawable.lowresjudgementofparis,
-                R.drawable.lowrespharaohsring
-
-
-        };
-        return imageSet;
-    }
-
 
 
     public static Art[] getMapArtwork(Activity context) {

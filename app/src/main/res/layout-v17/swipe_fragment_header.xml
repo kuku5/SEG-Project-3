@@ -30,7 +30,7 @@
             android:scaleType="fitStart"
             android:padding="5dp"
 
-             />
+            />
 
 
     </LinearLayout>
@@ -73,7 +73,9 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:orientation="horizontal"
-            android:padding="3dp">
+            android:padding="3dp"
+            android:background="@color/red"
+           >
 
             <com.etsy.android.grid.util.DynamicHeightImageView
                 android:id="@+id/inspiration_artwork"
@@ -83,7 +85,8 @@
                 android:adjustViewBounds="true"
                 android:background="@color/superlightgrey"
                 android:scaleType="fitStart"
-                android:visibility="visible" />
+                android:visibility="visible"
+                />
 
             <LinearLayout
                 android:layout_width="fill_parent"
