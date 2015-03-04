@@ -1,6 +1,7 @@
 package team3j.artworkdisplay;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -33,8 +34,10 @@ import java.util.ArrayList;
 
 import team3j.dulwichstreetart.Art;
 import team3j.dulwichstreetart.ArtistListAdapter;
+import team3j.dulwichstreetart.GalleryAdapter;
 import team3j.dulwichstreetart.GalleryData;
 import team3j.dulwichstreetart.GalleryFragment;
+import team3j.dulwichstreetart.GallerySwipeHolder;
 import team3j.dulwichstreetart.HomePageFragment;
 import team3j.dulwichstreetart.R;
 
@@ -112,7 +115,7 @@ public class GallerySwipeSingleFragment extends Fragment {
 
         recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view_grid1);
 
-        commentListAdapter = new CommentListAdapter(this,getActivity() ,indexOfArtWork,GalleryData.get().getArtworkList());
+        commentListAdapter = new CommentListAdapter(this,getActivity() ,indexOfArtWork,GalleryData.get().getArtworkList(),getMapItemTouchListener());
 
         recyclerView.setAdapter(commentListAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -135,6 +138,17 @@ public class GallerySwipeSingleFragment extends Fragment {
         }
     };
 
+    public CommentListAdapter.OnMapButtonPressTouchListener getMapItemTouchListener(){
+        CommentListAdapter.OnMapButtonPressTouchListener itemTouchListener = new CommentListAdapter.OnMapButtonPressTouchListener() {
+            @Override
+            public void onMapButtonPress(View view, int position) {
+
+            }
+        };
+
+        return itemTouchListener;
+
+    }
 
     public void getFbData() {
 
