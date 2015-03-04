@@ -39,6 +39,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import team3j.dulwichstreetart.Art;
 import team3j.dulwichstreetart.GalleryData;
 import team3j.dulwichstreetart.GoogleMapFragmentSmall;
 import team3j.dulwichstreetart.HomePageFragment;
@@ -55,6 +56,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
     private GallerySwipeSingleFragment gallerySwipeSingleFragment;
     private String commentAmount = null;
     private ArrayList<Comment> data;
+    private ArrayList<Art> galleryData;
     private Context context;
     private ImageView shareButton;
     private ImageView mapButton;
@@ -66,9 +68,11 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
     private boolean checkIfLogIn = false;
 
 
-    public CommentListAdapter(GallerySwipeSingleFragment gallerySwipeSingleFragment, Context context, int position) {
+
+    public CommentListAdapter(GallerySwipeSingleFragment gallerySwipeSingleFragment, Context context, int position,ArrayList<Art> galleryData) {
         //this.commentAmount = commentAmount;
         data = new ArrayList<Comment>();
+        this.galleryData=galleryData;
         //this.data = data;
         inflater = LayoutInflater.from(context);
         this.context = context;
@@ -99,7 +103,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         //add view to the grid cell for the first time
         //this stores the view in the cache meaning the images dont have to be reloaded over
         //and over mean its should be faster than a Listview/Gridview which does
-        View view = inflater.inflate(R.layout.comment_item, parent, false);
+        View view ;
         MyViewHolder myViewHolder;
 
         if (viewType == Header_View_Type) {
@@ -126,10 +130,18 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
         if (position == 0) {
 
-            bitmap = BitmapFactory.decodeResource(context.getResources(), GalleryData.GetArtWorkImageLocations()[indexOfArtwork]);
+            bitmap = BitmapFactory.decodeResource(context.getResources(), galleryData.get(indexOfArtwork).getPic());
             BitmapDrawable res = new BitmapDrawable(context.getResources(), bitmap);
-            //update header
+
+                //update header
             holder.dynamicHeightImageView.setImageDrawable(res);
+        Bitmap bitmap1 = BitmapFactory.decodeResource(context.getResources(), galleryData.get(indexOfArtwork).getInspiredPic());
+            BitmapDrawable res1 = new BitmapDrawable(context.getResources(), bitmap1);
+
+           holder.inspirationArtworkImageView.setImageDrawable(res1);
+
+            holder.descriptionTitle.setText(galleryData.get(indexOfArtwork).getInspirationTitle());
+            holder.description.setText(galleryData.get(indexOfArtwork).getDesc());
 
             Session session = Session.getActiveSession();
             if(!(session==null) && session.isOpened()) {
@@ -139,6 +151,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                 checkIfLogIn = true;
             }
             else {
+                commentAmount = "Click here to log in to Facebook to view comments";
 
                 String login = "Log in to Facebook to view comments";
                 String htmlTextLog = login.replace("Log in", "<font color = '#009672'> Log in </font>");
@@ -285,9 +298,12 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         TextView posterName;
         TextView message;
         TextView timestamp;
+        TextView description;
+        TextView descriptionTitle;
 
         private TextView commentTitle;
         private DynamicHeightImageView dynamicHeightImageView;
+        private DynamicHeightImageView inspirationArtworkImageView;
 
         public MyViewHolder(View itemView, int viewType) {
             super(itemView);
@@ -305,7 +321,6 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                         }
                     });
 
-
                     break;
 
                 case Post_View_Type:
@@ -317,6 +332,11 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                 case Header_View_Type:
                     // setup the header view elements
                     dynamicHeightImageView = (DynamicHeightImageView) itemView.findViewById(R.id.dynamic_imageview_artwork_display);
+                    inspirationArtworkImageView = (DynamicHeightImageView) itemView.findViewById(R.id.inspiration_artwork);
+                    description = (TextView) itemView.findViewById(R.id.description);
+                    descriptionTitle = (TextView) itemView.findViewById(R.id.description_title_single);
+
+
                     commentTitle = (TextView) itemView.findViewById(R.id.commentAmount);
                     shareButton = (ImageView) itemView.findViewById(R.id.shareIcon);
                     mapButton = (ImageView) itemView.findViewById(R.id.mapIcon);

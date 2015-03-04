@@ -232,8 +232,8 @@ public class HomePageFragment extends Fragment {
         cardView = (CardView) layout.findViewById(R.id.card_view_1_welcome1);
         cardView2 = (CardView) layout.findViewById(R.id.car_view_22);
         linearLayout = (LinearLayout) layout.findViewById(R.id.welcomeView);
-        //name = (TextView) layout.findViewById(R.id.atsymbol);
-        //name.setText("    @DulwichGallery      14h");
+        name = (TextView) layout.findViewById(R.id.atsymbol);
+        name.setText("    @DulwichGallery      14h");
         mapButton = (DynamicHeightImageView) layout.findViewById(R.id.map_image);
 
         mapButton.setOnClickListener(new View.OnClickListener() {
@@ -280,33 +280,33 @@ public class HomePageFragment extends Fragment {
         viewFlipper.setInAnimation(slide_in_left);
         viewFlipper.setOutAnimation(slide_out_right);
 
-        viewFlipper.getInAnimation().setAnimationListener(new Animation.AnimationListener() {
-            int i = 0;
-            boolean t1 = false;
-
-            public void onAnimationStart(Animation animation) {
-                if(i==todaysTweets.size()) i=0;
-
-                if(t1==false) {
-                    twitView1.setText(todaysTweets.get(i));
-                    t1=true;
-                    i++;
-                }
-                else {
-                    twitView2.setText(todaysTweets.get(i));
-                    t1=false;
-                    i++;
-                }
-            }
-
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-
-            public void onAnimationEnd(Animation animation) {
-
-            }
-        });
+//        viewFlipper.getInAnimation().setAnimationListener(new Animation.AnimationListener() {
+//            int i = 0;
+//            boolean t1 = false;
+//
+//            public void onAnimationStart(Animation animation) {
+//                if(i==todaysTweets.size()) i=0;
+//
+//                if(t1==false) {
+//                    twitView1.setText(todaysTweets.get(i));
+//                    t1=true;
+//                    i++;
+//                }
+//                else {
+//                    twitView2.setText(todaysTweets.get(i));
+//                    t1=false;
+//                    i++;
+//                }
+//            }
+//
+//            public void onAnimationRepeat(Animation animation) {
+//
+//            }
+//
+//            public void onAnimationEnd(Animation animation) {
+//
+//            }
+//        });
 
         cardView2.setOnClickListener(new View.OnClickListener() {
             @Override

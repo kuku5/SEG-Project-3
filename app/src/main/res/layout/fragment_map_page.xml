@@ -5,7 +5,8 @@
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingRight="3dp"
-    android:paddingLeft="3dp">
+    android:paddingLeft="3dp"
+    android:background="@color/white">
     ///////////////
     <!--<LinearLayout-->
     <!--android:orientation="horizontal"-->
@@ -63,7 +64,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
                         android:scaleType="fitStart"
-                        android:src="@drawable/mapdemo"
+                        android:src="@drawable/logobig"
                         android:layout_below="@id/position"
                         android:adjustViewBounds="true"
 

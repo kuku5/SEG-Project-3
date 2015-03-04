@@ -144,7 +144,9 @@ public class GoogleMapFragmentSmall extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-//       mMapView.onPause();
+        if(mMapView!=null) {
+           mMapView.onPause();
+        }
     }
 
     @Override
@@ -160,7 +162,7 @@ public class GoogleMapFragmentSmall extends Fragment {
     }
 
     public void setUpMap(){
-         arts = GalleryData.getMapArtwork(getActivity());
+        arts = GalleryData.getMapArtwork(getActivity());
 
         googleMap = mMapView.getMap();
         zoom();

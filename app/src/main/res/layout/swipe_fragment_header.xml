@@ -42,7 +42,7 @@
             android:layout_height="30dp"
             android:layout_marginLeft="250dp"
             android:layout_marginTop="5dp"
-            android:src="@drawable/shareicon" />
+            android:src="@drawable/ic_action_back" />
 
         <ImageView
             android:id="@+id/mapIcon"
@@ -50,7 +50,7 @@
             android:layout_height="30dp"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="5dp"
-            android:src="@drawable/mapicon" />
+            android:src="@drawable/ic_action_back" />
 
     </LinearLayout>
 
@@ -90,11 +90,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Title" />
+                    android:text="Title"
+                    android:id="@+id/description_title_single"
+                    />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/description"
                     android:text="AP is the only stencil artist in this project.  Once cut, stencil paintings can be reproduced easily, by anyone.  The work of art AP chose to interpret was a sketch by Rubens, highly prized because it is by him alone, whereas the finished piece would have had a great deal of workshop input.  "
                     android:textSize="11sp" />
             </LinearLayout>

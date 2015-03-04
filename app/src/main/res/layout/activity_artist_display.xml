@@ -52,7 +52,7 @@
                         android:layout_marginTop="5dp"
                         android:adjustViewBounds="true"
                         android:scaleType="fitStart"
-                        android:src="@drawable/stik2012" />
+                        android:src="@drawable/lowresapnunshead" />
 
                     <ImageView
                         android:id="@+id/shareIcon"

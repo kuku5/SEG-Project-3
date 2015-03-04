@@ -51,7 +51,7 @@ public class ArtistDisplayActivity extends ActionBarActivity {
         artist = (TextView) findViewById(R.id.position);
         stikArt = (ImageView) findViewById(R.id.stikImage);
 
-        stikArt.setImageResource(R.drawable.stik2012);
+        stikArt.setImageResource(R.drawable.lowresdogrun);
 
         shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,7 +64,7 @@ public class ArtistDisplayActivity extends ActionBarActivity {
 
                 // Retrieve the image from the res folder
                 bitmap = BitmapFactory.decodeResource(getResources(),
-                        R.drawable.stik2012);
+                        R.drawable.lowresapnunshead);
 
                 // Find the SD Card path
                 File filepath = Environment.getExternalStorageDirectory();

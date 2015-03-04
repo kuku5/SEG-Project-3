@@ -25,6 +25,7 @@ import java.util.ArrayList;
 public class GalleryFragment extends Fragment {
 
     private RecyclerView recyclerView;
+    static boolean goToMaps=false;
 
 
     public static GalleryFragment getInstance(int position) {
@@ -34,6 +35,11 @@ public class GalleryFragment extends Fragment {
         myGalleryFragmentTab.setArguments(args);
         return myGalleryFragmentTab;
     }
+    public static void goToMaps(){
+        //MainActivity.viewPager.setCurrentItem(3, true);
+
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -42,7 +48,7 @@ public class GalleryFragment extends Fragment {
         recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view_grid);
 
         //get Image Locations and descriptions
-        ArrayList<Art> galleryData= GalleryData.GetGalleryData();
+        ArrayList<Art> galleryData= GalleryData.get().getArtworkList();
         //create recycle view Adapter
 
 

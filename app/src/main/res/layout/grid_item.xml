@@ -7,7 +7,9 @@
     android:padding="5dp"
 
     android:clickable="true"
-    android:descendantFocusability="blocksDescendants">
+    android:descendantFocusability="blocksDescendants"
+    android:background="@color/colorPrimary"
+    >
 
     <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="fill_parent"
@@ -22,7 +24,9 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@color/colorPrimary"
+            >
 
             <com.etsy.android.grid.util.DynamicHeightImageView
                 android:id="@+id/dynamic_imageView"
@@ -33,7 +37,9 @@
                 android:scaleType="fitStart"
                 android:adjustViewBounds="true"
 
-                android:paddingBottom="2dp" />
+                android:paddingBottom="2dp"
+                android:background="@color/colorPrimary"
+                />
 
             <TextView
 
@@ -47,13 +53,16 @@
                 android:autoText="false"
                 android:text="@string/art_description"
                 android:textSize="9dp"
+                android:maxLines="4"
 
                 />
 
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
+                android:layout_height="fill_parent"
+                android:background="@color/colorPrimary"
+                >
 
                 <View
                     android:layout_width="fill_parent"

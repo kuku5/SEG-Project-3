@@ -31,8 +31,10 @@ import com.facebook.model.GraphUser;
 
 import java.util.ArrayList;
 
+import team3j.dulwichstreetart.Art;
 import team3j.dulwichstreetart.ArtistListAdapter;
 import team3j.dulwichstreetart.GalleryData;
+import team3j.dulwichstreetart.GalleryFragment;
 import team3j.dulwichstreetart.HomePageFragment;
 import team3j.dulwichstreetart.R;
 
@@ -87,7 +89,7 @@ public class GallerySwipeSingleFragment extends Fragment {
         Bundle bundle = getArguments();
 
         indexOfArtWork = bundle.getInt("indexOfArtWork");
-        String title = GalleryData.GetArtWorkData(getActivity()).get(indexOfArtWork);
+        String title = GalleryData.get().GetGalleryData().get(indexOfArtWork).getName();
         textView.setText(title);
 
         backButton=(ImageButton) layout.findViewById(R.id.back_button);
@@ -95,6 +97,7 @@ public class GallerySwipeSingleFragment extends Fragment {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                GalleryFragment.goToMaps();
 
                 getActivity().onBackPressed();
             }
@@ -109,7 +112,7 @@ public class GallerySwipeSingleFragment extends Fragment {
 
         recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view_grid1);
 
-        commentListAdapter = new CommentListAdapter(this,getActivity() ,indexOfArtWork);
+        commentListAdapter = new CommentListAdapter(this,getActivity() ,indexOfArtWork,GalleryData.get().getArtworkList());
 
         recyclerView.setAdapter(commentListAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -125,6 +128,7 @@ public class GallerySwipeSingleFragment extends Fragment {
             onSessionStateChange(session, state, exception);
         }
     };
+
 
     public void getFbData() {
 
