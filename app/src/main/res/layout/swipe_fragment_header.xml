@@ -24,7 +24,6 @@
             android:background="@color/superlightgrey"
             android:scaleType="fitStart"
 
-            android:src="@drawable/conorharrington"
             android:visibility="visible" />
 
 
@@ -78,7 +77,6 @@
                 android:adjustViewBounds="true"
                 android:background="@color/superlightgrey"
                 android:scaleType="fitStart"
-                android:src="@drawable/conorharrington"
                 android:visibility="visible" />
 
             <LinearLayout

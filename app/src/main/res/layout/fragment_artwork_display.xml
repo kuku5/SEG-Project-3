@@ -54,7 +54,9 @@
             android:textAllCaps="true"
             android:textColor="#1f3133"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:background="@color/white"
+            />
 
         <!--android:textColor="#1f3133"-->
 
@@ -65,7 +67,7 @@
         android:id="@+id/separator"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:background="@color/colorAccent"
+        android:background="@color/white"
         android:visibility="visible" />
 
 
