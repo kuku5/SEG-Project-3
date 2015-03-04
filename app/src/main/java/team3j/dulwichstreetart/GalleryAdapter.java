@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -65,6 +66,10 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
         holder.dynamicHeightImageView.setImageDrawable(res);
         holder.txtLineOne.setText(galleryData.get(position).getName());
         holder.descriptionTextView.setText(galleryData.get(position).getDesc());
+        holder.txtLineOne.setBackgroundColor(context.getResources().getColor(R.color.white));
+        holder.descriptionTextView.setBackgroundColor(context.getResources().getColor(R.color.white));
+        holder.dynamicHeightImageView.setBackgroundColor(context.getResources().getColor(R.color.white));
+        holder.cardView.setCardBackgroundColor(context.getResources().getColor(R.color.white));
 
 
     }
@@ -80,13 +85,14 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
         TextView txtLineOne;
         TextView descriptionTextView;
         DynamicHeightImageView dynamicHeightImageView;
+        CardView cardView;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             txtLineOne = (TextView) itemView.findViewById(R.id.txt_line1);
             dynamicHeightImageView = (DynamicHeightImageView) itemView.findViewById(R.id.dynamic_imageView);
             descriptionTextView = (TextView) itemView.findViewById(R.id.description_textview);
-
+            cardView= (CardView) itemView.findViewById(R.id.card_view_1_large_image);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -50,6 +50,7 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
         toolbar = (Toolbar) findViewById(R.id.app_bar);
 
 
+
         updateToolBarLayout();//update tool bar
         setUpTabsAdapter();//setup tabs
 
@@ -85,9 +86,10 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
                             .setTabListener(this);
             tabHost.addTab(materialTab);
 
-            materialTab.setTextColor(getResources().getColor(R.color.colorAccent));
+            materialTab.setTextColor(getResources().getColor(R.color.colorAccentReal));
 
         }
+        tabHost.setAccentColor(getResources().getColor(R.color.colorAccentReal));
     }
 
 
