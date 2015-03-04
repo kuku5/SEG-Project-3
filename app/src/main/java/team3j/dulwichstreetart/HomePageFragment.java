@@ -2,11 +2,14 @@ package team3j.dulwichstreetart;
 
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -94,13 +97,14 @@ public class HomePageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        getTweets(); //Get Today's Tweets
-
         //non facebook setup
         View layout = inflater.inflate(R.layout.fragment_home_page, container, false);
 
         setupOnScreenElements(layout);
-        setupAnimations(layout);
+        if (isNetworkConnected()) {
+            getTweets(); //Get Today's Tweets
+            setupAnimations(layout);
+        }
         setupGoogleMapsCard(layout);
         setupLibraryAnimations(layout);
 //        Toast.makeText(getActivity(), GalleryData.toVisit.size() +
@@ -232,8 +236,8 @@ public class HomePageFragment extends Fragment {
         cardView = (CardView) layout.findViewById(R.id.card_view_1_welcome1);
         cardView2 = (CardView) layout.findViewById(R.id.car_view_22);
         linearLayout = (LinearLayout) layout.findViewById(R.id.welcomeView);
-        name = (TextView) layout.findViewById(R.id.atsymbol);
-        name.setText("    @DulwichGallery      14h");
+        //name = (TextView) layout.findViewById(R.id.atsymbol);
+        //name.setText("    @DulwichGallery      14h");
         mapButton = (DynamicHeightImageView) layout.findViewById(R.id.map_image);
 
         mapButton.setOnClickListener(new View.OnClickListener() {
@@ -280,33 +284,37 @@ public class HomePageFragment extends Fragment {
         viewFlipper.setInAnimation(slide_in_left);
         viewFlipper.setOutAnimation(slide_out_right);
 
-//        viewFlipper.getInAnimation().setAnimationListener(new Animation.AnimationListener() {
-//            int i = 0;
-//            boolean t1 = false;
-//
-//            public void onAnimationStart(Animation animation) {
-//                if(i==todaysTweets.size()) i=0;
-//
-//                if(t1==false) {
-//                    twitView1.setText(todaysTweets.get(i));
-//                    t1=true;
-//                    i++;
-//                }
-//                else {
-//                    twitView2.setText(todaysTweets.get(i));
-//                    t1=false;
-//                    i++;
-//                }
-//            }
-//
-//            public void onAnimationRepeat(Animation animation) {
-//
-//            }
-//
-//            public void onAnimationEnd(Animation animation) {
-//
-//            }
-//        });
+        viewFlipper.getInAnimation().setAnimationListener(new Animation.AnimationListener() {
+            int i = 0;
+            boolean t1 = false;
+            boolean welcomed = false;
+
+            public void onAnimationStart(Animation animation) {
+                if(i==todaysTweets.size()) i=0;
+
+                if(t1==false) {
+                    twitView1.setText(todaysTweets.get(i));
+                    t1=true;
+                    i++;
+                }
+                else {
+                    twitView2.setText(todaysTweets.get(i));
+                    t1=false;
+                    i++;
+                }
+            }
+
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+
+            public void onAnimationEnd(Animation animation) {
+                if (!welcomed) {
+                    twitView2.setTextSize(12);
+                    welcomed = true;
+                }
+            }
+        });
 
         cardView2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -473,7 +481,7 @@ public class HomePageFragment extends Fragment {
 
                     do {
                         status = statuses.get(i).getText();
-                        if(!status.substring(0,2).equals("RT")) {
+                        if(!status.substring(0,2).equals("RT") && !status.substring(0, 1).equals("@")) {
                             todaysTweets.add(status);
                             c++;
                         }
@@ -489,6 +497,16 @@ public class HomePageFragment extends Fragment {
 
         thread.start();
 
+    }
+
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo ni = cm.getActiveNetworkInfo();
+        if (ni == null) {
+            // There are no active networks.
+            return false;
+        } else
+            return true;
     }
 
 }
