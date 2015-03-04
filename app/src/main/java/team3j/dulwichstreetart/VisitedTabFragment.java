@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -12,11 +15,19 @@ import android.view.LayoutInflater;
 import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
+
+import it.neokree.materialtabs.MaterialTab;
+import it.neokree.materialtabs.MaterialTabHost;
+import it.neokree.materialtabs.MaterialTabListener;
 
 /**
  * Created by JGill on 25/01/15.
@@ -25,10 +36,10 @@ import java.util.ArrayList;
 
 //TODO maybe add different button to cardviews, also add final images
 
-public class VisitedTabFragment extends Fragment {
+public class VisitedTabFragment extends Fragment implements MaterialTabListener {
 
     private RecyclerView recyclerView;
-
+   TextView tab1,tab2;
 
 
     public static VisitedTabFragment getInstance(int position) {
@@ -47,13 +58,23 @@ public class VisitedTabFragment extends Fragment {
 
         //kevin this is fake added data
 
-if(GalleryData.toVisit.size()==0) {
+    if(GalleryData.toVisit.size()==0) {
         Art[] arts = GalleryData.getMapArtwork(getActivity());
         int size = arts.length;
         for(int i = 0; i< size; ++i){
             GalleryData.toVisit.add(arts[i]);
         }
-}
+    }
+        ArrayList<String> tabs=new ArrayList<String>();
+
+        tab1 = (TextView) layout.findViewById(R.id.tableft);
+        tab2 = (TextView) layout.findViewById(R.id.tabright);
+
+        tab1.setText("Visited");
+        tab2.setText("To Visit");
+
+
+
 
         //create recycle view Adapter
 
@@ -61,7 +82,13 @@ if(GalleryData.toVisit.size()==0) {
         recyclerView.setAdapter(new VisitedAdapter(getActivity(), getVisitedClickListener()));
 
         //Set Layout Animation
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), 1, false));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity()) {
+            @Override
+            protected int getExtraLayoutSpace(RecyclerView.State state) {
+                return 200;
+            }
+        };
+        recyclerView.setLayoutManager(linearLayoutManager);
 
 
         return layout;
@@ -76,11 +103,6 @@ if(GalleryData.toVisit.size()==0) {
                 //tap the entire view
                 Toast.makeText(getActivity(), "Tapped " + position, Toast.LENGTH_SHORT).show();
                 //open Activity to display for Artwork Display
-//                Intent i = new Intent(getActivity(), GallerySwipeHolder.class);
-//                i.putExtra("indexOfArtWork", position);
-//                startActivity(i);
-//                getActivity().overridePendingTransition(R.anim.swipeback_slide_right_in,
-//                        R.anim.swipeback_stack_to_back);
 
             }
         };
@@ -90,7 +112,20 @@ if(GalleryData.toVisit.size()==0) {
     }
 
 
+    @Override
+    public void onTabSelected(MaterialTab materialTab) {
 
+    }
+
+    @Override
+    public void onTabReselected(MaterialTab materialTab) {
+
+    }
+
+    @Override
+    public void onTabUnselected(MaterialTab materialTab) {
+
+    }
 
 
 }

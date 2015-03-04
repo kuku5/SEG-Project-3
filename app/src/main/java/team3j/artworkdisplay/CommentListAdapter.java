@@ -130,15 +130,16 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
         if (position == 0) {
 
+            Bitmap bitmap1 = BitmapFactory.decodeResource(context.getResources(), galleryData.get(indexOfArtwork).getInspiredPic());
+            BitmapDrawable res1 = new BitmapDrawable(context.getResources(), bitmap1);
+
             bitmap = BitmapFactory.decodeResource(context.getResources(), galleryData.get(indexOfArtwork).getPic());
             BitmapDrawable res = new BitmapDrawable(context.getResources(), bitmap);
 
-                //update header
-            holder.dynamicHeightImageView.setImageDrawable(res);
-        Bitmap bitmap1 = BitmapFactory.decodeResource(context.getResources(), galleryData.get(indexOfArtwork).getInspiredPic());
-            BitmapDrawable res1 = new BitmapDrawable(context.getResources(), bitmap1);
+            //update header
+            holder.dynamicHeightImageView.setImageDrawable(res1);
 
-           holder.inspirationArtworkImageView.setImageDrawable(res1);
+           holder.inspirationArtworkImageView.setImageDrawable(res);
 
             holder.descriptionTitle.setText(galleryData.get(indexOfArtwork).getInspirationTitle());
             holder.description.setText(galleryData.get(indexOfArtwork).getDesc());

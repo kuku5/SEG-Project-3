@@ -116,7 +116,13 @@ public class GallerySwipeSingleFragment extends Fragment {
 
         recyclerView.setAdapter(commentListAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), 1, false));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity()) {
+            @Override
+            protected int getExtraLayoutSpace(RecyclerView.State state) {
+                return 300;
+            }
+        };
+        recyclerView.setLayoutManager(linearLayoutManager);
 
         return layout;
     }

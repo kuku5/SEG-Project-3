@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/superlightgrey"
-    >
+    tools:context=".MainActivity"
+    android:background="@android:color/white">
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view_visited"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:background="@color/superlightgrey"
         >
 
@@ -16,4 +18,36 @@
     </android.support.v7.widget.RecyclerView>
 
 
-</LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/linearLayout"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:text="Visited"
+            android:id="@+id/tableft"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:background="@color/colorAccent"
+            android:textAllCaps="true"
+            android:layout_weight="0.5"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:text="Visited"
+            android:gravity="center"
+            android:id="@+id/tabright"
+            android:textAllCaps="true"
+            android:textColor="@color/colorAccent"
+            android:background="@color/white"
+
+            android:layout_weight="0.5"
+            />
+    </LinearLayout>
+</RelativeLayout>

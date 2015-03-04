@@ -89,6 +89,7 @@ public class GalleryFragment extends Fragment {
 
         if (screenOrientation == Surface.ROTATION_0 + 1) {
             //For portrait mode
+
             recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, 1));
 
 

@@ -26,7 +26,6 @@ public class SplashActivity extends Activity {
 
 
     private long TIMER=500;
-    private SliderLayout sliderLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +34,6 @@ public class SplashActivity extends Activity {
 
         setContentView(R.layout.activity_splash);
 
-        // sliderLayout = (SliderLayout) findViewById(R.id.slider_splash);
-        // setupAnimationSplash();
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -52,44 +49,7 @@ public class SplashActivity extends Activity {
 
     }
 
-    private void setupAnimationSplash() {
 
-
-        HashMap<String, String> url_maps = new HashMap<String, String>();
-        url_maps.put("Hannibal", "http://static2.hypable.com/wp-content/uploads/2013/12/hannibal-season-2-release-date.jpg");
-        url_maps.put("Big Bang Theory", "http://tvfiles.alphacoders.com/100/hdclearart-10.png");
-
-        HashMap<String, Integer> file_maps = new HashMap<String, Integer>();
-
-        file_maps.put("Conor Harrington", R.drawable.logobig);
-        file_maps.put("Walter Landscape", R.drawable.logobig);
-
-        for (String name : file_maps.keySet()) {
-
-            TextSliderView textSliderView = new TextSliderView(this);
-
-            // initialize a SliderLayout
-            textSliderView
-                    .image(file_maps.get(name))
-                    .setScaleType(BaseSliderView.ScaleType.Fit)
-                    .setOnSliderClickListener(new OnSliderClickListener());
-
-            //add your extra information
-            textSliderView.getBundle()
-                    .putString("extra", name);
-
-            sliderLayout.addSlider(textSliderView);
-        }
-
-        sliderLayout.setPresetTransformer(SliderLayout.Transformer.FlipHorizontal);
-        //sliderLayout.setPresetTransformer(SliderLayout.Transformer.Tablet);
-        //sliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-        sliderLayout.setCustomAnimation(new DescriptionAnimation());
-        sliderLayout.setDuration(1000);
-
-        // sliderLayout.setPresetTransformer(((TextView) view).getText().toString());
-
-    }
 
 
     @Override
