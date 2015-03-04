@@ -53,8 +53,6 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
     private final LayoutInflater inflater;
     private final int indexOfArtwork;
-    private  OnMapButtonPressTouchListener onMapButtonPressTouchListener;
-
     private GallerySwipeSingleFragment gallerySwipeSingleFragment;
     private String commentAmount = null;
     private ArrayList<Comment> data;
@@ -71,7 +69,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
 
 
-    public CommentListAdapter(GallerySwipeSingleFragment gallerySwipeSingleFragment, Context context, int position,ArrayList<Art> galleryData,OnMapButtonPressTouchListener onMapButtonPressTouchListener) {
+    public CommentListAdapter(GallerySwipeSingleFragment gallerySwipeSingleFragment, Context context, int position,ArrayList<Art> galleryData) {
         //this.commentAmount = commentAmount;
         data = new ArrayList<Comment>();
         this.galleryData=galleryData;
@@ -79,7 +77,6 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         inflater = LayoutInflater.from(context);
         this.context = context;
         this.indexOfArtwork = position;
-        this.onMapButtonPressTouchListener= onMapButtonPressTouchListener;
         //System.out.println(data);
         this.gallerySwipeSingleFragment = gallerySwipeSingleFragment;
     }
@@ -426,10 +423,6 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         }
 
 
-    }
-    //interface need for Recycle Views to handle clicks
-    public interface OnMapButtonPressTouchListener {
-        public void onMapButtonPress(View view, int position);
     }
 
 }
