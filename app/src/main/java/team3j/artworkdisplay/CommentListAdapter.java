@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -126,7 +127,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
     }
 
     @Override
-    public void onBindViewHolder(CommentListAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(final CommentListAdapter.MyViewHolder holder, int position) {
 
         if (position == 0) {
 
@@ -166,7 +167,16 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             holder.commentTitle.setText(Html.fromHtml(commentAmount));
 
         } else if (position == 1) {
+            holder.post.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //THIS IS WHERE THE POST COMMENT TO FACEBOOK CODE WILL GO
+                    //System.out.println(holder.postBox.getText().toString());
+                    gallerySwipeSingleFragment.postComment(holder.postBox.getText().toString());
+                    holder.postBox.setText("");
 
+                }
+            });
 
         }
 
@@ -295,6 +305,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         EditText postBox;
+        Button post;
         // view holder for each grid  cell
         TextView posterName;
         TextView message;
@@ -327,7 +338,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                 case Post_View_Type:
                     //setup comment box elements
                     postBox = (EditText) itemView.findViewById(R.id.post_box);
-
+                    post = (Button) itemView.findViewById(R.id.post);
                     break;
 
                 case Header_View_Type:

@@ -30,6 +30,8 @@ import com.facebook.SessionState;
 import com.facebook.model.GraphUser;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import team3j.dulwichstreetart.Art;
 import team3j.dulwichstreetart.ArtistListAdapter;
@@ -192,6 +194,7 @@ public class GallerySwipeSingleFragment extends Fragment {
         Session session = Session.getActiveSession();
         if((session==null) || session.isClosed()) {
             Session.openActiveSession(getActivity(), this, true, statusCallback);
+
         }
 
         getFbData();
@@ -241,6 +244,21 @@ public class GallerySwipeSingleFragment extends Fragment {
             //the onCreateView gets called and this makes it difficult to track any initialization. so do some null checks
         }
         else {  }
+    }
+    //Method to post a comment to facebook
+    public void postComment(String comment){
+        //TODO check if active session is not null and opened
+        List<String> permissions = Session.getActiveSession().getPermissions();
+        System.out.println(permissions);
+        //if(permissions.contains("publish_actions")){
+        //    System.out.println("yes");
+
+        //} else {
+        Session.getActiveSession().requestNewPublishPermissions(new Session.NewPermissionsRequest(this, Arrays.asList("publish_actions")));
+
+        System.out.println(comment);
+        //}
+
     }
 
 }
