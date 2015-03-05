@@ -123,7 +123,7 @@ public class GallerySwipeSingleFragment extends Fragment {
             }
         };
         recyclerView.setLayoutManager(linearLayoutManager);
-
+        //recyclerView.smoothScrollToPosition(1);
         return layout;
     }
     //Acts like the an Observer who looks for Session changes and invokes onSessionStateChanged
