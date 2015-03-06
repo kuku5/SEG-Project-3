@@ -194,13 +194,18 @@ public class GallerySwipeSingleFragment extends Fragment {
 
     //handler for the log in button
     public ArrayList<Comment> onClickLogin() {
+
         Session session = Session.getActiveSession();
+
         if((session==null) || session.isClosed()) {
             Session.openActiveSession(getActivity(), this, true, statusCallback);
 
-        }
 
-        getFbData();
+        }
+        if(Session.getActiveSession().isOpened()) {
+            Session.getActiveSession().refreshPermissions();
+            getFbData();
+        }
         //System.out.println("onClickLogin" + comments);
         return comments;
 
@@ -209,6 +214,12 @@ public class GallerySwipeSingleFragment extends Fragment {
     //Display different things depending on if the user is logged in
     private void onSessionStateChange(Session session,
                                       SessionState state, Exception exception) {
+        System.out.println(state);
+        Session.setActiveSession(session);
+        if(state.equals(SessionState.OPENED_TOKEN_UPDATED)){
+
+            System.out.println(session.getPermissions());
+        }
         if (state.isOpened()) {
             //If logged in, show this
             Log.i("MainActivity", "Logged in...");
@@ -230,6 +241,7 @@ public class GallerySwipeSingleFragment extends Fragment {
             Log.i("GallerySwipeFragment", "Logged out...");
 
         }
+
     }
 
 
@@ -252,6 +264,8 @@ public class GallerySwipeSingleFragment extends Fragment {
     public void postComment(String comment){
         //TODO check if active session is not null and opened
         Session session = Session.getActiveSession();
+
+        //Might not be able to use this method to get permissions
         List<String> permissions = session.getPermissions();
         System.out.println(permissions);
         if(permissions.contains("publish_actions")){
@@ -263,6 +277,7 @@ public class GallerySwipeSingleFragment extends Fragment {
                     HttpMethod.POST,
                     new Request.Callback() {
                         public void onCompleted(Response response) {
+                            System.out.println(response);
                             //TODO REFRESH PAGE HERE
                             commentListAdapter.resetComments();
 
