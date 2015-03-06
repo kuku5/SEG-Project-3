@@ -13,7 +13,8 @@ public class Comment implements Parcelable {
     private String time;
     private int icon;
     private String posterURL;
-
+    private String commentID;
+    private boolean userLikes;
     public void setIcon(int icon) {
         this.icon = icon;
 
@@ -36,6 +37,15 @@ public class Comment implements Parcelable {
         this.time = time;
 
     }
+    public void setCommentID(String commentID) {
+        this.commentID = commentID;
+
+    }
+    public void setUserLikes(Boolean userLikes) {
+        this.userLikes = userLikes;
+
+    }
+
 
     public String getMessage() {
         return message;
@@ -54,10 +64,22 @@ public class Comment implements Parcelable {
 
     }
 
+    public String getCommentID() {
+        return commentID;
+
+    }
+    public boolean getUserLikes() {
+        return userLikes;
+
+    }
+
     public int getIcon() {
         return icon;
     }
 
+    public String toString(){
+        return posterName + " " + message + " " + commentID + " " + userLikes;
+    }
 
 
     @Override
