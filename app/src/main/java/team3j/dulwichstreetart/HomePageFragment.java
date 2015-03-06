@@ -101,10 +101,8 @@ public class HomePageFragment extends Fragment {
         View layout = inflater.inflate(R.layout.fragment_home_page, container, false);
 
         setupOnScreenElements(layout);
-        if (isNetworkConnected()) {
-            getTweets(); //Get Today's Tweets
-            setupAnimations(layout);
-        }
+        if (isNetworkConnected()) getTweets(); //Get Today's Tweets
+        setupAnimations(layout);
         setupGoogleMapsCard(layout);
         setupLibraryAnimations(layout);
 //        Toast.makeText(getActivity(), GalleryData.toVisit.size() +
@@ -284,37 +282,38 @@ public class HomePageFragment extends Fragment {
         viewFlipper.setInAnimation(slide_in_left);
         viewFlipper.setOutAnimation(slide_out_right);
 
-        viewFlipper.getInAnimation().setAnimationListener(new Animation.AnimationListener() {
-            int i = 0;
-            boolean t1 = false;
-            boolean welcomed = false;
+        if (todaysTweets.size()!=0) {
+            viewFlipper.getInAnimation().setAnimationListener(new Animation.AnimationListener() {
+                int i = 0;
+                boolean t1 = false;
+                boolean welcomed = false;
 
-            public void onAnimationStart(Animation animation) {
-                if(i==todaysTweets.size()) i=0;
+                public void onAnimationStart(Animation animation) {
+                    if (i == todaysTweets.size()) i = 0;
 
-                if(t1==false) {
-                    twitView1.setText(todaysTweets.get(i));
-                    t1=true;
-                    i++;
+                    if (t1 == false) {
+                        twitView1.setText(todaysTweets.get(i));
+                        t1 = true;
+                        i++;
+                    } else {
+                        twitView2.setText(todaysTweets.get(i));
+                        t1 = false;
+                        i++;
+                    }
                 }
-                else {
-                    twitView2.setText(todaysTweets.get(i));
-                    t1=false;
-                    i++;
+
+                public void onAnimationRepeat(Animation animation) {
+
                 }
-            }
 
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-
-            public void onAnimationEnd(Animation animation) {
-                if (!welcomed) {
-                    twitView2.setTextSize(12);
-                    welcomed = true;
+                public void onAnimationEnd(Animation animation) {
+                    if (!welcomed) {
+                        twitView2.setTextSize(12);
+                        welcomed = true;
+                    }
                 }
-            }
-        });
+            });
+        }
 
         cardView2.setOnClickListener(new View.OnClickListener() {
             @Override
