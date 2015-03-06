@@ -435,6 +435,10 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
 
     }
+    public void resetComments(){
+        data = gallerySwipeSingleFragment.onClickLogin();
+        notifyDataSetChanged();
+    }
 
 }
 

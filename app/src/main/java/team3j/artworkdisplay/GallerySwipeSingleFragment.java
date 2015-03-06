@@ -249,16 +249,31 @@ public class GallerySwipeSingleFragment extends Fragment {
     //Method to post a comment to facebook
     public void postComment(String comment){
         //TODO check if active session is not null and opened
-        List<String> permissions = Session.getActiveSession().getPermissions();
+        Session session = Session.getActiveSession();
+        List<String> permissions = session.getPermissions();
         System.out.println(permissions);
-        //if(permissions.contains("publish_actions")){
-        //    System.out.println("yes");
+        if(permissions.contains("publish_actions")){
+            System.out.println("has publish actions");
+            Bundle params = new Bundle();
+            params.putString("message", comment);
+            /* make the API call */
+            new Request(session, "/726958990741991/comments", params,
+                    HttpMethod.POST,
+                    new Request.Callback() {
+                        public void onCompleted(Response response) {
+                            //TODO REFRESH PAGE HERE
+                            commentListAdapter.resetComments();
 
-        //} else {
-        Session.getActiveSession().requestNewPublishPermissions(new Session.NewPermissionsRequest(this, Arrays.asList("publish_actions")));
+                        }
+                    }
+            ).executeAsync();
 
-        System.out.println(comment);
-        //}
+        } else {
+            //Request posting permissions
+            Session.getActiveSession().requestNewPublishPermissions(new Session.NewPermissionsRequest(this, Arrays.asList("publish_actions")));
+            //TODO something after the request been made
+
+        }
 
     }
 
