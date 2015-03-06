@@ -148,7 +148,7 @@ public class GallerySwipeSingleFragment extends Fragment {
                 b1.putBoolean("summary", true);     //includes a summary in the request
                 b1.putString("filter", "stream");   //gets the chronological order of comments
                 b1.putString("limit", "100");        //gets max of 100
-                new Request(Session.getActiveSession(), "726958990741991/comments", b1, HttpMethod.GET,
+                new Request(Session.getActiveSession(), "779466045468925/comments", b1, HttpMethod.GET,
                         new Request.Callback() {
                             public void onCompleted(Response response) {
                                 if (response != null) {
@@ -257,7 +257,7 @@ public class GallerySwipeSingleFragment extends Fragment {
             Bundle params = new Bundle();
             params.putString("message", comment);
             /* make the API call */
-            new Request(session, "/726958990741991/comments", params,
+            new Request(session, "/779466045468925/comments", params,
                     HttpMethod.POST,
                     new Request.Callback() {
                         public void onCompleted(Response response) {
