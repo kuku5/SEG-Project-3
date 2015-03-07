@@ -20,6 +20,7 @@
 
         android:padding="0dp">
 
+
         <com.etsy.android.grid.util.DynamicHeightImageView
             android:id="@+id/dynamic_imageview_artwork_display"
             android:layout_width="fill_parent"
@@ -36,90 +37,157 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@color/white">
 
-
-
-    </LinearLayout>
-
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/shareButtonLayout"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="@color/colorAccentReal">
-
-        <ImageView
-            android:id="@+id/shareIcon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="250dp"
-            android:layout_marginTop="5dp"
-            android:src="@drawable/ic_share" />
-
-        <ImageView
-            android:id="@+id/mapIcon"
+        android:background="@color/colorAccentReal"
+        >
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
-            android:src="@drawable/ic_map" />
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
 
-    </LinearLayout>
+            <TextView
 
-    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/artwork_display_description"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="5dp"
+                android:id="@+id/position"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center|left"
+                android:maxLines="1"
+                android:padding="12dp"
+                android:text="@string/infotext"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:background="@color/colorAccentReal"
+                />
 
-        card_view:cardBackgroundColor="@android:color/white"
-        card_view:cardCornerRadius="0dp">
-
+        </LinearLayout>
 
         <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="horizontal"
-            android:padding="3dp">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true">
 
-            <com.etsy.android.grid.util.DynamicHeightImageView
-                android:id="@+id/inspiration_artwork"
-                android:layout_width="200dp"
+            <ImageView
+                android:id="@+id/shareIcon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/ic_share" />
+
+            <ImageView
+                android:id="@+id/mapIcon"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="0dp"
-                android:adjustViewBounds="true"
-                android:background="@color/superlightgrey"
-                android:scaleType="fitStart"
-                android:visibility="visible" />
+                android:layout_marginTop="5dp"
+                android:src="@drawable/ic_map" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="5dp"
+        >
+        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/artwork_display_description"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+
+            card_view:cardBackgroundColor="@android:color/white"
+            card_view:cardCornerRadius="0dp">
+
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:padding="3dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <com.etsy.android.grid.util.DynamicHeightImageView
+                    android:id="@+id/inspiration_artwork"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
-                    android:text="Title"
-                    android:id="@+id/description_title_single"
-                    />
+                    android:layout_marginBottom="0dp"
+                    android:adjustViewBounds="true"
+                    android:background="@color/superlightgrey"
+                    android:scaleType="fitStart"
+                    android:visibility="visible" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/description"
-                    android:text="AP is the only stencil artist in this project.  Once cut, stencil paintings can be reproduced easily, by anyone.  The work of art AP chose to interpret was a sketch by Rubens, highly prized because it is by him alone, whereas the finished piece would have had a great deal of workshop input.  "
-                    android:textSize="11sp" />
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical"
+                    android:padding="3dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Title"
+                        android:id="@+id/description_title_single"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/description"
+                        android:text="AP is the only stencil artist in this project.  Once cut, stencil paintings can be reproduced easily, by anyone.  The work of art AP chose to interpret was a sketch by Rubens, highly prized because it is by him alone, whereas the finished piece would have had a great deal of workshop input.  "
+                        android:textSize="11sp" />
+                </LinearLayout>
+
             </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+
+    </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/artist_title_layout"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/colorAccentReal"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <TextView
+
+                android:id="@+id/artistTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center|left"
+                android:maxLines="1"
+                android:padding="12dp"
+                android:text="@string/artisttile"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:background="@color/colorAccentReal"
+                />
 
         </LinearLayout>
-    </android.support.v7.widget.CardView>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true">
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
