@@ -55,6 +55,7 @@ public class VisitedTabFragment extends Fragment implements MaterialTabListener 
         //get layout and elements
         View layout = inflater.inflate(R.layout.fragment_visited_tab, container, false);
         recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view_visited);
+        setRetainInstance(true);
 
         //kevin this is fake added data
 

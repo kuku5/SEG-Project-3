@@ -44,6 +44,7 @@ public class ArtistListFragment extends Fragment {
         //setup layout and elements
         View layout = inflater.inflate(R.layout.fragment_gallery_list, container, false);
         recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view_grid);
+        setRetainInstance(true);
 
         //get data for the List
         ArrayList<String> artistData = GalleryData.GetArtistsData(getActivity());

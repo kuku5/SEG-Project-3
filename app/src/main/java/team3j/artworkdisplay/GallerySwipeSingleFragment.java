@@ -81,6 +81,7 @@ public class GallerySwipeSingleFragment extends Fragment {
 
         //sort layout
         View layout = inflater.inflate(R.layout.fragment_artwork_display, container, false);
+        setRetainInstance(true);
 
         String commentAmount = null;
 

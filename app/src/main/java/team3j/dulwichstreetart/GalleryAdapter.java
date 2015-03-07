@@ -1,9 +1,12 @@
 package team3j.dulwichstreetart;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -12,10 +15,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.etsy.android.grid.util.DynamicHeightImageView;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 /**
@@ -36,12 +41,15 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
     private ArrayList<Art> galleryData;
     private Context context;
     private int[] imageSet;
+    private Bitmap mPlaceHolderBitmap;
 
     public GalleryAdapter(Context context,ArrayList<Art> galleryData, OnItemTouchListener itemTouchListener){
         this.inflater=LayoutInflater.from(context);
         this.context=context;
         this.galleryData=galleryData;
         this.onItemTouchListener = itemTouchListener;
+         mPlaceHolderBitmap = BitmapFactory.decodeResource(context.getResources(),R.drawable.ic_action_back);
+
     }
 
 
@@ -58,20 +66,102 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
         return myViewHolder;
     }
 
+
+
     @Override
     public void onBindViewHolder(GalleryAdapter.MyViewHolder holder, int position) {
         //add image and description to the view for each gallery item
-        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(),galleryData.get(position).getPic());
-        BitmapDrawable res = new BitmapDrawable(context.getResources(), bitmap);
-        holder.dynamicHeightImageView.setImageDrawable(res);
-        holder.txtLineOne.setText(galleryData.get(position).getName());
+//       Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(),R.drawable.ic_action_back);
+//        BitmapDrawable res = new BitmapDrawable(context.getResources(), bitmap);
+//        holder.dynamicHeightImageView.setImageDrawable(res);
+     //   BitmapFactory.Options options = new BitmapFactory.Options();
+       // options.inJustDecodeBounds = true;
+        //BitmapFactory.decodeResource(context.getResources(), galleryData.get(position).getPic(), options);
+//        int imageHeight = options.outHeight;
+//        int imageWidth = options.outWidth;
+        loadBitmap( galleryData.get(position).getPic(),  holder.dynamicHeightImageView);
+        //        holder.dynamicHeightImageView.setImageBitmap(
+//                decodeSampledBitmapFromResource(context.getResources(), galleryData.get(position).getPic(), 10, 10));
+//        holder.txtLineOne.setText(galleryData.get(position).getName());
         holder.descriptionTextView.setText(galleryData.get(position).getDesc());
-        holder.txtLineOne.setBackgroundColor(context.getResources().getColor(R.color.white));
-        holder.descriptionTextView.setBackgroundColor(context.getResources().getColor(R.color.white));
-        holder.dynamicHeightImageView.setBackgroundColor(context.getResources().getColor(R.color.white));
-        holder.cardView.setCardBackgroundColor(context.getResources().getColor(R.color.white));
 
 
+
+    }
+
+    public void loadBitmap(int resId, ImageView imageView) {
+        if (cancelPotentialWork(resId, imageView)) {
+            final BitmapWorkerTask task = new BitmapWorkerTask(imageView,context.getResources());
+            final AsyncDrawable asyncDrawable =
+                    new AsyncDrawable(context.getResources(), mPlaceHolderBitmap, task);
+            imageView.setImageDrawable(asyncDrawable);
+            task.execute(resId);
+        }
+    }
+    public static boolean cancelPotentialWork(int data, ImageView imageView) {
+        final BitmapWorkerTask bitmapWorkerTask = getBitmapWorkerTask(imageView);
+
+        if (bitmapWorkerTask != null) {
+            final int bitmapData = bitmapWorkerTask.data;
+            // If bitmapData is not yet set or it differs from the new data
+            if (bitmapData == 0 || bitmapData != data) {
+                // Cancel previous task
+                bitmapWorkerTask.cancel(true);
+            } else {
+                // The same work is already in progress
+                return false;
+            }
+        }
+        // No task associated with the ImageView, or an existing task was cancelled
+        return true;
+    }
+    private static BitmapWorkerTask getBitmapWorkerTask(ImageView imageView) {
+        if (imageView != null) {
+            final Drawable drawable = imageView.getDrawable();
+            if (drawable instanceof AsyncDrawable) {
+                final AsyncDrawable asyncDrawable = (AsyncDrawable) drawable;
+                return asyncDrawable.getBitmapWorkerTask();
+            }
+        }
+        return null;
+    }
+    public static Bitmap decodeSampledBitmapFromResource(Resources res, int resId,
+                                                         int reqWidth, int reqHeight) {
+
+        // First decode with inJustDecodeBounds=true to check dimensions
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeResource(res, resId, options);
+
+        // Calculate inSampleSize
+        options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
+
+        // Decode bitmap with inSampleSize set
+        options.inJustDecodeBounds = false;
+        return BitmapFactory.decodeResource(res, resId, options);
+    }
+
+    public static int calculateInSampleSize(
+            BitmapFactory.Options options, int reqWidth, int reqHeight) {
+        // Raw height and width of image
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+
+        if (height > reqHeight || width > reqWidth) {
+
+            final int halfHeight = height / 2;
+            final int halfWidth = width / 2;
+
+            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
+            // height and width larger than the requested height and width.
+            while ((halfHeight / inSampleSize) > reqHeight
+                    && (halfWidth / inSampleSize) > reqWidth) {
+                inSampleSize *= 2;
+            }
+        }
+
+        return inSampleSize;
     }
 
     @Override
@@ -109,5 +199,53 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
         public void onCardViewTap(View view, int position);
         }
 
+
+    class BitmapWorkerTask extends AsyncTask<Integer, Void, Bitmap> {
+        private final WeakReference<ImageView> imageViewReference;
+        private int data = 0;
+
+        public BitmapWorkerTask(ImageView imageView, Resources resources) {
+            // Use a WeakReference to ensure the ImageView can be garbage collected
+            imageViewReference = new WeakReference<ImageView>(imageView);
+        }
+
+        // Decode image in background.
+        @Override
+        protected Bitmap doInBackground(Integer... params) {
+            data = params[0];
+            return decodeSampledBitmapFromResource(context.getResources(), data, 200, 200);
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            if (isCancelled()) {
+                bitmap = null;
+            }
+
+            if (imageViewReference != null && bitmap != null) {
+                final ImageView imageView = imageViewReference.get();
+                final BitmapWorkerTask bitmapWorkerTask =
+                        getBitmapWorkerTask(imageView);
+                if (this == bitmapWorkerTask && imageView != null) {
+                    imageView.setImageBitmap(bitmap);
+                }
+            }
+        }
+    }
+    static class AsyncDrawable extends BitmapDrawable {
+        private final WeakReference<BitmapWorkerTask> bitmapWorkerTaskReference;
+
+        public AsyncDrawable(Resources res, Bitmap bitmap,
+                             BitmapWorkerTask bitmapWorkerTask) {
+            super(res, bitmap);
+            bitmapWorkerTaskReference =
+                    new WeakReference<BitmapWorkerTask>(bitmapWorkerTask);
+        }
+
+        public BitmapWorkerTask getBitmapWorkerTask() {
+            return bitmapWorkerTaskReference.get();
+        }
+    }
 }
+
 

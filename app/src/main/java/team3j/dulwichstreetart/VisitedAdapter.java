@@ -56,7 +56,6 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
 
             view = inflater.inflate(R.layout.visited_title, parent, false);
 
-
         } else if (viewType == To_Visit_Title_View_Type) {
 
             view = inflater.inflate(R.layout.to_visit_title, parent, false);
@@ -70,7 +69,7 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
 
     @Override
     public int getItemViewType(int position) {
-        int viewType = Place_View_Type;
+        int viewType = position+100;
 
         if (position == 0) {
             viewType = Visited_Title_View_Type;

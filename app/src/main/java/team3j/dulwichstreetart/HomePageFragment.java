@@ -98,11 +98,14 @@ public class HomePageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         //non facebook setup
+
         View layout = inflater.inflate(R.layout.fragment_home_page, container, false);
 
+        setRetainInstance(true);
+
         setupOnScreenElements(layout);
-        if (isNetworkConnected()) getTweets(); //Get Today's Tweets
-        setupAnimations(layout);
+      //  if (isNetworkConnected()) getTweets(); //Get Today's Tweets
+       // setupAnimations(layout);
         setupGoogleMapsCard(layout);
         setupLibraryAnimations(layout);
 //        Toast.makeText(getActivity(), GalleryData.toVisit.size() +

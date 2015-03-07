@@ -60,6 +60,8 @@ public class GoogleMapFragmentSmall extends Fragment {
         // inflat and return the layout
         View v = inflater.inflate(R.layout.fragment_location_info, container,
                 false);
+        setRetainInstance(true);
+
         mMapView = (MapView) v.findViewById(R.id.mapView);
         mMapView.onCreate(savedInstanceState);
         imageButton= (ImageButton) v.findViewById(R.id.fab_image_button);

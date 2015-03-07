@@ -62,7 +62,7 @@
                         android:layout_below="@id/stikImage"
                         android:layout_marginRight="50dp"
                         android:layout_marginTop="5dp"
-                        android:src="@drawable/shareicon" />
+                        android:src="@drawable/ic_action_back" />
 
                     <ImageView
                         android:id="@+id/mapIcon"
@@ -72,7 +72,7 @@
                         android:layout_below="@id/stikImage"
                         android:layout_marginRight="5dp"
                         android:layout_marginTop="5dp"
-                        android:src="@drawable/mapicon" />
+                        android:src="@drawable/ic_action_back" />
 
                     <TextView
                         android:id="@+id/artDescription"

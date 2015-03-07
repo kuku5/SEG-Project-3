@@ -2,6 +2,9 @@ package team3j.dulwichstreetart;
 
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -45,6 +48,9 @@ public class GalleryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, @Nullable Bundle savedInstanceState) {
         //get layout and elements
         View layout = inflater.inflate(R.layout.fragment_gallery_list, container, false);
+        setRetainInstance(true);
+
+
         recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view_grid);
 
         //get Image Locations and descriptions
@@ -52,6 +58,7 @@ public class GalleryFragment extends Fragment {
         //create recycle view Adapter
 
 
+        updateLayoutForRotation();
 
         //set adapter
         recyclerView.setAdapter(new GalleryAdapter(getActivity(), galleryData, getGalleryClickListener()));
