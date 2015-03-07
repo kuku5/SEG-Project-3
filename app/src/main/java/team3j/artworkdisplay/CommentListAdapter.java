@@ -140,7 +140,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             //update header
             holder.dynamicHeightImageView.setImageDrawable(res1);
 
-           holder.inspirationArtworkImageView.setImageDrawable(res);
+            holder.inspirationArtworkImageView.setImageDrawable(res);
 
             holder.descriptionTitle.setText(galleryData.get(indexOfArtwork).getInspirationTitle());
             holder.description.setText(galleryData.get(indexOfArtwork).getDesc());
