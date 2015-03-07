@@ -300,4 +300,5 @@ public class GallerySwipeSingleFragment extends Fragment {
         Session.getActiveSession().onActivityResult(getActivity(), requestCode, resultCode, data);
 
     }
+
 }

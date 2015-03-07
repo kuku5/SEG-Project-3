@@ -41,9 +41,11 @@ public class VisitedTabFragment extends Fragment implements MaterialTabListener 
     private RecyclerView recyclerView;
    TextView tab1,tab2;
 
+    int position;
 
     public static VisitedTabFragment getInstance(int position) {
         VisitedTabFragment visitedTabFragment = new VisitedTabFragment();
+        position = position;
         Bundle args = new Bundle();
         args.putInt("position", position);
         visitedTabFragment.setArguments(args);
@@ -57,15 +59,15 @@ public class VisitedTabFragment extends Fragment implements MaterialTabListener 
         recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view_visited);
         setRetainInstance(true);
 
-        //kevin this is fake added data
+        // add data
 
-    if(GalleryData.toVisit.size()==0) {
-        Art[] arts = GalleryData.getMapArtwork(getActivity());
-        int size = arts.length;
-        for(int i = 0; i< size; ++i){
-            GalleryData.toVisit.add(arts[i]);
+        if(GalleryData.toVisit.size()==0) {
+            Art[] arts = GalleryData.getMapArtwork(getActivity());
+            int size = arts.length;
+            for(int i = 0; i< size; ++i){
+                GalleryData.toVisit.add(arts[i]);
+            }
         }
-    }
         ArrayList<String> tabs=new ArrayList<String>();
 
         tab1 = (TextView) layout.findViewById(R.id.tableft);
@@ -80,7 +82,7 @@ public class VisitedTabFragment extends Fragment implements MaterialTabListener 
         //create recycle view Adapter
 
         //set adapter
-        recyclerView.setAdapter(new VisitedAdapter(getActivity(), getVisitedClickListener()));
+        recyclerView.setAdapter(new VisitedAdapter(getActivity(), getVisitedClickListener(), GalleryData.get().getArtworkList(), position));
 
         //Set Layout Animation
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity()) {
@@ -89,6 +91,7 @@ public class VisitedTabFragment extends Fragment implements MaterialTabListener 
                 return 200;
             }
         };
+
         recyclerView.setLayoutManager(linearLayoutManager);
 
 

@@ -4,18 +4,13 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.etsy.android.grid.util.DynamicHeightImageView;
-import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 
@@ -34,15 +29,21 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
 
     private final LayoutInflater inflater;
     private Context context;
+    private Bitmap bitmap;
+    private ArrayList<Art> galleryData;
     private final int Visited_Title_View_Type = 1;
     private final int Place_View_Type = 0;
     private final int To_Visit_Title_View_Type = 2;
+    private int indexOfArtwork;
 
 
-    public VisitedAdapter(Context context, OnItemTouchListener itemTouchListener){
+
+    public VisitedAdapter(Context context, OnItemTouchListener itemTouchListener, ArrayList<Art> galleryData, int position){
         this.inflater=LayoutInflater.from(context);
         this.context=context;
         this.onItemTouchListener = itemTouchListener;
+        this.galleryData = galleryData;
+        this.indexOfArtwork = position;
     }
 
 
@@ -55,6 +56,7 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
         if (viewType == Visited_Title_View_Type) {
 
             view = inflater.inflate(R.layout.visited_title, parent, false);
+
 
         } else if (viewType == To_Visit_Title_View_Type) {
 
@@ -85,7 +87,7 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(VisitedAdapter.MyViewHolderVisited holder, int position) {
-            //add image and description to the view for each gallery item
+        //add image and description to the view for each gallery item
 
         if (position == 0) {
 
@@ -98,7 +100,15 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
         }
         else{
 
-            holder.txtLineOne.setText("" + GalleryData.toVisit.get(position-1).getName());
+            holder.txtLineOne.setText("" + galleryData.get(position-1).getName());
+
+            Bitmap bitmap1 = BitmapFactory.decodeResource(context.getResources(), GalleryData.toVisit.get(position-1).getPic());
+            BitmapDrawable res1 = new BitmapDrawable(context.getResources(), bitmap1);
+            holder.image.setImageDrawable(res1);
+
+//            holder.art_info_area.setText("" + GalleryData.toVisit.get(position-1).getDesc());
+            holder.art_info_area.setText("" + galleryData.get(position-1).getDesc());
+
 
         }
 
@@ -115,7 +125,9 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
         // view holder for each grid  cell
         TextView title;
         TextView txtLineOne;
-        LinearLayout expandArea;
+        TextView art_info_area;
+        RelativeLayout expandArea;
+        ImageView image;
 
         boolean expanded=false;
         public MyViewHolderVisited(View itemView, int viewType) {
@@ -137,33 +149,36 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
 
                 default:
 
-                        txtLineOne = (TextView) itemView.findViewById(R.id.textview_visited_item);
-                        expandArea = (LinearLayout) itemView.findViewById(R.id.expand_area);
+                    txtLineOne = (TextView) itemView.findViewById(R.id.textview_visited_item);
+                    expandArea = (RelativeLayout) itemView.findViewById(R.id.expand_area);
+                    image = (ImageView) itemView.findViewById(R.id.image_area);
+                    art_info_area = (TextView) itemView.findViewById(R.id.art_info_area);
 
-                        itemView.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                if(expanded){
-                                    expandArea.setVisibility(View.GONE);
 
-                                    expanded=false;
-                                }else{
-                                    expandArea.setVisibility(View.VISIBLE);
-                                    expanded=true;
+                    itemView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if(expanded){
+                                expandArea.setVisibility(View.GONE);
 
-                                }
+                                expanded=false;
+                            }else{
+                                expandArea.setVisibility(View.VISIBLE);
+                                expanded=true;
+
+                            }
 //
 //                                onItemTouchListener.onCardViewTap(v, getPosition());
 //                                GalleryData.toVisit.add(new Art("Roa ssss",(new LatLng(51.467224, -0.072160)),R.drawable.art0));
-                           //     notifyDataSetChanged();
-                            }
-                        });
+                            //     notifyDataSetChanged();
+                        }
+                    });
 
 
-                        break;
+                    break;
 
             }
-          //  txtLineOne = (TextView) itemView.findViewById(R.id.textview_visited_item);
+            //  txtLineOne = (TextView) itemView.findViewById(R.id.textview_visited_item);
 
 
 
