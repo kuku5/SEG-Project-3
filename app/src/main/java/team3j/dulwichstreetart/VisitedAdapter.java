@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -31,19 +32,14 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
     private Context context;
     private Bitmap bitmap;
     private ArrayList<Art> galleryData;
-    private final int Visited_Title_View_Type = 1;
-    private final int Place_View_Type = 0;
-    private final int To_Visit_Title_View_Type = 2;
-    private int indexOfArtwork;
 
 
 
-    public VisitedAdapter(Context context, OnItemTouchListener itemTouchListener, ArrayList<Art> galleryData, int position){
+    public VisitedAdapter(Context context, OnItemTouchListener itemTouchListener, ArrayList<Art> galleryData){
         this.inflater=LayoutInflater.from(context);
         this.context=context;
         this.onItemTouchListener = itemTouchListener;
         this.galleryData = galleryData;
-        this.indexOfArtwork = position;
     }
 
 
@@ -53,17 +49,6 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
         //inflates the correct view
         View view = inflater.inflate(R.layout.visited_list_item, parent, false);
 
-        if (viewType == Visited_Title_View_Type) {
-
-            view = inflater.inflate(R.layout.visited_title, parent, false);
-
-
-        } else if (viewType == To_Visit_Title_View_Type) {
-
-            view = inflater.inflate(R.layout.to_visit_title, parent, false);
-
-        }
-
         MyViewHolderVisited myViewHolder = new MyViewHolderVisited(view, viewType);
 
         return myViewHolder;
@@ -71,59 +56,40 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
 
     @Override
     public int getItemViewType(int position) {
-        int viewType = position+100;
-
-        if (position == 0) {
-            viewType = Visited_Title_View_Type;
-        }
-
-        if (position == GalleryData.toVisit.size()+1) {
-            viewType = To_Visit_Title_View_Type;
-        }
-
-        return viewType;
+        return position;
 
     }
 
     @Override
     public void onBindViewHolder(VisitedAdapter.MyViewHolderVisited holder, int position) {
-        //add image and description to the view for each gallery item
-
-        if (position == 0) {
 
 
-            // holder.txtLineOne.setText(""+GalleryData.toVisit.get(position).getName());
 
-        }else if (position == GalleryData.toVisit.size()+1) {
+            //add image and description to the view for each gallery item
+            holder.txtLineOne.setText("" + galleryData.get(position).getName());
 
-
-        }
-        else{
-
-            holder.txtLineOne.setText("" + galleryData.get(position-1).getName());
-
-            Bitmap bitmap1 = BitmapFactory.decodeResource(context.getResources(), GalleryData.toVisit.get(position-1).getPic());
+            Bitmap bitmap1 = BitmapFactory.decodeResource(context.getResources(), GalleryData.toVisit.get(position).getPic());
             BitmapDrawable res1 = new BitmapDrawable(context.getResources(), bitmap1);
             holder.image.setImageDrawable(res1);
 
-//            holder.art_info_area.setText("" + GalleryData.toVisit.get(position-1).getDesc());
-            holder.art_info_area.setText("" + galleryData.get(position-1).getDesc());
+            //holder.art_info_area.setText("" + GalleryData.toVisit.get(position-1).getDesc());
+           // holder.art_info_area.setText("" + galleryData.get(position).getDesc());
 
 
-        }
+
 
 
     }
 
     @Override
     public int getItemCount() {
-        return GalleryData.toVisit.size()+GalleryData.visited.size()+2;
+        return GalleryData.toVisit.size()+GalleryData.visited.size();
     }
 
     //custom viewHolder for each item in recycle view
+
     class MyViewHolderVisited extends RecyclerView.ViewHolder  {
         // view holder for each grid  cell
-        TextView title;
         TextView txtLineOne;
         TextView art_info_area;
         RelativeLayout expandArea;
@@ -133,26 +99,11 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
         public MyViewHolderVisited(View itemView, int viewType) {
             super(itemView);
 
-            switch(viewType){
-                case Visited_Title_View_Type:
-
-                    title = (TextView) itemView.findViewById(R.id.textview_visited_item);
-
-
-
-                    break;
-                case To_Visit_Title_View_Type:
-
-                    title = (TextView) itemView.findViewById(R.id.textview_visited_item);
-
-                    break;
-
-                default:
 
                     txtLineOne = (TextView) itemView.findViewById(R.id.textview_visited_item);
                     expandArea = (RelativeLayout) itemView.findViewById(R.id.expand_area);
                     image = (ImageView) itemView.findViewById(R.id.image_area);
-                    art_info_area = (TextView) itemView.findViewById(R.id.art_info_area);
+                    art_info_area = (TextView) itemView.findViewById(R.id.visited_description);
 
 
                     itemView.setOnClickListener(new View.OnClickListener() {
@@ -167,18 +118,10 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
                                 expanded=true;
 
                             }
-//
-//                                onItemTouchListener.onCardViewTap(v, getPosition());
-//                                GalleryData.toVisit.add(new Art("Roa ssss",(new LatLng(51.467224, -0.072160)),R.drawable.art0));
-                            //     notifyDataSetChanged();
+
                         }
                     });
 
-
-                    break;
-
-            }
-            //  txtLineOne = (TextView) itemView.findViewById(R.id.textview_visited_item);
 
 
 

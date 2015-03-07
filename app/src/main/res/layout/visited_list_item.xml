@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -16,6 +16,15 @@
         card_view:cardBackgroundColor="@android:color/white"
         card_view:cardCornerRadius="4dp">
 
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
         <TextView android:text="Hello World" android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -38,95 +47,144 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="17dp"
+            android:layout_alignParentRight="true"
+
             android:layout_marginRight="3dp"
             android:layout_gravity="right"
             android:src="@android:drawable/arrow_down_float"/>
+            </RelativeLayout>
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/expand_area"
+    android:visibility="gone"
+    >
 
-        <RelativeLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="150dp"
-            android:background="@android:color/transparent"
-            android:visibility="gone"
-            android:id="@+id/expand_area"
-            android:gravity="center_horizontal">
+          <LinearLayout
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              >
 
-            <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:id="@+id/image_area"
-                android:layout_alignParentLeft="true"
-                android:layout_marginTop="35dp"
-                android:paddingLeft="15dp"/>
-            <!--android:src="@drawable/ic_launcher"-->
-            <!--android:layout_below="@+id/textview_visited_item"                -->
-            <!--android:layout_above="@+id/visitedQuestion_textView"-->
-            <!--android:layout_alignRight="@+id/visitedQuestion_textView"/>-->
+              <ImageView
+                  android:layout_width="40dp"
+                  android:layout_height="40dp"
+                  android:id="@+id/image_area"
+                  android:layout_alignParentLeft="true"
+                  android:padding="15dp"
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="art info"
-                android:id="@+id/art_info_area"
-                android:layout_toRightOf="@+id/image_area"
-                android:paddingLeft="15dp"
-                android:layout_marginTop="35dp"/>
-            <!--android:layout_alignBaseline="@+id/map_link_button"-->
-            <!--android:layout_alignBottom="@+id/address_info_area"-->
+                  />
 
-            <!--<LinearLayout-->
-            <!--android:orientation="vertical"-->
-            <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:background="@android:color/transparent"-->
-            <!--android:id="@+id/sub_button_area"-->
-            <!--android:layout_gravity="right">-->
+              <TextView
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/visited_description"
+                  android:text="You Last Visited On 06/01/2013"
+                  android:padding="15dp"
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Map Button"
-                android:id="@+id/map_link_button"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="35dp"
-                android:paddingRight="15dp"/>
-            <!--android:layout_toEndOf="@+id/art_info_area"-->
-            <!--android:layout_toRightOf="@+id/art_info_area"/>-->
-            <!--android:layout_below="@+id/visitedQuestion_textView"/>-->
+                  />
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/mapIcon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:padding="15dp"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_map" />
+    </RelativeLayout>
 
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Gallery Button"
-                android:id="@+id/gallery_link_button"
-                android:layout_below="@+id/map_link_button"
-                android:layout_alignParentRight="true"
-                android:layout_alignLeft="@+id/map_link_button"
-                android:paddingRight="15dp"/>
-
-            <!--</LinearLayout>-->
 
 
-            <!--<LinearLayout-->
+
+
+
+
+          </LinearLayout>
+</RelativeLayout>
+        <!---->
+        <!--<RelativeLayout-->
             <!--android:orientation="horizontal"-->
             <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_height="150dp"-->
             <!--android:background="@android:color/transparent"-->
-            <!--android:id="@+id/sub_text_area"-->
-            <!--android:layout_gravity="bottom">-->
+            <!--android:visibility="visible"-->
+            <!--android:id="@+id/expand_area"-->
+            <!--android:gravity="center_horizontal">-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Address goes here"
-                android:id="@+id/address_info_area"
-                android:layout_below="@+id/image_area"
-                android:layout_alignParentBottom="true"/>
+          <!---->
+            <!--&lt;!&ndash;android:src="@drawable/ic_launcher"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_below="@+id/textview_visited_item"                &ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_above="@+id/visitedQuestion_textView"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_alignRight="@+id/visitedQuestion_textView"/>&ndash;&gt;-->
 
-            <!--</LinearLayout>-->
-        </RelativeLayout>
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="art info"-->
+                <!--android:id="@+id/art_info_area"-->
+                <!--android:paddingLeft="15dp"-->
+                <!--android:layout_marginTop="35dp"/>-->
+            <!--&lt;!&ndash;android:layout_alignBaseline="@+id/map_link_button"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_alignBottom="@+id/address_info_area"&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
+            <!--&lt;!&ndash;android:orientation="vertical"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="fill_parent"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:background="@android:color/transparent"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/sub_button_area"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_gravity="right">&ndash;&gt;-->
+
+            <!--<Button-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Map Button"-->
+                <!--android:id="@+id/map_link_button"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_marginTop="35dp"-->
+                <!--android:paddingRight="15dp"/>-->
+            <!--&lt;!&ndash;android:layout_toEndOf="@+id/art_info_area"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_toRightOf="@+id/art_info_area"/>&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_below="@+id/visitedQuestion_textView"/>&ndash;&gt;-->
+
+
+            <!--<Button-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Gallery Button"-->
+                <!--android:id="@+id/gallery_link_button"-->
+                <!--android:layout_below="@+id/map_link_button"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_alignLeft="@+id/map_link_button"-->
+                <!--android:paddingRight="15dp"/>-->
+
+            <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+
+
+            <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
+            <!--&lt;!&ndash;android:orientation="horizontal"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="fill_parent"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:background="@android:color/transparent"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/sub_text_area"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_gravity="bottom">&ndash;&gt;-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Address goes here"-->
+                <!--android:id="@+id/address_info_area"-->
+                <!--android:layout_below="@+id/image_area"-->
+                <!--android:layout_alignParentBottom="true"/>-->
+
+            <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+        <!--</RelativeLayout>-->
+        </LinearLayout>
 
     </android.support.v7.widget.CardView>
 
-</RelativeLayout>
+</LinearLayout>

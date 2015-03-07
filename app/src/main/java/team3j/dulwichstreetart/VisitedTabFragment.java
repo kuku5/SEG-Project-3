@@ -39,13 +39,10 @@ import it.neokree.materialtabs.MaterialTabListener;
 public class VisitedTabFragment extends Fragment implements MaterialTabListener {
 
     private RecyclerView recyclerView;
-   TextView tab1,tab2;
 
-    int position;
 
     public static VisitedTabFragment getInstance(int position) {
         VisitedTabFragment visitedTabFragment = new VisitedTabFragment();
-        position = position;
         Bundle args = new Bundle();
         args.putInt("position", position);
         visitedTabFragment.setArguments(args);
@@ -68,13 +65,8 @@ public class VisitedTabFragment extends Fragment implements MaterialTabListener 
                 GalleryData.toVisit.add(arts[i]);
             }
         }
-        ArrayList<String> tabs=new ArrayList<String>();
 
-        tab1 = (TextView) layout.findViewById(R.id.tableft);
-        tab2 = (TextView) layout.findViewById(R.id.tabright);
 
-        tab1.setText("Visited");
-        tab2.setText("To Visit");
 
 
 
@@ -82,7 +74,7 @@ public class VisitedTabFragment extends Fragment implements MaterialTabListener 
         //create recycle view Adapter
 
         //set adapter
-        recyclerView.setAdapter(new VisitedAdapter(getActivity(), getVisitedClickListener(), GalleryData.get().getArtworkList(), position));
+        recyclerView.setAdapter(new VisitedAdapter(getActivity(), getVisitedClickListener(), GalleryData.get().getArtworkList()));
 
         //Set Layout Animation
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity()) {

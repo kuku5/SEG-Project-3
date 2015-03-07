@@ -9,6 +9,8 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_sub">SubActivity</string>
     <string name="next">Next</string>
+    <string name="infotext">Info</string>
+    <string name="artisttile">By Agent Provocateur</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>

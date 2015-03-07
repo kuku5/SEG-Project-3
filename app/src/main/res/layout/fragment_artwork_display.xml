@@ -26,14 +26,13 @@
 
         <ImageButton
             android:id="@+id/back_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:background="@android:color/transparent"
             android:clickable="true"
             android:padding="12dp"
             android:src="@drawable/ic_action_back"
             android:tint="@color/white"
-
             />
 
         <TextView
@@ -42,19 +41,18 @@
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_gravity="center|left"
-            android:layout_marginTop="5dp"
             android:layout_weight="0.8"
             android:maxLines="1"
             android:padding="12dp"
+            android:layout_marginTop="2dp"
+
             android:text="@string/hello_world"
             android:textAllCaps="true"
             android:textColor="@color/white"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:background="@color/colorAccentReal"
             />
-
-        <!--android:textColor="#1f3133"-->
 
 
     </LinearLayout>
