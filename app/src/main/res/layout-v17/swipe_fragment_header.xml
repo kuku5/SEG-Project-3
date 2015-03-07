@@ -58,12 +58,11 @@
                 android:layout_gravity="center|left"
                 android:maxLines="1"
                 android:padding="12dp"
-                android:text="@string/infotext"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:background="@color/colorAccentReal"
+                android:background="@drawable/ic_info"
                 />
 
         </LinearLayout>
