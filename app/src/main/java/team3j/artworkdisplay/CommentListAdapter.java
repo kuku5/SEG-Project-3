@@ -218,6 +218,10 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                 holder.likeIcon.setImageResource(R.drawable.ic_facebook_like_thumb);
             }
 
+            if (commentInfo.getUserLikes() == true) {
+                holder.likeWord.setText("Unlike");
+            }
+
             int year = Integer.parseInt(commentInfo.getTime().substring(0, 4));
             int month = Integer.parseInt(commentInfo.getTime().substring(5, 7)) - 1;
             int day = Integer.parseInt(commentInfo.getTime().substring(8, 10));
@@ -315,6 +319,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         TextView timestamp;
         TextView description;
         TextView descriptionTitle;
+        TextView likeWord;
         TextView numberLikes;
         ImageView likeIcon;
 
@@ -333,6 +338,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                     timestamp = (TextView) itemView.findViewById(R.id.time);
                     numberLikes = (TextView) itemView.findViewById(R.id.number_likes);
                     likeIcon = (ImageView) itemView.findViewById(R.id.like_picture);
+                    likeWord = (TextView) itemView.findViewById(R.id.like);
                     posterName.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
