@@ -238,7 +238,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                     holder.timestamp.setText(timeSincePost.get(TimeUnit.DAYS) + " days ago");
                 }
             } else if (timeSincePost.get(TimeUnit.DAYS) > 7) {
-                holder.timestamp.setText(postDate.getTime().toString().substring(4, 10) + " at " + postDate.getTime().toString().substring(11, 16));
+                holder.timestamp.setText(postDate.getTime().toString().substring(4, 10) +" "+ year+" at " + postDate.getTime().toString().substring(11, 16));
             } else if (timeSincePost.get(TimeUnit.DAYS) == 0) {
                 if (timeSincePost.get(TimeUnit.HOURS) == 1) {
                     holder.timestamp.setText("About one hour ago");
