@@ -15,6 +15,8 @@ public class Comment implements Parcelable {
     private String posterURL;
     private String commentID;
     private boolean userLikes;
+    private String numberLikes;
+
     public void setIcon(int icon) {
         this.icon = icon;
 
@@ -28,6 +30,10 @@ public class Comment implements Parcelable {
     public void setPosterName(String posterName) {
         this.posterName = posterName;
 
+    }
+
+    public void setNumberLikes(String numberLikes) {
+        this.numberLikes = numberLikes;
     }
 
     public void setPosterURL(String posterURL) {
@@ -55,6 +61,9 @@ public class Comment implements Parcelable {
     public String getPosterName() {
         return posterName;
 
+    }
+    public String getNumberLikes() {
+        return numberLikes;
     }
     public String getPosterURL() {
         return posterURL;
