@@ -303,4 +303,44 @@ public class GallerySwipeSingleFragment extends Fragment {
 
     }
 
+    public void likeComment(String commentID, Boolean userLikes){
+        System.out.println(commentID);
+        Session session = Session.getActiveSession();
+
+        //Might not be able to use this method to get permissions
+        List<String> permissions = session.getPermissions();
+        System.out.println(permissions);
+        HttpMethod method;
+        if(userLikes){
+            method = HttpMethod.DELETE;
+        }
+        else{
+            method = HttpMethod.POST;
+        }
+        if(permissions.contains("publish_actions")){
+            System.out.println("has publish actions");
+            Bundle params = new Bundle();
+
+            /* make the API call */
+            new Request(session, "/" + commentID + "/likes", params,
+                    method,
+                    new Request.Callback() {
+                        public void onCompleted(Response response) {
+                            System.out.println(response);
+                            //TODO REFRESH PAGE HERE
+                            commentListAdapter.resetComments();
+
+                        }
+                    }
+            ).executeAsync();
+
+        } else {
+            //Request posting permissions
+            Session.getActiveSession().requestNewPublishPermissions(new Session.NewPermissionsRequest(this, Arrays.asList("publish_actions")));
+            //TODO something after the request been made
+
+        }
+
+    }
+
 }

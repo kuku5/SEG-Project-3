@@ -221,6 +221,12 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             if (commentInfo.getUserLikes() == true) {
                 holder.likeWord.setText("Unlike");
             }
+            holder.likeWord.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    gallerySwipeSingleFragment.likeComment(commentInfo.getCommentID(), commentInfo.getUserLikes());
+                }
+            });
 
             int year = Integer.parseInt(commentInfo.getTime().substring(0, 4));
             int month = Integer.parseInt(commentInfo.getTime().substring(5, 7)) - 1;
