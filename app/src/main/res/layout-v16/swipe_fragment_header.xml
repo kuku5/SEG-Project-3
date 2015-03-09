@@ -42,6 +42,21 @@
         android:background="@color/colorAccentReal"
         android:layout_height="wrap_content">
 
+        <TextView
+
+            android:id="@+id/position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|left"
+            android:maxLines="1"
+            android:padding="12dp"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:background="@drawable/ic_info"
+
+            />
         <ImageView
             android:id="@+id/shareIcon"
             android:layout_width="40dp"
