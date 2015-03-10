@@ -310,7 +310,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         builder.setPositiveButton("Login", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                data = gallerySwipeSingleFragment.onClickLogin();
+                gallerySwipeSingleFragment.onClickLogin();
                 notifyDataSetChanged();
             }
         });
@@ -386,8 +386,8 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                         public void onClick(View v) {
                             if (checkIfLogIn == true) {
                                 //if logged in just get the comments and show
-                                data = gallerySwipeSingleFragment.onClickLogin();
-                                notifyDataSetChanged();
+                                gallerySwipeSingleFragment.onClickLogin();
+                                //notifyDataSetChanged();
                             }
                             else if (checkIfLogIn == false){
                                 // if not logged in show dialog box telling them what happens if they log in
@@ -463,8 +463,10 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
 
     }
-    public void resetComments(){
-        data = gallerySwipeSingleFragment.onClickLogin();
+
+
+    public void commentsChanged(ArrayList<Comment> data){
+        this.data = data;
         notifyDataSetChanged();
     }
 

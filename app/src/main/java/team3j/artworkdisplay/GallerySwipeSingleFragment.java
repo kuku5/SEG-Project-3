@@ -176,6 +176,7 @@ public class GallerySwipeSingleFragment extends Fragment {
                                             comments.add(commentInfo);
 
                                         }
+                                        commentListAdapter.commentsChanged(comments);
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }
@@ -198,7 +199,7 @@ public class GallerySwipeSingleFragment extends Fragment {
     }
 
     //handler for the log in button
-    public ArrayList<Comment> onClickLogin() {
+    public void onClickLogin() {
 
         Session session = Session.getActiveSession();
 
@@ -212,7 +213,7 @@ public class GallerySwipeSingleFragment extends Fragment {
             getFbData();
         }
         //System.out.println("onClickLogin" + comments);
-        return comments;
+
 
     }
 
@@ -240,6 +241,7 @@ public class GallerySwipeSingleFragment extends Fragment {
 //                    }
 //                }
 //            }).executeAsync();
+
 
         } else if (state.isClosed()) {
             //If logged out, show this
@@ -284,7 +286,7 @@ public class GallerySwipeSingleFragment extends Fragment {
                         public void onCompleted(Response response) {
                             System.out.println(response.getGraphObject().getInnerJSONObject());
                             //TODO REFRESH PAGE HERE
-                            commentListAdapter.resetComments();
+                            getFbData();
 
                         }
                     }
@@ -296,6 +298,7 @@ public class GallerySwipeSingleFragment extends Fragment {
             //TODO something after the request been made
 
         }
+
 
     }
 
@@ -334,7 +337,7 @@ public class GallerySwipeSingleFragment extends Fragment {
                                 boolean success = response.getGraphObject().getInnerJSONObject().getBoolean("success");
 
                                 if(success) {
-                                    commentListAdapter.resetComments();
+                                    getFbData();
                                 }
                                 else{
                                     System.out.println(response.getError());
