@@ -30,6 +30,8 @@ import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.model.GraphUser;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -280,7 +282,7 @@ public class GallerySwipeSingleFragment extends Fragment {
                     HttpMethod.POST,
                     new Request.Callback() {
                         public void onCompleted(Response response) {
-                            System.out.println(response);
+                            System.out.println(response.getGraphObject().getInnerJSONObject());
                             //TODO REFRESH PAGE HERE
                             commentListAdapter.resetComments();
 
@@ -326,9 +328,20 @@ public class GallerySwipeSingleFragment extends Fragment {
                     method,
                     new Request.Callback() {
                         public void onCompleted(Response response) {
-                            System.out.println(response);
                             //TODO REFRESH PAGE HERE
-                            commentListAdapter.resetComments();
+                            try {
+                                //System.out.println(response.getError());
+                                boolean success = response.getGraphObject().getInnerJSONObject().getBoolean("success");
+
+                                if(success) {
+                                    commentListAdapter.resetComments();
+                                }
+                                else{
+                                    System.out.println(response.getError());
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
 
                         }
                     }

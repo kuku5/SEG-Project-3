@@ -214,12 +214,21 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
             holder.message.setText(commentInfo.getMessage());
             if (Integer.parseInt(commentInfo.getNumberLikes())>=1) {
+                holder.numberLikes.setVisibility(View.VISIBLE);
+                holder.likeIcon.setVisibility(View.VISIBLE);
                 holder.numberLikes.setText(commentInfo.getNumberLikes());
                 holder.likeIcon.setImageResource(R.drawable.ic_facebook_like_thumb);
+            }
+            else{
+                holder.numberLikes.setVisibility(View.INVISIBLE);
+                holder.likeIcon.setVisibility(View.INVISIBLE);
             }
 
             if (commentInfo.getUserLikes() == true) {
                 holder.likeWord.setText("Unlike");
+            }
+            else{
+                holder.likeWord.setText("Like");
             }
             holder.likeWord.setOnClickListener(new View.OnClickListener() {
                 @Override
