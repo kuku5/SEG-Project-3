@@ -61,6 +61,8 @@ public class GallerySwipeSingleFragment extends Fragment {
 
     private CommentListAdapter commentListAdapter;
 
+    private boolean success = false;
+
     public static GallerySwipeSingleFragment getInstance(int position, int indexOfArtWork) {
         GallerySwipeSingleFragment myFragmentTab = new GallerySwipeSingleFragment();
         Bundle args = new Bundle();
@@ -174,9 +176,9 @@ public class GallerySwipeSingleFragment extends Fragment {
                                             commentInfo.setCommentID(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("id").toString());
                                             commentInfo.setUserLikes((Boolean) response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("user_likes"));
                                             comments.add(commentInfo);
-
+                                            success = true;
                                         }
-                                        commentListAdapter.commentsChanged(comments);
+
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }
@@ -192,6 +194,10 @@ public class GallerySwipeSingleFragment extends Fragment {
 
         } catch (InterruptedException e) {
             e.printStackTrace();
+        }
+        if(success){
+            commentListAdapter.commentsChanged(comments);
+            success = false;
         }
         //System.out.println("FBdata" + comments);
 
@@ -333,7 +339,7 @@ public class GallerySwipeSingleFragment extends Fragment {
                         public void onCompleted(Response response) {
                             //TODO REFRESH PAGE HERE
                             try {
-                                //System.out.println(response.getError());
+                                System.out.println(response.getError());
                                 boolean success = response.getGraphObject().getInnerJSONObject().getBoolean("success");
 
                                 if(success) {
