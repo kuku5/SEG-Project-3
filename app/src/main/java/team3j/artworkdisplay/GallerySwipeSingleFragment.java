@@ -34,6 +34,8 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import team3j.dulwichstreetart.Art;
@@ -151,13 +153,15 @@ public class GallerySwipeSingleFragment extends Fragment {
             public void run(){
                 Bundle b1 = new Bundle();
                 b1.putBoolean("summary", true);     //includes a summary in the request
-                b1.putString("filter", "stream");   //gets the chronological order of comments
+                b1.putString("filter", "toplevel");
+                //b1.putString("filter", "stream");   //gets the chronological order of comments
                 b1.putString("limit", "100");        //gets max of 100
                 new Request(Session.getActiveSession(), "779466045468925/comments", b1, HttpMethod.GET,
                         new Request.Callback() {
                             public void onCompleted(Response response) {
                                 if (response != null) {
                                     try {
+                                        System.out.println(response);
                                         //System.out.println(response.getGraphObject().toString());
                                         //System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" +response.getGraphObject().getInnerJSONObject().getJSONObject("summary").toString());
 
@@ -176,8 +180,17 @@ public class GallerySwipeSingleFragment extends Fragment {
                                             commentInfo.setCommentID(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("id").toString());
                                             commentInfo.setUserLikes((Boolean) response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("user_likes"));
                                             comments.add(commentInfo);
-                                            success = true;
+
                                         }
+                                        success = true;
+                                        //sorts the comments in descending order by time
+                                        Collections.sort(comments, new Comparator<Comment>() {
+                                            public int compare(Comment c1, Comment c2) {
+                                                return c2.getTime().compareTo(c1.getTime());
+                                            }
+                                        });
+
+
 
                                     } catch (Exception e) {
                                         e.printStackTrace();
