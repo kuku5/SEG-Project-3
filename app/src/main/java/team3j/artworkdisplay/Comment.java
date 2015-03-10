@@ -16,6 +16,7 @@ public class Comment implements Parcelable {
     private String commentID;
     private boolean userLikes;
     private String numberLikes;
+    private boolean isAReply;
 
     public void setIcon(int icon) {
         this.icon = icon;
@@ -51,6 +52,9 @@ public class Comment implements Parcelable {
         this.userLikes = userLikes;
 
     }
+    public void setIsAReply(Boolean isAReply){
+        this.isAReply = isAReply;
+    }
 
 
     public String getMessage() {
@@ -80,6 +84,9 @@ public class Comment implements Parcelable {
     public boolean getUserLikes() {
         return userLikes;
 
+    }
+    public boolean getIsAReply(){
+        return isAReply;
     }
 
     public int getIcon() {

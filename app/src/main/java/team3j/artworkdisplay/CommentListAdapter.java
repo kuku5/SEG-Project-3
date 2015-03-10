@@ -212,7 +212,12 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                 }
             });
 
-            holder.message.setText(commentInfo.getMessage());
+
+            if(commentInfo.getIsAReply()){
+                holder.message.setText("(Reply) " + commentInfo.getMessage());
+            }else {
+                holder.message.setText(commentInfo.getMessage());
+            }
             if (Integer.parseInt(commentInfo.getNumberLikes())>=1) {
                 holder.numberLikes.setVisibility(View.VISIBLE);
                 holder.likeIcon.setVisibility(View.VISIBLE);
