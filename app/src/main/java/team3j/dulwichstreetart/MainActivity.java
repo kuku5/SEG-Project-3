@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -78,6 +79,7 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
         viewPager.setOffscreenPageLimit(3);
 
 
+        tabHost.setPrimaryColor(getResources().getColor(R.color.colorAccentReal));
         //adds the titles to each tab and changes colors of text
         for (int i = 0; i < adapter.getCount(); i++) {
             MaterialTab materialTab =
@@ -85,11 +87,10 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
                             .setText(adapter.getPageTitle(i))
                             .setTabListener(this);
             tabHost.addTab(materialTab);
-
-            materialTab.setTextColor(getResources().getColor(R.color.colorAccentReal));
+            materialTab.setTextColor(getResources().getColor(R.color.white));
 
         }
-        tabHost.setAccentColor(getResources().getColor(R.color.colorAccentReal));
+        tabHost.setAccentColor(getResources().getColor(R.color.white));
     }
 
 
@@ -101,7 +102,7 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
 
         toolbar.setCollapsible(true);
         toolbar.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-        toolbar.setTitleTextColor(getResources().getColor(R.color.white));
+        toolbar.setTitleTextColor(getResources().getColor(R.color.colorAccentReal));
         toolbar.setSubtitleTextColor(getResources().getColor(R.color.white));
         //hide actionbar
         ActionBar actionBar = getSupportActionBar();
@@ -211,7 +212,8 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
         @Override
         public CharSequence getPageTitle(int position) {
             //this returns the page title for each tab from the xml strings file
-            return getResources().getStringArray(R.array.tabs)[position];
+            String title=getResources().getStringArray(R.array.tabs)[position];
+            return Html.fromHtml("<html><body><b>"+title+"</b>  </body><html>");
         }
 
     }

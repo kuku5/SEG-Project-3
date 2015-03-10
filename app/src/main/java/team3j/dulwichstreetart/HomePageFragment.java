@@ -103,6 +103,7 @@ public class HomePageFragment extends Fragment {
 
         setRetainInstance(true);
 
+
         setupOnScreenElements(layout);
       //  if (isNetworkConnected()) getTweets(); //Get Today's Tweets
        // setupAnimations(layout);

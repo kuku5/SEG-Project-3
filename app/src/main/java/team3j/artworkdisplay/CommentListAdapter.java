@@ -85,7 +85,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
     @Override
     public int getItemViewType(int position) {
-        int viewType = Comment_View_Type;
+        int viewType = position+100;
 
         if (position == 0) {
             viewType = Header_View_Type;

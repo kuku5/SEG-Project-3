@@ -18,7 +18,9 @@
         app:accentColor="@color/colorAccent"
         app:hasIcons="false"
         app:iconColor="@android:color/white"
-        app:primaryColor="@color/colorPrimary"/>
+        app:primaryColor="@color/colorPrimary"
+
+        />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPager"
