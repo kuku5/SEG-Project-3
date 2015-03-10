@@ -85,7 +85,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
     @Override
     public int getItemViewType(int position) {
-        int viewType = position+100;
+        int viewType = position+100 ;
 
         if (position == 0) {
             viewType = Header_View_Type;
@@ -337,7 +337,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             super(itemView);
 
             switch (viewType) {
-                case Comment_View_Type:
+                default:
                     //setup comment view elements
                     posterName = (TextView) itemView.findViewById(R.id.name);
                     message = (TextView) itemView.findViewById(R.id.comment);
