@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Environment;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -172,7 +173,9 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                 public void onClick(View v) {
                     //THIS IS WHERE THE POST COMMENT TO FACEBOOK CODE WILL GO
                     //System.out.println(holder.postBox.getText().toString());
-                    gallerySwipeSingleFragment.postComment(holder.postBox.getText().toString());
+                    CustomProcessDialog customProcessDialog = new CustomProcessDialog(gallerySwipeSingleFragment.getActivity());
+
+                    gallerySwipeSingleFragment.postComment(holder.postBox.getText().toString(), customProcessDialog);
                     holder.postBox.setText("");
 
                 }

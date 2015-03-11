@@ -359,10 +359,10 @@ public class GallerySwipeSingleFragment extends Fragment {
         else {  }
     }
     //Method to post a comment to facebook
-    public void postComment(String comment){
+    public void postComment(String comment, final CustomProcessDialog customProcessDialog){
         //TODO check if active session is not null and opened
         Session session = Session.getActiveSession();
-
+        customProcessDialog.show();
         //Might not be able to use this method to get permissions
         List<String> permissions = session.getPermissions();
         System.out.println(permissions);
@@ -377,12 +377,13 @@ public class GallerySwipeSingleFragment extends Fragment {
                         public void onCompleted(Response response) {
                             System.out.println(response.getGraphObject().getInnerJSONObject());
                             //TODO REFRESH PAGE HERE
+
+                            customProcessDialog.hide();
                             getFbData();
 
                         }
                     }
             ).executeAsync();
-
         } else {
             //Request posting permissions
             Session.getActiveSession().requestNewPublishPermissions(new Session.NewPermissionsRequest(this, Arrays.asList("publish_actions")));
