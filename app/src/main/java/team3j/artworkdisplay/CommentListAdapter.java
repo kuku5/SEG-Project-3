@@ -311,6 +311,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         return result;
     }
 
+
     private void showLoginDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(gallerySwipeSingleFragment.getActivity());
         builder.setTitle("Login to Facebook");
@@ -319,7 +320,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 gallerySwipeSingleFragment.onClickLogin();
-                notifyDataSetChanged();
+                //notifyDataSetChanged();
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

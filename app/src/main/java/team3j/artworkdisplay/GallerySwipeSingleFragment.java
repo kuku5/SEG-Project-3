@@ -152,68 +152,58 @@ public class GallerySwipeSingleFragment extends Fragment {
     public void getFbData() {
 
         comments = new ArrayList<Comment>();
-        Thread getComments = new Thread(){
-            public void run(){
-                Bundle b1 = new Bundle();
-                b1.putBoolean("summary", true);     //includes a summary in the request
-                b1.putString("filter", "toplevel");
-                //b1.putString("filter", "stream");   //gets the chronological order of comments
-                b1.putString("limit", "100");        //gets max of 100
-                new Request(Session.getActiveSession(), "779466045468925/comments", b1, HttpMethod.GET,
-                        new Request.Callback() {
-                            public void onCompleted(Response response) {
-                                if (response != null) {
-                                    try {
-                                        System.out.println(response);
-                                        //System.out.println(response.getGraphObject().toString());
-                                        //System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" +response.getGraphObject().getInnerJSONObject().getJSONObject("summary").toString());
 
-                                        int x = response.getGraphObject().getInnerJSONObject().getJSONArray("data").length();
-                                        System.out.println(x);
-                                        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" +response.getGraphObject().getInnerJSONObject().getJSONArray("data"));
-                                        for (int i = 0; i < x; i++) {
-                                            //System.out.println(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i));
-                                            Comment commentInfo = new Comment();
-                                            System.out.println("NUMBER LIKES"+Integer.parseInt(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("like_count").toString()));
-                                            commentInfo.setNumberLikes(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("like_count").toString());
-                                            commentInfo.setPosterURL(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).getJSONObject("from").get("id").toString());
-                                            commentInfo.setPosterName(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).getJSONObject("from").get("name").toString());
-                                            commentInfo.setMessage(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("message").toString());
-                                            commentInfo.setTime(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("created_time").toString());
-                                            commentInfo.setCommentID(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("id").toString());
-                                            commentInfo.setUserLikes((Boolean) response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("user_likes"));
-                                            commentInfo.setIsAReply(false);
-                                            comments.add(commentInfo);
+        Bundle b1 = new Bundle();
+        b1.putBoolean("summary", true);     //includes a summary in the request
+        b1.putString("filter", "toplevel");
+        //b1.putString("filter", "stream");   //gets the chronological order of comments
+        b1.putString("limit", "100");        //gets max of 100
+        new Request(Session.getActiveSession(), "779466045468925/comments", b1, HttpMethod.GET,
+                new Request.Callback() {
+                    public void onCompleted(Response response) {
+                        if (response != null) {
+                            try {
+                                System.out.println(response);
+                                //System.out.println(response.getGraphObject().toString());
+                                //System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" +response.getGraphObject().getInnerJSONObject().getJSONObject("summary").toString());
 
-                                        }
+                                int x = response.getGraphObject().getInnerJSONObject().getJSONArray("data").length();
+                                System.out.println(x);
+                                System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" +response.getGraphObject().getInnerJSONObject().getJSONArray("data"));
+                                for (int i = 0; i < x; i++) {
+                                    //System.out.println(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i));
+                                    Comment commentInfo = new Comment();
+                                    System.out.println("NUMBER LIKES"+Integer.parseInt(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("like_count").toString()));
+                                    commentInfo.setNumberLikes(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("like_count").toString());
+                                    commentInfo.setPosterURL(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).getJSONObject("from").get("id").toString());
+                                    commentInfo.setPosterName(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).getJSONObject("from").get("name").toString());
+                                    commentInfo.setMessage(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("message").toString());
+                                    commentInfo.setTime(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("created_time").toString());
+                                    commentInfo.setCommentID(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("id").toString());
+                                    commentInfo.setUserLikes((Boolean) response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("user_likes"));
+                                    commentInfo.setIsAReply(false);
+                                    comments.add(commentInfo);
 
-                                        //sorts the comments in descending order by time
-                                        Collections.sort(comments, new Comparator<Comment>() {
-                                            public int compare(Comment c1, Comment c2) {
-                                                return c2.getTime().compareTo(c1.getTime());
-                                            }
-                                        });
-
-
-
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }
                                 }
+
+                                //sorts the comments in descending order by time
+                                Collections.sort(comments, new Comparator<Comment>() {
+                                    public int compare(Comment c1, Comment c2) {
+                                        return c2.getTime().compareTo(c1.getTime());
+                                    }
+                                });
+                                getReplies();
+
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
                             }
-                        }).executeAndWait();
+                        }
+                    }
+                }).executeAsync();
 
-            }
-        };
-        getComments.start();
-        try {
-            getComments.join();
 
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println("Getting FB comments done");
-        getReplies();
+
 
         //System.out.println("FBdata" + comments);
 
