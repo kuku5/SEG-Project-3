@@ -177,9 +177,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                 public void onClick(View v) {
                     //THIS IS WHERE THE POST COMMENT TO FACEBOOK CODE WILL GO
                     //System.out.println(holder.postBox.getText().toString());
-                    CustomProcessDialog customProcessDialog = new CustomProcessDialog(gallerySwipeSingleFragment.getActivity());
-
-                    gallerySwipeSingleFragment.postComment(holder.postBox.getText().toString(), customProcessDialog);
+                    gallerySwipeSingleFragment.postComment(holder.postBox.getText().toString());
                     holder.postBox.setText("");
 
                 }

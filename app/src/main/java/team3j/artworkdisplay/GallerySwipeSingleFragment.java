@@ -2,6 +2,7 @@ package team3j.artworkdisplay;
 
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -150,7 +151,7 @@ public class GallerySwipeSingleFragment extends Fragment {
 
 
     public void getFbData(final CustomProcessDialog customProcessDialog) {
-        customProcessDialog.show();
+        //customProcessDialog.show();
         comments = new ArrayList<Comment>();
 
         Bundle b1 = new Bundle();
@@ -192,8 +193,9 @@ public class GallerySwipeSingleFragment extends Fragment {
                                         return c2.getTime().compareTo(c1.getTime());
                                     }
                                 });
-                                getReplies();
-                                customProcessDialog.hide();
+                                new MyAsync().execute();
+//                                getReplies();
+//                                customProcessDialog.hide();
 
 
 
@@ -274,10 +276,7 @@ public class GallerySwipeSingleFragment extends Fragment {
             e.printStackTrace();
         }
         loopCounter = 0;
-        if (success) {
-            commentListAdapter.commentsChanged(supercomments);
-            success = false;
-        }
+
     }
 
 
@@ -351,10 +350,9 @@ public class GallerySwipeSingleFragment extends Fragment {
         else {  }
     }
     //Method to post a comment to facebook
-    public void postComment(String comment, final CustomProcessDialog customProcessDialog){
+    public void postComment(String comment){
         //TODO check if active session is not null and opened
         Session session = Session.getActiveSession();
-        //customProcessDialog.show();
         //Might not be able to use this method to get permissions
         List<String> permissions = session.getPermissions();
         System.out.println(permissions);
@@ -367,8 +365,9 @@ public class GallerySwipeSingleFragment extends Fragment {
                     HttpMethod.POST,
                     new Request.Callback() {
                         public void onCompleted(Response response) {
-                            System.out.println(response.getGraphObject().getInnerJSONObject());
-                            //TODO REFRESH PAGE HERE
+                            //System.out.println(response.getGraphObject().getInnerJSONObject());
+                            System.out.println("HERE MADNESS >>>>>>>>>>>"+response);
+                            //TODO handle empty comments
 
 
                             getFbData(new CustomProcessDialog(getActivity()));
@@ -442,5 +441,31 @@ public class GallerySwipeSingleFragment extends Fragment {
         }
 
     }
+    class MyAsync extends AsyncTask<Void, Void, Void> {
 
+        CustomProcessDialog customProcessDialog = new CustomProcessDialog(getActivity());
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            customProcessDialog.show();
+
+        }
+
+        protected Void doInBackground(Void... params) {
+
+            getReplies();
+            return null;
+        }
+
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            if (success) {
+                commentListAdapter.commentsChanged(supercomments);
+                success = false;
+            }
+
+            customProcessDialog.hide();
+        }
+    }
 }
