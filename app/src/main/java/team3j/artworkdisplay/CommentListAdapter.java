@@ -219,6 +219,12 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
             holder.message.setText(commentInfo.getMessage());
 
+            holder.deleteIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // TODO listener for deleting your own comment only - needs check that it's own users post.
+                }
+            });
             if(commentInfo.getIsAReply()){
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 params.setMargins(75, 0, 0, 0);
@@ -229,8 +235,16 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                 holder.likeWord.setTextSize(8);
                 holder.posterName.setTextSize(12);
                 holder.timestamp.setTextSize(8);
+                holder.reply.setVisibility(View.INVISIBLE);
+                holder.reply.setOnClickListener(null); //Removes reply button listener if it's a reply.
                 holder.itemView.setLayoutParams(params);
             }else {
+                holder.reply.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // TODO implement listener for replying to comment.
+                    }
+                });
                 holder.message.setTextSize(12);
                 holder.numberLikes.setTextSize(10);
                 holder.likeWord.setTextSize(10);
@@ -364,7 +378,9 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         TextView descriptionTitle;
         TextView likeWord;
         TextView numberLikes;
+        TextView reply;
         ImageView likeIcon;
+        ImageView deleteIcon;
 
         private TextView commentTitle;
         private DynamicHeightImageView dynamicHeightImageView;
@@ -381,7 +397,9 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                     timestamp = (TextView) itemView.findViewById(R.id.time);
                     numberLikes = (TextView) itemView.findViewById(R.id.number_likes);
                     likeIcon = (ImageView) itemView.findViewById(R.id.like_picture);
+                    deleteIcon = (ImageView) itemView.findViewById(R.id.delete_comment);
                     likeWord = (TextView) itemView.findViewById(R.id.like);
+                    reply = (TextView) itemView.findViewById(R.id.reply);
                     posterName.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

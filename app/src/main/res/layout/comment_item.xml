@@ -56,8 +56,16 @@ android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/comment"
             android:layout_marginTop="3dp"
-            android:layout_marginLeft="50dp"
+            android:layout_marginLeft="95dp"
            />
+
+    <ImageView
+        android:id="@+id/delete_comment"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/com_facebook_close"
+       />
 
     <TextView
         android:id="@+id/number_likes"
@@ -107,9 +115,9 @@ android:layout_width="match_parent"
             android:textSize="10dp"
             android:textColor="@color/dark_grey"
             android:layout_below="@id/comment"
-            android:layout_toRightOf="@id/number_likes"
+            android:layout_alignParentRight="true"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="60dp"/>
+            android:layout_marginRight="10dp"/>
 
 
     </RelativeLayout>
