@@ -150,7 +150,7 @@ public class GallerySwipeSingleFragment extends Fragment {
     };
 
 
-    public void getFbData(final CustomProcessDialog customProcessDialog) {
+    public void getFbData(final boolean isPost, final boolean onlyLogIn) {
         //customProcessDialog.show();
         comments = new ArrayList<Comment>();
 
@@ -194,12 +194,10 @@ public class GallerySwipeSingleFragment extends Fragment {
                                         return c2.getTime().compareTo(c1.getTime());
                                     }
                                 });
-                                new MyAsync().execute();
-//                                getReplies();
-//                                customProcessDialog.hide();
 
+                                new MyAsync(isPost, onlyLogIn).execute();
 
-
+//
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -294,7 +292,7 @@ public class GallerySwipeSingleFragment extends Fragment {
         }
         if(Session.getActiveSession().isOpened()) {
             Session.getActiveSession().refreshPermissions();
-            getFbData(new CustomProcessDialog(this.getActivity()));
+            getFbData(false,true);
         }
         //System.out.println("onClickLogin" + comments);
 
@@ -372,7 +370,7 @@ public class GallerySwipeSingleFragment extends Fragment {
                             //TODO handle empty comments
 
 
-                            getFbData(new CustomProcessDialog(getActivity()));
+                            getFbData(true,false);
 
                         }
                     }
@@ -392,6 +390,46 @@ public class GallerySwipeSingleFragment extends Fragment {
         Session.getActiveSession().onActivityResult(getActivity(), requestCode, resultCode, data);
 
     }
+
+    public void deleteComment(String commentID) {
+        Session session = Session.getActiveSession();
+        List<String> permissions = session.getPermissions();
+        if(permissions.contains("publish_actions")) {
+            new Request(
+                    session,
+                    "/" + commentID,
+                    null,
+                    HttpMethod.DELETE,
+                    new Request.Callback() {
+                        public void onCompleted(Response response) {
+
+                            try {
+                                boolean success = response.getGraphObject().getInnerJSONObject().getBoolean("success");
+
+                                if(success) {
+                                    getFbData(false,false);
+
+                                }
+                                else{
+                                    System.out.println(response.getError());
+                                }
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                    }
+            ).executeAsync();
+
+        } else {
+            //Request posting permissions
+            Session.getActiveSession().requestNewPublishPermissions(new Session.NewPermissionsRequest(this, Arrays.asList("publish_actions")));
+            //TODO something after the request been made
+
+        }
+    }
+
 
     public void likeComment(String commentID, Boolean userLikes){
         System.out.println(commentID);
@@ -422,7 +460,7 @@ public class GallerySwipeSingleFragment extends Fragment {
                                 boolean success = response.getGraphObject().getInnerJSONObject().getBoolean("success");
 
                                 if(success) {
-                                    getFbData(new CustomProcessDialog(getActivity()));
+                                    getFbData(false,false);
                                 }
                                 else{
                                     System.out.println(response.getError());
@@ -445,7 +483,15 @@ public class GallerySwipeSingleFragment extends Fragment {
     }
     class MyAsync extends AsyncTask<Void, Void, Void> {
 
-        CustomProcessDialog customProcessDialog = new CustomProcessDialog(getActivity());
+        private CustomProcessDialog customProcessDialog;
+        private boolean isPost;
+        private boolean onlyLogIn;
+
+        public MyAsync(boolean isPost, boolean onlyLogIn) {
+            customProcessDialog = new CustomProcessDialog(getActivity());
+            this.isPost = isPost;
+            this.onlyLogIn = onlyLogIn;
+        }
 
         @Override
         protected void onPreExecute() {
@@ -466,7 +512,14 @@ public class GallerySwipeSingleFragment extends Fragment {
                 commentListAdapter.commentsChanged(supercomments);
                 success = false;
             }
+            if (!onlyLogIn) {
+                if (isPost) {
+                    Toast.makeText(getActivity(), "Comment posted", Toast.LENGTH_SHORT).show();
 
+                } else {
+                    Toast.makeText(getActivity(), "Comment deleted", Toast.LENGTH_SHORT).show();
+                }
+            }
             customProcessDialog.hide();
         }
     }

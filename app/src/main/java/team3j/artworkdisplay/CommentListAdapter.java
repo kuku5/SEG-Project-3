@@ -179,7 +179,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                     //System.out.println(holder.postBox.getText().toString());
                     gallerySwipeSingleFragment.postComment(holder.postBox.getText().toString());
                     holder.postBox.setText("");
-                    Toast.makeText(gallerySwipeSingleFragment.getActivity(), "Comment posted", Toast.LENGTH_SHORT).show();
+
 
                 }
             });
@@ -230,8 +230,9 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             holder.deleteIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TODO listener for deleting your own comment only - needs check that it's own users post.
-                    Toast.makeText(gallerySwipeSingleFragment.getActivity(), "Comment deleted", Toast.LENGTH_SHORT).show();
+                    // TODO listener for deleting your own comment only - needs check that it's own users post, ask for confirmation of delete.
+                    gallerySwipeSingleFragment.deleteComment(commentInfo.getCommentID());
+
                 }
             });
             if(commentInfo.getIsAReply()){

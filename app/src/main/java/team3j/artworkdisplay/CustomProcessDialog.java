@@ -16,11 +16,9 @@ public class CustomProcessDialog {
     public CustomProcessDialog(Context context) {
         progressDialog = new ProgressDialog(context);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressDialog.setMessage("Loading data...");
-        progressDialog.setIndeterminate(false);
-        progressDialog.setCanceledOnTouchOutside(true);
-        progressDialog.setCancelable(true);
-
+        progressDialog.setMessage("Processing request...");
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
     }
 
     /**
