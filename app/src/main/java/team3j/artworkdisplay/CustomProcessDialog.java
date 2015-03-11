@@ -16,7 +16,7 @@ public class CustomProcessDialog {
     public CustomProcessDialog(Context context) {
         progressDialog = new ProgressDialog(context);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressDialog.setMessage("Posting your comment...");
+        progressDialog.setMessage("Loading data...");
         progressDialog.setIndeterminate(false);
         progressDialog.setCanceledOnTouchOutside(true);
         progressDialog.setCancelable(true);
