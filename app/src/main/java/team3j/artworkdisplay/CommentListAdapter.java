@@ -219,14 +219,25 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                 }
             });
 
+            holder.message.setText(commentInfo.getMessage());
 
             if(commentInfo.getIsAReply()){
-                holder.message.setText("(Reply) " + commentInfo.getMessage());
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                params.setMargins(35, 0, 0, 0);
+                params.setMargins(75, 0, 0, 0);
+                //holder.likeIcon.getLayoutParams().height=30;
+                //holder.likeIcon.getLayoutParams().width=30;
+                holder.message.setTextSize(10);
+                holder.numberLikes.setTextSize(8);
+                holder.likeWord.setTextSize(8);
+                holder.posterName.setTextSize(12);
+                holder.timestamp.setTextSize(8);
                 holder.itemView.setLayoutParams(params);
             }else {
-                holder.message.setText(commentInfo.getMessage());
+                holder.message.setTextSize(12);
+                holder.numberLikes.setTextSize(10);
+                holder.likeWord.setTextSize(10);
+                holder.posterName.setTextSize(14);
+                holder.timestamp.setTextSize(10);
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 params.setMargins(0, 0, 0, 0);
                 holder.itemView.setLayoutParams(params);

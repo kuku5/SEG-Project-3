@@ -69,7 +69,7 @@ android:layout_width="match_parent"
         android:textColor="@color/com_facebook_blue"
         android:layout_below="@id/comment"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="75dp"
+        android:layout_marginLeft="120dp"
         android:textStyle="bold"/>
 
         <TextView
@@ -85,6 +85,19 @@ android:layout_width="match_parent"
             android:layout_marginLeft="5dp"
             android:textStyle="bold"/>
 
+    <TextView
+        android:id="@+id/reply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reply"
+        android:gravity="center_vertical"
+        android:textSize="10dp"
+        android:textColor="@color/com_facebook_blue"
+        android:layout_below="@id/comment"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="45dp"
+        android:textStyle="bold"/>
+
         <TextView
             android:id="@+id/time"
             android:layout_width="wrap_content"
@@ -96,7 +109,7 @@ android:layout_width="match_parent"
             android:layout_below="@id/comment"
             android:layout_toRightOf="@id/number_likes"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="20dp"/>
+            android:layout_marginLeft="60dp"/>
 
 
     </RelativeLayout>
