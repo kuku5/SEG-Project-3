@@ -1,5 +1,6 @@
 package team3j.artworkdisplay;
 
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -7,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -21,8 +23,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.etsy.android.grid.util.DynamicHeightImageView;
 import com.facebook.Session;
@@ -218,8 +222,14 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
             if(commentInfo.getIsAReply()){
                 holder.message.setText("(Reply) " + commentInfo.getMessage());
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                params.setMargins(35, 0, 0, 0);
+                holder.itemView.setLayoutParams(params);
             }else {
                 holder.message.setText(commentInfo.getMessage());
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                params.setMargins(0, 0, 0, 0);
+                holder.itemView.setLayoutParams(params);
             }
             if (Integer.parseInt(commentInfo.getNumberLikes())>=1) {
                 holder.numberLikes.setVisibility(View.VISIBLE);
