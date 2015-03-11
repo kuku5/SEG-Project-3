@@ -10,6 +10,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
@@ -180,8 +182,14 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                 public void onClick(View v) {
                     //THIS IS WHERE THE POST COMMENT TO FACEBOOK CODE WILL GO
                     //System.out.println(holder.postBox.getText().toString());
-                    gallerySwipeSingleFragment.postComment(holder.postBox.getText().toString());
-                    holder.postBox.setText("");
+                    if (isInternetAvailable()) {
+                        gallerySwipeSingleFragment.postComment(holder.postBox.getText().toString());
+                        holder.postBox.setText("");
+
+                    } else {
+                        Toast.makeText(gallerySwipeSingleFragment.getActivity(), "No internet connection available", Toast.LENGTH_SHORT).show();
+
+                    }
 
 
                 }
@@ -233,8 +241,13 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             holder.deleteIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TODO listener for deleting your own comment only - needs check that it's own users post, ask for confirmation of delete.
-                    gallerySwipeSingleFragment.deleteComment(commentInfo.getCommentID());
+                    if (isInternetAvailable()) {
+                        showDeleteDialog(commentInfo);
+
+                    } else {
+                        Toast.makeText(gallerySwipeSingleFragment.getActivity(), "No internet connection available", Toast.LENGTH_SHORT).show();
+
+                    }
 
                 }
             });
@@ -251,11 +264,18 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                 holder.reply.setVisibility(View.INVISIBLE);
                 holder.reply.setOnClickListener(null); //Removes reply button listener if it's a reply.
                 holder.itemView.setLayoutParams(params);
-            }else {
+            }
+            else {
                 holder.reply.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        // TODO implement listener for replying to comment.
+                        if (isInternetAvailable()) {
+                            // TODO implement listener for replying to comment.
+
+                        } else {
+                            Toast.makeText(gallerySwipeSingleFragment.getActivity(), "No internet connection available", Toast.LENGTH_SHORT).show();
+
+                        }
                     }
                 });
                 holder.message.setTextSize(12);
@@ -287,7 +307,13 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             holder.likeWord.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    gallerySwipeSingleFragment.likeComment(commentInfo.getCommentID(), commentInfo.getUserLikes());
+                    if (isInternetAvailable()) {
+                        gallerySwipeSingleFragment.likeComment(commentInfo.getCommentID(), commentInfo.getUserLikes());
+
+                    } else {
+                        Toast.makeText(gallerySwipeSingleFragment.getActivity(), "No internet connection available", Toast.LENGTH_SHORT).show();
+
+                    }
                 }
             });
 
@@ -357,7 +383,9 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         return result;
     }
 
-
+    /**
+     * Shows log in to facebook confirmation dialog
+     */
     private void showLoginDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(gallerySwipeSingleFragment.getActivity());
         builder.setTitle("Login to Facebook");
@@ -366,7 +394,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 gallerySwipeSingleFragment.onClickLogin();
-                //notifyDataSetChanged();
+
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -378,6 +406,44 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         AlertDialog dialog = builder.create();
         dialog.getWindow().setLayout(400, 400);
         dialog.show();
+    }
+
+    /**
+     * Shows a delete comment verification dialog
+     * @param commentInfo Comments for the specified position to get the ID of the comment
+     */
+    private void showDeleteDialog(final Comment commentInfo) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(gallerySwipeSingleFragment.getActivity());
+        builder.setTitle("Delete comment");
+        builder.setMessage(R.string.delete_fb_comment);
+        builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                gallerySwipeSingleFragment.deleteComment(commentInfo.getCommentID());
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.getWindow().setLayout(400, 200);
+        dialog.show();
+    }
+
+
+    /**
+     * Checks if you have internet connection on the phone
+     * Though this does not handle the fact that the servers of the providers may be down. (Such as fb servers being down)
+     *
+     * @return boolean true if there is connection
+     */
+    private boolean isInternetAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) gallerySwipeSingleFragment.getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
@@ -415,13 +481,6 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                     deleteIcon = (ImageView) itemView.findViewById(R.id.delete_comment);
                     likeWord = (TextView) itemView.findViewById(R.id.like);
                     reply = (TextView) itemView.findViewById(R.id.reply);
-                    posterName.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            //onArtistItemTouchListener.onItemClick(v, getPosition());
-                        }
-                    });
-
                     break;
 
                 case Post_View_Type:
@@ -445,19 +504,23 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                     commentTitle.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            if (checkIfLogIn == true) {
-                                //if logged in just get the comments and show
-                                gallerySwipeSingleFragment.onClickLogin();
-                                //notifyDataSetChanged();
-                            }
-                            else if (checkIfLogIn == false){
-                                // if not logged in show dialog box telling them what happens if they log in
-                                showLoginDialog();
-                            }
-                            //data = gallerySwipeSingleFragment.onClickLogin();
-                            System.out.println("CommentsListAdapter" + data);
+                            if (isInternetAvailable()) {
+                                if (checkIfLogIn == true) {
+                                    //if logged in just get the comments and show
+                                    gallerySwipeSingleFragment.onClickLogin();
+                                    //notifyDataSetChanged();
+                                } else if (checkIfLogIn == false) {
+                                    // if not logged in show dialog box telling them what happens if they log in
+                                    showLoginDialog();
 
-                            //notifyDataSetChanged();
+                                }
+                                //data = gallerySwipeSingleFragment.onClickLogin();
+                                System.out.println("CommentsListAdapter" + data);
+                            }
+                            else {
+                                Toast.makeText(gallerySwipeSingleFragment.getActivity(), "No internet connection available", Toast.LENGTH_SHORT).show();
+
+                            }
                         }
                     });
 
@@ -521,7 +584,6 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
 
                             } catch (Exception e) {
-                                // TODO Auto-generated catch block
                                 e.printStackTrace();
                             }
                         }

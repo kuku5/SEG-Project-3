@@ -109,27 +109,6 @@ public class HomePageFragment extends Fragment {
        // setupAnimations(layout);
         setupGoogleMapsCard(layout);
         setupLibraryAnimations(layout);
-//        Toast.makeText(getActivity(), GalleryData.toVisit.size() +
-//                        "this is my Toast message!!! =)",
-//                Toast.LENGTH_LONG).show();
-        //facebook setup
-        //setup xml elements
-        //button = (Button) layout.findViewById(R.id.button_facebook);
-//        facebookCardText = (TextView) layout.findViewById(R.id.facebookCardText);
-//        facebookCardText.setText("Log in via\nFacebook");
-//        //facebook work
-//        isLoggedIn = false;
-
-       // checkIfActiveSession();
-
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                onClickLogin();
-//            }
-//        });
-        //button.setText("Log In");
-
 
         //  ---------- KEYHASH GENERATOR -----------//
         /*
@@ -154,77 +133,6 @@ public class HomePageFragment extends Fragment {
     }
 
 
-    //Acts like the an Observer who looks for Session changes and invokes onSessionStateChanged
-//    private Session.StatusCallback statusCallback = new Session.StatusCallback() {
-//        @Override
-//        public void call(Session session, SessionState state,
-//                         Exception exception) {
-//            onSessionStateChange(session, state, exception);
-//        }
-//    };
-
-    //handler for the log in button
-//    public void onClickLogin() {
-//        Session session = Session.getActiveSession();
-//
-//        if (!isLoggedIn) {
-//            Session.openActiveSession(getActivity(), this, true, statusCallback);
-//            checkIfActiveSession();
-//        } else if (isLoggedIn) {
-//            session.close();
-//        }
-//    }
-
-    //checks to see if there is already a session open.
-//    public void checkIfActiveSession() {
-//        System.out.println("Checking session");
-//        Session session = Session.getActiveSession();
-//        if (session != null && (session.isOpened() || session.isClosed())) {
-//            onSessionStateChange(session, session.getState(), null);
-//            System.out.println("There is already a open session");
-//        }
-//        else{
-//            System.out.println("Session logged out");
-//            facebookCardText.setText("Log In via\nFacebook");
-//            isLoggedIn = false;
-//        }
-//
-//    }
-
-
-//    public void onResume() {
-//        super.onResume();
-//        checkIfActiveSession();
-//
-//    }
-
-    //Display different things depending on if the user is logged in
-//    private void onSessionStateChange(Session session, SessionState state, Exception exception) {
-//        if (state.isOpened()) {
-//            //If logged in, show this
-//            Log.i("MainActivity", "Logged in...");
-//            //test.setText("");
-//            //retrieveInfo(session);
-//            isLoggedIn = true;
-//            Request.newMeRequest(session, new Request.GraphUserCallback() {
-//                // callback after Graph API response with user object
-//                @Override
-//                public void onCompleted(GraphUser user, Response response) {
-//                    if (user != null) {
-//                        facebookCardText.setText(user.getFirstName() + "\nLog Out.");
-//                    }
-//                }
-//            }).executeAsync();
-//
-//        } else if (state.isClosed()) {
-//            //If logged out, show this
-//            Log.i("HomePageFragment", "Logged out...");
-//            //test.setText("");
-//            facebookCardText.setText("Log In via\nFacebook");
-//            isLoggedIn = false;
-//
-//        }
-//    }
 
 
     //Handles the web log in
