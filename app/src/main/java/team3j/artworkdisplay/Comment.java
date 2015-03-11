@@ -17,6 +17,7 @@ public class Comment implements Parcelable {
     private boolean userLikes;
     private String numberLikes;
     private boolean isAReply;
+    private boolean canDelete;
 
     public void setIcon(int icon) {
         this.icon = icon;
@@ -34,10 +35,12 @@ public class Comment implements Parcelable {
     }
 
     public void setNumberLikes(String numberLikes) {
+
         this.numberLikes = numberLikes;
     }
 
     public void setPosterURL(String posterURL) {
+
         this.posterURL = posterURL;
     }
     public void setTime(String time) {
@@ -48,20 +51,28 @@ public class Comment implements Parcelable {
         this.commentID = commentID;
 
     }
-    public void setUserLikes(Boolean userLikes) {
+    public void setUserLikes(boolean userLikes) {
         this.userLikes = userLikes;
 
     }
-    public void setIsAReply(Boolean isAReply){
+    public void setIsAReply(boolean isAReply){
+
         this.isAReply = isAReply;
     }
 
+    public void setCanDelete(boolean canDelete) {
+        this.canDelete = canDelete;
+
+    }
+
+    public boolean getCanDelete() {
+        return canDelete;
+    }
 
     public String getMessage() {
         return message;
 
     }
-
     public String getPosterName() {
         return posterName;
 
@@ -72,11 +83,11 @@ public class Comment implements Parcelable {
     public String getPosterURL() {
         return posterURL;
     }
+
     public String getTime() {
         return time;
 
     }
-
     public String getCommentID() {
         return commentID;
 
@@ -85,7 +96,9 @@ public class Comment implements Parcelable {
         return userLikes;
 
     }
+
     public boolean getIsAReply(){
+
         return isAReply;
     }
 
@@ -93,13 +106,14 @@ public class Comment implements Parcelable {
         return icon;
     }
 
+
     public String toString(){
         return posterName + " " + message + " " + commentID + " " + userLikes;
     }
 
-
     @Override
     public int describeContents() {
+
         return 0;
     }
 

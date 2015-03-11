@@ -59,14 +59,19 @@ android:layout_width="match_parent"
             android:layout_marginLeft="95dp"
            />
 
+    <!--<ImageView-->
+        <!--android:id="@+id/delete_comment"-->
+        <!--android:layout_width="20dp"-->
+        <!--android:layout_height="20dp"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:src="@drawable/com_facebook_close"-->
+       <!--/>-->
     <ImageView
         android:id="@+id/delete_comment"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_alignParentRight="true"
-        android:src="@drawable/com_facebook_close"
-       />
-
+        />
     <TextView
         android:id="@+id/number_likes"
         android:layout_width="wrap_content"
