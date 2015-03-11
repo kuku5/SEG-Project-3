@@ -81,12 +81,16 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
 
         tabHost.setPrimaryColor(getResources().getColor(R.color.colorAccentReal));
         //adds the titles to each tab and changes colors of text
+
         for (int i = 0; i < adapter.getCount(); i++) {
+            String pageTitle = ""+adapter.getPageTitle(i);
+
             MaterialTab materialTab =
                     tabHost.newTab()
-                            .setText(adapter.getPageTitle(i))
+                            .setText(pageTitle)
                             .setTabListener(this);
             tabHost.addTab(materialTab);
+
             materialTab.setTextColor(getResources().getColor(R.color.white));
 
         }

@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/superlightgrey">
+
+
+
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/superlightgrey"
+        android:animateLayoutChanges="true"
+        >
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:animateLayoutChanges="true"
+
+            >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:orientation="vertical"
+            android:background="@color/colorTertiary"
+            android:padding="0dp"
+            android:id="@+id/welcomeView"
+            android:animateLayoutChanges="true"
+
+            android:visibility="gone"
+            >
+
+
+            <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:id="@+id/card_view_1_welcome1"
+                android:animateLayoutChanges="true"
+                android:padding="4dp"
+
+                card_view:cardBackgroundColor="@android:color/white"
+                card_view:cardCornerRadius="4dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+
+                    >
+
+                    <TextView
+                        android:id="@+id/info_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:textColor="@color/text_grey"
+                        android:text="Tap Here"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:visibility="invisible"
+                        />
+
+                    <!--android:text="@string/info_title"-->
+
+                    <TextView
+                        android:id="@+id/info_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:text="@string/info_description_welcome"
+                        android:textColor="#1f3133"
+                        android:textSize="12sp"
+                        android:visibility="invisible"
+                        />
+
+                    <!--<ImageView-->
+
+                        <!--android:layout_width="300dp"-->
+                        <!--android:layout_height="100dp"-->
+                        <!--android:background="@color/white"-->
+                        <!--/>-->
+
+                    </LinearLayout>
+
+
+
+
+                </android.support.v7.widget.CardView>
+            <!--<View-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="100dp"-->
+                <!--android:id="@+id/title_view"-->
+                <!--android:background="@color/white"-->
+                <!---->
+                <!--/>-->
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="60dp"
+                android:background="@color/lightgrey"
+                android:visibility="gone"
+                android:id="@+id/welcomeView2"
+                android:animateLayoutChanges="true"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DULWICH OUTDOOR GALLERY"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+
+
+                    android:layout_gravity="center"
+                    />
+                </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/superlightgrey"
+            android:visibility="visible"
+            android:animateLayoutChanges="true"
+            android:layout_gravity="center"
+
+            >
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_2_double34"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|top"
+                android:layout_margin="4dp"
+                card_view:cardBackgroundColor="@android:color/white"
+                card_view:cardCornerRadius="4dp"
+                card_view:cardPreventCornerOverlap="false"
+                >
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical">
+
+
+                    <com.daimajia.slider.library.SliderLayout
+                        android:id="@+id/slider"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        />
+                    <!--<FrameLayout-->
+                    <!--android:id="@+id/small_map"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="100dp"-->
+                    <!--class="com.google.android.gms.maps.SupportMapFragment"-->
+                    <!-->-->
+
+                    <!--</FrameLayout>-->
+
+
+
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/car_view_22"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|top"
+                android:layout_margin="4dp"
+                card_view:cardBackgroundColor="@android:color/white"
+                card_view:cardCornerRadius="4dp"
+                card_view:cardPreventCornerOverlap="false"
+                >
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical">
+                    <ViewFlipper
+                        android:id="@+id/view_animator"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:autoStart="true"
+                        >
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <LinearLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/twitter_name"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold"
+
+                                    />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=" "
+                                    android:textSize="11sp"
+                                    android:textStyle="bold"
+                                    android:id="@+id/atsymbol"
+
+                                    /></LinearLayout>
+
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="WELCOME TO DULWICH !"
+                                android:id = "@+id/DisplayTweet2"
+                                android:textSize="25sp"/>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <LinearLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/twitter_name"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold"
+
+                                    />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=""
+                                    android:textSize="11sp"
+                                    android:textStyle="bold"
+                                    android:id="@+id/atsymbol2"
+
+                                    /></LinearLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="...and get some fuckin' internet"
+                                android:id = "@+id/DisplayTweet1"
+                                android:textSize="12sp"/>
+
+
+                        </LinearLayout>
+
+                    </ViewFlipper>
+
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/title_featured"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:text="Latest Updates from Dulwich Gallery"
+                            android:textAllCaps="true"
+                            android:textColor="#1f3133"
+                            android:textSize="14sp"
+                            android:gravity="left"
+                            android:textStyle="bold"
+                            />
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="right"
+                            android:src="@drawable/twitterbird"/>
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_2_double"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|top"
+                android:layout_margin="4dp"
+                card_view:cardBackgroundColor="@android:color/white"
+                card_view:cardCornerRadius="4dp"
+                card_view:cardPreventCornerOverlap="false"
+                >
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical">
+
+
+                    <com.etsy.android.grid.util.DynamicHeightImageView
+                        android:id="@+id/map_image"
+                        android:layout_width="fill_parent"
+                        android:layout_height="100dp"
+                        android:src="@drawable/mapbannersquare"
+                        android:layout_centerInParent="true"
+                        android:scaleType="centerCrop"
+                        android:adjustViewBounds="true"
+
+                        android:paddingBottom="2dp"
+                        />
+                    <TextView
+                        android:id="@+id/title_maps"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:text="Locate Nearest ArtWork"
+                        android:textAllCaps="true"
+                        android:textColor="#1f3133"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        />
+
+                </LinearLayout>
+                <!--<ImageView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:src="@drawable/mapbannersquare"-->
+                <!--android:scaleType="fitStart"/>-->
+            </android.support.v7.widget.CardView>
+
+//card 2
+
+            <!--<android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="fill_parent"-->
+                <!--card_view:cardBackgroundColor="@color/colorDivider"-->
+                <!--card_view:cardCornerRadius="5dp"-->
+                <!--card_view:cardPreventCornerOverlap="false"-->
+                <!--android:background="@color/colorPrimary"-->
+                <!--android:id="@+id/card_view_1_large_image">-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="fill_parent"-->
+                    <!--android:layout_height="fill_parent"-->
+                    <!--android:orientation="vertical">-->
+
+                    <!--<com.etsy.android.grid.util.DynamicHeightImageView-->
+                        <!--android:id="@+id/dynamic_imageView2"-->
+                        <!--android:layout_width="fill_parent"-->
+                        <!--android:layout_height="fill_parent"-->
+                        <!--android:src="@drawable/reka"-->
+                        <!--android:layout_centerInParent="true"-->
+                        <!--android:scaleType="fitStart"-->
+                        <!--android:adjustViewBounds="true"-->
+
+                        <!--android:paddingBottom="2dp" />-->
+
+                    <!--<TextView-->
+
+                        <!--android:layout_width="fill_parent"-->
+                        <!--android:layout_height="fill_parent"-->
+                        <!--android:id="@+id/description_textview"-->
+                        <!--android:paddingBottom="1dp"-->
+                        <!--android:drawableTop="@color/grey"-->
+                        <!--android:layout_margin="1dp"-->
+                        <!--android:layout_marginLeft="3dp"-->
+                        <!--android:autoText="false"-->
+                        <!--android:text="@string/art_description"-->
+                        <!--android:textSize="9dp"-->
+
+                        <!--/>-->
+
+                    <!--<LinearLayout-->
+                        <!--android:orientation="vertical"-->
+                        <!--android:layout_width="fill_parent"-->
+                        <!--android:layout_height="fill_parent">-->
+
+                        <!--<View-->
+                            <!--android:layout_width="fill_parent"-->
+                            <!--android:layout_height="1dp"-->
+                            <!--android:id="@+id/separator"-->
+                            <!--android:visibility="visible"-->
+                            <!--android:background="@color/grey" />-->
+
+
+                        <!--<TextView-->
+                            <!--android:layout_width="fill_parent"-->
+                            <!--android:layout_height="fill_parent"-->
+                            <!--android:id="@+id/txt_line1"-->
+                            <!--android:paddingTop="4dp"-->
+                            <!--android:paddingBottom="1dp"-->
+                            <!--android:drawableTop="@color/grey"-->
+                            <!--android:layout_margin="1dp"-->
+                            <!--android:layout_marginLeft="3dp"-->
+                            <!--android:autoText="false"-->
+                            <!--android:text="@string/title_activity_main"-->
+                            <!--android:textSize="11dp" />-->
+
+                    <!--</LinearLayout>-->
+
+                <!--</LinearLayout>-->
+            <!--</android.support.v7.widget.CardView>-->
+
+            //card 3
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/card22"
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|top"
+                    android:layout_margin="4dp"
+                    card_view:cardBackgroundColor="@android:color/white"
+                    card_view:cardCornerRadius="4dp"
+                    card_view:cardPreventCornerOverlap="false"
+                    android:layout_weight="0.5"
+
+                    >
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:orientation="vertical">
+
+
+                        <com.etsy.android.grid.util.DynamicHeightImageView
+                            android:id="@+id/aboutDulwich"
+                            android:layout_width="fill_parent"
+                            android:layout_height="100dp"
+                            android:src="@drawable/dulwichpicturegallery"
+                            android:layout_centerInParent="true"
+                            android:scaleType="centerCrop"
+                            android:adjustViewBounds="true"
+                            android:paddingBottom="2dp" />
+
+                        <TextView
+                            android:id="@+id/title_maps11"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:text="About Dulwich Outdoor Gallery"
+                            android:textAllCaps="true"
+                            android:textColor="#1f3133"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            />
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+                </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+          </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

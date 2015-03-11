@@ -27,6 +27,7 @@ public class GalleryData {
     private ArrayList<Art> artworkList;
     private static GalleryData mGalleryData;
 
+
     public static GalleryData get() {
         return mGalleryData;
     }
@@ -90,7 +91,7 @@ public class GalleryData {
         artArrayList.add(new Art("The Fall of Man","Stik","The Fall of Man","Pieter Coecke van Aelst","Stik takes portraits of wealthy, fashionable, landed gentry by Gainsborough, and strips away all pretention, leaving his simple stick figures to brilliantly convey the emotion and relationships behind the symbols of status. ",R.drawable.lowresstikfallofman,R.drawable.lowresinspiredfallofman));
         artArrayList.add(new Art("Eliza and Mary Davidson","Stik","Eliza and Mary Davidson","Tilly Kettlesm","Stik takes portraits of wealthy, fashionable, landed gentry by Gainsborough, and strips away all pretention, leaving his simple stick figures to brilliantly convey the emotion and relationships behind the symbols of status.  ",R.drawable.lowresstikelizaandmarydavidsontilly,R.drawable.lowresinspiredelizaandmarydavidson));
         artArrayList.add(new Art("Eliza and Mary Linley","Stik","Eliza and Mary Linley","Thomas Gainsborough","Stik takes portraits of wealthy, fashionable, landed gentry by Gainsborough, and strips away all pretention, leaving his simple stick figures to brilliantly convey the emotion and relationships behind the symbols of status.  ",R.drawable.lowresstikelizabethandmary,R.drawable.lowresinspiredelizabethandlinley));
-        artArrayList.add(new Art("A Couple in a Landscape","Stik","A Couple in a Landscape","Thomas Gainsborough","Stik takes portraits of wealthy, fashionable, landed gentry by Gainsborough, and strips away all pretention, leaving his simple stick figures to brilliantly convey the emotion and relationships behind the symbols of status.  ",R.drawable.lowresdoginlandscape,R.drawable.lowresinspiredacoupleinalandscape));
+        artArrayList.add(new Art("A Couple in a Landscape","Stik","A Couple in a Landscape","Thomas Gainsborough","Stik takes portraits of wealthy, fashionable, landed gentry by Gainsborough, and strips away all pretention, leaving his simple stick figures to brilliantly convey the emotion and relationships behind the symbols of status.  ",R.drawable.lowresstikacoupleinlandscape,R.drawable.lowresinspiredacoupleinalandscape));
 
         //Thierry Noir
         artArrayList.add(new Art("Context","Thierry Noir","Joseph Receiving Pharaoh’s Ring","Giambattista Tiepolo","Famed for painting the Berlin Wall at risk of his life for 10 years in the 1980s, Noir’s simple style was born of need for speed and clarity.  His versions of the characters in Tiepolo’s ‘Joseph Receiving Pharaoh’s Ring’ interact similarly, but with Noir, size relates to importance as in medieval times.   ",R.drawable.lowresnoir,R.drawable.lowresinspiredthierrynoir));
@@ -105,6 +106,32 @@ public class GalleryData {
 
 
 
+    public static ArrayList<Artist> GetArtistsDataReal(Activity context) {
+        final ArrayList<Artist> data = new ArrayList<Artist>();
+
+
+        data.add(new Artist("Stik","",""));
+        data.add(new Artist("Three Boys","",""));
+        data.add(new Artist("Phlegm","",""));
+        data.add(new Artist("Mear One","",""));
+        data.add(new Artist("Conor Harrington","",""));
+        data.add(new Artist("Agent Provocateur","",""));
+        data.add(new Artist("Ben Wilson","",""));
+        data.add(new Artist("David Shillinglaw","",""));
+        data.add(new Artist("Faith47","",""));
+        data.add(new Artist("Inkie, Pure Evil and AP","",""));
+        data.add(new Artist("MadC","",""));
+        data.add(new Artist("Reka","",""));
+        data.add(new Artist("Remi Rough and System","",""));
+        data.add(new Artist("ROA","",""));
+        data.add(new Artist("RUN","",""));
+        data.add(new Artist("Thierry Noir","",""));
+        data.add(new Artist("Walter Kershaw","",""));
+
+
+
+        return data;
+    }
 
 
 
@@ -181,6 +208,14 @@ public class GalleryData {
 
     public static Art[] getMapArtwork(Activity context) {
         final Art arts[] = new Art[19];
+
+        //add faith47
+        //couple in landscape now available stik
+        //delete Beerens
+        //delete Nunca
+
+
+
 
         arts[0] = new Art("Roa 2013",(new LatLng(51.467224, -0.072160)),R.drawable.art0);
         arts[1] = new Art("Remi Rough & System 2013",(new LatLng(51.461675, -0.079872)),R.drawable.art0) ;

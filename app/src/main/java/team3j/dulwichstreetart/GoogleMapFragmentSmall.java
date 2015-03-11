@@ -1,4 +1,5 @@
 package team3j.dulwichstreetart;
+
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -15,7 +16,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -23,12 +23,9 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import java.util.ArrayList;
 
 /**
  * A fragment that launches other parts of the demo application.
@@ -37,13 +34,19 @@ import java.util.ArrayList;
 
 public class GoogleMapFragmentSmall extends Fragment {
 
+
     public static MapView mMapView;
     private GoogleMap googleMap;
     private LinearLayout linearLayout2;
     private CardView cardView;
     private ImageButton imageButton;
     private LatLng locStart;
-       private Art[] arts;
+    private Art[] arts;
+    public static boolean filter=false;
+    public static int index= 4;
+
+
+
 
     public static GoogleMapFragmentSmall getInstance(int position) {
         GoogleMapFragmentSmall myFragmentTab = new GoogleMapFragmentSmall();
@@ -51,6 +54,8 @@ public class GoogleMapFragmentSmall extends Fragment {
         args.putInt("position", position);
         myFragmentTab.setArguments(args);
         return myFragmentTab;
+
+
     }
 
 
@@ -68,6 +73,9 @@ public class GoogleMapFragmentSmall extends Fragment {
         mMapView.onResume();// needed to get the map to display immediately
 
 
+
+
+
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
         } catch (Exception e) {
@@ -75,17 +83,19 @@ public class GoogleMapFragmentSmall extends Fragment {
         }
 
 
-       if(isGoogleMapsInstalled()) {
+        if(isGoogleMapsInstalled()) {
 
             setUpMap();
+
             setUpVisitedListener();
-       }
+        }
 
         // Perform any camera updates here
         return v;
     }
 
     private void setUpVisitedListener() {
+
         googleMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
             @Override
             public void onMyLocationChange(Location location) {
@@ -140,14 +150,25 @@ public class GoogleMapFragmentSmall extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        //filter = GallerySwipeSingleFragment.filt;
+        //index = GallerySwipeSingleFragment.ind;
+        System.out.println("on resumefilter: "+GoogleMapFragmentSmall.filter+" index: "+GoogleMapFragmentSmall.index);
+
+        if(isGoogleMapsInstalled()) {
+
+            setUpMap();
+
+        }
         mMapView.onResume();
+
+        GoogleMapFragmentSmall.filter = false;
     }
 
     @Override
     public void onPause() {
         super.onPause();
         if(mMapView!=null) {
-           mMapView.onPause();
+            mMapView.onPause();
         }
     }
 
@@ -164,8 +185,10 @@ public class GoogleMapFragmentSmall extends Fragment {
     }
 
     public void setUpMap(){
-        arts = GalleryData.getMapArtwork(getActivity());
 
+        System.out.println("filter is "+ GoogleMapFragmentSmall.filter);
+        System.out.println(GoogleMapFragmentSmall.index);
+        arts = GalleryData.getMapArtwork(getActivity());
         googleMap = mMapView.getMap();
         zoom();
         googleMap.setMyLocationEnabled(true);
@@ -177,15 +200,44 @@ public class GoogleMapFragmentSmall extends Fragment {
             }
         });
 
+        /*SharedPreferences preference = getActivity().getSharedPreferences("com.example.app", Context.MODE_PRIVATE);
+        filter = preference.getBoolean("filter",true);
+        index = preference.getInt("index", 0);
+        */
+
+
+
+
+googleMap.clear();
+
+
         for (int i = 0; i < arts.length; i++) {
             int pos = i + 1;
             String title = pos + ". ";
-            if (i == 14) {
-                googleMap.addMarker(new MarkerOptions().position(arts[i].getLoc()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)).title(title));
-            } else {
+
+            if(i==GoogleMapFragmentSmall.index && GoogleMapFragmentSmall.filter == true)
+            {
+                System.out.println("filter is "+ GoogleMapFragmentSmall.filter);
                 googleMap.addMarker(new MarkerOptions().position(arts[i].getLoc()).title(title));
+
+
+                //preference.edit().putBoolean("filter",false);
+
+                break;
+            }else if(GoogleMapFragmentSmall.filter == false)
+            {
+                if (i == 14) {
+                    System.out.println("filter is " + GoogleMapFragmentSmall.filter);
+                    googleMap.addMarker(new MarkerOptions().position(arts[i].getLoc()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)).title(title));
+                } else {
+                    googleMap.addMarker(new MarkerOptions().position(arts[i].getLoc()).title(title));
+                }
             }
+
+
         }
+
+
 
 
         googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
@@ -235,5 +287,6 @@ public class GoogleMapFragmentSmall extends Fragment {
 
 
     }
+
 
 }

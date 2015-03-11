@@ -43,6 +43,7 @@ import team3j.dulwichstreetart.Art;
 import team3j.dulwichstreetart.ArtistListAdapter;
 import team3j.dulwichstreetart.GalleryData;
 import team3j.dulwichstreetart.GalleryFragment;
+import team3j.dulwichstreetart.GoogleMapFragmentSmall;
 import team3j.dulwichstreetart.HomePageFragment;
 import team3j.dulwichstreetart.R;
 
@@ -108,6 +109,7 @@ public class GallerySwipeSingleFragment extends Fragment {
 
         backButton=(ImageButton) layout.findViewById(R.id.back_button);
 
+
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,7 +128,7 @@ public class GallerySwipeSingleFragment extends Fragment {
 
         recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view_grid1);
 
-        commentListAdapter = new CommentListAdapter(this,getActivity() ,indexOfArtWork,GalleryData.get().getArtworkList());
+        commentListAdapter = new CommentListAdapter(this,getActivity() ,indexOfArtWork,GalleryData.get().getArtworkList(),getMapItemTouchListener());
 
         recyclerView.setAdapter(commentListAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -139,6 +141,22 @@ public class GallerySwipeSingleFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
         //recyclerView.smoothScrollToPosition(1);
         return layout;
+    }
+
+
+    public CommentListAdapter.OnMapButtonPressTouchListener getMapItemTouchListener(){
+        CommentListAdapter.OnMapButtonPressTouchListener itemTouchListener = new CommentListAdapter.OnMapButtonPressTouchListener() {
+            @Override
+            public void onMapButtonPress(  boolean filter, int index) {
+                getActivity().onBackPressed();
+                GoogleMapFragmentSmall.index = index;
+                GoogleMapFragmentSmall.filter = true;
+
+
+            }
+
+        };
+        return itemTouchListener;
     }
     //Acts like the an Observer who looks for Session changes and invokes onSessionStateChanged
     private Session.StatusCallback statusCallback = new Session.StatusCallback() {

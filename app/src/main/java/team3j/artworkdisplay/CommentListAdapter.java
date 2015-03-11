@@ -64,8 +64,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
     private ArrayList<Comment> data;
     private ArrayList<Art> galleryData;
     private Context context;
-    private ImageView shareButton;
-    private ImageView mapButton;
+
     private Bitmap bitmap;
 
     private final int Header_View_Type = 1;
@@ -73,9 +72,10 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
     private final int Post_View_Type = 2;
     private boolean checkIfLogIn = false;
 
+    private OnMapButtonPressTouchListener onMapButtonPressTouchListener;
 
 
-    public CommentListAdapter(GallerySwipeSingleFragment gallerySwipeSingleFragment, Context context, int position,ArrayList<Art> galleryData) {
+    public CommentListAdapter(GallerySwipeSingleFragment gallerySwipeSingleFragment, Context context, int position,ArrayList<Art> galleryData,OnMapButtonPressTouchListener onMapButtonPressTouchListener) {
         //this.commentAmount = commentAmount;
         data = new ArrayList<Comment>();
         this.galleryData=galleryData;
@@ -85,12 +85,13 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         this.indexOfArtwork = position;
         //System.out.println(data);
         this.gallerySwipeSingleFragment = gallerySwipeSingleFragment;
+        this.onMapButtonPressTouchListener=onMapButtonPressTouchListener;
     }
 
 
     @Override
     public int getItemViewType(int position) {
-        int viewType = position+100 ;
+        int viewType = 100 ;
 
         if (position == 0) {
             viewType = Header_View_Type;
@@ -136,6 +137,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
         if (position == 0) {
 
+
             Bitmap bitmap1 = BitmapFactory.decodeResource(context.getResources(), galleryData.get(indexOfArtwork).getInspiredPic());
             BitmapDrawable res1 = new BitmapDrawable(context.getResources(), bitmap1);
 
@@ -149,6 +151,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
             holder.descriptionTitle.setText(galleryData.get(indexOfArtwork).getInspirationTitle());
             holder.description.setText(galleryData.get(indexOfArtwork).getDesc());
+
 
             Session session = Session.getActiveSession();
             if(!(session==null) && session.isOpened()) {
@@ -392,6 +395,8 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         ImageView likeIcon;
         ImageView deleteIcon;
 
+        private ImageView shareButton;
+        private ImageView mapButton;
         private TextView commentTitle;
         private DynamicHeightImageView dynamicHeightImageView;
         private DynamicHeightImageView inspirationArtworkImageView;
@@ -455,6 +460,19 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                             //notifyDataSetChanged();
                         }
                     });
+
+                    mapButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            MainActivity.viewPager.setCurrentItem(3, true);
+
+                            onMapButtonPressTouchListener.onMapButtonPress(false, galleryData.get(indexOfArtwork).getIndex());
+
+
+
+                        }
+                    });
+
 
 
                     shareButton.setOnClickListener(new View.OnClickListener() {
@@ -524,6 +542,11 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
     public void commentsChanged(ArrayList<Comment> data){
         this.data = data;
         notifyDataSetChanged();
+    }
+
+
+    public interface OnMapButtonPressTouchListener {
+        public void onMapButtonPress( boolean filter, int index);
     }
 
 }
