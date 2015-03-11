@@ -149,8 +149,8 @@ public class GallerySwipeSingleFragment extends Fragment {
     };
 
 
-    public void getFbData() {
-
+    public void getFbData(final CustomProcessDialog customProcessDialog) {
+        customProcessDialog.show();
         comments = new ArrayList<Comment>();
 
         Bundle b1 = new Bundle();
@@ -193,6 +193,8 @@ public class GallerySwipeSingleFragment extends Fragment {
                                     }
                                 });
                                 getReplies();
+                                customProcessDialog.hide();
+
 
 
                             } catch (Exception e) {
@@ -291,7 +293,7 @@ public class GallerySwipeSingleFragment extends Fragment {
         }
         if(Session.getActiveSession().isOpened()) {
             Session.getActiveSession().refreshPermissions();
-            getFbData();
+            getFbData(new CustomProcessDialog(this.getActivity()));
         }
         //System.out.println("onClickLogin" + comments);
 
@@ -352,7 +354,7 @@ public class GallerySwipeSingleFragment extends Fragment {
     public void postComment(String comment, final CustomProcessDialog customProcessDialog){
         //TODO check if active session is not null and opened
         Session session = Session.getActiveSession();
-        customProcessDialog.show();
+        //customProcessDialog.show();
         //Might not be able to use this method to get permissions
         List<String> permissions = session.getPermissions();
         System.out.println(permissions);
@@ -368,8 +370,8 @@ public class GallerySwipeSingleFragment extends Fragment {
                             System.out.println(response.getGraphObject().getInnerJSONObject());
                             //TODO REFRESH PAGE HERE
 
-                            customProcessDialog.hide();
-                            getFbData();
+
+                            getFbData(new CustomProcessDialog(getActivity()));
 
                         }
                     }
@@ -419,7 +421,7 @@ public class GallerySwipeSingleFragment extends Fragment {
                                 boolean success = response.getGraphObject().getInnerJSONObject().getBoolean("success");
 
                                 if(success) {
-                                    getFbData();
+                                    getFbData(new CustomProcessDialog(getActivity()));
                                 }
                                 else{
                                     System.out.println(response.getError());
