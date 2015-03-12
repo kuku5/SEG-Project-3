@@ -20,6 +20,7 @@
     <color name="superlightgrey">#fffcfcfc</color>
     <color name="lightgrey">#ffdedede</color>
     <color name="grey">#fff4f4f4</color>
+    <color name="artist_text_grey">#ffd1d1d1</color>
     <color name="green">#ff8dd304</color>
     <color name="blue">#ff82e0ff</color>
     <color name="yellow">#fffffbae</color>

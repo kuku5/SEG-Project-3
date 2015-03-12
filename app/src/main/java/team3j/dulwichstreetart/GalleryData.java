@@ -109,6 +109,7 @@ public class GalleryData {
     public static ArrayList<Artist> GetArtistsDataReal(Activity context) {
         final ArrayList<Artist> data = new ArrayList<Artist>();
 
+       //data.add(new Artist("artist","description","website"));
 
         data.add(new Artist("Stik","",""));
         data.add(new Artist("Three Boys","",""));
@@ -121,7 +122,13 @@ public class GalleryData {
         data.add(new Artist("Faith47","",""));
         data.add(new Artist("Inkie, Pure Evil and AP","",""));
         data.add(new Artist("MadC","",""));
-        data.add(new Artist("Reka","",""));
+        data.add(new Artist("Reka","Growing up next to a major train line in Melbourne, Australia, REKA was introduced to the world ofigraffiti at an early age first hitting the walls of his native city in the late 1990s. He gradually made the shift from graffiti into what is now known as street art. One of the original members of the famed Everfresh crew, REKA has painted large murals all over the world. REKA’s body of work comprises surrealist, abstracted \n" +
+                "\n" +
+                "creatures communicated through strong lines, dynamic \n" +
+                "\n" +
+                "“movement and bold colours. ‘ \n" +
+                "\n" +
+                "REKA’s work is held in the permanent collection of the National Gallery of Australia and he has exhibited his work in galleries all around the world. ","www.rekaone.com"));
         data.add(new Artist("Remi Rough and System","",""));
         data.add(new Artist("ROA","",""));
         data.add(new Artist("RUN","",""));

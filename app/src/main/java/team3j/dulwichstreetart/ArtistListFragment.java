@@ -47,7 +47,7 @@ public class ArtistListFragment extends Fragment {
         setRetainInstance(true);
 
         //get data for the List
-        ArrayList<String> artistData = GalleryData.GetArtistsData(getActivity());
+        ArrayList<Artist> artistData = GalleryData.GetArtistsDataReal(getActivity());
 
         //get Adapter
         artistListAdapter = new ArtistListAdapter(getActivity(), artistData, getOnArtistItemTouchListener());
