@@ -370,7 +370,12 @@ public class GallerySwipeSingleFragment extends Fragment {
         else {  }
     }
     //Method to post a comment to facebook
-    public void postComment(String comment){
+    public void postComment(String comment, String commentID){
+        String replyTo = "/779466045468925"; //ID of the post
+        if(!commentID.isEmpty()){
+            replyTo = "/" + commentID; //ID of the comment (for replies)
+        }
+
 
         if(checkIfActiveSession()) {
             Session session = Session.getActiveSession();
@@ -383,7 +388,7 @@ public class GallerySwipeSingleFragment extends Fragment {
                 Bundle params = new Bundle();
                 params.putString("message", comment);
             /* make the API call */
-                new Request(session, "/779466045468925/comments", params,
+                new Request(session, replyTo +"/comments", params,
                         HttpMethod.POST,
                         new Request.Callback() {
                             public void onCompleted(Response response) {

@@ -204,10 +204,9 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             holder.post.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //THIS IS WHERE THE POST COMMENT TO FACEBOOK CODE WILL GO
-                    //System.out.println(holder.postBox.getText().toString());
+
                     if (isInternetAvailable()) {
-                        gallerySwipeSingleFragment.postComment(holder.postBox.getText().toString());
+                        gallerySwipeSingleFragment.postComment(holder.postBox.getText().toString(), "");
                         holder.postBox.setText("");
 
                     } else {
@@ -254,7 +253,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             });
 
             holder.message.setText(commentInfo.getMessage());
-            if (commentInfo.getCanDelete() == true) {
+            if (commentInfo.getCanDelete()) {
                 holder.deleteIcon.setImageResource(R.drawable.com_facebook_close);
 
             }
@@ -295,6 +294,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                     public void onClick(View v) {
                         if (isInternetAvailable()) {
                             // TODO implement listener for replying to comment.
+                            gallerySwipeSingleFragment.postComment("Replace this string with the message", commentInfo.getCommentID());
 
                         } else {
                             Toast.makeText(gallerySwipeSingleFragment.getActivity(), "No internet connection available", Toast.LENGTH_SHORT).show();
@@ -322,7 +322,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                 holder.likeIcon.setVisibility(View.INVISIBLE);
             }
 
-            if (commentInfo.getUserLikes() == true) {
+            if (commentInfo.getUserLikes()) {
                 holder.likeWord.setText("Unlike");
             }
             else{
