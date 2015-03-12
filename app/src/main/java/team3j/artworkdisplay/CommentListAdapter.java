@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -81,14 +82,12 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
 
     public CommentListAdapter(GallerySwipeSingleFragment gallerySwipeSingleFragment, Context context, int position,ArrayList<Art> galleryData,OnMapButtonPressTouchListener onMapButtonPressTouchListener) {
-        //this.commentAmount = commentAmount;
+
         data = new ArrayList<Comment>();
         this.galleryData=galleryData;
-        //this.data = data;
         inflater = LayoutInflater.from(context);
         this.context = context;
         this.indexOfArtwork = position;
-        //System.out.println(data);
         this.gallerySwipeSingleFragment = gallerySwipeSingleFragment;
         this.onMapButtonPressTouchListener=onMapButtonPressTouchListener;
     }
@@ -174,14 +173,15 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                 checkIfLogIn = false;
             }
             if(data.size() > 0){
+
                 commentAmount = data.size() + " comments";
             }
-            //holder.commentTitle.setText(commentAmount);
             holder.commentTitle.setText(Html.fromHtml(commentAmount));
 
         } else if (position == 1) {
             if(name!=null){
-                holder.postBox.setHint("Posting as " + name);
+
+                holder.postBox.setHint(Html.fromHtml("<i>" + "Posting as " + name + "</i>"));
             }
 
             holder.postBox.addTextChangedListener(new TextWatcher() {
@@ -538,13 +538,11 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                                 if (checkIfLogIn == true) {
                                     //if logged in just get the comments and show
                                     gallerySwipeSingleFragment.onClickLogin();
-                                    //notifyDataSetChanged();
                                 } else if (checkIfLogIn == false) {
                                     // if not logged in show dialog box telling them what happens if they log in
                                     showLoginDialog();
 
                                 }
-                                //data = gallerySwipeSingleFragment.onClickLogin();
                                 System.out.println("CommentsListAdapter" + data);
                             }
                             else {
@@ -641,6 +639,10 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         public void onMapButtonPress( boolean filter, int index);
     }
 
+    /**
+     * For the poster's name
+     * @param name Poster's name
+     */
     public void nameChange(String name){
         this.name = name;
     }
