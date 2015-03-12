@@ -63,6 +63,11 @@ public class GallerySwipeSingleFragment extends Fragment {
 
     private int loopCounter = 0;
 
+    private int facebookCode = 10;
+    private String comment;
+    private String commentID;
+    private boolean userLikes;
+
     public static GallerySwipeSingleFragment getInstance(int position, int indexOfArtWork) {
         GallerySwipeSingleFragment myFragmentTab = new GallerySwipeSingleFragment();
         Bundle args = new Bundle();
@@ -294,7 +299,9 @@ public class GallerySwipeSingleFragment extends Fragment {
 
     //handler for the log in button
     public void onClickLogin() {
-        Session.openActiveSession(getActivity(), this, true, statusCallback);
+
+        //Session.openActiveSession(getActivity(), this, true, statusCallback);
+        facebookCode = 0;
         if(checkIfActiveSession()){
             Request.newMeRequest(Session.getActiveSession(), new Request.GraphUserCallback() {
                 @Override
@@ -329,29 +336,42 @@ public class GallerySwipeSingleFragment extends Fragment {
     }
 
     //Display different things depending on if the user is logged in
-    private void onSessionStateChange(Session session,
-                                      SessionState state, Exception exception) {
-        System.out.println(state);
+    private void onSessionStateChange(Session session, SessionState state, Exception exception) {
         Session.setActiveSession(session);
+        System.out.println(state);
+        System.out.println(session);
+        System.out.println(Session.getActiveSession());
+
         if(state.equals(SessionState.OPENED_TOKEN_UPDATED)){
 
             System.out.println(session.getPermissions());
+            if(session.isPermissionGranted("publish_actions")) {
+                if (facebookCode == 1) {
+                    postComment(comment, commentID);
+                    facebookCode = 10;
+                    comment = null;
+                    commentID = null;
+                } else if (facebookCode == 2) {
+                    deleteComment(commentID);
+                    facebookCode = 10;
+                    commentID = null;
+                } else if (facebookCode == 3) {
+                    likeComment(commentID, userLikes);
+                    facebookCode = 10;
+                    commentID = null;
+
+                }
+            }
         }
         if (state.isOpened()) {
             //If logged in, show this
             Log.i("MainActivity", "Logged in...");
-            //test.setText("");
-            //retrieveInfo(session);
-            //isLoggedIn = true;
-//            Request.newMeRequest(session, new Request.GraphUserCallback() {
-//                // callback after Graph API response with user object
-//                @Override
-//                public void onCompleted(GraphUser user, Response response) {
-//                    if (user != null) {
-//                       // HomePageFragment.facebookCardText.setText(user.getFirstName() + "\nLog Out.");
-//                    }
-//                }
-//            }).executeAsync();
+
+            //Loads comments after login
+            if(facebookCode == 0){
+                onClickLogin();
+                facebookCode = 10; //reset code
+            }
 
 
         } else if (state.isClosed()) {
@@ -378,6 +398,7 @@ public class GallerySwipeSingleFragment extends Fragment {
         }
         else {  }
     }
+
     //Method to post a comment to facebook
     public void postComment(String comment, String commentID){
         String replyTo = "/779466045468925"; //ID of the post
@@ -414,6 +435,11 @@ public class GallerySwipeSingleFragment extends Fragment {
                 //Request posting permissions
                 Session.getActiveSession().requestNewPublishPermissions(new Session.NewPermissionsRequest(this, Arrays.asList("publish_actions")));
                 //TODO something after the request been made
+
+                this.comment = comment;
+                this.commentID = commentID;
+                facebookCode = 1;
+
 
             }
         }
@@ -462,11 +488,12 @@ public class GallerySwipeSingleFragment extends Fragment {
                 //Request posting permissions
                 Session.getActiveSession().requestNewPublishPermissions(new Session.NewPermissionsRequest(this, Arrays.asList("publish_actions")));
                 //TODO something after the request been made
+                this.commentID = commentID;
+                facebookCode = 2;
 
             }
         }
     }
-
 
     public void likeComment(String commentID, Boolean userLikes){
         if(checkIfActiveSession()) {
@@ -514,11 +541,14 @@ public class GallerySwipeSingleFragment extends Fragment {
                 //Request posting permissions
                 Session.getActiveSession().requestNewPublishPermissions(new Session.NewPermissionsRequest(this, Arrays.asList("publish_actions")));
                 //TODO something after the request been made
-
+                facebookCode = 3;
+                this.commentID = commentID;
+                this.userLikes = userLikes;
             }
         }
 
     }
+
     class MyAsync extends AsyncTask<Void, Void, Void> {
 
         private CustomProcessDialog customProcessDialog;
