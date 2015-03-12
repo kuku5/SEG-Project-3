@@ -25,6 +25,7 @@ import com.facebook.Request;
 import com.facebook.Response;
 import com.facebook.Session;
 import com.facebook.SessionState;
+import com.facebook.model.GraphUser;
 
 import org.json.JSONException;
 
@@ -178,13 +179,13 @@ public class GallerySwipeSingleFragment extends Fragment {
                     public void onCompleted(Response response) {
                         if (response != null) {
                             try {
-                                System.out.println(response);
+                                //System.out.println(response);
                                 //System.out.println(response.getGraphObject().toString());
                                 //System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" +response.getGraphObject().getInnerJSONObject().getJSONObject("summary").toString());
 
                                 int x = response.getGraphObject().getInnerJSONObject().getJSONArray("data").length();
-                                System.out.println(x);
-                                System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" +response.getGraphObject().getInnerJSONObject().getJSONArray("data"));
+                                //System.out.println(x);
+                                //System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" +response.getGraphObject().getInnerJSONObject().getJSONArray("data"));
                                 for (int i = 0; i < x; i++) {
                                     //System.out.println(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i));
                                     Comment commentInfo = new Comment();
@@ -242,13 +243,13 @@ public class GallerySwipeSingleFragment extends Fragment {
                                     if (response != null) {
                                         try {
 
-                                            System.out.println(response);
+                                            //System.out.println(response);
                                             if(!response.getGraphObject().getInnerJSONObject().getJSONArray("data").equals("")) {
 
 
                                                 int x = response.getGraphObject().getInnerJSONObject().getJSONArray("data").length();
-                                                System.out.println(x);
-                                                System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + response.getGraphObject().getInnerJSONObject().getJSONArray("data"));
+                                                //System.out.println(x);
+                                                //System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + response.getGraphObject().getInnerJSONObject().getJSONArray("data"));
                                                 for (int i = 0; i < x; i++) {
                                                     //System.out.println(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i));
                                                     Comment commentInfo = new Comment();
@@ -264,7 +265,7 @@ public class GallerySwipeSingleFragment extends Fragment {
                                                     replyComments.add(commentInfo);
 
                                                 }
-                                                System.out.println(replyComments);
+                                                //System.out.println(replyComments);
                                                 success = true;
                                                 supercomments.addAll(replyComments); //Add the list of reply comments
                                             }
@@ -287,6 +288,7 @@ public class GallerySwipeSingleFragment extends Fragment {
             e.printStackTrace();
         }
         loopCounter = 0;
+        System.out.println(supercomments);
 
     }
 
@@ -295,6 +297,14 @@ public class GallerySwipeSingleFragment extends Fragment {
     public void onClickLogin() {
         Session.openActiveSession(getActivity(), this, true, statusCallback);
         if(checkIfActiveSession()){
+            Request.newMeRequest(Session.getActiveSession(), new Request.GraphUserCallback() {
+                @Override
+                public void onCompleted(GraphUser user, Response response) {
+                    if (user != null) {
+                        commentListAdapter.nameChange(user.getFirstName());
+                    }
+                }
+            }).executeAsync();
             getFbData(false,true);
         }
 

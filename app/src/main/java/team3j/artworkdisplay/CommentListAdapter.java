@@ -75,6 +75,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
     private final int Comment_View_Type = 0;
     private final int Post_View_Type = 2;
     private boolean checkIfLogIn = false;
+    private String name;
 
     private OnMapButtonPressTouchListener onMapButtonPressTouchListener;
 
@@ -179,6 +180,10 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             holder.commentTitle.setText(Html.fromHtml(commentAmount));
 
         } else if (position == 1) {
+            if(name!=null){
+                holder.postBox.setHint("Posting as " + name);
+            }
+
             holder.postBox.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -634,6 +639,10 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
     public interface OnMapButtonPressTouchListener {
         public void onMapButtonPress( boolean filter, int index);
+    }
+
+    public void nameChange(String name){
+        this.name = name;
     }
 
 }
