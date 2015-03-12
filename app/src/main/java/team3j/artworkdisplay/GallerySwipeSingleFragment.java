@@ -293,7 +293,7 @@ public class GallerySwipeSingleFragment extends Fragment {
 
     //handler for the log in button
     public void onClickLogin() {
-
+        Session.openActiveSession(getActivity(), this, true, statusCallback);
         if(checkIfActiveSession()){
             getFbData(false,true);
         }
@@ -311,10 +311,11 @@ public class GallerySwipeSingleFragment extends Fragment {
             Session.openActiveSession(getActivity(), this, true, statusCallback);
             return false;
         }
-        else{
+        else if(session.isOpened()){
             Session.getActiveSession().refreshPermissions();
             return true;
         }
+        return false;
 
     }
 
