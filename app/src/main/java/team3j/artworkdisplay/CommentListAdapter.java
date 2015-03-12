@@ -19,6 +19,7 @@ import android.os.Environment;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.Html;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
@@ -300,7 +301,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                     public void onClick(View v) {
                         if (isInternetAvailable()) {
                             // TODO implement listener for replying to comment.
-                            gallerySwipeSingleFragment.postComment("Replace this string with the message", commentInfo.getCommentID());
+                            showCommentsDialog(commentInfo);
 
                         } else {
                             Toast.makeText(gallerySwipeSingleFragment.getActivity(), "No internet connection available", Toast.LENGTH_SHORT).show();
@@ -460,6 +461,36 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         });
         AlertDialog dialog = builder.create();
         dialog.getWindow().setLayout(400, 200);
+        dialog.show();
+    }
+
+    private void showCommentsDialog(final Comment commentInfo) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(gallerySwipeSingleFragment.getActivity());
+        builder.setTitle("Reply to " + commentInfo.getPosterName());
+        builder.setMessage(commentInfo.getMessage());
+        final EditText input = new EditText(context);
+        //input.setHorizontallyScrolling(false);
+
+        input.setSingleLine(false);
+        input.setMaxLines(3);
+        input.setTextColor(Color.BLACK);
+        builder.setView(input);
+        builder.setPositiveButton("Post", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(input.getText().length() > 0) {
+                    gallerySwipeSingleFragment.postComment(input.getText().toString(), commentInfo.getCommentID());
+                }
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.getWindow().setLayout(400, 400);
         dialog.show();
     }
 
