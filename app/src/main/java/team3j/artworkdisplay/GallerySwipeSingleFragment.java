@@ -63,6 +63,8 @@ public class GallerySwipeSingleFragment extends Fragment {
 
     private int loopCounter = 0;
 
+    private String facebookPostID;
+
     private int facebookCode = 10;
     private String comment;
     private String commentID;
@@ -116,6 +118,8 @@ public class GallerySwipeSingleFragment extends Fragment {
                 getActivity().onBackPressed();
             }
         });
+
+        facebookPostID = "779466045468925";
 
 //
 //        toolbar= (Toolbar) layout.findViewById(R.id.toolbar_gallery);
@@ -178,7 +182,7 @@ public class GallerySwipeSingleFragment extends Fragment {
         b1.putString("filter", "toplevel");
         //b1.putString("filter", "stream");   //gets the chronological order of comments
         b1.putString("limit", "100");        //gets max of 100
-        new Request(Session.getActiveSession(), "779466045468925/comments", b1, HttpMethod.GET,
+        new Request(Session.getActiveSession(), facebookPostID + "/comments", b1, HttpMethod.GET,
                 new Request.Callback() {
                     public void onCompleted(Response response) {
                         if (response != null) {
@@ -401,9 +405,9 @@ public class GallerySwipeSingleFragment extends Fragment {
 
     //Method to post a comment to facebook
     public void postComment(String comment, String commentID){
-        String replyTo = "/779466045468925"; //ID of the post
+        String replyTo = facebookPostID; //ID of the post
         if(!commentID.isEmpty()){
-            replyTo = "/" + commentID; //ID of the comment (for replies)
+            replyTo = commentID; //ID of the comment (for replies)
         }
 
 
@@ -460,7 +464,7 @@ public class GallerySwipeSingleFragment extends Fragment {
             if (permissions.contains("publish_actions")) {
                 new Request(
                         session,
-                        "/" + commentID,
+                        commentID,
                         null,
                         HttpMethod.DELETE,
                         new Request.Callback() {
@@ -516,7 +520,7 @@ public class GallerySwipeSingleFragment extends Fragment {
                 Bundle params = new Bundle();
 
             /* make the API call */
-                new Request(session, "/" + commentID + "/likes", params,
+                new Request(session, commentID + "/likes", params,
                         method,
                         new Request.Callback() {
                             public void onCompleted(Response response) {
