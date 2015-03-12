@@ -289,6 +289,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                 holder.itemView.setLayoutParams(params);
             }
             else {
+                holder.reply.setVisibility(View.VISIBLE);
                 holder.reply.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
