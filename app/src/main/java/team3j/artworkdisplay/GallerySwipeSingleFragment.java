@@ -162,10 +162,9 @@ public class GallerySwipeSingleFragment extends Fragment {
 
     /**
      * Gets facebook comments for this post
-     * @param isPost
-     * @param onlyLogIn
+     * @param code
      */
-    public void getFbData(final boolean isPost, final boolean onlyLogIn) {
+    public void getFbData(final int code) {
         //customProcessDialog.show();
         comments = new ArrayList<Comment>();
 
@@ -209,7 +208,7 @@ public class GallerySwipeSingleFragment extends Fragment {
                                     }
                                 });
 
-                                new MyAsync(isPost, onlyLogIn).execute();
+                                new MyAsync(code).execute();
 
 //
                             } catch (Exception e) {
@@ -305,7 +304,7 @@ public class GallerySwipeSingleFragment extends Fragment {
                     }
                 }
             }).executeAsync();
-            getFbData(false,true);
+            getFbData(0);
         }
 
     }
@@ -406,7 +405,7 @@ public class GallerySwipeSingleFragment extends Fragment {
                                 System.out.println("HERE MADNESS >>>>>>>>>>>" + response);
 
 
-                                getFbData(true, false);
+                                getFbData(1);
 
                             }
                         }
@@ -445,7 +444,7 @@ public class GallerySwipeSingleFragment extends Fragment {
                                     boolean success = response.getGraphObject().getInnerJSONObject().getBoolean("success");
 
                                     if (success) {
-                                        getFbData(false, false);
+                                        getFbData(2);
 
                                     } else {
                                         System.out.println(response.getError());
@@ -471,6 +470,7 @@ public class GallerySwipeSingleFragment extends Fragment {
 
     public void likeComment(String commentID, Boolean userLikes){
         if(checkIfActiveSession()) {
+            final int code;
             Session session = Session.getActiveSession();
 
             //Might not be able to use this method to get permissions
@@ -479,8 +479,10 @@ public class GallerySwipeSingleFragment extends Fragment {
             HttpMethod method;
             if (userLikes) {
                 method = HttpMethod.DELETE;
+                code = 4;
             } else {
                 method = HttpMethod.POST;
+                code = 3;
             }
             if (permissions.contains("publish_actions")) {
                 System.out.println("has publish actions");
@@ -496,7 +498,7 @@ public class GallerySwipeSingleFragment extends Fragment {
                                     boolean success = response.getGraphObject().getInnerJSONObject().getBoolean("success");
 
                                     if (success) {
-                                        getFbData(false, false);
+                                        getFbData(code);
                                     } else {
                                         System.out.println(response.getError());
                                     }
@@ -520,13 +522,11 @@ public class GallerySwipeSingleFragment extends Fragment {
     class MyAsync extends AsyncTask<Void, Void, Void> {
 
         private CustomProcessDialog customProcessDialog;
-        private boolean isPost;
-        private boolean onlyLogIn;
+        private int code;
 
-        public MyAsync(boolean isPost, boolean onlyLogIn) {
+        public MyAsync(int code) {
             customProcessDialog = new CustomProcessDialog(getActivity());
-            this.isPost = isPost;
-            this.onlyLogIn = onlyLogIn;
+            this.code = code;
         }
 
         @Override
@@ -548,13 +548,17 @@ public class GallerySwipeSingleFragment extends Fragment {
                 commentListAdapter.commentsChanged(supercomments);
                 success = false;
             }
-            if (!onlyLogIn) {
-                if (isPost) {
-                    Toast.makeText(getActivity(), "Comment posted", Toast.LENGTH_SHORT).show();
-
-                } else {
-                    Toast.makeText(getActivity(), "Comment deleted", Toast.LENGTH_SHORT).show();
-                }
+            if (code == 1) {
+                Toast.makeText(getActivity(), "Comment posted", Toast.LENGTH_SHORT).show();
+            }
+            else if (code == 2) {
+                Toast.makeText(getActivity(), "Comment deleted", Toast.LENGTH_SHORT).show();
+            }
+            else if(code == 3){
+                Toast.makeText(getActivity(), "Comment liked", Toast.LENGTH_SHORT).show();
+            }
+            else if(code == 4){
+                Toast.makeText(getActivity(), "Comment unliked", Toast.LENGTH_SHORT).show();
             }
             customProcessDialog.hide();
         }
