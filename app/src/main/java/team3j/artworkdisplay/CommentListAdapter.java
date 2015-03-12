@@ -16,7 +16,9 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
 import android.text.Html;
+import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -177,6 +179,28 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             holder.commentTitle.setText(Html.fromHtml(commentAmount));
 
         } else if (position == 1) {
+            holder.postBox.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    if(holder.postBox.getText().length() > 0){
+                        holder.post.setEnabled(true);
+                    }
+                    else{
+                        holder.post.setEnabled(false);
+                    }
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+            });
+            holder.post.setEnabled(false);
             holder.post.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
