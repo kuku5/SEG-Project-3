@@ -17,19 +17,14 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.daimajia.slider.library.SliderLayout;
-import com.etsy.android.grid.util.DynamicHeightImageView;
 import com.facebook.HttpMethod;
 import com.facebook.Request;
 import com.facebook.Response;
 import com.facebook.Session;
 import com.facebook.SessionState;
-import com.facebook.model.GraphUser;
 
 import org.json.JSONException;
 
@@ -39,12 +34,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import team3j.dulwichstreetart.Art;
-import team3j.dulwichstreetart.ArtistListAdapter;
 import team3j.dulwichstreetart.GalleryData;
 import team3j.dulwichstreetart.GalleryFragment;
 import team3j.dulwichstreetart.GoogleMapFragmentSmall;
-import team3j.dulwichstreetart.HomePageFragment;
 import team3j.dulwichstreetart.R;
 
 
@@ -55,7 +47,7 @@ import team3j.dulwichstreetart.R;
 
 public class GallerySwipeSingleFragment extends Fragment {
     private TextView textView;
-    int indexOfArtWork;
+    private int indexOfArtWork;
     private Toolbar toolbar;
     private RecyclerView recyclerView;
 
@@ -167,7 +159,11 @@ public class GallerySwipeSingleFragment extends Fragment {
         }
     };
 
-
+    /**
+     * Gets facebook comments for this post
+     * @param isPost
+     * @param onlyLogIn
+     */
     public void getFbData(final boolean isPost, final boolean onlyLogIn) {
         //customProcessDialog.show();
         comments = new ArrayList<Comment>();
@@ -192,7 +188,6 @@ public class GallerySwipeSingleFragment extends Fragment {
                                 for (int i = 0; i < x; i++) {
                                     //System.out.println(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i));
                                     Comment commentInfo = new Comment();
-                                    System.out.println("NUMBER LIKES"+Integer.parseInt(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("like_count").toString()));
                                     commentInfo.setNumberLikes(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("like_count").toString());
                                     commentInfo.setPosterURL(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).getJSONObject("from").get("id").toString());
                                     commentInfo.setPosterName(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).getJSONObject("from").get("name").toString());
@@ -223,13 +218,11 @@ public class GallerySwipeSingleFragment extends Fragment {
                     }
                 }).executeAsync();
 
-
-
-
-        //System.out.println("FBdata" + comments);
-
-
     }
+
+    /**
+     * Gets replies to each individual comments
+     */
     public void getReplies() {
         supercomments = new ArrayList<Comment>();
 
@@ -301,19 +294,27 @@ public class GallerySwipeSingleFragment extends Fragment {
     //handler for the log in button
     public void onClickLogin() {
 
+        if(checkIfActiveSession()){
+            getFbData(false,true);
+        }
+
+    }
+
+    /**
+     * Checks if there is an active facebook session open
+     * @return true if there is, false if there isn't and opens a new session
+     */
+    public boolean checkIfActiveSession(){
         Session session = Session.getActiveSession();
 
         if((session==null) || session.isClosed()) {
             Session.openActiveSession(getActivity(), this, true, statusCallback);
-
-
+            return false;
         }
-        if(Session.getActiveSession().isOpened()) {
+        else{
             Session.getActiveSession().refreshPermissions();
-            getFbData(false,true);
+            return true;
         }
-        //System.out.println("onClickLogin" + comments);
-
 
     }
 
@@ -357,7 +358,7 @@ public class GallerySwipeSingleFragment extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
-            Log.i("GallerySwipeFragment", "Visible"+indexOfArtWork);
+            Log.i("GallerySwipeFragment", "Visible" + indexOfArtWork);
             //vince put it here
             if(recyclerView!=null) {
                 recyclerView.getAdapter().notifyDataSetChanged();
@@ -369,35 +370,37 @@ public class GallerySwipeSingleFragment extends Fragment {
     }
     //Method to post a comment to facebook
     public void postComment(String comment){
-        //TODO check if active session is not null and opened
-        Session session = Session.getActiveSession();
-        //Might not be able to use this method to get permissions
-        List<String> permissions = session.getPermissions();
-        System.out.println(permissions);
-        if(permissions.contains("publish_actions")){
-            System.out.println("has publish actions");
-            Bundle params = new Bundle();
-            params.putString("message", comment);
+
+        if(checkIfActiveSession()) {
+            Session session = Session.getActiveSession();
+
+            //Might not be able to use this method to get permissions
+            List<String> permissions = session.getPermissions();
+            System.out.println(permissions);
+            if (permissions.contains("publish_actions")) {
+                System.out.println("has publish actions");
+                Bundle params = new Bundle();
+                params.putString("message", comment);
             /* make the API call */
-            new Request(session, "/779466045468925/comments", params,
-                    HttpMethod.POST,
-                    new Request.Callback() {
-                        public void onCompleted(Response response) {
-                            //System.out.println(response.getGraphObject().getInnerJSONObject());
-                            System.out.println("HERE MADNESS >>>>>>>>>>>"+response);
-                            //TODO handle empty comments
+                new Request(session, "/779466045468925/comments", params,
+                        HttpMethod.POST,
+                        new Request.Callback() {
+                            public void onCompleted(Response response) {
+                                //System.out.println(response.getGraphObject().getInnerJSONObject());
+                                System.out.println("HERE MADNESS >>>>>>>>>>>" + response);
 
 
-                            getFbData(true,false);
+                                getFbData(true, false);
 
+                            }
                         }
-                    }
-            ).executeAsync();
-        } else {
-            //Request posting permissions
-            Session.getActiveSession().requestNewPublishPermissions(new Session.NewPermissionsRequest(this, Arrays.asList("publish_actions")));
-            //TODO something after the request been made
+                ).executeAsync();
+            } else {
+                //Request posting permissions
+                Session.getActiveSession().requestNewPublishPermissions(new Session.NewPermissionsRequest(this, Arrays.asList("publish_actions")));
+                //TODO something after the request been made
 
+            }
         }
 
 
@@ -410,92 +413,91 @@ public class GallerySwipeSingleFragment extends Fragment {
     }
 
     public void deleteComment(String commentID) {
-        Session session = Session.getActiveSession();
-        List<String> permissions = session.getPermissions();
-        if(permissions.contains("publish_actions")) {
-            new Request(
-                    session,
-                    "/" + commentID,
-                    null,
-                    HttpMethod.DELETE,
-                    new Request.Callback() {
-                        public void onCompleted(Response response) {
+        if(checkIfActiveSession()) {
+            Session session = Session.getActiveSession();
+            List<String> permissions = session.getPermissions();
+            if (permissions.contains("publish_actions")) {
+                new Request(
+                        session,
+                        "/" + commentID,
+                        null,
+                        HttpMethod.DELETE,
+                        new Request.Callback() {
+                            public void onCompleted(Response response) {
 
-                            try {
-                                boolean success = response.getGraphObject().getInnerJSONObject().getBoolean("success");
+                                try {
+                                    boolean success = response.getGraphObject().getInnerJSONObject().getBoolean("success");
 
-                                if(success) {
-                                    getFbData(false,false);
+                                    if (success) {
+                                        getFbData(false, false);
 
+                                    } else {
+                                        System.out.println(response.getError());
+                                    }
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
                                 }
-                                else{
-                                    System.out.println(response.getError());
-                                }
 
-                            } catch (JSONException e) {
-                                e.printStackTrace();
                             }
-
                         }
-                    }
-            ).executeAsync();
+                ).executeAsync();
 
-        } else {
-            //Request posting permissions
-            Session.getActiveSession().requestNewPublishPermissions(new Session.NewPermissionsRequest(this, Arrays.asList("publish_actions")));
-            //TODO something after the request been made
+            } else {
+                //Request posting permissions
+                Session.getActiveSession().requestNewPublishPermissions(new Session.NewPermissionsRequest(this, Arrays.asList("publish_actions")));
+                //TODO something after the request been made
 
+            }
         }
     }
 
 
     public void likeComment(String commentID, Boolean userLikes){
-        System.out.println(commentID);
-        Session session = Session.getActiveSession();
+        if(checkIfActiveSession()) {
+            Session session = Session.getActiveSession();
 
-        //Might not be able to use this method to get permissions
-        List<String> permissions = session.getPermissions();
-        System.out.println(permissions);
-        HttpMethod method;
-        if(userLikes){
-            method = HttpMethod.DELETE;
-        }
-        else{
-            method = HttpMethod.POST;
-        }
-        if(permissions.contains("publish_actions")){
-            System.out.println("has publish actions");
-            Bundle params = new Bundle();
+            //Might not be able to use this method to get permissions
+            List<String> permissions = session.getPermissions();
+            System.out.println(permissions);
+            HttpMethod method;
+            if (userLikes) {
+                method = HttpMethod.DELETE;
+            } else {
+                method = HttpMethod.POST;
+            }
+            if (permissions.contains("publish_actions")) {
+                System.out.println("has publish actions");
+                Bundle params = new Bundle();
 
             /* make the API call */
-            new Request(session, "/" + commentID + "/likes", params,
-                    method,
-                    new Request.Callback() {
-                        public void onCompleted(Response response) {
-                            //TODO REFRESH PAGE HERE
-                            try {
-                                System.out.println(response.getError());
-                                boolean success = response.getGraphObject().getInnerJSONObject().getBoolean("success");
-
-                                if(success) {
-                                    getFbData(false,false);
-                                }
-                                else{
+                new Request(session, "/" + commentID + "/likes", params,
+                        method,
+                        new Request.Callback() {
+                            public void onCompleted(Response response) {
+                                try {
                                     System.out.println(response.getError());
+                                    boolean success = response.getGraphObject().getInnerJSONObject().getBoolean("success");
+
+                                    if (success) {
+                                        getFbData(false, false);
+                                    } else {
+                                        System.out.println(response.getError());
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
                                 }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+
                             }
-
                         }
-                    }
-            ).executeAsync();
+                ).executeAsync();
 
-        } else {
-            //Request posting permissions
-            Session.getActiveSession().requestNewPublishPermissions(new Session.NewPermissionsRequest(this, Arrays.asList("publish_actions")));
-            //TODO something after the request been made
+            } else {
+                //Request posting permissions
+                Session.getActiveSession().requestNewPublishPermissions(new Session.NewPermissionsRequest(this, Arrays.asList("publish_actions")));
+                //TODO something after the request been made
 
+            }
         }
 
     }
