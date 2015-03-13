@@ -7,12 +7,14 @@ public class Artist {
     private final String name;
     private final String description;
     private final String website;
+    private final int artistPhoto;
 
-    public Artist(String name,String description, String website){
+    public Artist(String name,String description, String website, int artistPhoto){
 
         this.name=name;
         this.description=description;
         this.website=website;
+        this.artistPhoto = artistPhoto;
 
     }
 
@@ -26,5 +28,8 @@ public class Artist {
 
     public String getWebsite() {
         return website;
+    }
+    public int getArtistPhoto () {
+        return artistPhoto;
     }
 }

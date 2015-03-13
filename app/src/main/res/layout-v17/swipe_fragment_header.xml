@@ -5,8 +5,6 @@
     android:orientation="vertical"
     >
 
-
-
     <LinearLayout
         android:id="@+id/image1"
         android:layout_width="fill_parent"

@@ -83,7 +83,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
         //        holder.dynamicHeightImageView.setImageBitmap(
 //                decodeSampledBitmapFromResource(context.getResources(), galleryData.get(position).getPic(), 10, 10));
        holder.txtLineOne.setText(galleryData.get(position).getName());
-        holder.descriptionTextView.setText(galleryData.get(position).getDesc());
+       holder.descriptionTextView.setText(galleryData.get(position).getDesc());
 
 
 
@@ -187,6 +187,8 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
                 @Override
                 public void onClick(View v) {
                     onItemTouchListener.onCardViewTap(v, getPosition());
+
+
                 }
             });
 

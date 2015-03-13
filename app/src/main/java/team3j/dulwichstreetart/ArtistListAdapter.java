@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,6 +59,8 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
 
         holder.title.setText(data.get(position).getName());
         holder.description.setText(data.get(position).getDescription());
+        holder.website.setText(data.get(position).getWebsite());
+        holder.artistPhoto.setImageResource(data.get(position).getArtistPhoto());
     }
 
     @Override
@@ -74,6 +77,8 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
         // view holder for each grid  cell
         TextView title;
         TextView description;
+        TextView website;
+        ImageView artistPhoto;
         boolean expanded=false;
         CardView expandArea;
 
@@ -81,7 +86,10 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.artist_list_item_title);
             description = (TextView) itemView.findViewById(R.id.artist_list_item_desc);
+            website = (TextView) itemView.findViewById(R.id.website);
+            artistPhoto = (ImageView)itemView.findViewById(R.id.artistPhoto);
             expandArea= (CardView) itemView.findViewById(R.id.artist_list_item_card);
+
 //            title.setOnClickListener(new View.OnClickListener() {
 //                @Override
 //                public void onClick(View v) {
