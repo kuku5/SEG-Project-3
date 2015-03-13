@@ -307,7 +307,6 @@ public class GallerySwipeSingleFragment extends Fragment {
 
     //handler for the log in button
     public void onClickLogin() {
-
         //Session.openActiveSession(getActivity(), this, true, statusCallback);
         facebookCode = 0;
         if(checkIfActiveSession()){
