@@ -71,7 +71,7 @@
         android:layout_margin="8dp"
         android:animateLayoutChanges="true"
         android:padding="8dp"
-        android:visibility="gone"
+        android:visibility="visible"
         card_view:cardCornerRadius="8dp"
         card_view:cardPreventCornerOverlap="false"
         card_view:contentPadding="8dp">
@@ -113,6 +113,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="10dp"
                 android:text="website"
+                android:autoLink="web"
                 android:textColor="#ff7b7b7f"
                 android:textSize="13sp"
                 android:textStyle="bold" />
