@@ -166,8 +166,6 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                 checkIfLogIn = true;
             }
             else {
-                commentAmount = "Click here to log in to Facebook to view comments";
-
                 String login = "Log in to Facebook to view comments";
                 String htmlTextLog = login.replace("Log in", "<font color = '#009672'> Log in </font>");
                 commentAmount = htmlTextLog;
@@ -219,8 +217,6 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                         Toast.makeText(gallerySwipeSingleFragment.getActivity(), "No internet connection available", Toast.LENGTH_SHORT).show();
 
                     }
-
-
                 }
             });
 

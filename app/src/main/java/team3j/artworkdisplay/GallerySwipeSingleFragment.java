@@ -312,6 +312,7 @@ public class GallerySwipeSingleFragment extends Fragment {
                 public void onCompleted(GraphUser user, Response response) {
                     if (user != null) {
                         commentListAdapter.nameChange(user.getFirstName());
+                        getLikes(user.getId());
                     }
                 }
             }).executeAsync();
@@ -551,6 +552,37 @@ public class GallerySwipeSingleFragment extends Fragment {
             }
         }
 
+    }
+
+    public void getLikes(final String userID){
+        Bundle b1 = new Bundle();
+        b1.putBoolean("summary", true);     //includes a summary in the request
+        b1.putString("filter", "toplevel");
+        //b1.putString("filter", "stream");   //gets the chronological order of comments
+        b1.putString("limit", "100");        //gets max of 100
+        new Request(Session.getActiveSession(), facebookPostID + "/likes" , b1, HttpMethod.GET,
+            new Request.Callback() {
+                public void onCompleted(Response response) {
+                    if (response != null) {
+                        try {
+                            //TODO error checking (if post has more then 100 likes we'll get index out of bound error)
+                            int numberOfLikes = response.getGraphObject().getInnerJSONObject().getJSONObject("summary").getInt("total_count");
+                            boolean userLikes = false;
+                            for(int i = 0; i < numberOfLikes; i++){
+                                if(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("id").equals(userID)){
+                                    userLikes = true;
+                                    break;
+                                }
+                            }
+                            //TODO Insert code here for using numberOfLikes and userLikes for post liking
+                            
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }).executeAsync();
     }
 
     class MyAsync extends AsyncTask<Void, Void, Void> {
