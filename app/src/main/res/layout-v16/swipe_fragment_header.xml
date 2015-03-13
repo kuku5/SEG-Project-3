@@ -24,7 +24,7 @@
             android:id="@+id/dynamic_imageview_artwork_display"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:maxHeight="400dp"
+            android:maxHeight="500dp"
             android:layout_gravity="center"
             android:src="@drawable/lowresconorharrington"
             android:adjustViewBounds="true"
@@ -201,6 +201,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorAccentReal"
+        android:minHeight="?attr/actionBarSize"
+
         >
         <LinearLayout
             android:layout_width="wrap_content"
@@ -212,23 +214,7 @@
             android:paddingLeft="10dp"
 
             >
-            <TextView
 
-                android:id="@+id/comment_list_description_title_streetartwork"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|left"
-                android:gravity="center_vertical"
-                android:maxLines="2"
-                android:paddingLeft="4dp"
-                android:paddingTop="10dp"
-                android:textAllCaps="true"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                android:textStyle="italic"
-
-                android:text="@string/artist_title"
-                />
             <TextView
 
                 android:id="@+id/comment_list_description_title_artist_streetartist"
@@ -238,13 +224,12 @@
                 android:gravity="center_vertical"
                 android:maxLines="2"
                 android:paddingLeft="4dp"
-                android:paddingBottom="10dp"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
 
-                android:text="@string/artist_title"
+                android:text="@string/more_info"
                 />
 
         </LinearLayout>
@@ -259,7 +244,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         card_view:cardBackgroundColor="@android:color/white"
-        card_view:cardCornerRadius="0dp">
+        card_view:cardCornerRadius="0dp"
+        android:layout_margin="5dp"
+
+        >
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -267,22 +255,23 @@
             android:orientation="vertical"
             android:padding="3dp">
 
-            <TextView
+            <!--<TextView-->
 
-                android:id="@+id/comment_list_more_info_links_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|left"
-                android:gravity="center_vertical"
-                android:maxLines="2"
-                android:paddingLeft="4dp"
-                android:paddingTop="10dp"
-                android:textAllCaps="true"
-                android:textSize="12sp"
-                android:textStyle="italic"
+            <!--android:id="@+id/comment_list_more_info_links_title"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center|left"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:maxLines="2"-->
+            <!--android:paddingLeft="4dp"-->
+            <!--android:paddingStart="4dp"-->
+            <!--android:paddingTop="10dp"-->
+            <!--android:textAllCaps="true"-->
+            <!--android:textSize="12sp"-->
+            <!--android:textStyle="italic"-->
 
-                android:text="@string/more_info"
-                />
+            <!--android:text="@string/more_info"-->
+            <!--/>-->
             <TextView
 
                 android:id="@+id/comment_list_more_info_links"
@@ -294,11 +283,11 @@
                 android:paddingLeft="4dp"
                 android:paddingBottom="10dp"
                 android:textAllCaps="true"
-                android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold"
 
-                android:text="@string/more_info"
+
+                android:text="@string/test_links"
                 />
 
 
