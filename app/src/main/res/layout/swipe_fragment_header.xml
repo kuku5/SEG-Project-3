@@ -6,7 +6,6 @@
     >
 
 
-
     <LinearLayout
         android:id="@+id/image1"
         android:layout_width="fill_parent"
@@ -24,14 +23,12 @@
         <com.etsy.android.grid.util.DynamicHeightImageView
             android:id="@+id/dynamic_imageview_artwork_display"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
+            android:maxHeight="400dp"
             android:layout_gravity="center"
             android:src="@drawable/lowresconorharrington"
-            android:layout_marginBottom="0dp"
             android:adjustViewBounds="true"
-            android:scaleType="fitStart"
-
-
+            android:scaleType="fitXY"
             />
 
 
@@ -41,28 +38,33 @@
     <RelativeLayout
         android:id="@+id/shareButtonLayout"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:background="@color/colorAccentReal"
         >
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
+            android:layout_alignParentStart="true"
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/right_part">
 
             <TextView
 
                 android:id="@+id/position"
                 android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center|left"
-                android:maxLines="1"
+                android:gravity="center_vertical"
+                android:maxLines="2"
                 android:padding="12dp"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
-                android:background="@drawable/ic_info"
+
+                android:text="@string/artist_title"
                 />
 
         </LinearLayout>
@@ -71,12 +73,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true">
+            android:layout_alignParentEnd="true"
+            android:id="@+id/right_part">
 
             <ImageView
                 android:id="@+id/shareIcon"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:src="@drawable/ic_share" />
 
@@ -101,10 +104,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-
             card_view:cardBackgroundColor="@android:color/white"
             card_view:cardCornerRadius="0dp">
-
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -168,7 +169,7 @@
                 android:layout_gravity="center|left"
                 android:maxLines="1"
                 android:padding="12dp"
-                android:text="@string/artisttile"
+                android:text="@string/artist_title"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="16sp"
@@ -187,6 +188,9 @@
         </LinearLayout>
 
     </RelativeLayout>
+
+
+
 
     <LinearLayout
         android:layout_width="fill_parent"

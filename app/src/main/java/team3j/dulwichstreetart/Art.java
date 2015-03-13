@@ -44,6 +44,7 @@ public class Art {
         this.inspirationTitle=inspirationTitle;
         this.pic=pic;
         this.inspiredPic=inspiredPic;
+        this.inspirationArtist=inspirationArtist;
     }
 
 

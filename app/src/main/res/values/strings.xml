@@ -11,8 +11,9 @@
     <string name="next">Next</string>
     <string name="infotext">Info</string>
     <string name="artisttitle">By Marcantonio Franceschini</string>
-    <string name="artisttile">By Agent Provocateur</string>
+    <string name="artist_title">Original By Agent Provocateur</string>
     <string name="artisttitle_info">Info</string>
+    <string name="more_info">More Info</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>

@@ -75,13 +75,11 @@ public class GallerySwipeHolder extends FragmentActivity {
                 viewPager.getCurrentItem();
                 mPagerPosition=position;
                 mPagerOffsetPixels = 90;
-                Log.d("page",""+position);
                 if(position==indexOfArtWork){
                     mPagerPosition=0;
                     mPagerOffsetPixels = 0;
 
                 }
-              //  Log.d("page","index"+indexOfArtWork+" positionOffsetPixels="+positionOffsetPixels);
 
             }
 
@@ -89,13 +87,10 @@ public class GallerySwipeHolder extends FragmentActivity {
         });
 
 
-       // System.out.println(viewPager.getCurrentItem() + "sss");
-       // Log.d("page","");
         viewPager.setPageTransformer(true, new ZoomOutPageTransformer());
 
         viewPager.setCurrentItem(indexOfArtWork,true);
 
-        //  mPagerPosition=0;
     }
 
     public class ZoomOutPageTransformer implements ViewPager.PageTransformer {

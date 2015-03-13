@@ -17,6 +17,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +39,7 @@ import java.util.List;
 import team3j.dulwichstreetart.GalleryData;
 import team3j.dulwichstreetart.GalleryFragment;
 import team3j.dulwichstreetart.GoogleMapFragmentSmall;
+import team3j.dulwichstreetart.QuickReturnRecyclerView;
 import team3j.dulwichstreetart.R;
 
 
@@ -49,8 +51,8 @@ import team3j.dulwichstreetart.R;
 public class GallerySwipeSingleFragment extends Fragment {
     private TextView textView;
     private int indexOfArtWork;
-    private Toolbar toolbar;
-    private RecyclerView recyclerView;
+    private LinearLayout toolbar;
+    private QuickReturnRecyclerView recyclerView;
 
     private ImageButton backButton;
 
@@ -62,6 +64,8 @@ public class GallerySwipeSingleFragment extends Fragment {
     private boolean success = false;
 
     private int loopCounter = 0;
+
+
 
     private String facebookPostID;
 
@@ -99,7 +103,7 @@ public class GallerySwipeSingleFragment extends Fragment {
         //set toolbar appearance
 
         textView = (TextView) layout.findViewById(R.id.position);
-
+        toolbar=(LinearLayout) layout.findViewById(R.id.toolbar_quick_return);
         //get arguments passed in and handle
         Bundle bundle = getArguments();
 
@@ -128,8 +132,8 @@ public class GallerySwipeSingleFragment extends Fragment {
 //        toolbar.setTitleTextColor(getActivity().getResources().getColor(R.color.dark_grey));
 //
 
-        recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view_grid1);
-
+        recyclerView = (QuickReturnRecyclerView) layout.findViewById(R.id.recycler_view_grid1);
+        recyclerView.setReturningView(toolbar);
         commentListAdapter = new CommentListAdapter(this,getActivity() ,indexOfArtWork,GalleryData.get().getArtworkList(),getMapItemTouchListener());
 
         recyclerView.setAdapter(commentListAdapter);
@@ -499,6 +503,7 @@ public class GallerySwipeSingleFragment extends Fragment {
             }
         }
     }
+
 
     public void likeComment(String commentID, Boolean userLikes){
         if(checkIfActiveSession()) {

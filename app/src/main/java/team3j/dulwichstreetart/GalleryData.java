@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * Created by JGill on 26/01/15.
- * <p/>
+ *
  * This returns the data for the specific artwork also stores array of images
  * returns data from xml strings
  */
@@ -33,7 +33,7 @@ public class GalleryData {
     }
 
     public GalleryData() {
-        artworkList = GetGalleryData();
+        artworkList=GetGalleryData();
     }
 
 
@@ -54,9 +54,9 @@ public class GalleryData {
         //The Struggle was real
         ArrayList<Art> artArrayList = new ArrayList<>();
 
-        artArrayList.add(new Art("The Guardian Angel", "Stik", "The Guardian Angel", "Marcantonio Franceschini", "Stik takes portraits of wealthy, fashionable, landed gentry by Gainsborough, and strips away all pretention, leaving his simple stick figures to brilliantly convey the emotion and relationships behind the symbols of status.", R.drawable.lowresstikguardianangel, R.drawable.lowresinspiredtheguardianangel));
-        artArrayList.add(new Art("Three Boys", "Stik", "Three Boys", "Bartolomé Esteban Murillo", "Stik takes portraits of wealthy, fashionable, landed gentry by Gainsborough, and strips away all pretention, leaving his simple stick figures to brilliantly convey the emotion and relationships behind the symbols of status. ", R.drawable.lowresstikthreeboys, R.drawable.lowresinspiredtheguardianangel));
-        artArrayList.add(new Art("Triumph of David Village", "RUN", "Triumph of David", "Nicolas Poussin", "RUN chose a detail from ‘The Translation of St Rita of Cascia’ by Poussin, the saint herself. ‘St Rita, I felt, was such a destroyed soul that I want to give her a bit of peace in her life.’", R.drawable.lowresdogrun, R.drawable.lowresinspiredtriumphofdavid));
+        artArrayList.add(new Art("The Guardian Angel ","Stik","The Guardian Angel 1716 ","Marcantonio Franceschini","Stik takes portraits of wealthy, fashionable, landed gentry by Gainsborough, and strips away all pretention, leaving his simple stick figures to brilliantly convey the emotion and relationships behind the symbols of status.",R.drawable.lowresstikguardianangel,R.drawable.lowresinspiredtheguardianangel));
+        artArrayList.add(new Art("Three Boys","Stik","Three Boys","Bartolomé Esteban Murillo","Stik takes portraits of wealthy, fashionable, landed gentry by Gainsborough, and strips away all pretention, leaving his simple stick figures to brilliantly convey the emotion and relationships behind the symbols of status. ",R.drawable.lowresstikthreeboys,R.drawable.lowresinspiredthreeboys));
+        artArrayList.add(new Art("Triumph of David Village","RUN","Triumph of David","Nicolas Poussin","RUN chose a detail from ‘The Translation of St Rita of Cascia’ by Poussin, the saint herself. ‘St Rita, I felt, was such a destroyed soul that I want to give her a bit of peace in her life.’",R.drawable.lowresdogrun,R.drawable.lowresinspiredtriumphofdavid));
         ///Phlegm
         artArrayList.add(new Art("The Triumph of David 2013", "Phlegm", "The Triumph of David 1628,31", "Nicolas Poussin", "The 9 year old son of the owner of the wall helped Phlegm paint his picture.  His mum said, ‘My son loved giving him a hand and I am so grateful to him for letting him have an input.  He feels proud to be part of it and now feels very protective towards the wall.’ ", R.drawable.lowresphlegm, R.drawable.lowresinspiredtriumphofdavid));
 
@@ -99,8 +99,11 @@ public class GalleryData {
         artArrayList.add(new Art("Finished Wall", "Walter Kershaw", "Landscape with Windmills Near Haarlem", "Jacob Van Ruisdael", "‘Landscape with Windmills near Haarlem’ painted first by Jacob Van Ruisdael in c 1650, then copied by John Constable in c 1830, then copied by Walter Kershaw as a huge mural in 2014.  Spot the differences!  ", R.drawable.lowreswalterlandscape, R.drawable.lowresinspiredlandscapewithwindmill));
 
 
+
         return artArrayList;
     }
+
+
 
 
     public static ArrayList<Artist> GetArtistsDataReal(Activity context) {
@@ -168,8 +171,10 @@ public class GalleryData {
     }
 
 
+
     public static ArrayList<String> GetArtistsData(Activity context) {
         final ArrayList<String> data = new ArrayList<String>(18);
+
 
 
         for (int i = 0; i < 18; i++) {
@@ -232,6 +237,7 @@ public class GalleryData {
 
 
     //nandu change this one below to match the titles
+
 
 
     public static Art[] getMapArtwork(Activity context) {

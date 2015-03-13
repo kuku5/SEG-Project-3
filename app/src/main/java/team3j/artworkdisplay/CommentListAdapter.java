@@ -154,8 +154,17 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
             holder.inspirationArtworkImageView.setImageDrawable(res);
 
-            holder.descriptionTitle.setText(galleryData.get(indexOfArtwork).getInspirationTitle());
+
+            holder.descriptionTitle.setText(galleryData.get(indexOfArtwork).getName());
+            holder.descriptionTitleArtist.setText("By "+galleryData.get(indexOfArtwork).getArtistName());
             holder.description.setText(galleryData.get(indexOfArtwork).getDesc());
+
+            holder.inspirationTitle.setText("\""+galleryData.get(indexOfArtwork).getInspirationTitle()+"\"");
+            holder.inspirationTitleArtist.setText("By "+galleryData.get(indexOfArtwork).getInspirationArtist());
+
+            holder.streetArtistTitle.setText("\""+galleryData.get(indexOfArtwork).getName()+"\"");
+            holder.streetArtistTitleArtist.setText("By "+galleryData.get(indexOfArtwork).getArtistName());
+
 
 
             Session session = Session.getActiveSession();
@@ -217,6 +226,8 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                         Toast.makeText(gallerySwipeSingleFragment.getActivity(), "No internet connection available", Toast.LENGTH_SHORT).show();
 
                     }
+
+
                 }
             });
 
@@ -507,20 +518,25 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         EditText postBox;
         Button post;
         // view holder for each grid  cell
-        TextView posterName;
-        TextView message;
-        TextView timestamp;
-        TextView description;
-        TextView descriptionTitle;
-        TextView likeWord;
-        TextView numberLikes;
-        TextView reply;
-        ImageView likeIcon;
-        ImageView deleteIcon;
+        private TextView posterName;
+        private TextView message;
+        private TextView timestamp;
+        private TextView description;
+        private TextView descriptionTitle;
+        private TextView descriptionTitleArtist;
+        private TextView streetArtistTitle;
+        private TextView streetArtistTitleArtist;
+        private TextView likeWord;
+        private TextView numberLikes;
+        private TextView reply;
+        private ImageView likeIcon;
+        private ImageView deleteIcon;
 
         private ImageView shareButton;
         private ImageView mapButton;
         private TextView commentTitle;
+        private TextView inspirationTitle;
+        private TextView inspirationTitleArtist;
         private DynamicHeightImageView dynamicHeightImageView;
         private DynamicHeightImageView inspirationArtworkImageView;
 
@@ -551,7 +567,15 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                     dynamicHeightImageView = (DynamicHeightImageView) itemView.findViewById(R.id.dynamic_imageview_artwork_display);
                     inspirationArtworkImageView = (DynamicHeightImageView) itemView.findViewById(R.id.inspiration_artwork);
                     description = (TextView) itemView.findViewById(R.id.description);
-                    descriptionTitle = (TextView) itemView.findViewById(R.id.description_title_single);
+
+                    descriptionTitle = (TextView) itemView.findViewById(R.id.comment_list_description_title);
+                    descriptionTitleArtist = (TextView) itemView.findViewById(R.id.comment_list_description_title_artist);
+
+                    inspirationTitle = (TextView) itemView.findViewById(R.id.comment_list_inspiration_title);
+                    inspirationTitleArtist = (TextView) itemView.findViewById(R.id.comment_list_inspiration_title_artist);
+
+                    streetArtistTitle = (TextView) itemView.findViewById(R.id.comment_list_description_title_streetartwork);
+                    streetArtistTitleArtist = (TextView) itemView.findViewById(R.id.comment_list_description_title_artist_streetartist);
 
 
                     commentTitle = (TextView) itemView.findViewById(R.id.commentAmount);
