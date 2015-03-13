@@ -30,6 +30,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
@@ -268,7 +269,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             holder.message.setText(commentInfo.getMessage());
             if (commentInfo.getCanDelete()) {
                 holder.deleteIcon.setImageResource(R.drawable.com_facebook_close);
-
+                holder.deleteIcon.setVisibility(View.VISIBLE);
             }
             else {
                 holder.deleteIcon.setVisibility(View.INVISIBLE);
@@ -292,11 +293,11 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                 params.setMargins(75, 0, 0, 0);
                 //holder.likeIcon.getLayoutParams().height=30;
                 //holder.likeIcon.getLayoutParams().width=30;
-                holder.message.setTextSize(10);
-                holder.numberLikes.setTextSize(8);
-                holder.likeWord.setTextSize(8);
-                holder.posterName.setTextSize(12);
-                holder.timestamp.setTextSize(8);
+                holder.message.setTextSize(13);
+                holder.numberLikes.setTextSize(11);
+                holder.likeWord.setTextSize(11);
+                holder.posterName.setTextSize(15);
+                holder.timestamp.setTextSize(11);
                 holder.reply.setVisibility(View.INVISIBLE);
                 holder.reply.setOnClickListener(null); //Removes reply button listener if it's a reply.
                 holder.itemView.setLayoutParams(params);
@@ -316,13 +317,14 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                         }
                     }
                 });
-                holder.message.setTextSize(12);
-                holder.numberLikes.setTextSize(10);
-                holder.likeWord.setTextSize(10);
-                holder.posterName.setTextSize(14);
-                holder.timestamp.setTextSize(10);
+                holder.message.setTextSize(15);
+                holder.numberLikes.setTextSize(13);
+                holder.likeWord.setTextSize(13);
+                holder.posterName.setTextSize(17);
+                holder.timestamp.setTextSize(13);
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 params.setMargins(0, 0, 0, 0);
+
                 holder.itemView.setLayoutParams(params);
             }
             if (Integer.parseInt(commentInfo.getNumberLikes())>=1) {

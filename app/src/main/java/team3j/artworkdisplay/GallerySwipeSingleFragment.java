@@ -177,7 +177,7 @@ public class GallerySwipeSingleFragment extends Fragment {
      * Gets facebook comments for this post
      * @param code
      */
-    public void getFbData(final int code) {
+    public void getFbData(final int code, final CustomProcessDialog customProcessDialog) {
         //customProcessDialog.show();
         comments = new ArrayList<Comment>();
 
@@ -221,7 +221,7 @@ public class GallerySwipeSingleFragment extends Fragment {
                                     }
                                 });
 
-                                new MyAsync(code).execute();
+                                new MyAsync(code,customProcessDialog).execute();
 
 //
                             } catch (Exception e) {
@@ -320,7 +320,9 @@ public class GallerySwipeSingleFragment extends Fragment {
                     }
                 }
             }).executeAsync();
-            getFbData(0);
+            CustomProcessDialog dialog = new CustomProcessDialog(getActivity());
+            dialog.show();
+            getFbData(0,dialog);
         }
 
     }
@@ -411,6 +413,8 @@ public class GallerySwipeSingleFragment extends Fragment {
     //Method to post a comment to facebook
     public void postComment(String comment, String commentID){
         String replyTo = facebookPostID; //ID of the post
+        final CustomProcessDialog dialog = new CustomProcessDialog(getActivity());
+        dialog.show();
         if(!commentID.isEmpty()){
             replyTo = commentID; //ID of the comment (for replies)
         }
@@ -435,13 +439,14 @@ public class GallerySwipeSingleFragment extends Fragment {
                                 System.out.println("HERE MADNESS >>>>>>>>>>>" + response);
 
 
-                                getFbData(1);
+                                getFbData(1,dialog);
 
                             }
                         }
                 ).executeAsync();
             } else {
                 //Request posting permissions
+                dialog.hide();
                 Session.getActiveSession().requestNewPublishPermissions(new Session.NewPermissionsRequest(this, Arrays.asList("publish_actions")));
                 //TODO something after the request been made
 
@@ -466,6 +471,8 @@ public class GallerySwipeSingleFragment extends Fragment {
         if(checkIfActiveSession()) {
             Session session = Session.getActiveSession();
             List<String> permissions = session.getPermissions();
+            final CustomProcessDialog dialog = new CustomProcessDialog(getActivity());
+            dialog.show();
             if (permissions.contains("publish_actions")) {
                 new Request(
                         session,
@@ -478,10 +485,12 @@ public class GallerySwipeSingleFragment extends Fragment {
                                 try {
                                     boolean success = response.getGraphObject().getInnerJSONObject().getBoolean("success");
 
+
                                     if (success) {
-                                        getFbData(2);
+                                        getFbData(2,dialog);
 
                                     } else {
+                                        dialog.hide();
                                         System.out.println(response.getError());
                                     }
 
@@ -495,6 +504,7 @@ public class GallerySwipeSingleFragment extends Fragment {
 
             } else {
                 //Request posting permissions
+                dialog.hide();
                 Session.getActiveSession().requestNewPublishPermissions(new Session.NewPermissionsRequest(this, Arrays.asList("publish_actions")));
                 //TODO something after the request been made
                 this.commentID = commentID;
@@ -535,7 +545,9 @@ public class GallerySwipeSingleFragment extends Fragment {
                                     boolean success = response.getGraphObject().getInnerJSONObject().getBoolean("success");
 
                                     if (success) {
-                                        getFbData(code);
+                                        CustomProcessDialog dialog = new CustomProcessDialog(getActivity());
+                                        dialog.show();
+                                        getFbData(code,dialog);
                                     } else {
                                         System.out.println(response.getError());
                                     }
@@ -595,15 +607,16 @@ public class GallerySwipeSingleFragment extends Fragment {
         private CustomProcessDialog customProcessDialog;
         private int code;
 
-        public MyAsync(int code) {
-            customProcessDialog = new CustomProcessDialog(getActivity());
+        public MyAsync(int code, CustomProcessDialog customProcessDialog) {
+            //customProcessDialog = new CustomProcessDialog(getActivity());
+            this.customProcessDialog = customProcessDialog;
             this.code = code;
         }
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            customProcessDialog.show();
+            //customProcessDialog.show();
 
         }
 
