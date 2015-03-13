@@ -42,7 +42,7 @@ public class GallerySwipeHolder extends FragmentActivity {
          // uses library for swiping to create swipe effect
          SwipeBack.attach(this, Position.LEFT)
                 .setContentView(R.layout.view_pager)
-                .setSwipeBackView(R.layout.swipeback_default)
+                .setSwipeBackView(R.layout.custom_swipeback)
                 .setDividerAsSolidColor(Color.WHITE)
                 .setDividerSize(2)
                 .setOnInterceptMoveEventListener(

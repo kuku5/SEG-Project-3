@@ -48,8 +48,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
         this.context=context;
         this.galleryData=galleryData;
         this.onItemTouchListener = itemTouchListener;
-         mPlaceHolderBitmap = BitmapFactory.decodeResource(context.getResources(),R.drawable.ic_action_back);
-
+         mPlaceHolderBitmap = BitmapFactory.decodeResource(context.getResources(),R.drawable.loadimage);
     }
 
 

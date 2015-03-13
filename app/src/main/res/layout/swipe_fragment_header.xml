@@ -5,7 +5,7 @@
     android:orientation="vertical"
     >
 
-
+    <!--layout for inspiration image  begin -->
     <LinearLayout
         android:id="@+id/image1"
         android:layout_width="fill_parent"
@@ -33,8 +33,11 @@
 
 
     </LinearLayout>
+    <!--layout for inspiration image  end -->
 
+    <!--////////////////-->
 
+    <!--layout for title bar below  begin -->
     <RelativeLayout
         android:id="@+id/shareButtonLayout"
         android:layout_width="match_parent"
@@ -48,20 +51,39 @@
             android:layout_alignParentStart="true"
             android:orientation="vertical"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/right_part">
+            android:paddingLeft="10dp"
 
+            android:layout_toLeftOf="@+id/right_part">
             <TextView
 
-                android:id="@+id/position"
+                android:id="@+id/comment_list_inspiration_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|left"
                 android:gravity="center_vertical"
                 android:maxLines="2"
-                android:padding="12dp"
+                android:paddingLeft="4dp"
+                android:paddingStart="4dp"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
-                android:textSize="15sp"
+                android:textSize="12sp"
+                android:textStyle="italic"
+
+                android:text="@string/artist_title"
+                />
+            <TextView
+
+                android:id="@+id/comment_list_inspiration_title_artist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|left"
+                android:gravity="center_vertical"
+                android:maxLines="2"
+                android:paddingLeft="4dp"
+                android:paddingStart="4dp"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="14sp"
                 android:textStyle="bold"
 
                 android:text="@string/artist_title"
@@ -92,6 +114,8 @@
         </LinearLayout>
 
     </RelativeLayout>
+    <!--layout for title bar below  end -->
+
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -129,18 +153,45 @@
                     android:orientation="vertical"
                     android:padding="3dp">
 
+
+
+
                     <TextView
+                        android:id="@+id/comment_list_description_title_artist"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Title"
-                        android:id="@+id/description_title_single"
+                        android:layout_gravity="center|left"
+                        android:gravity="center_vertical"
+                        android:maxLines="2"
+                        android:paddingLeft="0dp"
+                        android:paddingStart="0dp"
+                        android:textAllCaps="true"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:text="@string/artist_title"
                         />
 
+                    <TextView
+
+                        android:id="@+id/comment_list_description_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|left"
+                        android:gravity="center_vertical"
+                        android:maxLines="2"
+                        android:paddingLeft="0dp"
+                        android:paddingStart="0dp"
+                        android:textAllCaps="true"
+                        android:textSize="12sp"
+                        android:textStyle="italic"
+
+                        android:text="@string/artist_title"
+                        />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/description"
-                        android:text="AP is the only stencil artist in this project.  Once cut, stencil paintings can be reproduced easily, by anyone.  The work of art AP chose to interpret was a sketch by Rubens, highly prized because it is by him alone, whereas the finished piece would have had a great deal of workshop input.  "
+                        android:text="AP is the only stencil artist in this project. Once cut, stencil paintings can be reproduced easily, by anyone.  The work of art AP chose to interpret was a sketch by Rubens, highly prized because it is by him alone, whereas the finished piece would have had a great deal of workshop input.  "
                         android:textSize="11sp" />
                 </LinearLayout>
 
@@ -149,46 +200,118 @@
 
 
     </LinearLayout>
+
     <RelativeLayout
-        android:id="@+id/artist_title_layout"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:background="@color/colorAccentReal"
         >
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
+            android:layout_alignParentStart="true"
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            android:paddingLeft="10dp"
 
+            >
             <TextView
 
-                android:id="@+id/artistTitle"
+                android:id="@+id/comment_list_description_title_streetartwork"
                 android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center|left"
-                android:maxLines="1"
-                android:padding="12dp"
-                android:text="@string/artist_title"
+                android:gravity="center_vertical"
+                android:maxLines="2"
+                android:paddingLeft="4dp"
+                android:paddingStart="4dp"
+                android:paddingTop="10dp"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
-                android:textSize="16sp"
+                android:textSize="12sp"
+                android:textStyle="italic"
+
+                android:text="@string/artist_title"
+                />
+            <TextView
+
+                android:id="@+id/comment_list_description_title_artist_streetartist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|left"
+                android:gravity="center_vertical"
+                android:maxLines="2"
+                android:paddingLeft="4dp"
+                android:paddingStart="4dp"
+                android:paddingBottom="10dp"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="14sp"
                 android:textStyle="bold"
-                android:background="@color/colorAccentReal"
+
+                android:text="@string/artist_title"
                 />
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true">
 
-        </LinearLayout>
 
     </RelativeLayout>
 
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/moreInfoLinksCard"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        card_view:cardBackgroundColor="@android:color/white"
+        card_view:cardCornerRadius="0dp">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:padding="3dp">
+
+            <TextView
+
+                android:id="@+id/comment_list_more_info_links_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|left"
+                android:gravity="center_vertical"
+                android:maxLines="2"
+                android:paddingLeft="4dp"
+                android:paddingStart="4dp"
+                android:paddingTop="10dp"
+                android:textAllCaps="true"
+                android:textSize="12sp"
+                android:textStyle="italic"
+
+                android:text="@string/more_info"
+                />
+            <TextView
+
+                android:id="@+id/comment_list_more_info_links"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|left"
+                android:gravity="center_vertical"
+                android:maxLines="2"
+                android:paddingLeft="4dp"
+                android:paddingStart="4dp"
+                android:paddingBottom="10dp"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
+
+                android:text="@string/more_info"
+                />
+
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
 
 
 

@@ -162,8 +162,8 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             holder.inspirationTitle.setText("\""+galleryData.get(indexOfArtwork).getInspirationTitle()+"\"");
             holder.inspirationTitleArtist.setText("By "+galleryData.get(indexOfArtwork).getInspirationArtist());
 
-            holder.streetArtistTitle.setText("\""+galleryData.get(indexOfArtwork).getName()+"\"");
-            holder.streetArtistTitleArtist.setText("By "+galleryData.get(indexOfArtwork).getArtistName());
+//            holder.streetArtistTitle.setText("\""+galleryData.get(indexOfArtwork).getName()+"\"");
+         //   holder.streetArtistTitleArtist.setText("By "+galleryData.get(indexOfArtwork).getArtistName());
 
 
 
@@ -574,8 +574,8 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                     inspirationTitle = (TextView) itemView.findViewById(R.id.comment_list_inspiration_title);
                     inspirationTitleArtist = (TextView) itemView.findViewById(R.id.comment_list_inspiration_title_artist);
 
-                    streetArtistTitle = (TextView) itemView.findViewById(R.id.comment_list_description_title_streetartwork);
-                    streetArtistTitleArtist = (TextView) itemView.findViewById(R.id.comment_list_description_title_artist_streetartist);
+                    //streetArtistTitle = (TextView) itemView.findViewById(R.id.comment_list_description_title_streetartwork);
+                   // streetArtistTitleArtist = (TextView) itemView.findViewById(R.id.comment_list_description_title_artist_streetartist);
 
 
                     commentTitle = (TextView) itemView.findViewById(R.id.commentAmount);
