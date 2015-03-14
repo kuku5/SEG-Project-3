@@ -37,6 +37,7 @@
     <string name="art_outdoor_gallery_about"> Dulwich Outdoor Gallery is a collection of murals painted by some of the top street artists alive today who based their work on Baroque era paintings in the permanent collection at Dulwich Picture Gallery.\n\nThese carefully selected artists, from all over the world, are top class representatives of probably the world\'s biggest current international art movement - street art.\n\nThey were invited to study Dulwich Picture Gallery\'s permanent collection and choose a painting as an inspiration for their works. The style and subject matter of the murals were carefully matched to the location of the walls. It is hoped these murals will be permanent.\n\nEngland\'s oldest public art gallery has been an inspiration to its newest.</string>
     <string name="log_in_fb_about">Logging into Facebook will allow you to view and post comments. \n\nYou will also be able to view the profile of those in the comments.</string>
     <string name="delete_fb_comment">Are you sure you want to delete this comment?</string>
+    <string name="logout_fb">Do you wish to log out of Facebook?</string>
    <string name="art_picture_gallery_about">Dulwich Picture Gallery is the world\’s first purpose-built public art gallery: it was founded in 1811 when Sir Francis Bourgeois RA bequeathed his collection of old masters “for the inspection of the public”\n\nToday the Gallery is a vibrant cultural hub hosting some of the UK\’s leading exhibitions alongside its Permanent Collection of Baroque masterpieces while staging a wide-ranging programme of public events, practical art and community engagement..</string>
     <string-array name="artwork_descriptions">
         <item>The Guardian Angel</item>
@@ -166,6 +167,7 @@
 
     <string name="title_maps">Street Art Locations</string>
     <string name="commentAmount">Comments</string>
+    <string name="logout">Logout</string>
     <string name="posthint"><i>Post a comment...</i></string>
     <string name="postbutton">Post</string>
 

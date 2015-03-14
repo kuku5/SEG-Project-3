@@ -305,7 +305,7 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/commentAmount"
@@ -316,6 +316,14 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="6dp"
             android:text="@string/commentAmount"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="6dp"
             android:textStyle="bold" />
 
         <View

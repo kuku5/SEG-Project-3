@@ -166,11 +166,12 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 //            holder.streetArtistTitle.setText("\""+galleryData.get(indexOfArtwork).getName()+"\"");
          //   holder.streetArtistTitleArtist.setText("By "+galleryData.get(indexOfArtwork).getArtistName());
 
+            String logout = "";
 
-
-            Session session = Session.getActiveSession();
+            final Session session = Session.getActiveSession();
             if(!(session==null) && session.isOpened()) {
                 String viewComment = "View comments";
+                logout = "Logout of FB";
                 String htmlTextView = viewComment.replace("View", "<font color = '#009672'> View </font>");
                 commentAmount = htmlTextView;
                 checkIfLogIn = true;
@@ -186,6 +187,24 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                 commentAmount = data.size() + " comments";
             }
             holder.commentTitle.setText(Html.fromHtml(commentAmount));
+
+            holder.logout.setText(Html.fromHtml("<font color = '#009672'>"+logout+"</font>"));
+            holder.logout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (isInternetAvailable()) {
+                        showLogoutDialog(session);
+                    }
+                    else {
+                        Toast.makeText(gallerySwipeSingleFragment.getActivity(), "No internet connection available", Toast.LENGTH_SHORT).show();
+
+                    }
+
+                }
+
+            });
+
+
 
         } else if (position == 1) {
             if(name!=null){
@@ -473,6 +492,34 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         dialog.show();
     }
 
+    private void showLogoutDialog(final Session session) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(gallerySwipeSingleFragment.getActivity());
+        builder.setTitle("Log out of Facebook");
+        builder.setMessage(R.string.logout_fb);
+        builder.setPositiveButton("Log out", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (session.getActiveSession() != null) {
+                    session.getActiveSession().closeAndClearTokenInformation();
+                }
+
+                session.setActiveSession(null);
+                data.clear();
+                notifyDataSetChanged();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.getWindow().setLayout(400, 200);
+        dialog.show();
+    }
+
+
     private void showCommentsDialog(final Comment commentInfo) {
         AlertDialog.Builder builder = new AlertDialog.Builder(gallerySwipeSingleFragment.getActivity());
         builder.setTitle("Reply to " + commentInfo.getPosterName());
@@ -517,8 +564,9 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
-        EditText postBox;
-        Button post;
+        private TextView logout;
+        private EditText postBox;
+        private Button post;
         // view holder for each grid  cell
         private TextView posterName;
         private TextView message;
@@ -583,6 +631,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                     commentTitle = (TextView) itemView.findViewById(R.id.commentAmount);
                     shareButton = (ImageView) itemView.findViewById(R.id.shareIcon);
                     mapButton = (ImageView) itemView.findViewById(R.id.mapIcon);
+                    logout = (TextView) itemView.findViewById(R.id.logout);
 
                     commentTitle.setOnClickListener(new View.OnClickListener() {
                         @Override
