@@ -60,6 +60,7 @@ import team3j.dulwichstreetart.MainActivity;
 import team3j.dulwichstreetart.R;
 
 /**
+ * Adapter for the recycler view that holds everything that is viewable on GallerySwipeSingleFragment
  * @author Team 3-J
  */
 public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.MyViewHolder> {
@@ -71,18 +72,23 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
     private ArrayList<Comment> data;
     private ArrayList<Art> galleryData;
     private Context context;
-
     private Bitmap bitmap;
-
     private final int Header_View_Type = 1;
     private final int Comment_View_Type = 0;
     private final int Post_View_Type = 2;
     private boolean checkIfLogIn = false;
     private String name;
-
     private OnMapButtonPressTouchListener onMapButtonPressTouchListener;
 
 
+    /**
+     * Constructs a CommentListAdapter, with the specified data that will be shown on the recycler view
+     * @param gallerySwipeSingleFragment The instance of GallerySwipeSingleFragment
+     * @param context The activity of GallerySwipeSingleFragment
+     * @param position The position of the current fragment
+     * @param galleryData The data of the gallery pictures
+     * @param onMapButtonPressTouchListener The button that allows you access the map fragment
+     */
     public CommentListAdapter(GallerySwipeSingleFragment gallerySwipeSingleFragment, Context context, int position,ArrayList<Art> galleryData,OnMapButtonPressTouchListener onMapButtonPressTouchListener) {
 
         data = new ArrayList<Comment>();
@@ -96,6 +102,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
 
     @Override
+    // The view type of the recycler view, depending on the position on the recycler view
     public int getItemViewType(int position) {
         int viewType = 100 ;
 
@@ -112,6 +119,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
     }
 
     @Override
+    // Determines the XML Layout that matches with the particular view type
     public CommentListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //add view to the grid cell for the first time
         //this stores the view in the cache meaning the images dont have to be reloaded over
@@ -139,6 +147,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
     }
 
     @Override
+    // The details of/actions of the layout depending on which layout is at that position
     public void onBindViewHolder(final CommentListAdapter.MyViewHolder holder, int position) {
 
         if (position == 0) {
@@ -286,7 +295,9 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             });
 
             holder.message.setText(commentInfo.getMessage());
+
             if (commentInfo.getCanDelete()) {
+                // If the comment is deletable by the user
                 holder.deleteIcon.setImageResource(R.drawable.cross_grey);
                 holder.deleteIcon.setVisibility(View.VISIBLE);
             }
@@ -381,13 +392,10 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             int day = Integer.parseInt(commentInfo.getTime().substring(8, 10));
             int hour = Integer.parseInt(commentInfo.getTime().substring(11, 13));
             int minute = Integer.parseInt(commentInfo.getTime().substring(14, 16));
-            //System.out.println("TEEEEEEEEEEEEST   " + year + "   " + month + "   " + day + "   " + hour + "   " + minute);
             Calendar postDate = GregorianCalendar.getInstance();
             postDate.set(year, month, day, hour, minute);
-            Map<TimeUnit, Long> timeSincePost = getTimeDifference(postDate.getTime(), new Date()); // new Date = current
-            //System.out.println(commentInfo.getTime());
-            //System.out.println("MONTH " + month + "  HOUR " + hour + " MINUTE " + minute);
-            //System.out.println(postDate.getTime());
+            Map<TimeUnit, Long> timeSincePost = getTimeDifference(postDate.getTime(), new Date());
+
             if (timeSincePost.get(TimeUnit.DAYS) > 0 && timeSincePost.get(TimeUnit.DAYS) < 8) {
                 if (timeSincePost.get(TimeUnit.DAYS) == 1) {
                     holder.timestamp.setText("One day ago");
@@ -416,6 +424,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
     }
 
     @Override
+    // Returns the size of the recycler view based on the size of the data
     public int getItemCount() {
         if (data.size() == 0) {
             return 1;
@@ -492,6 +501,10 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         dialog.show();
     }
 
+    /**
+     * Shows a FB Logout confirmation dialog
+     * @param session The session that is currently running
+     */
     private void showLogoutDialog(final Session session) {
         AlertDialog.Builder builder = new AlertDialog.Builder(gallerySwipeSingleFragment.getActivity());
         builder.setTitle("Log out of Facebook");
@@ -519,14 +532,16 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         dialog.show();
     }
 
-
+    /**
+     * Shows a reply to comment dialog
+     * @param commentInfo The comment's details for a specific position
+     */
     private void showCommentsDialog(final Comment commentInfo) {
         AlertDialog.Builder builder = new AlertDialog.Builder(gallerySwipeSingleFragment.getActivity());
         builder.setTitle("Reply to " + commentInfo.getPosterName());
         builder.setMessage(commentInfo.getMessage());
         final EditText input = new EditText(context);
         //input.setHorizontallyScrolling(false);
-
         input.setSingleLine(false);
         input.setMaxLines(3);
         input.setTextColor(Color.BLACK);
@@ -563,12 +578,16 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
+    /**
+     * Recycler view's details, based on the view type cases
+     *
+     */
     class MyViewHolder extends RecyclerView.ViewHolder {
+        // view holder for each grid  cell
+        private TextView posterName;
         private TextView logout;
         private EditText postBox;
         private Button post;
-        // view holder for each grid  cell
-        private TextView posterName;
         private TextView message;
         private TextView timestamp;
         private TextView description;
@@ -645,7 +664,6 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                                     showLoginDialog();
 
                                 }
-                                System.out.println("CommentsListAdapter" + data);
                             }
                             else {
                                 Toast.makeText(gallerySwipeSingleFragment.getActivity(), "No internet connection available", Toast.LENGTH_SHORT).show();
@@ -657,8 +675,8 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                     mapButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            MainActivity.viewPager.setCurrentItem(3, true);
 
+                            MainActivity.viewPager.setCurrentItem(3, true);
                             onMapButtonPressTouchListener.onMapButtonPress(false, galleryData.get(indexOfArtwork).getIndex());
 
 
@@ -666,16 +684,12 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                         }
                     });
 
-
-
                     shareButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
 
                             OutputStream output;
-
                             // Retrieve the image from the res folder
-
 
                             // Find the SD Card path
                             File filepath = Environment.getExternalStorageDirectory();
@@ -730,13 +744,18 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
     }
 
-
+    /**
+     * Notifies when comments data has changed
+     * @param data The "new" data
+     */
     public void commentsChanged(ArrayList<Comment> data){
         this.data = data;
         notifyDataSetChanged();
     }
 
-
+    /**
+     *
+     */
     public interface OnMapButtonPressTouchListener {
         public void onMapButtonPress( boolean filter, int index);
     }
