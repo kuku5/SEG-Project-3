@@ -279,7 +279,6 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                     String facebookUrl = "https://www.facebook.com/"+commentInfo.getPosterURL();
                     try {
                         int versionCode = context.getPackageManager().getPackageInfo("com.facebook.katana", 0).versionCode;
-                        System.out.println("VERSION CODE HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE "+versionCode);
                         if (versionCode >= 3002850) {
                             Uri uri = Uri.parse("fb://facewebmodal/f?href=" + facebookUrl);
                             context.startActivity(new Intent(Intent.ACTION_VIEW, uri));;

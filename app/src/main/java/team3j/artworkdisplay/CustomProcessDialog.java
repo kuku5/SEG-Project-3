@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 
 /**
+ * Process dialog with specific settings
  * @author Team 3-J
  *
  */

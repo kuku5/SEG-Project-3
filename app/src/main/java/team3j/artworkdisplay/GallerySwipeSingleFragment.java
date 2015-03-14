@@ -44,6 +44,7 @@ import team3j.dulwichstreetart.R;
 
 
 /**
+ * The fragment that shows the selected artwork from the gallery view.
  * @author Team 3-J
  */
 
@@ -53,27 +54,24 @@ public class GallerySwipeSingleFragment extends Fragment {
     private int indexOfArtWork;
     private LinearLayout toolbar;
     private QuickReturnRecyclerView recyclerView;
-
     private ImageButton backButton;
-
     private ArrayList<Comment> comments;
     private ArrayList<Comment> supercomments;
-
     private CommentListAdapter commentListAdapter;
-
     private boolean success = false;
-
     private int loopCounter = 0;
-
-
-
     private String facebookPostID;
-
     private int facebookCode = 10;
     private String comment;
     private String commentID;
     private boolean userLikes;
 
+    /**
+     * Constructs a GallerySwipeSingleFragment with given position and the index of the artwork
+     * @param position position given for "swiping"
+     * @param indexOfArtWork the index that it possesses as the artwork
+     * @return
+     */
     public static GallerySwipeSingleFragment getInstance(int position, int indexOfArtWork) {
         GallerySwipeSingleFragment myFragmentTab = new GallerySwipeSingleFragment();
         Bundle args = new Bundle();
@@ -84,6 +82,7 @@ public class GallerySwipeSingleFragment extends Fragment {
     }
 
     @Override
+    // Menu for the fragment
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_splash, menu);
 
@@ -91,6 +90,7 @@ public class GallerySwipeSingleFragment extends Fragment {
     }
 
     @Override
+    // Given details of/actions of the swipe fragment
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
 
@@ -149,7 +149,10 @@ public class GallerySwipeSingleFragment extends Fragment {
         return layout;
     }
 
-
+    /**
+     * The action of the map button on the fragment
+     * @return the action listener
+     */
     public CommentListAdapter.OnMapButtonPressTouchListener getMapItemTouchListener(){
         CommentListAdapter.OnMapButtonPressTouchListener itemTouchListener = new CommentListAdapter.OnMapButtonPressTouchListener() {
             @Override
@@ -164,7 +167,11 @@ public class GallerySwipeSingleFragment extends Fragment {
         };
         return itemTouchListener;
     }
-    //Acts like the an Observer who looks for Session changes and invokes onSessionStateChanged
+
+    /**
+     * Acts like the an Observer who looks for Session changes and invokes onSessionStateChanged
+     *
+     */
     private Session.StatusCallback statusCallback = new Session.StatusCallback() {
         @Override
         public void call(Session session, SessionState state,
@@ -175,7 +182,8 @@ public class GallerySwipeSingleFragment extends Fragment {
 
     /**
      * Gets facebook comments for this post
-     * @param code
+     * @param code to determine what toast the method will return from the async
+     * @param customProcessDialog the process dialog
      */
     public void getFbData(final int code, final CustomProcessDialog customProcessDialog) {
         //customProcessDialog.show();
@@ -305,7 +313,9 @@ public class GallerySwipeSingleFragment extends Fragment {
     }
 
 
-    //handler for the log in button
+    /**
+     * Logs you into facebook, receiving the user's name, and retrieves data from fb to populate the recycler view's comment view type
+     */
     public void onClickLogin() {
         //Session.openActiveSession(getActivity(), this, true, statusCallback);
         facebookCode = 0;
@@ -345,7 +355,10 @@ public class GallerySwipeSingleFragment extends Fragment {
 
     }
 
-    //Display different things depending on if the user is logged in
+    /**
+     * Display different things depending on if the user is logged in
+     *
+     */
     private void onSessionStateChange(Session session, SessionState state, Exception exception) {
         Session.setActiveSession(session);
         System.out.println(state);
@@ -395,11 +408,12 @@ public class GallerySwipeSingleFragment extends Fragment {
 
 
     @Override
+    //
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
             Log.i("GallerySwipeFragment", "Visible" + indexOfArtWork);
-            //vince put it here
+
             if(recyclerView!=null) {
                 recyclerView.getAdapter().notifyDataSetChanged();
                 Session session = Session.getActiveSession();
@@ -407,13 +421,15 @@ public class GallerySwipeSingleFragment extends Fragment {
                     commentListAdapter.commentsChanged(new ArrayList<Comment>());
                 }
             }
-            //I have found that the setUserVisibleHint method gets called BEFORE
-            //the onCreateView gets called and this makes it difficult to track any initialization. so do some null checks
         }
 
     }
 
-    //Method to post a comment to facebook
+    /**
+     * Posts a comment to the facebook post
+     * @param comment the comment that you are replying to if replying to a comment
+     * @param commentID The comment's ID
+     */
     public void postComment(String comment, String commentID){
         String replyTo = facebookPostID; //ID of the post
         final CustomProcessDialog dialog = new CustomProcessDialog(getActivity());
@@ -433,15 +449,11 @@ public class GallerySwipeSingleFragment extends Fragment {
                 System.out.println("has publish actions");
                 Bundle params = new Bundle();
                 params.putString("message", comment);
-            /* make the API call */
+
                 new Request(session, replyTo +"/comments", params,
                         HttpMethod.POST,
                         new Request.Callback() {
                             public void onCompleted(Response response) {
-                                //System.out.println(response.getGraphObject().getInnerJSONObject());
-                                System.out.println("HERE MADNESS >>>>>>>>>>>" + response);
-
-
                                 getFbData(1,dialog);
 
                             }
@@ -464,12 +476,22 @@ public class GallerySwipeSingleFragment extends Fragment {
 
     }
 
+    /**
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Session.getActiveSession().onActivityResult(getActivity(), requestCode, resultCode, data);
 
     }
 
+    /**
+     * Deletes a specified comment, only if the user has permissions to delete
+     * @param commentID the comment ID of the comment requesting to be deleted
+     */
     public void deleteComment(String commentID) {
         if(checkIfActiveSession()) {
             Session session = Session.getActiveSession();
@@ -488,13 +510,12 @@ public class GallerySwipeSingleFragment extends Fragment {
                                 try {
                                     boolean success = response.getGraphObject().getInnerJSONObject().getBoolean("success");
 
-
                                     if (success) {
+                                        //if successfully deleted, refresh the comments on the recycler view
                                         getFbData(2,dialog);
 
                                     } else {
                                         dialog.hide();
-                                        System.out.println(response.getError());
                                     }
 
                                 } catch (JSONException e) {
@@ -517,7 +538,11 @@ public class GallerySwipeSingleFragment extends Fragment {
         }
     }
 
-
+    /**
+     * Likes a specified comment
+     * @param commentID the ID of the comment being liked
+     * @param userLikes checks if the user has already liked the comment or not
+     */
     public void likeComment(String commentID, Boolean userLikes){
         if(checkIfActiveSession()) {
             final int code;
@@ -548,12 +573,12 @@ public class GallerySwipeSingleFragment extends Fragment {
                                     boolean success = response.getGraphObject().getInnerJSONObject().getBoolean("success");
 
                                     if (success) {
+                                        //if successfully liked the comment
                                         CustomProcessDialog dialog = new CustomProcessDialog(getActivity());
                                         dialog.show();
                                         getFbData(code,dialog);
-                                    } else {
-                                        System.out.println(response.getError());
                                     }
+
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -574,6 +599,10 @@ public class GallerySwipeSingleFragment extends Fragment {
 
     }
 
+    /**
+     *
+     * @param userID
+     */
     public void getLikes(final String userID){
         Bundle b1 = new Bundle();
         b1.putBoolean("summary", true);     //includes a summary in the request
@@ -605,13 +634,20 @@ public class GallerySwipeSingleFragment extends Fragment {
             }).executeAsync();
     }
 
+    /**
+     * Async task for the process dialog to run whilst loading data from Facebook
+     */
     class MyAsync extends AsyncTask<Void, Void, Void> {
 
         private CustomProcessDialog customProcessDialog;
         private int code;
 
+        /**
+         * Construcs a MyAsync with the code type which determines the "toast" to return
+         * @param code the code for what "toast" to return
+         * @param customProcessDialog the process dialog
+         */
         public MyAsync(int code, CustomProcessDialog customProcessDialog) {
-            //customProcessDialog = new CustomProcessDialog(getActivity());
             this.customProcessDialog = customProcessDialog;
             this.code = code;
         }
@@ -619,7 +655,6 @@ public class GallerySwipeSingleFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            //customProcessDialog.show();
 
         }
 
