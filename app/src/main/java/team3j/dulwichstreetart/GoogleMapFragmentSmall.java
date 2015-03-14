@@ -28,6 +28,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 /**
+ * @author Team 3-J
  * A fragment that launches other parts of the demo application.
  */
 

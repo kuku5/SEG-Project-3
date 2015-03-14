@@ -19,7 +19,7 @@ import it.neokree.materialtabs.MaterialTabHost;
 import it.neokree.materialtabs.MaterialTabListener;
 
 /**
- * Created by JGill on 25/01/15.
+ * @author Team 3-J
  * This is the Main Activity this creates the tabview and adds the fragment for each tab
  *
  */

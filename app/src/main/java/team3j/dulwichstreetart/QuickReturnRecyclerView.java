@@ -1,8 +1,6 @@
 package team3j.dulwichstreetart;
 
-/**
- * Created by JGill on 13/03/15.
- */
+
 import android.content.Context;
 import android.os.Build;
 import android.support.v7.widget.RecyclerView;
@@ -17,7 +15,7 @@ import android.widget.FrameLayout;
  * Add view with BottomToolBarRecyclerView.setReturningView to be used as a QuickReturnView
  * when the user scrolls down the content.
  *
- * Created by johnen on 14-11-11.
+ * @author Team 3-J
  */
 public class QuickReturnRecyclerView extends RecyclerView {
     private static final String TAG = QuickReturnRecyclerView.class.getName();

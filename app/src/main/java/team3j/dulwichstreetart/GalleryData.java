@@ -12,7 +12,7 @@ import java.util.List;
 
 
 /**
- * Created by JGill on 26/01/15.
+ * @author Team 3-J
  *
  * This returns the data for the specific artwork also stores array of images
  * returns data from xml strings

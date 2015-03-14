@@ -4,7 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Created by Team 3-J.
+ * @author Team 3-J
  * Stores the details of a particular comment from a facebook post
  */
 public class Comment implements Parcelable {

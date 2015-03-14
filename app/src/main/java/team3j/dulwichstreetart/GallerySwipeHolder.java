@@ -12,7 +12,7 @@ import com.hannesdorfmann.swipeback.Position;
 import com.hannesdorfmann.swipeback.SwipeBack;
 
 /**
- * Created by JGill on 25/01/15.
+ * @author Team 3-J
  * This class is the Holder for the Swipe Gallery
  */
 

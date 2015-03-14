@@ -24,7 +24,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 /**
- * Created by JGill on 03/02/15.
+ * @author Team 3-J
  *This is the adapter that puts elements into the Gallery
  *
  */

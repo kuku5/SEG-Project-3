@@ -11,6 +11,9 @@ import android.widget.ImageView;
 
 import team3j.dulwichstreetart.R;
 
+/**
+ * @author Team 3-J
+ */
 public class FullScreenDisplay extends ActionBarActivity {
 
     @Override

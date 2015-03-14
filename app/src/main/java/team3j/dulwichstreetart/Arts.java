@@ -6,7 +6,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 
 /**
- * Created by Ananda on 10/02/2015.
+ * @author Team 3-J
  */
 public class Arts {
 

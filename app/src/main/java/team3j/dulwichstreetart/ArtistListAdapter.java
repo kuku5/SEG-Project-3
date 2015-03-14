@@ -21,7 +21,7 @@ import com.etsy.android.grid.util.DynamicHeightImageView;
 import java.util.ArrayList;
 
 /**
- * Created by JGill on 03/02/15.
+ * @author Team 3-J
  *
  * This is the Recycle View Adapter for the Artist List in the artist tab
  *

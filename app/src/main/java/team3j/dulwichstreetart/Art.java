@@ -4,7 +4,7 @@ package team3j.dulwichstreetart;
 import com.google.android.gms.maps.model.LatLng;
 
 /**
- * Created by Ananda on 04/02/2015.
+ * @author Team 3-J
  */
 public class Art {
 

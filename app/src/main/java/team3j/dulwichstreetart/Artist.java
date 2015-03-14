@@ -1,7 +1,7 @@
 package team3j.dulwichstreetart;
 
 /**
- * Created by JGill on 11/03/15.
+ * @author Team 3-J
  */
 public class Artist {
     private final String name;

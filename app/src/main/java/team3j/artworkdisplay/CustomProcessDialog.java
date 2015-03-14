@@ -3,6 +3,10 @@ package team3j.artworkdisplay;
 import android.app.ProgressDialog;
 import android.content.Context;
 
+/**
+ * @author Team 3-J
+ *
+ */
 
 public class CustomProcessDialog {
 

@@ -16,7 +16,7 @@ import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import java.util.HashMap;
 
 /**
- * Created by JGill on 25/01/15.
+ * @author Team 3-J
  * This Activity creates displays splash
  *
  */

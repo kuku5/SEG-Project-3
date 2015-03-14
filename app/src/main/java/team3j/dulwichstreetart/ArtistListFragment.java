@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import team3j.artistdisplay.ArtistDisplayActivity;
 
 /**
- * Created by JGill on 25/01/15.
+ * @author Team 3-J
  *
  * This is the Fragment for the artist layout
  *

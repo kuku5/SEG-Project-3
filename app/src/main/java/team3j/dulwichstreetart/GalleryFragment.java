@@ -19,7 +19,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 /**
- * Created by JGill on 25/01/15.
+ * @author Team 3-J
  * Gallery Fragment for to be displayed in the tab Fragment
  */
 

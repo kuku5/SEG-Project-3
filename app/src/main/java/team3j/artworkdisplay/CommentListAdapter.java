@@ -60,7 +60,7 @@ import team3j.dulwichstreetart.MainActivity;
 import team3j.dulwichstreetart.R;
 
 /**
- * Created by JGill on 03/02/15.
+ * @author Team 3-J
  */
 public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.MyViewHolder> {
 

@@ -44,7 +44,7 @@ import team3j.dulwichstreetart.R;
 
 
 /**
- * Created by JGill on 06/02/15.
+ * @author Team 3-J
  */
 
 

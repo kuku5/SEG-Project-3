@@ -21,6 +21,11 @@ import java.io.OutputStream;
 import team3j.dulwichstreetart.GalleryData;
 import team3j.dulwichstreetart.R;
 
+/**
+ *
+ * @author Team 3-J
+ */
+
 public class ArtistDisplayActivity extends ActionBarActivity {
 
     private TextView textView;

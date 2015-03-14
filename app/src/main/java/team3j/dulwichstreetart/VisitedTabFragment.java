@@ -30,7 +30,7 @@ import it.neokree.materialtabs.MaterialTabHost;
 import it.neokree.materialtabs.MaterialTabListener;
 
 /**
- * Created by JGill on 25/01/15.
+ * @author Team 3-J
  * Gallery Fragment for to be displayed in the tab Fragment
  */
 

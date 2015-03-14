@@ -1,7 +1,7 @@
 package team3j.dulwichstreetart;
 
 /**
- * Created by JGill on 08/02/15.
+ * @author Team 3-J
  *
  * This is the Fragment Adapter for the Large Gallery Display
  */
