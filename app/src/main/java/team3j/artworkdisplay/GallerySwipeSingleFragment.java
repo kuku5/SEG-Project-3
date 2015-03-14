@@ -402,11 +402,15 @@ public class GallerySwipeSingleFragment extends Fragment {
             //vince put it here
             if(recyclerView!=null) {
                 recyclerView.getAdapter().notifyDataSetChanged();
+                Session session = Session.getActiveSession();
+                if((session==null) || session.isClosed()) {
+                    commentListAdapter.commentsChanged(new ArrayList<Comment>());
+                }
             }
             //I have found that the setUserVisibleHint method gets called BEFORE
             //the onCreateView gets called and this makes it difficult to track any initialization. so do some null checks
         }
-        else {  }
+
     }
 
     //Method to post a comment to facebook
