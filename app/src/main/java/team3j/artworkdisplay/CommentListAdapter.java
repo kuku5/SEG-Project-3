@@ -287,7 +287,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
             holder.message.setText(commentInfo.getMessage());
             if (commentInfo.getCanDelete()) {
-                holder.deleteIcon.setImageResource(R.drawable.com_facebook_close);
+                holder.deleteIcon.setImageResource(R.drawable.cross_grey);
                 holder.deleteIcon.setVisibility(View.VISIBLE);
             }
             else {
