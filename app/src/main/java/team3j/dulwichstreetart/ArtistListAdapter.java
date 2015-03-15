@@ -31,19 +31,16 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
     private final LayoutInflater inflater;
     private ArrayList<Artist> data;
     private Context context;
-    private OnArtistItemTouchListener onArtistItemTouchListener;
 
     /**
      *
      * @param context
      * @param data
-     * @param onArtistItemTouchListener
      */
-    public ArtistListAdapter(Context context,ArrayList<Artist> data,OnArtistItemTouchListener onArtistItemTouchListener){
+    public ArtistListAdapter(Context context,ArrayList<Artist> data){
         this.data=data;
         inflater=LayoutInflater.from(context);
         this.context=context;
-        this.onArtistItemTouchListener=onArtistItemTouchListener;
     }
 
     /**
@@ -140,14 +137,6 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
 
 
     }
-
-    /**
-     *
-     */
-    public interface OnArtistItemTouchListener{
-        public void onItemClick(View view,int position);
-    }
-
 
 
 

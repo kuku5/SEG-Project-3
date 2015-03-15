@@ -70,7 +70,7 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
                 tabHost.setSelectedNavigationItem(position);
             }
         });
-        viewPager.setOffscreenPageLimit(3);
+        viewPager.setOffscreenPageLimit(1);
 
 
         tabHost.setPrimaryColor(getResources().getColor(R.color.colorAccentReal));

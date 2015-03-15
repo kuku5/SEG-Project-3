@@ -1,7 +1,6 @@
 package team3j.dulwichstreetart;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,17 +10,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import team3j.artistdisplay.ArtistDisplayActivity;
-
 /**
  * @author Team 3-J
- *
- * This is the Fragment for the artist layout
- *
+ *         <p/>
+ *         This is the Fragment for the artist layout
  */
 
 
@@ -32,7 +27,6 @@ public class ArtistListFragment extends Fragment {
 
 
     /**
-     *
      * @param position
      * @return
      */
@@ -45,7 +39,6 @@ public class ArtistListFragment extends Fragment {
     }
 
     /**
-     *
      * @param inflater
      * @param container
      * @param savedInstanceState
@@ -62,7 +55,7 @@ public class ArtistListFragment extends Fragment {
         ArrayList<Artist> artistData = GalleryData.GetArtistsDataReal(getActivity());
 
         //get Adapter
-        artistListAdapter = new ArtistListAdapter(getActivity(), artistData, getOnArtistItemTouchListener());
+        artistListAdapter = new ArtistListAdapter(getActivity(), artistData);
 
         //setup recycleView
         recyclerView.setAdapter(artistListAdapter);
@@ -73,25 +66,5 @@ public class ArtistListFragment extends Fragment {
         return layout;
     }
 
-    /**
-     *
-     * @return
-     */
-    //create click listener
-    public  ArtistListAdapter.OnArtistItemTouchListener getOnArtistItemTouchListener(){
-        ArtistListAdapter.OnArtistItemTouchListener onArtistItemTouchListener = new ArtistListAdapter.OnArtistItemTouchListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                //clicked on the entire view add more methods to method to get clicks on other parts
-                //put the intent here
-                Intent i = new Intent(getActivity(), ArtistDisplayActivity.class);
-                i.putExtra("indexOfArtist", position);
-                startActivity(i);
 
-                Toast.makeText(getActivity(), "Tapped " + position, Toast.LENGTH_SHORT).show();
-            }
-        };
-
-        return onArtistItemTouchListener;
-    }
 }

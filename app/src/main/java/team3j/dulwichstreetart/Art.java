@@ -4,7 +4,7 @@ package team3j.dulwichstreetart;
 import com.google.android.gms.maps.model.LatLng;
 
 /**
- * @author Team 3-J
+ * Created by Ananda on 04/02/2015.
  */
 public class Art {
 
@@ -20,6 +20,23 @@ public class Art {
     private int inspiredPic;
     private int postId;
 
+
+    //main constructor
+    public Art( String name,String artistName,String inspirationTitle,String inspirationArtist,String desc,int pic,int inspiredPic, LatLng loc){
+
+        this.name=name;
+        this.artistName = artistName;
+        this.desc=desc;
+        this.inspirationTitle=inspirationTitle;
+        this.pic=pic;
+        this.inspiredPic=inspiredPic;
+        this.inspirationArtist=inspirationArtist;
+        this.loc = loc;
+    }
+
+
+
+    //the rest of these are redundent except for the last constructor
     public Art( String name,LatLng loc,int pic)
     {
 
@@ -27,15 +44,7 @@ public class Art {
         this.loc = loc;
         this.pic = pic;
     }
-    public Art(int index, String name,String artistName,String inspirationTitle,String inspirationArtist,String desc,int pic,int inspiredPic){
-        this.index = index;
-        this.name=name;
-        this.artistName = artistName;
-        this.desc=desc;
-        this.inspirationTitle=inspirationTitle;
-        this.pic=pic;
-        this.inspiredPic=inspiredPic;
-    }
+
     public Art( String name,String artistName,String inspirationTitle,String inspirationArtist,String desc,int pic,int inspiredPic){
 
         this.name=name;

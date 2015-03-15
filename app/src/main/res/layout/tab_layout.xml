@@ -4,11 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="materialtest.vivz.slidenerd.materialtest.ActivityUsingTabLibrary">
+    tools:context=".MainActivity">
 
-    <include
-        android:id="@+id/app_bar"
-        layout="@layout/app_bar" />
+
 
     <it.neokree.materialtabs.MaterialTabHost
         android:id="@+id/materialTabHost"
