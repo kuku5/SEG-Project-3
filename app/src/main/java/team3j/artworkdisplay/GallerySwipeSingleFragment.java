@@ -302,6 +302,8 @@ public class GallerySwipeSingleFragment extends Fragment {
      */
     public void onClickLogin() {
         //Session.openActiveSession(getActivity(), this, true, statusCallback);
+//        supercomments = new ArrayList<>();
+//        comments = new ArrayList<>();
         facebookCode = 0;
         if(checkIfActiveSession()){
             Request.newMeRequest(Session.getActiveSession(), new Request.GraphUserCallback() {
@@ -401,13 +403,12 @@ public class GallerySwipeSingleFragment extends Fragment {
             if(recyclerView!=null) {
                 recyclerView.getAdapter().notifyDataSetChanged();
                 Session session = Session.getActiveSession();
-//                session.removeCallback(statusCallback);
-//                session.addCallback(statusCallback);
                 if((session==null) || session.isClosed()) {
                     commentListAdapter.commentsChanged(new ArrayList<Comment>());
                 }
                 else {
-
+//                    session.removeCallback(statusCallback);
+//                    session.addCallback(statusCallback);
                 }
             }
         }
