@@ -4,7 +4,7 @@ package team3j.dulwichstreetart;
 import com.google.android.gms.maps.model.LatLng;
 
 /**
- * Created by Ananda on 04/02/2015.
+ * @author Team 3-J
  */
 public class Art {
 
@@ -19,10 +19,11 @@ public class Art {
     private int pic;
     private int inspiredPic;
     private int postId;
+    private String fbLink;
 
 
     //main constructor
-    public Art( String name,String artistName,String inspirationTitle,String inspirationArtist,String desc,int pic,int inspiredPic, LatLng loc){
+    public Art( String name,String artistName,String inspirationTitle,String inspirationArtist,String desc,int pic,int inspiredPic, LatLng loc,String fbLink){
 
         this.name=name;
         this.artistName = artistName;
@@ -32,6 +33,7 @@ public class Art {
         this.inspiredPic=inspiredPic;
         this.inspirationArtist=inspirationArtist;
         this.loc = loc;
+        this.fbLink=fbLink;
     }
 
 
@@ -54,6 +56,7 @@ public class Art {
         this.pic=pic;
         this.inspiredPic=inspiredPic;
         this.inspirationArtist=inspirationArtist;
+        
     }
 
 
@@ -97,6 +100,11 @@ public class Art {
 
     public void  setName( String name){
         this.name = name;
+    }
+
+   //vince added these for the fblinks
+    public String getFbLink() {
+        return fbLink;
     }
 
 }

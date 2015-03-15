@@ -99,7 +99,6 @@ public class GallerySwipeSingleFragment extends Fragment {
         setRetainInstance(true);
 
         String commentAmount = null;
-
         //set toolbar appearance
 
         textView = (TextView) layout.findViewById(R.id.position);
@@ -122,8 +121,9 @@ public class GallerySwipeSingleFragment extends Fragment {
             }
         });
 
-        facebookPostID = "779466045468925";
+        facebookPostID = GalleryData.get().getArtworkList().get(indexOfArtWork).getFbLink();
 
+        
 //
 //        toolbar= (Toolbar) layout.findViewById(R.id.toolbar_gallery);
 //        toolbar.setTitle(title);
@@ -416,8 +416,13 @@ public class GallerySwipeSingleFragment extends Fragment {
             if(recyclerView!=null) {
                 recyclerView.getAdapter().notifyDataSetChanged();
                 Session session = Session.getActiveSession();
+//                session.removeCallback(statusCallback);
+//                session.addCallback(statusCallback);
                 if((session==null) || session.isClosed()) {
                     commentListAdapter.commentsChanged(new ArrayList<Comment>());
+                }
+                else {
+
                 }
             }
         }
