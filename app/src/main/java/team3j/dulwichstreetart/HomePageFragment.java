@@ -40,6 +40,13 @@ import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.model.GraphUser;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -78,9 +85,10 @@ public class HomePageFragment extends Fragment {
     private boolean isLoggedIn;
     private DynamicHeightImageView mapButton;
 
-    private ArrayList<String> todaysTweets = new ArrayList<>();
+    static ArrayList<String> todaysTweets = new ArrayList<>();
     private TextView twitView1;
     private TextView twitView2;
+    private View layout;
 
     /**
      * return an instance of this Fragment with a bundle into the tab adapter
@@ -108,16 +116,23 @@ public class HomePageFragment extends Fragment {
 
         //non facebook setup
 
-        View layout = inflater.inflate(R.layout.fragment_home_page, container, false);
+         layout = inflater.inflate(R.layout.fragment_home_page, container, false);
 
         setRetainInstance(true);
 
 
         setupOnScreenElements(layout);
-      //  if (isNetworkConnected()) getTweets(); //Get Today's Tweets
-       // setupAnimations(layout);
+        //Get Today's Tweets
+        if (isOnline()) {
+                getTweets();
 
-        /* BELOW KEYHASH GENERATOR ALLOWS DEVELOPERS TO GET THEIR DEVELOPER KEYS FOR FACEBOOK ACCESS **/
+            Log.d("tweets","online");
+
+        }
+        else{
+                getOfflineTweets();
+
+        }
 
         setupLibraryAnimations(layout);
 
@@ -141,6 +156,11 @@ public class HomePageFragment extends Fragment {
 
         //slideDown();
         return layout;
+    }
+
+    private void getOfflineTweets() {
+        Log.d("tweets","offline");
+
     }
 
 
@@ -188,10 +208,20 @@ public class HomePageFragment extends Fragment {
      *
      * @param layout
      */
-    public void setupAnimations(View layout) {
+    public void setupTweetsAnimations(View layout) {
 
         twitView1 = (TextView) layout.findViewById(R.id.DisplayTweet1);
         twitView2 = (TextView) layout.findViewById(R.id.DisplayTweet2);
+
+
+
+//        try {
+//        //    writeToFile("dulwichTweet.txt");
+//      //      ReadBtn();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
 
         Bundle bundle = getArguments();
 
@@ -261,7 +291,91 @@ public class HomePageFragment extends Fragment {
 
     }
 
+    private void writeToFile(String fileName) throws IOException {
+        File file = getActivity().getFileStreamPath(fileName);
 
+        if (!file.exists()) {
+            file.createNewFile();
+        }
+
+        FileOutputStream writer = getActivity().openFileOutput(file.getName(), Context.MODE_PRIVATE);
+
+        for (String string: todaysTweets){
+            writer.write(string.getBytes());
+            writer.flush();
+        }
+
+        writer.close();
+
+
+    }
+    public void ReadBtn() {
+        //reading text from file
+        try {
+            FileInputStream fileIn=getActivity().openFileInput("dulwichTweet.txt");
+            InputStreamReader InputRead= new InputStreamReader(fileIn);
+
+            char[] inputBuffer= new char[100];
+            String s="";
+            int charRead;
+
+            while ((charRead=InputRead.read(inputBuffer))>0) {
+                // char to string conversion
+                String readstring=String.copyValueOf(inputBuffer,0,charRead);
+                s +=readstring;
+            }
+            InputRead.close();
+            Toast.makeText(getActivity().getBaseContext(), s,Toast.LENGTH_SHORT).show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+//    public void WriteBtn(View v) {
+//        // add-write text into file
+//        try {
+//            FileOutputStream fileout=openFileOutput("mytextfile.txt", getActivity().MODE_PRIVATE);
+//            OutputStreamWriter outputWriter=new OutputStreamWriter(fileout);
+//            outputWriter.write(textmsg.getText().toString());
+//            outputWriter.close();
+//
+//            //display file saved message
+//            Toast.makeText(getActivity().getBaseContext(), "File saved successfully!",
+//                    Toast.LENGTH_SHORT).show();
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+    private String readFromFile(Context context, String fileName) {
+        if (context == null) {
+            return null;
+        }
+
+        String ret = "";
+
+        try {
+            InputStream inputStream = context.openFileInput(fileName);
+
+            if ( inputStream != null ) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+
+                int size = inputStream.available();
+                char[] buffer = new char[size];
+
+                inputStreamReader.read(buffer);
+
+                inputStream.close();
+                ret = new String(buffer);
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return ret;
+    }
     /**
      *
      * @param layout
@@ -351,7 +465,7 @@ public class HomePageFragment extends Fragment {
             }
         });
 
-        AlertDialog box = builder.create(); //creates the dialog with the information
+        AlertDialog box = builder.create();
         box.getWindow().setLayout(400, 400);
         box.show();
     }
@@ -395,6 +509,8 @@ public class HomePageFragment extends Fragment {
                     e.printStackTrace();
                 }
 
+                setupTweetsAnimations(layout);
+
             }
         });
 
@@ -406,17 +522,13 @@ public class HomePageFragment extends Fragment {
      *
      * @return
      */
-    private boolean isNetworkConnected() {
-        ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo ni = cm.getActiveNetworkInfo();
-        if (ni == null) {
-            // There are no active networks.
-            return false;
-        } else
-            return true;
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
-
-}
+  }
 
 
 
