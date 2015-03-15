@@ -85,7 +85,6 @@ public class GallerySwipeSingleFragment extends Fragment {
     // Menu for the fragment
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_splash, menu);
-
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -121,15 +120,9 @@ public class GallerySwipeSingleFragment extends Fragment {
             }
         });
 
+
         facebookPostID = GalleryData.get().getArtworkList().get(indexOfArtWork).getFbLink();
 
-        
-//
-//        toolbar= (Toolbar) layout.findViewById(R.id.toolbar_gallery);
-//        toolbar.setTitle(title);
-//
-//        toolbar.setTitleTextColor(getActivity().getResources().getColor(R.color.dark_grey));
-//
 
         recyclerView = (QuickReturnRecyclerView) layout.findViewById(R.id.recycler_view_grid1);
         recyclerView.setReturningView(toolbar);
@@ -198,15 +191,11 @@ public class GallerySwipeSingleFragment extends Fragment {
                     public void onCompleted(Response response) {
                         if (response != null) {
                             try {
-                                //System.out.println(response);
-                                //System.out.println(response.getGraphObject().toString());
-                                //System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" +response.getGraphObject().getInnerJSONObject().getJSONObject("summary").toString());
 
                                 int x = response.getGraphObject().getInnerJSONObject().getJSONArray("data").length();
-                                //System.out.println(x);
-                                //System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" +response.getGraphObject().getInnerJSONObject().getJSONArray("data"));
+
                                 for (int i = 0; i < x; i++) {
-                                    //System.out.println(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i));
+                                    //Setting comment information such as; number of likes, message, time, url of the post etc..
                                     Comment commentInfo = new Comment();
                                     commentInfo.setNumberLikes(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("like_count").toString());
                                     commentInfo.setPosterURL(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).getJSONObject("from").get("id").toString());
@@ -217,7 +206,7 @@ public class GallerySwipeSingleFragment extends Fragment {
                                     commentInfo.setUserLikes((Boolean) response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("user_likes"));
                                     commentInfo.setCanDelete((Boolean) response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("can_remove"));
                                     commentInfo.setIsAReply(false);
-                                    comments.add(commentInfo);
+                                    comments.add(commentInfo); //adding the comment information to array
 
                                 }
 
@@ -262,15 +251,12 @@ public class GallerySwipeSingleFragment extends Fragment {
                                     if (response != null) {
                                         try {
 
-                                            //System.out.println(response);
                                             if(!response.getGraphObject().getInnerJSONObject().getJSONArray("data").equals("")) {
 
 
                                                 int x = response.getGraphObject().getInnerJSONObject().getJSONArray("data").length();
-                                                //System.out.println(x);
-                                                //System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + response.getGraphObject().getInnerJSONObject().getJSONArray("data"));
+
                                                 for (int i = 0; i < x; i++) {
-                                                    //System.out.println(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i));
                                                     Comment commentInfo = new Comment();
                                                     commentInfo.setNumberLikes(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("like_count").toString());
                                                     commentInfo.setPosterURL(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).getJSONObject("from").get("id").toString());
@@ -284,7 +270,6 @@ public class GallerySwipeSingleFragment extends Fragment {
                                                     replyComments.add(commentInfo);
 
                                                 }
-                                                //System.out.println(replyComments);
                                                 success = true;
                                                 supercomments.addAll(replyComments); //Add the list of reply comments
                                             }
@@ -647,7 +632,7 @@ public class GallerySwipeSingleFragment extends Fragment {
         private int code;
 
         /**
-         * Construcs a MyAsync with the code type which determines the "toast" to return
+         * Constructs an MyAsync with the code type which determines the "toast" to return
          * @param code the code for what "toast" to return
          * @param customProcessDialog the process dialog
          */

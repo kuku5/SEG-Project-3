@@ -23,8 +23,6 @@ import java.util.ArrayList;
  * Gallery Fragment for to be displayed in the tab Fragment
  */
 
-//TODO maybe add different button to cardviews, also add final images
-
 public class GalleryFragment extends Fragment {
 
     private RecyclerView recyclerView;

@@ -73,7 +73,7 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
         holder.title.setText(data.get(position).getName());
         holder.description.setText(data.get(position).getDescription());
         holder.website.setText(data.get(position).getWebsite());
-        //holder.artistPhoto.setImageResource(data.get(position).getArtistPhoto());
+        holder.artistPhoto.setImageResource(data.get(position).getArtistPhoto());
     }
 
     /**
@@ -103,7 +103,7 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
         TextView title;
         TextView description;
         TextView website;
-        //ImageView artistPhoto;
+        ImageView artistPhoto;
         boolean expanded=false;
         CardView expandArea;
 
@@ -112,7 +112,7 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
             title = (TextView) itemView.findViewById(R.id.artist_list_item_title);
             description = (TextView) itemView.findViewById(R.id.artist_list_item_desc);
             website = (TextView) itemView.findViewById(R.id.website);
-            //artistPhoto = (ImageView)itemView.findViewById(R.id.artistPhoto);
+            artistPhoto = (ImageView)itemView.findViewById(R.id.artistPhoto);
             expandArea= (CardView) itemView.findViewById(R.id.artist_list_item_card);
 
 

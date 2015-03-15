@@ -17,7 +17,6 @@ import java.util.List;
  * This returns the data for the specific artwork also stores array of images
  * returns data from xml strings
  */
-//TODO maybe change getimages to return bitmaps
 
 public class GalleryData {
 
@@ -99,8 +98,6 @@ public class GalleryData {
         //Walter Kershaw
         artArrayList.add(new Art("Finished Wall", "Walter Kershaw", "Landscape with Windmills Near Haarlem", "Jacob Van Ruisdael", "‘Landscape with Windmills near Haarlem’ painted first by Jacob Van Ruisdael in c 1650, then copied by John Constable in c 1830, then copied by Walter Kershaw as a huge mural in 2014.  Spot the differences!  ", R.drawable.lowreswalterlandscape, R.drawable.lowresinspiredlandscapewithwindmill,new LatLng(51.467546, -0.072552),"783165585098971"));
 
-
-
         return artArrayList;
     }
 
@@ -110,7 +107,7 @@ public class GalleryData {
     public static ArrayList<Artist> GetArtistsDataReal(Activity context) {
         final ArrayList<Artist> data = new ArrayList<Artist>();
 
-        //data.add(new Artist("artist","description","website"));
+        //FORMAT: data.add(new Artist("artist","description","website", "artist image"));
 
         data.add(new Artist("Stik", "Stik is one of London's best know and most loved street artists. He is renowned for painting simple, androgynous stick figures which although simple nevertheless convey complex body language and emotion." +
                 "Themes of human vulnerability and infused into Stik's work which reflects both the human spirit and his own life story and experiences with homelessness.\n\nInitially Stik developed his simple style through having to execute works illegally. He painted his characteristic figures on London streets in this manner for years and was instrumental in raising the British public's appreciation of street art. Now, routinely invited to paint walls legally, Stik maintains his minimal simplicity for aesthetic reasons. Stik now paints murals across the UK, Europe, Asia and America in association with organisations such as The British Council, Amnesty International and Big Issue Foundation. He has staged sell-out exhibitions of his work in the UK and the USA.", "www.stik.org.uk", R.drawable.profilestik));

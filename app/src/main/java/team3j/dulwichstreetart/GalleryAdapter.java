@@ -81,7 +81,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
 
        //load bitmap in background thread
        loadBitmap( galleryData.get(position).getPic(),  holder.dynamicHeightImageView);
-
+        //holder allows you to display the content onto the page - through the adapter
        holder.txtLineOne.setText(galleryData.get(position).getName());
        holder.descriptionTextView.setText(galleryData.get(position).getDesc());
 

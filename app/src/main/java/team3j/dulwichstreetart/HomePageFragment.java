@@ -66,7 +66,6 @@ public class HomePageFragment extends Fragment {
     private CardView cardView;
     private CardView cardView2;
     private TextView facebookCardText;
-    //private Button button;
     private LinearLayout linearLayout;
     private ViewFlipper viewFlipper;
     private Timer timer;
@@ -117,6 +116,9 @@ public class HomePageFragment extends Fragment {
         setupOnScreenElements(layout);
       //  if (isNetworkConnected()) getTweets(); //Get Today's Tweets
        // setupAnimations(layout);
+
+        /* BELOW KEYHASH GENERATOR ALLOWS DEVELOPERS TO GET THEIR DEVELOPER KEYS FOR FACEBOOK ACCESS **/
+
         setupLibraryAnimations(layout);
 
         //  ---------- KEYHASH GENERATOR -----------//
@@ -268,36 +270,11 @@ public class HomePageFragment extends Fragment {
 
         mDemoSlider = (SliderLayout) layout.findViewById(R.id.slider);
 
-        HashMap<String, String> url_maps = new HashMap<String, String>();
-        url_maps.put("Hannibal", "http://static2.hypable.com/wp-content/uploads/2013/12/hannibal-season-2-release-date.jpg");
-        url_maps.put("Big Bang Theory", "http://tvfiles.alphacoders.com/100/hdclearart-10.png");
-        url_maps.put("House of Cards", "http://cdn3.nflximg.net/images/3093/2043093.jpg");
-        url_maps.put("Game of Thrones", "http://images.boomsbeat.com/data/images/full/19640/game-of-thrones-season-4-jpg.jpg");
 
         HashMap<String, Integer> file_maps = new HashMap<String, Integer>();
 
-        //file_maps.put("Agent Provocateur", R.drawable.lowresagentprovocateur);
-
-        //file_maps.put("Ben Wilson", R.drawable.judgementofparis);
-        //file_maps.put("Ben Wilson", R.drawable.lowrespharaohsring);
-        //file_maps.put("Ben Wilson", R.drawable.stcatherine);
-
+        //file_maps - used to display images in the top homepage slider
         file_maps.put("Conor Harrington", R.drawable.lowresconorharrington);
-        //file_maps.put("David Shillinglaw", R.drawable.lowresdavidshillinglaw);
-        //file_maps.put("Faith47", R.drawable.lowreseuropaandthebull);
-
-        //file_maps.put("Pablo Delgado", R.drawable.lowrespablodelgadoone);
-
-        //file_maps.put("REKA", R.drawable.lowresreka);
-      //  file_maps.put("Remi Rough & System", R.drawable.lowresremiroughandsystem);
-    //    file_maps.put("ROA", R.drawable.lowresdoginlandscape);
-
-  //      file_maps.put("RUN - St Rita", R.drawable.lowresrunstrita);
-//        file_maps.put("RUN - Triumph Of David - Triumph of David Lordship Lane", R.drawable.runtriumphofdavid);
-
-       // file_maps.put("STIK - Eliza and Mary Davidson", R.drawable.lowresstikelizaandmarydavidsontilly);
-       // file_maps.put("STIK - Three Boys", R.drawable.lowresstikthreeboys);
-
         file_maps.put("Walter Kershaw", R.drawable.lowreswalterlandscape);
 
 
@@ -329,7 +306,8 @@ public class HomePageFragment extends Fragment {
 
 
     /**
-     *
+     *ShowMessage() - this method shows the about us information for the outdoor gallery in an
+     * AlertDialog
      */
     private void showMessage() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -353,7 +331,7 @@ public class HomePageFragment extends Fragment {
     }
 
     /**
-     *
+     *showMessagePictureGallery - this method shows the about information about the picture gallery
      */
     private void showMessagePictureGallery() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -373,7 +351,7 @@ public class HomePageFragment extends Fragment {
             }
         });
 
-        AlertDialog box = builder.create();
+        AlertDialog box = builder.create(); //creates the dialog with the information
         box.getWindow().setLayout(400, 400);
         box.show();
     }

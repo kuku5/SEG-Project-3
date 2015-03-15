@@ -21,8 +21,21 @@ public class Art {
     private int postId;
     private String fbLink;
 
+    /**
+     *
+     * @param name
+     * @param artistName
+     * @param inspirationTitle
+     * @param inspirationArtist
+     * @param desc
+     * @param pic
+     * @param inspiredPic
+     * @param loc
+     * @param fbLink
+     */
 
-    //main constructor
+
+    //main constructor passing through art information -
     public Art( String name,String artistName,String inspirationTitle,String inspirationArtist,String desc,int pic,int inspiredPic, LatLng loc,String fbLink){
 
         this.name=name;
@@ -35,8 +48,6 @@ public class Art {
         this.loc = loc;
         this.fbLink=fbLink;
     }
-
-
 
     //the rest of these are redundent except for the last constructor
     public Art( String name,LatLng loc,int pic)
