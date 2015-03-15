@@ -6,8 +6,7 @@
 
     android:layout_height="fill_parent"
     android:layout_width="fill_parent"
-    android:orientation="horizontal"
-    >
+    android:orientation="horizontal">
 
     <!--<com.facebook.widget.ProfilePictureView-->
         <!--android:layout_width="80dp"-->
