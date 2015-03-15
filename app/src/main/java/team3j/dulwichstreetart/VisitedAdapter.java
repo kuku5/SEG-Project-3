@@ -34,7 +34,12 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
     private ArrayList<Art> galleryData;
 
 
-
+    /**
+     *
+     * @param context
+     * @param itemTouchListener
+     * @param galleryData
+     */
     public VisitedAdapter(Context context, OnItemTouchListener itemTouchListener, ArrayList<Art> galleryData){
         this.inflater=LayoutInflater.from(context);
         this.context=context;
@@ -129,6 +134,9 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
         }
     }
 
+    /**
+     *
+     */
     //interface need for Recycle Views to handle clicks
     public interface OnItemTouchListener {
         public void onCardViewTap(View view, int position);

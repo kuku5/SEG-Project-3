@@ -16,18 +16,25 @@ import android.view.ViewGroup;
 
 import team3j.artworkdisplay.GallerySwipeSingleFragment;
 
+
 public class FragmentAdapter extends FragmentStatePagerAdapter {
 
-    private int indexOfFirstArtwork;
 
-    public FragmentAdapter(FragmentManager fm,int indexOfFirstArtwork) {
+    /**
+     * This is the Constructor for the FragmentAdapter that passes in the fragment manager for the
+     * FragmentStatePagerAdapter to handle the loading of fragments
+     * @param fm
+     */
+    public FragmentAdapter(FragmentManager fm) {
         super(fm);
-        this.indexOfFirstArtwork=indexOfFirstArtwork-1;
-
     }
 
 
-
+    /**
+     * this gets the correct artwork fragment for each position in the viewpager
+     * @param i
+     * @return
+     */
     @Override
     public Fragment getItem(int i) {
 
@@ -36,7 +43,11 @@ public class FragmentAdapter extends FragmentStatePagerAdapter {
     }
 
 
-
+    /**
+     * this returns the count of the artwork
+     * @return
+     */
+    //todo change this to final number
     @Override
     public int getCount() {
         return 22;

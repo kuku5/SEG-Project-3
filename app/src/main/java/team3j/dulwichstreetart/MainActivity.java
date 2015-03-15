@@ -33,11 +33,11 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
     private MaterialTabHost tabHost;
     public static ViewPager viewPager;
 
-    private HomePageFragment.OnClickInsideFragment onClickInsideFragment;
-    private GoogleMapFragmentSmall googleMapFragmentSmall;
 
-
-
+    /**
+     * onCreate inflates the layout to be viewed for the fragment and setups up the on screen elements
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,25 +50,19 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         toolbar = (Toolbar) findViewById(R.id.app_bar);
 
+        //setup tabs
+        setUpTabsAdapter();
 
-
-        updateToolBarLayout();//update tool bar
-        setUpTabsAdapter();//setup tabs
-
-        onClickInsideFragment= new HomePageFragment.OnClickInsideFragment() {
-            @Override
-            public void onCardViewTap() {
-                viewPager.setCurrentItem(3);
-
-            }
-        };
 
     }
 
+    /**
+     * this method creates the tab layout and the viewpager which displays the fragments below the tabs
+     */
     public void setUpTabsAdapter(){
         //fragment page adapter for the tabs displays a fragment and handles loading of fragments for each tab
 
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(),onClickInsideFragment);
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
         viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
@@ -99,71 +93,47 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
 
 
 
-    public void updateToolBarLayout(){
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setShowHideAnimationEnabled(true);
-
-        toolbar.setCollapsible(true);
-        toolbar.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-        toolbar.setTitleTextColor(getResources().getColor(R.color.colorAccentReal));
-        toolbar.setSubtitleTextColor(getResources().getColor(R.color.white));
-        //hide actionbar
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
-
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-
+    /**
+     * this method makes the tab view pager go to the selected tab
+     * @param materialTab
+     */
     @Override
     public void onTabSelected(MaterialTab materialTab) {
         viewPager.setCurrentItem(materialTab.getPosition());
-        Log.d("testing2", "opened tab " + materialTab.getPosition());
     }
 
 
-
+    /**
+     *  this method gets when a tab is reselected
+     * @param materialTab
+     */
     @Override
     public void onTabReselected(MaterialTab materialTab) {
 
 
     }
 
+    /**
+     *  this method gets when a tab is Unselected
+     * @param materialTab
+     */
     @Override
     public void onTabUnselected(MaterialTab materialTab) {
 
     }
 
-    /*
+    /**
     ViewPagerAdapter
     adapter for the tab layout fill each space with a fragment and manages loading
      */
-
     private class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
 
-        public ViewPagerAdapter(FragmentManager fragmentManager,HomePageFragment.OnClickInsideFragment onClickInsideFragment1) {
+        /**
+         * constructor view pager takes fragment manager as parameter
+         * @param fragmentManager
+         */
+        public ViewPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
 
         }
@@ -174,29 +144,17 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
            // this returns a fragment for each tab space
 
 
-
-
             switch (num) {
                 case 0:
-                    HomePageFragment homePageFragment= HomePageFragment.getInstance(num);
-                    homePageFragment.setupClickInsideFragment(onClickInsideFragment);
-
-                    return homePageFragment;
+                    return HomePageFragment.getInstance(num);
                 case 1:
                     return GalleryFragment.getInstance(num);
                 case 2:
                     return ArtistListFragment.getInstance(num);
                 case 3:
-
-                     googleMapFragmentSmall= GoogleMapFragmentSmall.getInstance(num);
-
-                    return googleMapFragmentSmall;
+                    return GoogleMapFragmentSmall.getInstance(num);
                 case 4:
-
-
-
                     return VisitedTabFragment.getInstance(num);
-
                 default:
                     return HomePageFragment.getInstance(num);
 
@@ -206,6 +164,10 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
         }
 
 
+        /**
+         * this gets the number of pages in the view pager
+         * @return
+         */
         @Override
         public int getCount() {
             //returns the number of tabs to be displayed
@@ -213,6 +175,11 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
         }
 
 
+        /**
+         * this gets the title of each tab depending on the position
+         * @param position
+         * @return
+         */
         @Override
         public CharSequence getPageTitle(int position) {
             //this returns the page title for each tab from the xml strings file

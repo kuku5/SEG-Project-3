@@ -47,8 +47,11 @@ public class GoogleMapFragmentSmall extends Fragment {
     public static int index= 4;
 
 
-
-
+    /**
+     *
+     * @param position
+     * @return
+     */
     public static GoogleMapFragmentSmall getInstance(int position) {
         GoogleMapFragmentSmall myFragmentTab = new GoogleMapFragmentSmall();
         Bundle args = new Bundle();

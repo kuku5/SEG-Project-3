@@ -31,6 +31,11 @@ public class GalleryFragment extends Fragment {
     static boolean goToMaps=false;
 
 
+    /**
+     *
+     * @param position
+     * @return
+     */
     public static GalleryFragment getInstance(int position) {
         GalleryFragment myGalleryFragmentTab = new GalleryFragment();
         Bundle args = new Bundle();
@@ -38,12 +43,16 @@ public class GalleryFragment extends Fragment {
         myGalleryFragmentTab.setArguments(args);
         return myGalleryFragmentTab;
     }
-    public static void goToMaps(){
-        //MainActivity.viewPager.setCurrentItem(3, true);
 
 
-    }
 
+    /**
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, @Nullable Bundle savedInstanceState) {
         //get layout and elements
@@ -69,7 +78,12 @@ public class GalleryFragment extends Fragment {
         return layout;
     }
 
-    //return a Click Listener for the Recycle View
+
+    /**
+     * This method creates and returns a Gallery CLick Listener for the Gallery recycler view
+     *
+     * @return itemTouchListener - Gallery ClickListener
+     */
     public GalleryAdapter.OnItemTouchListener getGalleryClickListener(){
         GalleryAdapter.OnItemTouchListener itemTouchListener = new GalleryAdapter.OnItemTouchListener() {
             @Override
@@ -91,6 +105,12 @@ public class GalleryFragment extends Fragment {
     }
 
     //adapt recycle view for the Screen Rotation
+
+    /**
+     * This method adapt recycler view for the Screen Rotation by updating
+     * the Layout Manager of the recycler view
+     *
+     */
     public void updateLayoutForRotation(){
         int screenOrientation = this.getResources().getConfiguration().orientation;
 

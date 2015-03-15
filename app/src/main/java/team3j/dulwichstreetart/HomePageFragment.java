@@ -59,7 +59,6 @@ import twitter4j.conf.ConfigurationBuilder;
  * This is the fragment of the Homepage to be displayed in the tab
  */
 
-//TODO incomplete homepage needs a clear idea of design
 
 public class HomePageFragment extends Fragment {
 
@@ -79,13 +78,17 @@ public class HomePageFragment extends Fragment {
     Animation slide_in_left, slide_out_right;
     private boolean isLoggedIn;
     private DynamicHeightImageView mapButton;
-    private OnClickInsideFragment onClickInsideFragment;
 
     private ArrayList<String> todaysTweets = new ArrayList<>();
     private TextView twitView1;
     private TextView twitView2;
 
-    //return an instance of this Fragment with a bundle into the tab adapter
+    /**
+     * return an instance of this Fragment with a bundle into the tab adapter
+     * @param position
+     * @return myFragmentTab
+     */
+
     public static HomePageFragment getInstance(int position) {
         HomePageFragment myFragmentTab = new HomePageFragment();
         Bundle args = new Bundle();
@@ -94,6 +97,13 @@ public class HomePageFragment extends Fragment {
         return myFragmentTab;
     }
 
+    /**
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
@@ -107,7 +117,6 @@ public class HomePageFragment extends Fragment {
         setupOnScreenElements(layout);
       //  if (isNetworkConnected()) getTweets(); //Get Today's Tweets
        // setupAnimations(layout);
-        setupGoogleMapsCard(layout);
         setupLibraryAnimations(layout);
 
         //  ---------- KEYHASH GENERATOR -----------//
@@ -133,8 +142,12 @@ public class HomePageFragment extends Fragment {
     }
 
 
-
-
+    /**
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     //Handles the web log in
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -142,6 +155,10 @@ public class HomePageFragment extends Fragment {
 
     }
 
+    /**
+     *
+     * @param layout
+     */
     private void setupOnScreenElements(View layout) {
         cardView = (CardView) layout.findViewById(R.id.card_view_1_welcome1);
         cardView2 = (CardView) layout.findViewById(R.id.car_view_22);
@@ -154,7 +171,6 @@ public class HomePageFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 MainActivity.viewPager.setCurrentItem(3, true);
-                // onClickInsideFragment.onCardViewTa p();
             }
         });
         aboutDulwich = (DynamicHeightImageView) layout.findViewById(R.id.aboutDulwich);
@@ -166,6 +182,10 @@ public class HomePageFragment extends Fragment {
         });
     }
 
+    /**
+     *
+     * @param layout
+     */
     public void setupAnimations(View layout) {
 
         twitView1 = (TextView) layout.findViewById(R.id.DisplayTweet1);
@@ -240,16 +260,10 @@ public class HomePageFragment extends Fragment {
     }
 
 
-    private void setupGoogleMapsCard(View layout) {
-//        FragmentManager fm = getFragmentManager();
-//        FragmentTransaction ft = fm.beginTransaction();
-//
-//        GoogleMapFragmentSmall fragmentSmall = GoogleMapFragmentSmall.getInstance(0);
-//        ft.replace(R.id.small_map, fragmentSmall);
-//        ft.commit();
-
-    }
-
+    /**
+     *
+     * @param layout
+     */
     private void setupLibraryAnimations(View layout) {
 
         mDemoSlider = (SliderLayout) layout.findViewById(R.id.slider);
@@ -294,8 +308,7 @@ public class HomePageFragment extends Fragment {
             textSliderView
                     .description(name)
                     .image(file_maps.get(name))
-                    .setScaleType(BaseSliderView.ScaleType.Fit)
-                    .setOnSliderClickListener(new OnSliderClickListener());
+                    .setScaleType(BaseSliderView.ScaleType.Fit);
             //add your extra information
             textSliderView.getBundle()
                     .putString("extra", name);
@@ -315,14 +328,9 @@ public class HomePageFragment extends Fragment {
     }
 
 
-    public void setupClickInsideFragment(OnClickInsideFragment onClickInsideFragment) {
-        this.onClickInsideFragment = onClickInsideFragment;
-    }
-
-    public interface OnClickInsideFragment {
-        public void onCardViewTap();
-    }
-
+    /**
+     *
+     */
     private void showMessage() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("About Dulwich Outdoor Gallery");
@@ -344,6 +352,9 @@ public class HomePageFragment extends Fragment {
         dialog.show();
     }
 
+    /**
+     *
+     */
     private void showMessagePictureGallery() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("About Dulwich Picture Gallery");
@@ -367,6 +378,9 @@ public class HomePageFragment extends Fragment {
         box.show();
     }
 
+    /**
+     *
+     */
     public void getTweets() {
 
         Thread thread = new Thread(new Runnable(){
@@ -410,6 +424,10 @@ public class HomePageFragment extends Fragment {
 
     }
 
+    /**
+     *
+     * @return
+     */
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo ni = cm.getActiveNetworkInfo();
@@ -423,40 +441,5 @@ public class HomePageFragment extends Fragment {
 }
 
 
-/*
 
-/// LEAVE THIS MIGHT PUT BACK IN
-
-
-//        String message=
-//                "Here you can locate and navigate to your favourite street artist in Dulwich " +
-//                        "and interact with other Street art Enthusiasts ";
-//
-//
-//        new AlertDialog.Builder(getActivity())
-//                .setTitle("Welcome to the Dulwich Outdoor Gallery")
-//                .setMessage(message)
-//                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        // continue with delete
-//                    }
-//                })
-//                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        // do nothing
-//                    }
-//                })
-//                .setIcon(R.drawable.ic_blob)
-//                .show();
- */
-class OnSliderClickListener implements BaseSliderView.OnSliderClickListener {
-
-
-    @Override
-    public void onSliderClick(BaseSliderView baseSliderView) {
-
-        
-
-    }
-}
 

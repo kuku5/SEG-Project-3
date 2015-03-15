@@ -31,6 +31,11 @@ public class ArtistListFragment extends Fragment {
     private ArtistListAdapter artistListAdapter;
 
 
+    /**
+     *
+     * @param position
+     * @return
+     */
     public static ArtistListFragment getInstance(int position) {
         ArtistListFragment myGalleryFragmentTab = new ArtistListFragment();
         Bundle args = new Bundle();
@@ -39,6 +44,13 @@ public class ArtistListFragment extends Fragment {
         return myGalleryFragmentTab;
     }
 
+    /**
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, @Nullable Bundle savedInstanceState) {
         //setup layout and elements
@@ -61,6 +73,10 @@ public class ArtistListFragment extends Fragment {
         return layout;
     }
 
+    /**
+     *
+     * @return
+     */
     //create click listener
     public  ArtistListAdapter.OnArtistItemTouchListener getOnArtistItemTouchListener(){
         ArtistListAdapter.OnArtistItemTouchListener onArtistItemTouchListener = new ArtistListAdapter.OnArtistItemTouchListener() {

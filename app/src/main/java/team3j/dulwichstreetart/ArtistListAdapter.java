@@ -33,7 +33,12 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
     private Context context;
     private OnArtistItemTouchListener onArtistItemTouchListener;
 
-    //constructor
+    /**
+     *
+     * @param context
+     * @param data
+     * @param onArtistItemTouchListener
+     */
     public ArtistListAdapter(Context context,ArrayList<Artist> data,OnArtistItemTouchListener onArtistItemTouchListener){
         this.data=data;
         inflater=LayoutInflater.from(context);
@@ -41,6 +46,12 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
         this.onArtistItemTouchListener=onArtistItemTouchListener;
     }
 
+    /**
+     *
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @Override
     public ArtistListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //add view to the grid cell for the first time
@@ -53,6 +64,11 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
         return myViewHolder;
     }
 
+    /**
+     *
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(ArtistListAdapter.MyViewHolder holder, int position) {
         //add data to for each layout of the list
@@ -63,16 +79,28 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
         //holder.artistPhoto.setImageResource(data.get(position).getArtistPhoto());
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int getItemCount() {
         return data.size();
     }
 
+    /**
+     *
+     * @param position
+     * @return
+     */
     @Override
     public int getItemViewType(int position) {
         return position+100;
     }
 
+    /**
+     * This Class is the Viewholder for each item in the
+     */
     class MyViewHolder extends RecyclerView.ViewHolder{
         // view holder for each grid  cell
         TextView title;
@@ -89,13 +117,6 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
             website = (TextView) itemView.findViewById(R.id.website);
             //artistPhoto = (ImageView)itemView.findViewById(R.id.artistPhoto);
             expandArea= (CardView) itemView.findViewById(R.id.artist_list_item_card);
-
-//            title.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    onArtistItemTouchListener.onItemClick(v, getPosition());
-//                }
-//            });
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -120,6 +141,9 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
 
     }
 
+    /**
+     *
+     */
     public interface OnArtistItemTouchListener{
         public void onItemClick(View view,int position);
     }

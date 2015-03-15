@@ -117,7 +117,6 @@ public class GallerySwipeSingleFragment extends Fragment {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GalleryFragment.goToMaps();
 
                 getActivity().onBackPressed();
             }
