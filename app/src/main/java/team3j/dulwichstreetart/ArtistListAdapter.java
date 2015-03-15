@@ -1,22 +1,13 @@
 package team3j.dulwichstreetart;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.etsy.android.grid.util.DynamicHeightImageView;
 
 import java.util.ArrayList;
 
@@ -109,11 +100,11 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            title = (TextView) itemView.findViewById(R.id.artist_list_item_title);
-            description = (TextView) itemView.findViewById(R.id.artist_list_item_desc);
+            title = (TextView) itemView.findViewById(R.id.artist_title);
+            description = (TextView) itemView.findViewById(R.id.artist_description);
             website = (TextView) itemView.findViewById(R.id.website);
             artistPhoto = (ImageView)itemView.findViewById(R.id.artistPhoto);
-            expandArea= (CardView) itemView.findViewById(R.id.artist_list_item_card);
+            expandArea= (CardView) itemView.findViewById(R.id.artist_list_card);
 
 
             itemView.setOnClickListener(new View.OnClickListener() {

@@ -1,3 +1,7 @@
+
+        <!--activity_splash.xml consists of a main linear
+    layout followed by an ImageView which holds the splash screen art-->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layoutSplash"
@@ -13,6 +17,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:src="@drawable/newsplash" />
+        android:src="@drawable/dulwichsplashart" />
 
 </LinearLayout>
