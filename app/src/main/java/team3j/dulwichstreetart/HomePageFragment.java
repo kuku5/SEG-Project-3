@@ -334,7 +334,7 @@ public class HomePageFragment extends Fragment {
 //    public void WriteBtn(View v) {
 //        // add-write text into file
 //        try {
-//            FileOutputStream fileout=openFileOutput("mytextfile.txt", getActivity().MODE_PRIVATE);
+//             FileOutputStream fileout=openFileOutput("mytextfile.txt", getActivity().MODE_PRIVATE);
 //            OutputStreamWriter outputWriter=new OutputStreamWriter(fileout);
 //            outputWriter.write(textmsg.getText().toString());
 //            outputWriter.close();
