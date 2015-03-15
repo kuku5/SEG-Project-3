@@ -116,7 +116,7 @@ public class HomePageFragment extends Fragment {
 
         //non facebook setup
 
-         layout = inflater.inflate(R.layout.fragment_home_page, container, false);
+        layout = inflater.inflate(R.layout.fragment_home_page, container, false);
 
         setRetainInstance(true);
 
@@ -124,14 +124,13 @@ public class HomePageFragment extends Fragment {
         setupOnScreenElements(layout);
         //Get Today's Tweets
         if (isOnline()) {
-                getTweets();
+            getTweets();
 
             Log.d("tweets","online");
 
         }
         else{
-                getOfflineTweets();
-
+            getOfflineTweets();
         }
 
         setupLibraryAnimations(layout);
@@ -528,7 +527,7 @@ public class HomePageFragment extends Fragment {
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
         return netInfo != null && netInfo.isConnectedOrConnecting();
     }
-  }
+}
 
 
 
