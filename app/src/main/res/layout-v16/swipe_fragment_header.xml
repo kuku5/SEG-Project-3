@@ -234,6 +234,17 @@
 
         </LinearLayout>
 
+        <com.facebook.widget.LikeView
+            android:id="@+id/like_view"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
+
+        </com.facebook.widget.LikeView>
+
 
 
     </RelativeLayout>
