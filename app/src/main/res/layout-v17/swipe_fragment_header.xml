@@ -221,7 +221,7 @@
 
             <TextView
 
-                android:id="@+id/comment_list_description_title_artist_streetartist"
+                android:id="@+id/comment_list_more_info_links_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|left"

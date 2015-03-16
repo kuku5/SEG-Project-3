@@ -171,7 +171,12 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
             holder.inspirationTitle.setText("\""+galleryData.get(indexOfArtwork).getInspirationTitle()+"\"");
             holder.inspirationTitleArtist.setText("By "+galleryData.get(indexOfArtwork).getInspirationArtist());
-
+            holder.moreInfo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    linkToFb("779461175469412/photos/"+galleryData.get(indexOfArtwork).getFbLink(),false);
+                }
+            });
 //            holder.streetArtistTitle.setText("\""+galleryData.get(indexOfArtwork).getName()+"\"");
          //   holder.streetArtistTitleArtist.setText("By "+galleryData.get(indexOfArtwork).getArtistName());
 
@@ -265,31 +270,13 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
         else {
 
-
             final Comment commentInfo = data.get(position - 2);
-
-//            if (holder.posterName != null) {
-//                holder.posterName.setText(Html.fromHtml("<a href=\"http://www.facebook.com/"+commentInfo.getPosterURL()+"\">"+commentInfo.getPosterName()+"</a> "));
-//                holder.posterName.setMovementMethod(LinkMovementMethod.getInstance());
-//            }
             holder.posterName.setText(commentInfo.getPosterName());
             holder.posterName.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String facebookUrl = "https://www.facebook.com/"+commentInfo.getPosterURL();
-                    try {
-                        int versionCode = context.getPackageManager().getPackageInfo("com.facebook.katana", 0).versionCode;
-                        if (versionCode >= 3002850) {
-                            Uri uri = Uri.parse("fb://facewebmodal/f?href=" + facebookUrl);
-                            context.startActivity(new Intent(Intent.ACTION_VIEW, uri));;
-                        } else {
-                            // open the Facebook app using the old method (fb://profile/id or fb://page/id)
-                            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/"+commentInfo.getPosterURL())));
-                        }
-                    } catch (PackageManager.NameNotFoundException e) {
-                        // Facebook is not installed. Open the browser
-                        context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(facebookUrl)));
-                    }
+                    String link = commentInfo.getPosterURL();
+                    linkToFb(link,true);
                 }
             });
 
@@ -420,6 +407,33 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         }
 
 
+    }
+
+    public void linkToFb (String link, boolean isPage) {
+        String facebookUrl = "https://www.facebook.com/"+link;
+        try {
+            int versionCode = context.getPackageManager().getPackageInfo("com.facebook.katana", 0).versionCode;
+            if (versionCode >= 3002850) {
+                Uri uri;
+                if(!isPage) {
+                    uri = Uri.parse("fb://facewebmodal/f?href=" + facebookUrl);
+
+                } else {
+
+                    uri = Uri.parse("fb://page/" + link);
+                }
+                System.out.println(facebookUrl);
+                //System.out.println(uri);
+
+                context.startActivity(new Intent(Intent.ACTION_VIEW, uri));
+            } else {
+                // open the Facebook app using the old method (fb://profile/id or fb://page/id)
+                context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/"+link)));
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            // Facebook is not installed. Open the browser
+            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(facebookUrl)));
+        }
     }
 
     @Override
@@ -599,6 +613,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         private TextView reply;
         private ImageView likeIcon;
         private ImageView deleteIcon;
+        private TextView moreInfo;
 
         private ImageView shareButton;
         private ImageView mapButton;
@@ -622,6 +637,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                     deleteIcon = (ImageView) itemView.findViewById(R.id.delete_comment);
                     likeWord = (TextView) itemView.findViewById(R.id.like);
                     reply = (TextView) itemView.findViewById(R.id.reply);
+
                     break;
 
                 case Post_View_Type:
@@ -641,9 +657,10 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
                     inspirationTitle = (TextView) itemView.findViewById(R.id.comment_list_inspiration_title);
                     inspirationTitleArtist = (TextView) itemView.findViewById(R.id.comment_list_inspiration_title_artist);
+                    moreInfo = (TextView) itemView.findViewById(R.id.comment_list_more_info_links_title);
 
                     //streetArtistTitle = (TextView) itemView.findViewById(R.id.comment_list_description_title_streetartwork);
-                   // streetArtistTitleArtist = (TextView) itemView.findViewById(R.id.comment_list_description_title_artist_streetartist);
+                    // streetArtistTitleArtist = (TextView) itemView.findViewById(R.id.comment_list_description_title_artist_streetartist);
 
 
                     commentTitle = (TextView) itemView.findViewById(R.id.commentAmount);
