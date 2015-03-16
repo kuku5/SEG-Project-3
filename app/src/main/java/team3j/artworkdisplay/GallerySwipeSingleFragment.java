@@ -301,9 +301,7 @@ public class GallerySwipeSingleFragment extends Fragment {
      * Logs you into facebook, receiving the user's name, and retrieves data from fb to populate the recycler view's comment view type
      */
     public void onClickLogin() {
-        //Session.openActiveSession(getActivity(), this, true, statusCallback);
-//        supercomments = new ArrayList<>();
-//        comments = new ArrayList<>();
+
         facebookCode = 0;
         if(checkIfActiveSession()){
             Request.newMeRequest(Session.getActiveSession(), new Request.GraphUserCallback() {
@@ -350,27 +348,28 @@ public class GallerySwipeSingleFragment extends Fragment {
         System.out.println(state);
         System.out.println(session);
         System.out.println(Session.getActiveSession());
+        System.out.println(facebookCode);
 
         if(state.equals(SessionState.OPENED_TOKEN_UPDATED)){
 
             System.out.println(session.getPermissions());
-            if(session.isPermissionGranted("publish_actions")) {
-                if (facebookCode == 1) {
-                    postComment(comment, commentID);
-                    facebookCode = 10;
-                    comment = null;
-                    commentID = null;
-                } else if (facebookCode == 2) {
-                    deleteComment(commentID);
-                    facebookCode = 10;
-                    commentID = null;
-                } else if (facebookCode == 3) {
-                    likeComment(commentID, userLikes);
-                    facebookCode = 10;
-                    commentID = null;
-
-                }
-            }
+//            if(session.isPermissionGranted("publish_actions")) {
+//                if (facebookCode == 1) {
+//                    postComment(comment, commentID);
+//                    facebookCode = 10;
+//                    comment = null;
+//                    commentID = null;
+//                } else if (facebookCode == 2) {
+//                    deleteComment(commentID);
+//                    facebookCode = 10;
+//                    commentID = null;
+//                } else if (facebookCode == 3) {
+//                    likeComment(commentID, userLikes);
+//                    facebookCode = 10;
+//                    commentID = null;
+//
+//                }
+//            }
         }
         if (state.isOpened()) {
             //If logged in, show this
@@ -474,8 +473,29 @@ public class GallerySwipeSingleFragment extends Fragment {
      */
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Session.getActiveSession().onActivityResult(getActivity(), requestCode, resultCode, data);
+        boolean success = Session.getActiveSession().onActivityResult(getActivity(), requestCode, resultCode, data);
+        System.out.println("OnActivityResult" + indexOfArtWork);
+        if(success) {
+            Session session = Session.getActiveSession();
+            if (session.isPermissionGranted("publish_actions")) {
+                if (facebookCode == 1) {
+                    postComment(comment, commentID);
+                    facebookCode = 10;
+                    comment = null;
+                    commentID = null;
+                } else if (facebookCode == 2) {
+                    deleteComment(commentID);
+                    facebookCode = 10;
+                    commentID = null;
+                } else if (facebookCode == 3) {
+                    likeComment(commentID, userLikes);
+                    facebookCode = 10;
+                    commentID = null;
 
+                }
+
+            }
+        }
     }
 
     /**
