@@ -85,10 +85,13 @@ public class HomePageFragment extends Fragment {
     private boolean isLoggedIn;
     private DynamicHeightImageView mapButton;
 
-    static ArrayList<String> todaysTweets = new ArrayList<>();
-    private TextView twitView1;
-    private TextView twitView2;
+    private ArrayList<Status> todaysTweets = new ArrayList<>();
+    private TextView twitView1,twitView2, twitTime1, twitTime2;
+    private String TWEETS_FILE = "offline_tweets";
+    private FileOutputStream fos;
+    private String offlineTweet;
     private View layout;
+
 
     /**
      * return an instance of this Fragment with a bundle into the tab adapter
@@ -134,6 +137,7 @@ public class HomePageFragment extends Fragment {
         }
 
         setupLibraryAnimations(layout);
+        setupTweetsAnimations(layout);
 
         //  ---------- KEYHASH GENERATOR -----------//
         /*
@@ -211,16 +215,8 @@ public class HomePageFragment extends Fragment {
 
         twitView1 = (TextView) layout.findViewById(R.id.DisplayTweet1);
         twitView2 = (TextView) layout.findViewById(R.id.DisplayTweet2);
-
-
-
-//        try {
-//        //    writeToFile("dulwichTweet.txt");
-//      //      ReadBtn();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
+        twitTime1 = (TextView) layout.findViewById(R.id.statusTime1);
+        twitTime2 = (TextView) layout.findViewById(R.id.statusTime2);
 
         Bundle bundle = getArguments();
 
@@ -245,7 +241,7 @@ public class HomePageFragment extends Fragment {
         viewFlipper.setInAnimation(slide_in_left);
         viewFlipper.setOutAnimation(slide_out_right);
 
-        if (todaysTweets.size()!=0) {
+        if (isOnline()) {
             viewFlipper.getInAnimation().setAnimationListener(new Animation.AnimationListener() {
                 int i = 0;
                 boolean t1 = false;
@@ -255,11 +251,14 @@ public class HomePageFragment extends Fragment {
                     if (i == todaysTweets.size()) i = 0;
 
                     if (t1 == false) {
-                        twitView1.setText(todaysTweets.get(i));
+                        twitView1.setText(todaysTweets.get(i).getText());
+                        //date.toGMTString().slice(0, -4)
+                        twitTime1.setText(todaysTweets.get(i).getCreatedAt().toString());
                         t1 = true;
                         i++;
                     } else {
-                        twitView2.setText(todaysTweets.get(i));
+                        twitView2.setText(todaysTweets.get(i).getText());
+                        twitTime2.setText(todaysTweets.get(i).getCreatedAt().toString());
                         t1 = false;
                         i++;
                     }
@@ -278,6 +277,7 @@ public class HomePageFragment extends Fragment {
             });
         }
 
+
         cardView2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -290,24 +290,6 @@ public class HomePageFragment extends Fragment {
 
     }
 
-    private void writeToFile(String fileName) throws IOException {
-        File file = getActivity().getFileStreamPath(fileName);
-
-        if (!file.exists()) {
-            file.createNewFile();
-        }
-
-        FileOutputStream writer = getActivity().openFileOutput(file.getName(), Context.MODE_PRIVATE);
-
-        for (String string: todaysTweets){
-            writer.write(string.getBytes());
-            writer.flush();
-        }
-
-        writer.close();
-
-
-    }
     public void ReadBtn() {
         //reading text from file
         try {
@@ -498,17 +480,17 @@ public class HomePageFragment extends Fragment {
                     do {
                         status = statuses.get(i).getText();
                         if(!status.substring(0,2).equals("RT") && !status.substring(0, 1).equals("@")) {
-                            todaysTweets.add(status);
+                            todaysTweets.add(statuses.get(i));
                             c++;
                         }
                         i++;
                     } while (i<20 && c<5); //statuses.get(i).getCreatedAt().equals(currentDate)
 
+                    //fos.write(todaysTweets.get(0).getText().getBytes());
+
                 } catch (TwitterException e) {
                     e.printStackTrace();
                 }
-
-                setupTweetsAnimations(layout);
 
             }
         });

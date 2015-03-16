@@ -223,7 +223,7 @@
                                     android:text=" "
                                     android:textSize="11sp"
                                     android:textStyle="bold"
-                                    android:id="@+id/atsymbol"
+                                    android:id="@+id/statusTime2"
 
                                     /></LinearLayout>
 
@@ -260,7 +260,7 @@
                                     android:text=""
                                     android:textSize="11sp"
                                     android:textStyle="bold"
-                                    android:id="@+id/atsymbol2"
+                                    android:id="@+id/statusTime1"
 
                                     /></LinearLayout>
                             <TextView
