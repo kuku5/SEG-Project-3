@@ -19,6 +19,7 @@ public class Comment implements Parcelable {
     private String numberLikes;
     private Boolean isAReply;
     private Boolean canDelete;
+    private boolean isPage;
 
     /**
      * Set profile picture of the post
@@ -135,6 +136,11 @@ public class Comment implements Parcelable {
         return posterName;
 
     }
+
+    /**
+     * Gets the number of likes for the comment
+     * @return number of likes
+     */
     public String getNumberLikes() {
         return numberLikes;
     }
@@ -190,7 +196,21 @@ public class Comment implements Parcelable {
     public int getIcon() {
         return icon;
     }
+    /**
+     * Set's if the profile is a page or a regular profile
+     * @param isPage boolean true if it is a page
+     */
+    public void setIsPage(boolean isPage) {
+        this.isPage = isPage;
+    }
 
+    /**
+     * Returns true if the profile is a page
+     * @return Returns true if the profile is a page
+     */
+    public boolean isPage() {
+        return isPage;
+    }
 
     public String toString(){
         return posterName + " " + message + " " + commentID + " " + userLikes;

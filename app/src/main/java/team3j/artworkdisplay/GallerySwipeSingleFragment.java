@@ -195,6 +195,11 @@ public class GallerySwipeSingleFragment extends Fragment {
                                 int x = response.getGraphObject().getInnerJSONObject().getJSONArray("data").length();
 
                                 for (int i = 0; i < x; i++) {
+                                    boolean isPage = false;
+                                    //checks if it has a category if it does, it is definitely not a profile
+                                    if(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).getJSONObject("from").has("category")) {
+                                        isPage = true;
+                                    }
                                     //Setting comment information such as; number of likes, message, time, url of the post etc..
                                     Comment commentInfo = new Comment();
                                     commentInfo.setNumberLikes(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("like_count").toString());
@@ -205,6 +210,7 @@ public class GallerySwipeSingleFragment extends Fragment {
                                     commentInfo.setCommentID(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("id").toString());
                                     commentInfo.setUserLikes((Boolean) response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("user_likes"));
                                     commentInfo.setCanDelete((Boolean) response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("can_remove"));
+                                    commentInfo.setIsPage(isPage);
                                     commentInfo.setIsAReply(false);
                                     comments.add(commentInfo); //adding the comment information to array
 
@@ -253,10 +259,14 @@ public class GallerySwipeSingleFragment extends Fragment {
 
                                             if(!response.getGraphObject().getInnerJSONObject().getJSONArray("data").equals("")) {
 
-
                                                 int x = response.getGraphObject().getInnerJSONObject().getJSONArray("data").length();
 
                                                 for (int i = 0; i < x; i++) {
+                                                    boolean isPage = false;
+                                                    //checks if it has a category if it does, it is definitely not a profile
+                                                    if(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).getJSONObject("from").has("category")) {
+                                                        isPage = true;
+                                                    }
                                                     Comment commentInfo = new Comment();
                                                     commentInfo.setNumberLikes(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("like_count").toString());
                                                     commentInfo.setPosterURL(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).getJSONObject("from").get("id").toString());
@@ -266,6 +276,7 @@ public class GallerySwipeSingleFragment extends Fragment {
                                                     commentInfo.setCommentID(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("id").toString());
                                                     commentInfo.setUserLikes((boolean) response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("user_likes"));
                                                     commentInfo.setCanDelete((Boolean) response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("can_remove"));
+                                                    commentInfo.setIsPage(isPage);
                                                     commentInfo.setIsAReply(true);
                                                     replyComments.add(commentInfo);
 

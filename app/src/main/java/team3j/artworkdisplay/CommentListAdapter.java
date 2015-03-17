@@ -282,8 +282,9 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             holder.posterName.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    boolean isPage = commentInfo.isPage();
                     String link = commentInfo.getPosterURL();
-                    linkToFb(link,true);
+                    linkToFb(link,isPage);
                 }
             });
 
@@ -426,15 +427,16 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             int versionCode = context.getPackageManager().getPackageInfo("com.facebook.katana", 0).versionCode;
             if (versionCode >= 3002850) {
                 Uri uri;
-                if(!isPage) {
+                if (isPage) {
+                    //works for pages
+                    uri = Uri.parse("fb://page/" + link);
+
+                }
+                else {
+                    // /works for photos and profile
                     uri = Uri.parse("fb://facewebmodal/f?href=" + facebookUrl);
 
-                } else {
-
-                    uri = Uri.parse("fb://page/" + link);
                 }
-                System.out.println(facebookUrl);
-                //System.out.println(uri);
 
                 context.startActivity(new Intent(Intent.ACTION_VIEW, uri));
             } else {
