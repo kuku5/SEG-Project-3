@@ -1,6 +1,5 @@
 package team3j.artworkdisplay;
 
-import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,20 +8,15 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Environment;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.Html;
-import android.text.InputType;
 import android.text.TextWatcher;
-import android.text.method.LinkMovementMethod;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,10 +24,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.etsy.android.grid.util.DynamicHeightImageView;
 import com.facebook.Session;
@@ -55,9 +47,6 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import team3j.dulwichstreetart.Art;
-import team3j.dulwichstreetart.GalleryData;
-import team3j.dulwichstreetart.GoogleMapFragmentSmall;
-import team3j.dulwichstreetart.HomePageFragment;
 import team3j.dulwichstreetart.MainActivity;
 import team3j.dulwichstreetart.R;
 
@@ -179,10 +168,10 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             holder.likeView.setObjectId("https://www.facebook.com/dulwichoutdoorgallerydisplay");
             //holder.likeView.setObjectId("https://www.facebook.com/dulwichoutdoorgallerydisplay/photos/"+galleryData.get(indexOfArtwork).getFbLink());
             holder.likeView.setForegroundColor(-256);
-            holder.moreInfo.setOnClickListener(new View.OnClickListener() {
+            holder.linkToFbPost.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    linkToFb("779461175469412/photos/"+galleryData.get(indexOfArtwork).getFbLink(),false);
+                    linkToFb("779461175469412/photos/" + galleryData.get(indexOfArtwork).getFbLink(), false);
                 }
             });
 //            holder.streetArtistTitle.setText("\""+galleryData.get(indexOfArtwork).getName()+"\"");
@@ -626,7 +615,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         private TextView reply;
         private ImageView likeIcon;
         private ImageView deleteIcon;
-        private TextView moreInfo;
+        private TextView linkToFbPost;
         private LikeView likeView;
 
         private ImageView shareButton;
@@ -671,7 +660,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
                     inspirationTitle = (TextView) itemView.findViewById(R.id.comment_list_inspiration_title);
                     inspirationTitleArtist = (TextView) itemView.findViewById(R.id.comment_list_inspiration_title_artist);
-                    moreInfo = (TextView) itemView.findViewById(R.id.comment_list_more_info_links_title);
+                    linkToFbPost = (TextView) itemView.findViewById(R.id.comment_list_fb_links);
                     likeView = (LikeView) itemView.findViewById(R.id.like_view);
 
                     //streetArtistTitle = (TextView) itemView.findViewById(R.id.comment_list_description_title_streetartwork);
