@@ -75,6 +75,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
     private ArrayList<Art> galleryData;
     private Context context;
     private Bitmap bitmap;
+    private Bitmap bitmap1;
     private final int Header_View_Type = 1;
     private final int Comment_View_Type = 0;
     private final int Post_View_Type = 2;
@@ -154,8 +155,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
         if (position == 0) {
 
-
-            Bitmap bitmap1 = BitmapFactory.decodeResource(context.getResources(), galleryData.get(indexOfArtwork).getInspiredPic());
+            bitmap1 = BitmapFactory.decodeResource(context.getResources(), galleryData.get(indexOfArtwork).getInspiredPic());
             BitmapDrawable res1 = new BitmapDrawable(context.getResources(), bitmap1);
 
             bitmap = BitmapFactory.decodeResource(context.getResources(), galleryData.get(indexOfArtwork).getPic());
@@ -797,6 +797,15 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
      */
     public void nameChange(String name){
         this.name = name;
+    }
+
+    public void recycleBitmap(){
+
+        bitmap.recycle();
+        bitmap = null;
+        bitmap1.recycle();
+        bitmap1 = null;
+        System.gc();
     }
 
 }

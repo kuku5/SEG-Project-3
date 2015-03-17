@@ -82,6 +82,13 @@ public class GallerySwipeSingleFragment extends Fragment {
     }
 
     @Override
+    public void onPause() {
+        commentListAdapter.recycleBitmap();
+        super.onPause();
+    }
+
+
+    @Override
     // Menu for the fragment
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_splash, menu);

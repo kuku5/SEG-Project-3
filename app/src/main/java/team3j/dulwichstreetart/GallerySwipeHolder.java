@@ -32,6 +32,10 @@ public class GallerySwipeHolder extends FragmentActivity {
         super.onBackPressed();
         overridePendingTransition(R.anim.swipeback_stack_to_front,
                 R.anim.swipeback_stack_right_out);
+        viewPager.removeAllViews();
+        viewPager.destroyDrawingCache();
+        viewPager = null;
+        System.gc();
 
     }
 
