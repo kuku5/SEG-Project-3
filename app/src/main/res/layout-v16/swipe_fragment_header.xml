@@ -234,18 +234,6 @@
 
         </LinearLayout>
 
-        <com.facebook.widget.LikeView
-            android:id="@+id/like_view"
-            android:layout_width="75dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp">
-
-        </com.facebook.widget.LikeView>
-
-
 
     </RelativeLayout>
 
@@ -316,6 +304,23 @@
                 android:textStyle="bold"
                 android:textColor="@color/com_facebook_blue"
                 android:text="See this on Facebook!"
+                />
+            <TextView
+
+                android:id="@+id/like_post"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|left"
+                android:gravity="center_vertical"
+                android:maxLines="2"
+                android:paddingLeft="4dp"
+                android:paddingStart="4dp"
+                android:paddingBottom="10dp"
+                android:textAllCaps="true"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/com_facebook_blue"
+                android:text="Like this picture on Facebook"
                 />
 
         </LinearLayout>

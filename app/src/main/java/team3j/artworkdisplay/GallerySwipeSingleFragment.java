@@ -66,6 +66,7 @@ public class GallerySwipeSingleFragment extends Fragment {
     private String comment;
     private String commentID;
     private boolean userLikes;
+    private String userId;
 
     /**
      * Constructs a GallerySwipeSingleFragment with given position and the index of the artwork
@@ -82,13 +83,12 @@ public class GallerySwipeSingleFragment extends Fragment {
         return myFragmentTab;
     }
 
-    @Override
-    public void onPause() {
-        System.out.println("<<<<<<<< ON PAUSE");
-        //commentListAdapter.recycleBitmap();
-        super.onPause();
-    }
 
+    @Override
+    public void onDetach() {
+        commentListAdapter.recycleBitmap();
+        super.onDetach();
+    }
 
     @Override
     // Menu for the fragment
@@ -338,7 +338,8 @@ public class GallerySwipeSingleFragment extends Fragment {
                 public void onCompleted(GraphUser user, Response response) {
                     if (user != null) {
                         commentListAdapter.nameChange(user.getFirstName());
-                        getLikes(user.getId());
+                        userId = user.getId();
+                        getLikes();
                     }
                 }
             }).executeAsync();
@@ -640,9 +641,9 @@ public class GallerySwipeSingleFragment extends Fragment {
 
     /**
      *
-     * @param userID
+     *
      */
-    public void getLikes(final String userID){
+    public void getLikes(){
         Bundle b1 = new Bundle();
         b1.putBoolean("summary", true);     //includes a summary in the request
         b1.putString("filter", "toplevel");
@@ -657,13 +658,13 @@ public class GallerySwipeSingleFragment extends Fragment {
                             int numberOfLikes = response.getGraphObject().getInnerJSONObject().getJSONObject("summary").getInt("total_count");
                             boolean userLikes = false;
                             for(int i = 0; i < numberOfLikes; i++){
-                                if(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("id").equals(userID)){
+                                if(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("id").equals(userId)){
                                     userLikes = true;
                                     break;
                                 }
                             }
                             //TODO Insert code here for using numberOfLikes and userLikes for post liking
-                            
+                            commentListAdapter.likePostChange(Integer.toString(numberOfLikes), userLikes);
 
                         } catch (Exception e) {
                             e.printStackTrace();
