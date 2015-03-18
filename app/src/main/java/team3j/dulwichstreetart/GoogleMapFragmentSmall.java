@@ -27,8 +27,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+
+import team3j.artworkdisplay.GallerySwipeSingleFragment;
+
 /**
- * @author Team 3-J
  * A fragment that launches other parts of the demo application.
  */
 
@@ -43,15 +46,16 @@ public class GoogleMapFragmentSmall extends Fragment {
     private ImageButton imageButton;
     private LatLng locStart;
     private Art[] arts;
-    public static boolean filter=false;
-    public static int index= 4;
+    private ArrayList<Art> artArrayList;
+    public static boolean filter;
+    public static String name;
+    private Marker filterMarker;
+    private View v;
 
 
-    /**
-     *
-     * @param position
-     * @return
-     */
+
+
+
     public static GoogleMapFragmentSmall getInstance(int position) {
         GoogleMapFragmentSmall myFragmentTab = new GoogleMapFragmentSmall();
         Bundle args = new Bundle();
@@ -74,6 +78,7 @@ public class GoogleMapFragmentSmall extends Fragment {
         mMapView = (MapView) v.findViewById(R.id.mapView);
         mMapView.onCreate(savedInstanceState);
         imageButton= (ImageButton) v.findViewById(R.id.fab_image_button);
+
         mMapView.onResume();// needed to get the map to display immediately
 
 
@@ -106,25 +111,29 @@ public class GoogleMapFragmentSmall extends Fragment {
                 if(googleMap.getMyLocation()==null){
 
                 }else {
-                    for(int i=0; i<arts.length - 1; i++)
+                    for(int i=0; i<artArrayList.size(); i++)
                     {
 
                         double tolerance=1000;
                         //checks all locations
-                        LatLng artLoc = arts[i].getLoc();
+                        LatLng artLoc = artArrayList.get(i).getLoc();
                         if((googleMap.getMyLocation().getLatitude()<= artLoc.latitude + tolerance) && (googleMap.getMyLocation().getLatitude()>= artLoc.latitude - tolerance) )
                         {
                             if((googleMap.getMyLocation().getLongitude()<= artLoc.longitude + tolerance) &&(googleMap.getMyLocation().getLongitude()>= artLoc.longitude - tolerance) )
                             {
                                 //if the user is at the street art
-                                for(int j=0; j<GalleryData.toVisit.size(); j++)
-                                {
-                                    if(GalleryData.toVisit.get(j)== arts[i])
-                                    {
-                                        GalleryData.visited.add(arts[i]);
-                                        GalleryData.toVisit.remove(j);
-                                    }
-                                }
+
+//                                for(int j=0; j<GalleryData.toVisit.size(); j++)
+//                                {
+//                                    if(GalleryData.toVisit.get(j)== artArrayList.get(i))
+//                                    {
+//                                        GalleryData.visited.add(artArrayList.get(i));
+//                                        GalleryData.toVisit.remove(j);
+//                                    }
+//                                }
+
+
+                                artArrayList.get(i).setVisited();
 
                             }
                         }
@@ -154,9 +163,9 @@ public class GoogleMapFragmentSmall extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        //filter = GallerySwipeSingleFragment.filt;
-        //index = GallerySwipeSingleFragment.ind;
-        System.out.println("on resumefilter: "+GoogleMapFragmentSmall.filter+" index: "+GoogleMapFragmentSmall.index);
+        filter = GallerySwipeSingleFragment.filt;
+        name = GallerySwipeSingleFragment.ind;
+        System.out.println("on resume filter: "+GoogleMapFragmentSmall.filter+" index: "+name);
 
         if(isGoogleMapsInstalled()) {
 
@@ -188,11 +197,18 @@ public class GoogleMapFragmentSmall extends Fragment {
         mMapView.onLowMemory();
     }
 
+
+    public void setUpNoFilterMap()
+    {
+        GallerySwipeSingleFragment.filt = false;
+        setUpMap();
+    }
+
     public void setUpMap(){
 
-        System.out.println("filter is "+ GoogleMapFragmentSmall.filter);
-        System.out.println(GoogleMapFragmentSmall.index);
+
         arts = GalleryData.getMapArtwork(getActivity());
+        artArrayList = GalleryData.create().GetGalleryData();
         googleMap = mMapView.getMap();
         zoom();
         googleMap.setMyLocationEnabled(true);
@@ -212,35 +228,57 @@ public class GoogleMapFragmentSmall extends Fragment {
 
 
 
-googleMap.clear();
+
+        googleMap.clear();
 
 
-        for (int i = 0; i < arts.length; i++) {
+       /* for (int i = 0; i < artArrayList.size(); i++) {
             int pos = i + 1;
             String title = pos + ". ";
+            System.out.println("filter is "+ GoogleMapFragmentSmall.filter);
+           // System.out.println(GoogleMapFragmentSmall.index);
 
-            if(i==GoogleMapFragmentSmall.index && GoogleMapFragmentSmall.filter == true)
+
+
+            if(filter==false) {
+                googleMap.addMarker(new MarkerOptions().position(new LatLng(51.445988, -0.0863601)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)).title("The Inspiration Dulwich Picture Gallery 1811"));
+            }
+            if(artArrayList.get(i).getName()==name && GoogleMapFragmentSmall.filter == true)
             {
-                System.out.println("filter is "+ GoogleMapFragmentSmall.filter);
-                googleMap.addMarker(new MarkerOptions().position(arts[i].getLoc()).title(title));
+                System.out.println("when filter works: filter is "+ GoogleMapFragmentSmall.filter +" name is: "+name);
+                googleMap.addMarker(new MarkerOptions().position(artArrayList.get(i).getLoc()).title(title));
 
 
-                //preference.edit().putBoolean("filter",false);
+
 
                 break;
             }else if(GoogleMapFragmentSmall.filter == false)
             {
-                if (i == 14) {
-                    System.out.println("filter is " + GoogleMapFragmentSmall.filter);
-                    googleMap.addMarker(new MarkerOptions().position(arts[i].getLoc()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)).title(title));
-                } else {
-                    googleMap.addMarker(new MarkerOptions().position(arts[i].getLoc()).title(title));
-                }
+
+                    googleMap.addMarker(new MarkerOptions().position(artArrayList.get(i).getLoc()).title(title));
+
             }
 
 
         }
+        */
 
+
+        for (int i = 0; i < artArrayList.size(); i++) {
+            int pos = i + 1;
+            String title = pos + ". ";
+            System.out.println("filter is " + GoogleMapFragmentSmall.filter);
+            // System.out.println(GoogleMapFragmentSmall.index);
+
+            if (filter == true && name == artArrayList.get(i).getName()) {
+                filterMarker = googleMap.addMarker(new MarkerOptions().position(artArrayList.get(i).getLoc()).title(title));
+            } else
+            {
+                googleMap.addMarker(new MarkerOptions().position(artArrayList.get(i).getLoc()).title(title));
+            }
+
+        }
+        googleMap.addMarker(new MarkerOptions().position(new LatLng(51.445988, -0.0863601)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)).title("The Inspiration Dulwich Picture Gallery 1811"));
 
 
 
@@ -257,28 +295,66 @@ googleMap.clear();
             public View getInfoContents(Marker arg0) {
 
 
-                View v = getActivity().getLayoutInflater().inflate(R.layout.infowindow, null);
+                v = getActivity().getLayoutInflater().inflate(R.layout.infowindow, null);
+
+
 
 
                 LatLng latLng = arg0.getPosition();
-                for (int i = 0; i < arts.length; i++) {
-                    if (latLng.equals(arts[i].getLoc())) {
+
+
+                if (latLng.equals(new LatLng(51.452656, -0.102931))) {
+
+                    ImageView picView = (ImageView) v.findViewById(R.id.pic);
+                    Bitmap bitmap = BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.dulwichpicturegallery);
+                    BitmapDrawable res = new BitmapDrawable(getActivity().getResources(), bitmap);
+                    picView.setImageDrawable(res);
+                    TextView txtView = (TextView) v.findViewById(R.id.markerName);
+                    txtView.setText("The Inspiration Dulwich Picture Gallery 1811");
+
+                }
+
+                for (int i = 0; i < artArrayList.size(); i++) {
+                    if (latLng.equals(artArrayList.get(i).getLoc())) {
 
                         ImageView picView = (ImageView) v.findViewById(R.id.pic);
-                        Bitmap bitmap = BitmapFactory.decodeResource(getActivity().getResources(), arts[i].getPic());
+                        Bitmap bitmap = BitmapFactory.decodeResource(getActivity().getResources(), artArrayList.get(i).getPic());
                         BitmapDrawable res = new BitmapDrawable(getActivity().getResources(), bitmap);
                         picView.setImageDrawable(res);
-                        TextView txtView = (TextView) v.findViewById(R.id.name);
-                        txtView.setText((i + 1) + ". " + arts[i].getName());
+                        TextView txtView = (TextView) v.findViewById(R.id.markerName);
+                        txtView.setText(artArrayList.get(i).getName());
+
+
 
                     }
+
+
                 }
+
 
 
                 return v;
 
+
+
+
             }
+
         });
+
+
+
+        if(filter == true)
+        {
+
+            CameraUpdate update = CameraUpdateFactory.newLatLngZoom(filterMarker.getPosition(), 13);
+            googleMap.animateCamera(update);
+            filterMarker.showInfoWindow();
+            filter = false;
+            GallerySwipeSingleFragment.filt = false;
+        }
+
+
     }
 
     public void zoom(){
@@ -290,7 +366,11 @@ googleMap.clear();
         googleMap.animateCamera(update);
 
 
+
     }
+
+
+
 
 
 }

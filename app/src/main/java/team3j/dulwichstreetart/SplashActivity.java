@@ -28,6 +28,10 @@ public class SplashActivity extends Activity {
         super.onCreate(savedInstanceState);
         //create Gallery Data instance
         GalleryData.create();
+        //loop thorugh all
+        ////also read from txt file if it existed then continue
+        //
+       // GalleryData.get().getArtworkList()
 
         setContentView(R.layout.activity_splash);
 

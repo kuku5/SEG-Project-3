@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -30,7 +29,6 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
 
     private final LayoutInflater inflater;
     private Context context;
-    private Bitmap bitmap;
     private ArrayList<Art> galleryData;
 
 
@@ -48,7 +46,12 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
     }
 
 
-
+    /**
+     *
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @Override
     public VisitedAdapter.MyViewHolderVisited onCreateViewHolder(ViewGroup parent, int viewType) {
         //inflates the correct view
@@ -59,26 +62,45 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
         return myViewHolder;
     }
 
+    /**
+     *
+     * @param position
+     * @return
+     */
     @Override
     public int getItemViewType(int position) {
         return position;
 
     }
 
+    /**
+     *
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(VisitedAdapter.MyViewHolderVisited holder, int position) {
 
 
 
-            //add image and description to the view for each gallery item
-            holder.txtLineOne.setText("" + galleryData.get(position).getName());
+        //add image and description to the view for each gallery item
+        holder.txtLineOne.setText("" + galleryData.get(position).getName());
 
-            Bitmap bitmap1 = BitmapFactory.decodeResource(context.getResources(), GalleryData.toVisit.get(position).getPic());
-            BitmapDrawable res1 = new BitmapDrawable(context.getResources(), bitmap1);
-            holder.image.setImageDrawable(res1);
+        if(galleryData.get(position).visited() == true){
+            holder.visitedQuestion_textView.setText("Visited");
+        }
+        else if(galleryData.get(position).visited() == false) {
+            holder.visitedQuestion_textView.setText("Not Visited");
+        }
 
-            //holder.art_info_area.setText("" + GalleryData.toVisit.get(position-1).getDesc());
-           // holder.art_info_area.setText("" + galleryData.get(position).getDesc());
+        Bitmap bitmap1 = BitmapFactory.decodeResource(context.getResources(), galleryData.get(position).getPic());
+        BitmapDrawable res1 = new BitmapDrawable(context.getResources(), bitmap1);
+        holder.image.setImageDrawable(res1);
+
+        holder.art_address.setText("Address: " + galleryData.get(position).getArtAddress());
+
+        //holder.art_info_area.setText("" + GalleryData.toVisit.get(position-1).getDesc());
+        // holder.art_info_area.setText("" + galleryData.get(position).getDesc());
 
 
 
@@ -86,9 +108,13 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
 
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int getItemCount() {
-        return GalleryData.toVisit.size()+GalleryData.visited.size();
+        return galleryData.size();
     }
 
     //custom viewHolder for each item in recycle view
@@ -97,6 +123,8 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
         // view holder for each grid  cell
         TextView txtLineOne;
         TextView art_info_area;
+        TextView art_address;
+        TextView visitedQuestion_textView;
         RelativeLayout expandArea;
         ImageView image;
 
@@ -105,27 +133,29 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
             super(itemView);
 
 
-                    txtLineOne = (TextView) itemView.findViewById(R.id.textview_visited_item);
-                    expandArea = (RelativeLayout) itemView.findViewById(R.id.expand_area);
-                    image = (ImageView) itemView.findViewById(R.id.image_area);
-                    art_info_area = (TextView) itemView.findViewById(R.id.visited_description);
+            txtLineOne = (TextView) itemView.findViewById(R.id.textview_visited_item);
+            expandArea = (RelativeLayout) itemView.findViewById(R.id.expand_area);
+            image = (ImageView) itemView.findViewById(R.id.image_area);
+            art_info_area = (TextView) itemView.findViewById(R.id.visited_description);
+            art_address = (TextView) itemView.findViewById(R.id.art_address);
+            visitedQuestion_textView = (TextView)itemView.findViewById(R.id.visitedQuestion_textView);
 
 
-                    itemView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            if(expanded){
-                                expandArea.setVisibility(View.GONE);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(expanded){
+                        expandArea.setVisibility(View.GONE);
 
-                                expanded=false;
-                            }else{
-                                expandArea.setVisibility(View.VISIBLE);
-                                expanded=true;
+                        expanded=false;
+                    }else{
+                        expandArea.setVisibility(View.VISIBLE);
+                        expanded=true;
 
-                            }
+                    }
 
-                        }
-                    });
+                }
+            });
 
 
 
@@ -141,6 +171,21 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
     public interface OnItemTouchListener {
         public void onCardViewTap(View view, int position);
     }
+
+//    public void saveToFile(){
+//        String fileName = "visitedOrNot";
+//        //File file = new File(context.getFilesDir(), fileName);
+//
+//        FileOutputStream outputStream;
+//
+//        try {
+//            //outputStream = openFileOutput(fileName, Context.MODE_PRIVATE);
+//            outputStream = openFileOutput("visitedOrNot", Context.MODE_PRIVATE);
+//            outputStream.write();
+//
+//        }
+//
+//    }
 
 }
 

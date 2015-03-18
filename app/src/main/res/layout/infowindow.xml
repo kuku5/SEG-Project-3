@@ -19,13 +19,15 @@
 
         />
     <TextView
-        android:id="@+id/name"
+        android:id="@+id/markerName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-android:padding="4dp"
-        android:textColor="@color/colorAccent"
         android:gravity="center"
-        android:textSize="15sp"/>
+        android:padding="4dp"
+        android:textColor="@color/colorAccentReal"
+        android:textStyle="bold"
+        android:textSize="15sp" />
+
 
 </LinearLayout>

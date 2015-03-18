@@ -9,7 +9,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -38,9 +37,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import team3j.dulwichstreetart.GalleryData;
-import team3j.dulwichstreetart.GalleryFragment;
 import team3j.dulwichstreetart.GoogleMapFragmentSmall;
-import team3j.dulwichstreetart.QuickReturnRecyclerView;
 import team3j.dulwichstreetart.R;
 
 
@@ -67,7 +64,8 @@ public class GallerySwipeSingleFragment extends Fragment {
     private String commentID;
     private boolean userLikes;
     private String userId;
-
+    public static boolean filt;
+    public static String ind;
     /**
      * Constructs a GallerySwipeSingleFragment with given position and the index of the artwork
      * @param position position given for "swiping"
@@ -153,13 +151,14 @@ public class GallerySwipeSingleFragment extends Fragment {
      * The action of the map button on the fragment
      * @return the action listener
      */
+
     public CommentListAdapter.OnMapButtonPressTouchListener getMapItemTouchListener(){
         CommentListAdapter.OnMapButtonPressTouchListener itemTouchListener = new CommentListAdapter.OnMapButtonPressTouchListener() {
             @Override
-            public void onMapButtonPress(  boolean filter, int index) {
+            public void onMapButtonPress(  boolean filter, String name) {
                 getActivity().onBackPressed();
-                GoogleMapFragmentSmall.index = index;
-                GoogleMapFragmentSmall.filter = true;
+                filt = true;
+                ind = name;
 
 
             }
@@ -167,7 +166,6 @@ public class GallerySwipeSingleFragment extends Fragment {
         };
         return itemTouchListener;
     }
-
     /**
      * Acts like the an Observer who looks for Session changes and invokes onSessionStateChanged
      *

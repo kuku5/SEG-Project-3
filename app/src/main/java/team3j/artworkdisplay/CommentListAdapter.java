@@ -721,9 +721,9 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                     mapButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-
                             MainActivity.viewPager.setCurrentItem(3, true);
-                            onMapButtonPressTouchListener.onMapButtonPress(false, galleryData.get(indexOfArtwork).getIndex());
+
+                            onMapButtonPressTouchListener.onMapButtonPress(false, galleryData.get(indexOfArtwork).getName());
 
 
 
@@ -799,11 +799,12 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         notifyDataSetChanged();
     }
 
+
     /**
-     *
+     * This is the Interface for allowing clicks to go to the maps
      */
     public interface OnMapButtonPressTouchListener {
-        public void onMapButtonPress( boolean filter, int index);
+        public void onMapButtonPress( boolean filter, String name);
     }
 
     /**

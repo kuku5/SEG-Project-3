@@ -20,6 +20,8 @@ public class Art {
     private int inspiredPic;
     private int postId;
     private String fbLink;
+    private String artAddress;
+    private Boolean visited;
 
     /**
      *
@@ -32,11 +34,13 @@ public class Art {
      * @param inspiredPic
      * @param loc
      * @param fbLink
+     * @param artAddress
+     * @param visited
      */
 
 
     //main constructor passing through art information -
-    public Art( String name,String artistName,String inspirationTitle,String inspirationArtist,String desc,int pic,int inspiredPic, LatLng loc,String fbLink){
+    public Art( String name,String artistName,String inspirationTitle,String inspirationArtist,String desc,int pic,int inspiredPic, LatLng loc, String fbLink, String artAddress, Boolean visited){
 
         this.name=name;
         this.artistName = artistName;
@@ -47,6 +51,8 @@ public class Art {
         this.inspirationArtist=inspirationArtist;
         this.loc = loc;
         this.fbLink=fbLink;
+        this.artAddress = artAddress;
+        this.visited = visited;
     }
 
     //the rest of these are redundent except for the last constructor
@@ -67,7 +73,7 @@ public class Art {
         this.pic=pic;
         this.inspiredPic=inspiredPic;
         this.inspirationArtist=inspirationArtist;
-        
+
     }
 
 
@@ -113,9 +119,16 @@ public class Art {
         this.name = name;
     }
 
-   //vince added these for the fblinks
+    //vince added these for the fblinks
     public String getFbLink() {
         return fbLink;
     }
+
+    public String getArtAddress() { return artAddress;}
+
+    public Boolean visited() { return visited;}
+
+    public void setVisited(){this.visited = true;}
+
 
 }
