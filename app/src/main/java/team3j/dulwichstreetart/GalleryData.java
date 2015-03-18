@@ -178,7 +178,7 @@ public class GalleryData {
         //delete Beerens
         //delete Nunca
 
-//array not needed anymore
+        //array not needed anymore
         arts[0] = new Art("Roa 2013", (new LatLng(51.467224, -0.072160)), R.drawable.art0);
         arts[1] = new Art("Remi Rough & System 2013", (new LatLng(51.461675, -0.079872)), R.drawable.art0);
         arts[2] = new Art("Conor Harrington 2013", (new LatLng(51.460628, -0.075084)), R.drawable.art2);

@@ -215,7 +215,6 @@
                                     android:text="@string/twitter_name"
                                     android:textSize="12sp"
                                     android:textStyle="bold"
-                                    android:autoLink="web"
 
                                     />
                                 <TextView
@@ -225,7 +224,6 @@
                                     android:textSize="11sp"
                                     android:textStyle="bold"
                                     android:id="@+id/statusTime2"
-                                    android:autoLink="web"
 
                                     /></LinearLayout>
 
@@ -233,10 +231,9 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:text="   WELCOME TO DULWICH !"
                                 android:id = "@+id/DisplayTweet2"
-                                android:textSize="12sp"
-                                android:autoLink="web"
-                                />
+                                android:textSize="26sp"/>
 
                         </LinearLayout>
 
@@ -255,8 +252,6 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/twitter_name"
                                     android:textSize="12sp"
-                                    android:autoLink="web"
-
                                     android:textStyle="bold"
 
                                     />
@@ -266,8 +261,6 @@
                                     android:text=""
                                     android:textSize="11sp"
                                     android:textStyle="bold"
-                                    android:autoLink="web"
-
                                     android:id="@+id/statusTime1"
 
                                     /></LinearLayout>
@@ -275,9 +268,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:id = "@+id/DisplayTweet1"
-                                android:textSize="12sp"
-                                android:autoLink="web"
-                                />
+                                android:textSize="12sp"/>
 
 
                         </LinearLayout>
@@ -336,11 +327,11 @@
                         android:id="@+id/map_image"
                         android:layout_width="fill_parent"
                         android:layout_height="100dp"
+                        android:src="@drawable/mapbannersquare"
                         android:layout_centerInParent="true"
                         android:scaleType="centerCrop"
                         android:adjustViewBounds="true"
 
-                        android:src="@drawable/mapbannersquare"
                         android:paddingBottom="2dp"
                         />
                     <TextView

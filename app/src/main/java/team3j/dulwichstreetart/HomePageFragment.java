@@ -8,11 +8,6 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
-import android.content.res.AssetManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -45,7 +40,6 @@ import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.model.GraphUser;
 
-import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -55,6 +49,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -88,11 +83,14 @@ public class HomePageFragment extends Fragment {
     private SliderLayout mDemoSlider;
 
     Animation slide_in_left, slide_out_right;
+    private boolean isLoggedIn;
     private DynamicHeightImageView mapButton;
 
     private ArrayList<Status> todaysTweets = new ArrayList<>();
     private TextView twitView1,twitView2, twitTime1, twitTime2;
-
+    private String TWEETS_FILE = "offline_tweets";
+    private FileOutputStream fos;
+    private String offlineTweet;
     private View layout;
 
 
@@ -195,7 +193,6 @@ public class HomePageFragment extends Fragment {
         //name.setText("    @DulwichGallery      14h");
         mapButton = (DynamicHeightImageView) layout.findViewById(R.id.map_image);
 
-
         mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -210,7 +207,6 @@ public class HomePageFragment extends Fragment {
             }
         });
     }
-
 
     /**
      *
@@ -251,23 +247,22 @@ public class HomePageFragment extends Fragment {
                 int i = 0;
                 boolean t1 = false;
                 boolean welcomed = false;
+                SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+
 
                 public void onAnimationStart(Animation animation) {
-                    if(!todaysTweets.isEmpty()){
-                    if (i == 4) i = 0;
+                    if (i == todaysTweets.size()) i = 0;
 
                     if (t1 == false) {
                         twitView1.setText(todaysTweets.get(i).getText());
-                        //date.toGMTString().slice(0, -4)
-                        twitTime1.setText(todaysTweets.get(i).getCreatedAt().toString());
-                        t1 = true;
+                        twitTime1.setText("                                                             " +
+                                df.format(todaysTweets.get(i).getCreatedAt()).toString());                        t1 = true;
                         i++;
                     } else {
                         twitView2.setText(todaysTweets.get(i).getText());
-                        twitTime2.setText(todaysTweets.get(i).getCreatedAt().toString());
-                        t1 = false;
+                        twitTime2.setText("                                                             " +
+                                df.format(todaysTweets.get(i).getCreatedAt()).toString());                        t1 = false;
                         i++;
-                    }
                     }
                 }
 
@@ -320,8 +315,50 @@ public class HomePageFragment extends Fragment {
         }
     }
 
+//    public void WriteBtn(View v) {
+//        // add-write text into file
+//        try {
+//             FileOutputStream fileout=openFileOutput("mytextfile.txt", getActivity().MODE_PRIVATE);
+//            OutputStreamWriter outputWriter=new OutputStreamWriter(fileout);
+//            outputWriter.write(textmsg.getText().toString());
+//            outputWriter.close();
+//
+//            //display file saved message
+//            Toast.makeText(getActivity().getBaseContext(), "File saved successfully!",
+//                    Toast.LENGTH_SHORT).show();
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
+    private String readFromFile(Context context, String fileName) {
+        if (context == null) {
+            return null;
+        }
 
+        String ret = "";
+
+        try {
+            InputStream inputStream = context.openFileInput(fileName);
+
+            if ( inputStream != null ) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+
+                int size = inputStream.available();
+                char[] buffer = new char[size];
+
+                inputStreamReader.read(buffer);
+
+                inputStream.close();
+                ret = new String(buffer);
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return ret;
+    }
     /**
      *
      * @param layout
