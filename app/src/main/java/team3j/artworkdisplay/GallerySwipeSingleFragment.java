@@ -28,6 +28,7 @@ import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.model.GraphUser;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.ArrayList;
@@ -83,7 +84,8 @@ public class GallerySwipeSingleFragment extends Fragment {
 
     @Override
     public void onPause() {
-        commentListAdapter.recycleBitmap();
+        System.out.println("<<<<<<<< ON PAUSE");
+        //commentListAdapter.recycleBitmap();
         super.onPause();
     }
 
@@ -198,25 +200,26 @@ public class GallerySwipeSingleFragment extends Fragment {
                     public void onCompleted(Response response) {
                         if (response != null) {
                             try {
+                                JSONArray data = response.getGraphObject().getInnerJSONObject().getJSONArray("data");
 
-                                int x = response.getGraphObject().getInnerJSONObject().getJSONArray("data").length();
+                                int x = data.length();
 
                                 for (int i = 0; i < x; i++) {
                                     boolean isPage = false;
                                     //checks if it has a category if it does, it is definitely not a profile
-                                    if(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).getJSONObject("from").has("category")) {
+                                    if(data.getJSONObject(i).getJSONObject("from").has("category")) {
                                         isPage = true;
                                     }
                                     //Setting comment information such as; number of likes, message, time, url of the post etc..
                                     Comment commentInfo = new Comment();
-                                    commentInfo.setNumberLikes(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("like_count").toString());
-                                    commentInfo.setPosterURL(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).getJSONObject("from").get("id").toString());
-                                    commentInfo.setPosterName(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).getJSONObject("from").get("name").toString());
-                                    commentInfo.setMessage(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("message").toString());
-                                    commentInfo.setTime(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("created_time").toString());
-                                    commentInfo.setCommentID(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("id").toString());
-                                    commentInfo.setUserLikes((Boolean) response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("user_likes"));
-                                    commentInfo.setCanDelete((Boolean) response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("can_remove"));
+                                    commentInfo.setNumberLikes((int)data.getJSONObject(i).getInt("like_count"));
+                                    commentInfo.setPosterURL(data.getJSONObject(i).getJSONObject("from").get("id").toString());
+                                    commentInfo.setPosterName(data.getJSONObject(i).getJSONObject("from").get("name").toString());
+                                    commentInfo.setMessage(data.getJSONObject(i).get("message").toString());
+                                    commentInfo.setTime(data.getJSONObject(i).get("created_time").toString());
+                                    commentInfo.setCommentID(data.getJSONObject(i).get("id").toString());
+                                    commentInfo.setUserLikes((Boolean) data.getJSONObject(i).get("user_likes"));
+                                    commentInfo.setCanDelete((Boolean) data.getJSONObject(i).get("can_remove"));
                                     commentInfo.setIsPage(isPage);
                                     commentInfo.setIsAReply(false);
                                     comments.add(commentInfo); //adding the comment information to array
@@ -263,26 +266,26 @@ public class GallerySwipeSingleFragment extends Fragment {
                                 public void onCompleted(Response response) {
                                     if (response != null) {
                                         try {
+                                            JSONArray data = response.getGraphObject().getInnerJSONObject().getJSONArray("data");
+                                            if(!data.equals("")) {
 
-                                            if(!response.getGraphObject().getInnerJSONObject().getJSONArray("data").equals("")) {
-
-                                                int x = response.getGraphObject().getInnerJSONObject().getJSONArray("data").length();
+                                                int x = data.length();
 
                                                 for (int i = 0; i < x; i++) {
                                                     boolean isPage = false;
                                                     //checks if it has a category if it does, it is definitely not a profile
-                                                    if(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).getJSONObject("from").has("category")) {
+                                                    if(data.getJSONObject(i).getJSONObject("from").has("category")) {
                                                         isPage = true;
                                                     }
                                                     Comment commentInfo = new Comment();
-                                                    commentInfo.setNumberLikes(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("like_count").toString());
-                                                    commentInfo.setPosterURL(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).getJSONObject("from").get("id").toString());
-                                                    commentInfo.setPosterName(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).getJSONObject("from").get("name").toString());
-                                                    commentInfo.setMessage(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("message").toString());
-                                                    commentInfo.setTime(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("created_time").toString());
-                                                    commentInfo.setCommentID(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("id").toString());
-                                                    commentInfo.setUserLikes((boolean) response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("user_likes"));
-                                                    commentInfo.setCanDelete((Boolean) response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("can_remove"));
+                                                    commentInfo.setNumberLikes((int)data.getJSONObject(i).getInt("like_count"));
+                                                    commentInfo.setPosterURL(data.getJSONObject(i).getJSONObject("from").get("id").toString());
+                                                    commentInfo.setPosterName(data.getJSONObject(i).getJSONObject("from").get("name").toString());
+                                                    commentInfo.setMessage(data.getJSONObject(i).get("message").toString());
+                                                    commentInfo.setTime(data.getJSONObject(i).get("created_time").toString());
+                                                    commentInfo.setCommentID(data.getJSONObject(i).get("id").toString());
+                                                    commentInfo.setUserLikes((Boolean) data.getJSONObject(i).get("user_likes"));
+                                                    commentInfo.setCanDelete((Boolean) data.getJSONObject(i).get("can_remove"));
                                                     commentInfo.setIsPage(isPage);
                                                     commentInfo.setIsAReply(true);
                                                     replyComments.add(commentInfo);

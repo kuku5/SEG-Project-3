@@ -340,10 +340,10 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
                 holder.itemView.setLayoutParams(params);
             }
-            if (Integer.parseInt(commentInfo.getNumberLikes())>=1) {
+            if (commentInfo.getNumberLikes()>=1) {
                 holder.numberLikes.setVisibility(View.VISIBLE);
                 holder.likeIcon.setVisibility(View.VISIBLE);
-                holder.numberLikes.setText(commentInfo.getNumberLikes());
+                holder.numberLikes.setText(commentInfo.getNumberLikes() + "");
                 holder.likeIcon.setImageResource(R.drawable.ic_facebook_like_thumb);
             }
             else{

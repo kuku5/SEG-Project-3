@@ -15,8 +15,8 @@ public class Comment implements Parcelable {
     private int icon;
     private String posterURL;
     private String commentID;
-    private boolean userLikes;
-    private String numberLikes;
+    private Boolean userLikes;
+    private int numberLikes;
     private Boolean isAReply;
     private Boolean canDelete;
     private boolean isPage;
@@ -52,7 +52,7 @@ public class Comment implements Parcelable {
      * Sets number of likes for the comment
      * @param numberLikes The amount of likes for the comment
      */
-    public void setNumberLikes(String numberLikes) {
+    public void setNumberLikes(int numberLikes) {
 
         this.numberLikes = numberLikes;
     }
@@ -141,7 +141,7 @@ public class Comment implements Parcelable {
      * Gets the number of likes for the comment
      * @return number of likes
      */
-    public String getNumberLikes() {
+    public int getNumberLikes() {
         return numberLikes;
     }
 
