@@ -81,6 +81,12 @@ public class HomePageFragment extends Fragment {
         return myFragmentTab;
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("curChoice", 1);
+    }
+
     /**
      *
      * @param inflater
@@ -100,15 +106,20 @@ public class HomePageFragment extends Fragment {
 
         setupOnScreenElements(layout);
         //Get Today's Tweets
-        if (isOnline()) {
-            getTweets();
 
-            Log.d("tweets","online");
+            if (savedInstanceState == null) {
+                // Restore last state for checked position.
+                if (isOnline()) {
+                    getTweets();
 
-        }
-        else{
-            getOfflineTweets();
-        }
+                    Log.d("tweets","online");
+
+                }
+                else{
+                    getOfflineTweets();
+                }            }
+
+
 
         setupLibraryAnimations(layout);
         setupTweetsAnimations(layout);
@@ -216,7 +227,6 @@ public class HomePageFragment extends Fragment {
 
         viewFlipper.setInAnimation(slide_in_left);
         viewFlipper.setOutAnimation(slide_out_right);
-        final SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 
             viewFlipper.getInAnimation().setAnimationListener(new Animation.AnimationListener() {
                 int i = 0;
@@ -230,11 +240,16 @@ public class HomePageFragment extends Fragment {
                     if (t1 == false) {
                         twitView1.setText(todaysTweets.get(i).getText());
                         //date.toGMTString().slice(0, -4)
-                           twitTime1.setText(df.format(todaysTweets.get(i).getCreatedAt()).toString());
-                        t1 = true;
+                        final SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                        if(todaysTweets.get(i)!=null) {
+                            twitTime1.setText(df.format(todaysTweets.get(i).getCreatedAt()).toString());
+                            t1 = true;
+                        }
                         i++;
                     } else {
                         twitView2.setText(todaysTweets.get(i).getText());
+                        final SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+
                         twitTime2.setText(df.format(todaysTweets.get(i).getCreatedAt()).toString());
                         t1 = false;
                         i++;
@@ -398,7 +413,8 @@ public class HomePageFragment extends Fragment {
                             c++;
                         }
                         i++;
-                    } while (i<20 && c<5); //statuses.get(i).getCreatedAt().equals(currentDate)
+                    } while (i<20 && c<5);
+                    //statuses.get(i).getCreatedAt().equals(currentDate)
 
                     //fos.write(todaysTweets.get(0).getText().getBytes());
 
