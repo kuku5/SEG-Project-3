@@ -71,7 +71,8 @@ public class GalleryFragment extends Fragment {
         recyclerView.setAdapter(new GalleryAdapter(getActivity(), galleryData, getGalleryClickListener()));
 
         //adapt view for the Screen orientation
-        updateLayoutForRotation();
+
+
 
         return layout;
     }
