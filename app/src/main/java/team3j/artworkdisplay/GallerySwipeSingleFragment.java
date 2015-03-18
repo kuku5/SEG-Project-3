@@ -54,7 +54,7 @@ public class GallerySwipeSingleFragment extends Fragment {
     private TextView textView;
     private int indexOfArtWork;
     private LinearLayout toolbar;
-    private QuickReturnRecyclerView recyclerView;
+    private RecyclerView recyclerView;
     private ImageButton backButton;
     private ArrayList<Comment> comments;
     private ArrayList<Comment> supercomments;
@@ -133,8 +133,7 @@ public class GallerySwipeSingleFragment extends Fragment {
         facebookPostID = GalleryData.get().getArtworkList().get(indexOfArtWork).getFbLink();
 
 
-        recyclerView = (QuickReturnRecyclerView) layout.findViewById(R.id.recycler_view_grid1);
-        recyclerView.setReturningView(toolbar);
+        recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view_grid1);
         commentListAdapter = new CommentListAdapter(this,getActivity() ,indexOfArtWork,GalleryData.get().getArtworkList(),getMapItemTouchListener());
 
         recyclerView.setAdapter(commentListAdapter);

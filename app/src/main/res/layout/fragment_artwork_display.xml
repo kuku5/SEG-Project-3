@@ -30,19 +30,11 @@
                 android:layout_height="fill_parent">
 
 
-                <team3j.dulwichstreetart.QuickReturnRecyclerView
+                <android.support.v7.widget.RecyclerView
                     android:id="@+id/recycler_view_grid1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginBottom="0dp" />
-
-                <!--<android.support.v7.widget.Toolbar-->
-                    <!--android:id="@+id/BottomToolbar"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_gravity="bottom"-->
-                    <!--android:background="#f2ffffff"-->
-                    <!--android:minHeight="?attr/actionBarSize" />-->
 
 
                 <LinearLayout
@@ -52,7 +44,7 @@
                     android:orientation="horizontal"
                     android:padding="0dp"
                     android:minHeight="?attr/actionBarSize"
-            android:layout_gravity="top"
+                    android:layout_gravity="top"
                     android:id="@+id/toolbar_quick_return"
                     >
 
