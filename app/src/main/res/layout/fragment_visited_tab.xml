@@ -6,17 +6,8 @@
     tools:context=".MainActivity"
     android:background="@android:color/white">
 
-    <Switch
-        android:id="@+id/switchButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textOn="Location On"
-        android:textOff="Location Off"
-        android:onClick="onToggleClicked"
-        android:layout_alignParentRight="true"/>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view_visited"
-        android:layout_below="@id/switchButton"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="@color/superlightgrey"
