@@ -94,7 +94,6 @@ public class VisitedTabFragment extends Fragment implements MaterialTabListener 
                 //tap the entire view
                 Toast.makeText(getActivity(), "Tapped " + position, Toast.LENGTH_SHORT).show();
                 //open Activity to display for Artwork Display
-
             }
         };
 
@@ -115,46 +114,18 @@ public class VisitedTabFragment extends Fragment implements MaterialTabListener 
 
     @Override
     public void onTabUnselected(MaterialTab materialTab) {
-        Log.d("testing","un selected");
 
     }
 
-    @Override
-    public void onStart() {
-        Log.d("testing", "start");
-
-        super.onStart();
-    }
 
     @Override
     public void onStop() {
-        Log.d("testing","Stop");
-
 
         visitedAdapter.recycleBitmap();
 
         super.onStop();
     }
 
-    @Override
-    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
-        Log.d("testing","ViewRestored");
 
-        super.onViewStateRestored(savedInstanceState);
-    }
-
-    @Override
-    public void onResume() {
-        Log.d("testing","Resume");
-
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        Log.d("testing","Pause");
-
-        super.onPause();
-    }
 
 }
