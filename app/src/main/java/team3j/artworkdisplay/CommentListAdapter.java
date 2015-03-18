@@ -1,5 +1,6 @@
 package team3j.artworkdisplay;
 
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -12,6 +13,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -140,6 +142,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
     }
 
+    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
     @Override
     // The details of/actions of the layout depending on which layout is at that position
     public void onBindViewHolder(final CommentListAdapter.MyViewHolder holder, int position) {
@@ -165,7 +168,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             holder.inspirationTitleArtist.setText("By "+galleryData.get(indexOfArtwork).getInspirationArtist());
             Settings.sdkInitialize(context);
             //holder.likeView.setLikeViewStyle(LikeView.Style.STANDARD);
-           //holder.likeView.setObjectId("https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xaf1/v/t1.0-9/s720x720/10405661_783165585098971_4975770454349316368_n.jpg?oh=c9abd7ef41b9693561dc7381539bf319&oe=55B84B51&__gda__=1438361014_3a3da4e0a308610d8f24c2a512190db8");
+            //holder.likeView.setObjectId("https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xaf1/v/t1.0-9/s720x720/10405661_783165585098971_4975770454349316368_n.jpg?oh=c9abd7ef41b9693561dc7381539bf319&oe=55B84B51&__gda__=1438361014_3a3da4e0a308610d8f24c2a512190db8");
             //holder.likeView.setObjectId("https://www.facebook.com/dulwichoutdoorgallerydisplay");
             //holder.likeView.setObjectId("https://www.facebook.com/dulwichoutdoorgallerydisplay/photos/"+galleryData.get(indexOfArtwork).getFbLink());
             //holder.likeView.setForegroundColor(-256);
@@ -177,18 +180,19 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             });
 
             if (numberOfLikesPost!= null) {
-                if(!userLikes) {
-                    holder.likeFbPost.setText("Like this on Facebook!" + numberOfLikesPost);
-                } else {
-                    holder.likeFbPost.setText("Unlike on Facebook" + numberOfLikesPost);
-                }
+
+                holder.likeFbPost.setText(numberOfLikesPost + " people like this." );
+                holder.likeFbPost.setVisibility(View.VISIBLE);
+
+            } else {
+                holder.likeFbPost.setVisibility(View.INVISIBLE);
             }
 
             holder.likeFbPost.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(isInternetAvailable()) {
-
+                        gallerySwipeSingleFragment.likePhotoPost(userLikes);
 
                     }
                     else {
@@ -553,6 +557,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                 }
 
                 session.setActiveSession(null);
+                numberOfLikesPost = null;
                 data.clear();
                 notifyDataSetChanged();
             }
@@ -811,6 +816,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
     public void likePostChange(String numberOfLikesPost, boolean userLikes){
         this.userLikes = userLikes;
         this.numberOfLikesPost = numberOfLikesPost;
+        notifyDataSetChanged();
     }
 
     public void recycleBitmap(){

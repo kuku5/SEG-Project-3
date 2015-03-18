@@ -320,7 +320,7 @@
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:textColor="@color/com_facebook_blue"
-                android:text="Like this picture on Facebook"
+                android:text=""
                 />
 
         </LinearLayout>

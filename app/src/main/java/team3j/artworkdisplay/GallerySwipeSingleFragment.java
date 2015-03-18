@@ -434,6 +434,7 @@ public class GallerySwipeSingleFragment extends Fragment {
                 Session session = Session.getActiveSession();
                 if((session==null) || session.isClosed()) {
                     commentListAdapter.commentsChanged(new ArrayList<Comment>());
+                    commentListAdapter.likePostChange(null,false);
                 }
                 else {
 //                    session.removeCallback(statusCallback);
@@ -521,6 +522,10 @@ public class GallerySwipeSingleFragment extends Fragment {
                     likeComment(commentID, userLikes);
                     facebookCode = 10;
                     commentID = null;
+
+                } else if (facebookCode == 4) {
+                    likePhotoPost(userLikes);
+                    facebookCode = 10;
 
                 }
 
@@ -650,28 +655,80 @@ public class GallerySwipeSingleFragment extends Fragment {
         //b1.putString("filter", "stream");   //gets the chronological order of comments
         b1.putString("limit", "100");        //gets max of 100
         new Request(Session.getActiveSession(), facebookPostID + "/likes" , b1, HttpMethod.GET,
-            new Request.Callback() {
-                public void onCompleted(Response response) {
-                    if (response != null) {
-                        try {
-                            //TODO error checking (if post has more then 100 likes we'll get index out of bound error)
-                            int numberOfLikes = response.getGraphObject().getInnerJSONObject().getJSONObject("summary").getInt("total_count");
-                            boolean userLikes = false;
-                            for(int i = 0; i < numberOfLikes; i++){
-                                if(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("id").equals(userId)){
-                                    userLikes = true;
-                                    break;
+                new Request.Callback() {
+                    public void onCompleted(Response response) {
+                        if (response != null) {
+                            try {
+                                //TODO error checking (if post has more then 100 likes we'll get index out of bound error)
+                                int numberOfLikes = response.getGraphObject().getInnerJSONObject().getJSONObject("summary").getInt("total_count");
+                                boolean userLikes = false;
+                                for(int i = 0; i < numberOfLikes; i++){
+                                    if(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("id").equals(userId)){
+                                        userLikes = true;
+                                        break;
+                                    }
                                 }
-                            }
-                            //TODO Insert code here for using numberOfLikes and userLikes for post liking
-                            commentListAdapter.likePostChange(Integer.toString(numberOfLikes), userLikes);
+                                //TODO Insert code here for using numberOfLikes and userLikes for post liking
+                                commentListAdapter.likePostChange(Integer.toString(numberOfLikes), userLikes);
 
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
-                }
-            }).executeAsync();
+                }).executeAsync();
+    }
+
+    public void likePhotoPost(boolean userLikes) {
+        if(checkIfActiveSession()) {
+
+            Session session = Session.getActiveSession();
+
+            //Might not be able to use this method to get permissions
+            List<String> permissions = session.getPermissions();
+            System.out.println(permissions);
+            HttpMethod method;
+            if (userLikes) {
+                method = HttpMethod.DELETE;
+
+            } else {
+                method = HttpMethod.POST;
+
+            }
+            if (permissions.contains("publish_actions")) {
+                System.out.println("has publish actions");
+                Bundle params = new Bundle();
+
+            /* make the API call */
+                new Request(session, facebookPostID + "/likes", params,
+                        method,
+                        new Request.Callback() {
+                            public void onCompleted(Response response) {
+                                try {
+                                    System.out.println(response.getError());
+                                    boolean success = response.getGraphObject().getInnerJSONObject().getBoolean("success");
+
+                                    if (success) {
+
+                                        getLikes();
+                                    }
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+                        }
+                ).executeAsync();
+
+            } else {
+                //Request posting permissions
+                Session.getActiveSession().requestNewPublishPermissions(new Session.NewPermissionsRequest(this, Arrays.asList("publish_actions")));
+                //TODO something after the request been made
+                facebookCode = 4;
+                this.userLikes = userLikes;
+            }
+        }
     }
 
     /**
