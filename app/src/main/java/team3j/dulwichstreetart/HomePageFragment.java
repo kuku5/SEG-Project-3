@@ -55,6 +55,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -245,8 +246,8 @@ public class HomePageFragment extends Fragment {
 
         viewFlipper.setInAnimation(slide_in_left);
         viewFlipper.setOutAnimation(slide_out_right);
+        final SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 
-        if (isOnline()) {
             viewFlipper.getInAnimation().setAnimationListener(new Animation.AnimationListener() {
                 int i = 0;
                 boolean t1 = false;
@@ -259,12 +260,12 @@ public class HomePageFragment extends Fragment {
                     if (t1 == false) {
                         twitView1.setText(todaysTweets.get(i).getText());
                         //date.toGMTString().slice(0, -4)
-                        twitTime1.setText(todaysTweets.get(i).getCreatedAt().toString());
+                           twitTime1.setText(df.format(todaysTweets.get(i).getCreatedAt()).toString());
                         t1 = true;
                         i++;
                     } else {
                         twitView2.setText(todaysTweets.get(i).getText());
-                        twitTime2.setText(todaysTweets.get(i).getCreatedAt().toString());
+                        twitTime2.setText(df.format(todaysTweets.get(i).getCreatedAt()).toString());
                         t1 = false;
                         i++;
                     }
@@ -282,7 +283,7 @@ public class HomePageFragment extends Fragment {
                     }
                 }
             });
-        }
+
 
 
         cardView2.setOnClickListener(new View.OnClickListener() {
@@ -297,28 +298,6 @@ public class HomePageFragment extends Fragment {
 
     }
 
-    public void ReadBtn() {
-        //reading text from file
-        try {
-            FileInputStream fileIn=getActivity().openFileInput("dulwichTweet.txt");
-            InputStreamReader InputRead= new InputStreamReader(fileIn);
-
-            char[] inputBuffer= new char[100];
-            String s="";
-            int charRead;
-
-            while ((charRead=InputRead.read(inputBuffer))>0) {
-                // char to string conversion
-                String readstring=String.copyValueOf(inputBuffer,0,charRead);
-                s +=readstring;
-            }
-            InputRead.close();
-            Toast.makeText(getActivity().getBaseContext(), s,Toast.LENGTH_SHORT).show();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
 
 
