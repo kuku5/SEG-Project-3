@@ -201,6 +201,7 @@ public class GallerySwipeSingleFragment extends Fragment {
                         if (response != null) {
                             try {
                                 JSONArray data = response.getGraphObject().getInnerJSONObject().getJSONArray("data");
+                                System.out.println(data);
 
                                 int x = data.length();
 
@@ -209,6 +210,10 @@ public class GallerySwipeSingleFragment extends Fragment {
                                     //checks if it has a category if it does, it is definitely not a profile
                                     if(data.getJSONObject(i).getJSONObject("from").has("category")) {
                                         isPage = true;
+                                    }
+                                    //Checks to see if message is empty
+                                    if(data.getJSONObject(i).get("message").toString().length() == 0){
+                                        continue;
                                     }
                                     //Setting comment information such as; number of likes, message, time, url of the post etc..
                                     Comment commentInfo = new Comment();
@@ -276,6 +281,10 @@ public class GallerySwipeSingleFragment extends Fragment {
                                                     //checks if it has a category if it does, it is definitely not a profile
                                                     if(data.getJSONObject(i).getJSONObject("from").has("category")) {
                                                         isPage = true;
+                                                    }
+                                                    //Checks to see if message is empty
+                                                    if(data.getJSONObject(i).get("message").toString().length() == 0){
+                                                        continue;
                                                     }
                                                     Comment commentInfo = new Comment();
                                                     commentInfo.setNumberLikes((int)data.getJSONObject(i).getInt("like_count"));
