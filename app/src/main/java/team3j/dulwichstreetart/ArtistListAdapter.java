@@ -1,6 +1,9 @@
 package team3j.dulwichstreetart;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -64,7 +67,10 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
         holder.title.setText(data.get(position).getName());
         holder.description.setText(data.get(position).getDescription());
         holder.website.setText(data.get(position).getWebsite());
-        holder.artistPhoto.setImageResource(data.get(position).getArtistPhoto());
+
+        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), data.get(position).getArtistPhoto());
+        BitmapDrawable res = new BitmapDrawable(context.getResources(), bitmap);
+        holder.artistPhoto.setImageDrawable(res);
     }
 
     /**
