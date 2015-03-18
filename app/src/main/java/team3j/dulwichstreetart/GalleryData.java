@@ -7,6 +7,8 @@ import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 
+import twitter4j.Status;
+
 
 /**
  * @author Team 3-J
@@ -20,6 +22,7 @@ public class GalleryData {
 
     public static ArrayList<Art> visited = new ArrayList<>();
     public static ArrayList<Art> toVisit = new ArrayList<>();
+    private  ArrayList<Status> todaysTweets ;
     private ArrayList<Art> artworkList;
     private static GalleryData mGalleryData;
 
@@ -30,8 +33,12 @@ public class GalleryData {
 
     public GalleryData() {
         artworkList=GetGalleryData();
+        todaysTweets=new ArrayList<>();
     }
 
+    public ArrayList<Status> getTodaysTweets() {
+        return todaysTweets;
+    }
 
     public static GalleryData create() {
         if (mGalleryData == null) {
@@ -44,6 +51,8 @@ public class GalleryData {
     public ArrayList<Art> getArtworkList() {
         return artworkList;
     }
+
+
 
     public ArrayList<Art> GetGalleryData() {
 

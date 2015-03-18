@@ -56,12 +56,14 @@ public class HomePageFragment extends Fragment {
     private ViewFlipper viewFlipper;
     private com.etsy.android.grid.util.DynamicHeightImageView aboutDulwich;
 
+
     private SliderLayout mDemoSlider;
 
     Animation slide_in_left, slide_out_right;
     private DynamicHeightImageView mapButton;
 
-    private ArrayList<Status> todaysTweets = new ArrayList<>();
+    private ArrayList<Status> todaysTweets ;
+
     private TextView twitView1,twitView2, twitTime1, twitTime2;
 
     private View layout;
@@ -107,22 +109,26 @@ public class HomePageFragment extends Fragment {
         setupOnScreenElements(layout);
         //Get Today's Tweets
 
-            if (savedInstanceState == null) {
+            if (GalleryData.get().getTodaysTweets().isEmpty()) {
                 // Restore last state for checked position.
                 if (isOnline()) {
-                    getTweets();
 
+                    getTweets();
                     Log.d("tweets","online");
 
                 }
-                else{
-                    getOfflineTweets();
-                }            }
+            }else{
+                todaysTweets=GalleryData.get().getTodaysTweets();
+                Log.d("tweets","no tweets call");
+
+                setupTweetsAnimations(layout);
+
+
+            }
 
 
 
         setupLibraryAnimations(layout);
-        setupTweetsAnimations(layout);
 
         //  ---------- KEYHASH GENERATOR -----------//
         /*
@@ -146,10 +152,7 @@ public class HomePageFragment extends Fragment {
         return layout;
     }
 
-    private void getOfflineTweets() {
-        Log.d("tweets","offline");
 
-    }
 
 
     /**
@@ -242,8 +245,9 @@ public class HomePageFragment extends Fragment {
                         //date.toGMTString().slice(0, -4)
                         final SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
                         if(todaysTweets.get(i)!=null) {
-                            twitTime1.setText(df.format(todaysTweets.get(i).getCreatedAt()).toString());
-                            t1 = true;
+                                twitTime1.setText(df.format(todaysTweets.get(i).getCreatedAt()).toString());
+                                t1 = true;
+
                         }
                         i++;
                     } else {
@@ -409,7 +413,7 @@ public class HomePageFragment extends Fragment {
                     do {
                         status = statuses.get(i).getText();
                         if(!status.substring(0,2).equals("RT") && !status.substring(0, 1).equals("@")) {
-                            todaysTweets.add(statuses.get(i));
+                            GalleryData.get().getTodaysTweets().add(statuses.get(i));
                             c++;
                         }
                         i++;
@@ -421,6 +425,9 @@ public class HomePageFragment extends Fragment {
                 } catch (TwitterException e) {
                     e.printStackTrace();
                 }
+                todaysTweets=GalleryData.get().getTodaysTweets();
+
+                setupTweetsAnimations(layout);
 
             }
         });
