@@ -11,6 +11,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Surface;
 import android.view.View;
@@ -39,6 +40,7 @@ import it.neokree.materialtabs.MaterialTabListener;
 public class VisitedTabFragment extends Fragment implements MaterialTabListener {
 
     private RecyclerView recyclerView;
+    private VisitedAdapter visitedAdapter;
 
 
     public static VisitedTabFragment getInstance(int position) {
@@ -53,7 +55,6 @@ public class VisitedTabFragment extends Fragment implements MaterialTabListener 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, @Nullable Bundle savedInstanceState) {
         //get layout and elements
         View layout = inflater.inflate(R.layout.fragment_visited_tab, container, false);
-        recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view_visited);
         setRetainInstance(true);
 
         // add data
@@ -61,22 +62,24 @@ public class VisitedTabFragment extends Fragment implements MaterialTabListener 
 
 
 
+            recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view_visited);
+
+            //create recycle view Adapter
+
+            //set adapter
+            visitedAdapter = new VisitedAdapter(getActivity(), getVisitedClickListener(), GalleryData.get().getArtworkList());
+            recyclerView.setAdapter(visitedAdapter);
+
+            //Set Layout Animation
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity()) {
+                @Override
+                protected int getExtraLayoutSpace(RecyclerView.State state) {
+                    return 200;
+                }
+            };
 
 
-        //create recycle view Adapter
-
-        //set adapter
-        recyclerView.setAdapter(new VisitedAdapter(getActivity(), getVisitedClickListener(), GalleryData.get().getArtworkList()));
-
-        //Set Layout Animation
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity()) {
-            @Override
-            protected int getExtraLayoutSpace(RecyclerView.State state) {
-                return 200;
-            }
-        };
-
-        recyclerView.setLayoutManager(linearLayoutManager);
+            recyclerView.setLayoutManager(linearLayoutManager);
 
 
         return layout;
@@ -112,8 +115,46 @@ public class VisitedTabFragment extends Fragment implements MaterialTabListener 
 
     @Override
     public void onTabUnselected(MaterialTab materialTab) {
+        Log.d("testing","un selected");
 
     }
 
+    @Override
+    public void onStart() {
+        Log.d("testing", "start");
+
+        super.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        Log.d("testing","Stop");
+
+
+        visitedAdapter.recycleBitmap();
+
+        super.onStop();
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        Log.d("testing","ViewRestored");
+
+        super.onViewStateRestored(savedInstanceState);
+    }
+
+    @Override
+    public void onResume() {
+        Log.d("testing","Resume");
+
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        Log.d("testing","Pause");
+
+        super.onPause();
+    }
 
 }

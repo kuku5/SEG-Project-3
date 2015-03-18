@@ -272,21 +272,17 @@
             <!--android:text="@string/more_info"-->
             <!--/>-->
             <TextView
-
+                android:textSize="15sp"
+                android:autoLink="web"
                 android:id="@+id/comment_list_more_info_links"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|left"
                 android:gravity="center_vertical"
-                android:maxLines="2"
                 android:paddingLeft="4dp"
-                android:paddingBottom="10dp"
-                android:textAllCaps="true"
-                android:textSize="14sp"
-                android:textStyle="bold"
 
+                android:maxLines="5"
 
-                android:text="@string/test_links"
                 />
             <TextView
 
@@ -297,8 +293,7 @@
                 android:gravity="center_vertical"
                 android:maxLines="2"
                 android:paddingLeft="4dp"
-                android:paddingStart="4dp"
-                android:paddingBottom="10dp"
+                android:paddingBottom="1dp"
                 android:textAllCaps="true"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -314,13 +309,12 @@
                 android:gravity="center_vertical"
                 android:maxLines="2"
                 android:paddingLeft="4dp"
-                android:paddingStart="4dp"
-                android:paddingBottom="10dp"
+                android:paddingBottom="1dp"
                 android:textAllCaps="true"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:textColor="@color/com_facebook_blue"
-                android:text=""
+                android:text="Like Post"
                 />
 
         </LinearLayout>

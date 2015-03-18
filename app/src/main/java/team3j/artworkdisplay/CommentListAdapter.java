@@ -163,6 +163,11 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             holder.descriptionTitle.setText(galleryData.get(indexOfArtwork).getName());
             holder.descriptionTitleArtist.setText("By "+galleryData.get(indexOfArtwork).getArtistName());
             holder.description.setText(galleryData.get(indexOfArtwork).getDesc());
+            String linksText="";
+            for(int i=0;i<galleryData.get(indexOfArtwork).getWebLinks().length;i++){
+                linksText+=galleryData.get(indexOfArtwork).getWebLinks()[i]+"\n";
+            }
+            holder.extraLinksText.setText(linksText);
 
             holder.inspirationTitle.setText("\""+galleryData.get(indexOfArtwork).getInspirationTitle()+"\"");
             holder.inspirationTitleArtist.setText("By "+galleryData.get(indexOfArtwork).getInspirationArtist());
@@ -185,7 +190,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                 holder.likeFbPost.setVisibility(View.VISIBLE);
 
             } else {
-                holder.likeFbPost.setVisibility(View.INVISIBLE);
+                holder.likeFbPost.setVisibility(View.GONE);
             }
 
             holder.likeFbPost.setOnClickListener(new View.OnClickListener() {
@@ -649,6 +654,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         private TextView commentTitle;
         private TextView inspirationTitle;
         private TextView inspirationTitleArtist;
+        private TextView extraLinksText;
         private DynamicHeightImageView dynamicHeightImageView;
         private DynamicHeightImageView inspirationArtworkImageView;
 
@@ -686,12 +692,14 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
                     inspirationTitle = (TextView) itemView.findViewById(R.id.comment_list_inspiration_title);
                     inspirationTitleArtist = (TextView) itemView.findViewById(R.id.comment_list_inspiration_title_artist);
+
+                    extraLinksText = (TextView) itemView.findViewById(R.id.comment_list_more_info_links);
+
                     linkToFbPost = (TextView) itemView.findViewById(R.id.comment_list_fb_links);
                     likeFbPost = (TextView) itemView.findViewById(R.id.like_post);
 
                     //streetArtistTitle = (TextView) itemView.findViewById(R.id.comment_list_description_title_streetartwork);
-                    // streetArtistTitleArtist = (TextView) itemView.findViewById(R.id.comment_list_description_title_artist_streetartist);
-
+                    //streetArtistTitleArtist = (TextView) itemView.findViewById(R.id.comment_list_description_title_artist_streetartist);
 
                     commentTitle = (TextView) itemView.findViewById(R.id.commentAmount);
                     shareButton = (ImageView) itemView.findViewById(R.id.shareIcon);

@@ -235,6 +235,7 @@
                                         android:id="@+id/statusTime2"
                                         android:layout_marginRight="3dp"
 
+                                        android:autoLink="web"
                                         /></RelativeLayout>
 
 
@@ -243,7 +244,9 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/desc_offline"
                                     android:id = "@+id/DisplayTweet2"
-                                    android:textSize="12sp"/>
+                                    android:textSize="12sp"
+                                    android:autoLink="web"
+                                    />
 
                             </LinearLayout>
 
@@ -274,6 +277,7 @@
                                         android:textStyle="bold"
                                         android:id="@+id/statusTime1"
                                         android:layout_marginRight="3dp"
+                                        android:autoLink="web"
 
                                         /></RelativeLayout>
                                 <TextView
@@ -281,7 +285,9 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/desc_offline"
                                     android:id = "@+id/DisplayTweet1"
-                                    android:textSize="12sp"/>
+                                    android:textSize="12sp"
+                                    android:autoLink="web"
+                                    />
 
 
                             </LinearLayout>

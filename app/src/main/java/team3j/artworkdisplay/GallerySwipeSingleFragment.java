@@ -237,7 +237,7 @@ public class GallerySwipeSingleFragment extends Fragment {
 
                                 new MyAsync(code,customProcessDialog).execute();
 
-//
+
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -419,9 +419,11 @@ public class GallerySwipeSingleFragment extends Fragment {
     }
 
 
-
+    /**
+     *
+     * @param isVisibleToUser
+     */
     @Override
-    //
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {

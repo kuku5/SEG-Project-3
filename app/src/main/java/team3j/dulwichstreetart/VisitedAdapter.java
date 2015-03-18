@@ -30,6 +30,7 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
     private final LayoutInflater inflater;
     private Context context;
     private ArrayList<Art> galleryData;
+    private Bitmap bitmap1;
 
 
     /**
@@ -86,14 +87,14 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
         //add image and description to the view for each gallery item
         holder.txtLineOne.setText("" + galleryData.get(position).getName());
 
-        if(galleryData.get(position).visited() == true){
+        if(galleryData.get(position).getVisited() == true){
             holder.visitedQuestion_textView.setText("Visited");
         }
-        else if(galleryData.get(position).visited() == false) {
+        else if(galleryData.get(position).getVisited() == false) {
             holder.visitedQuestion_textView.setText("Not Visited");
         }
 
-        Bitmap bitmap1 = BitmapFactory.decodeResource(context.getResources(), galleryData.get(position).getPic());
+         bitmap1 = BitmapFactory.decodeResource(context.getResources(), galleryData.get(position).getPic());
         BitmapDrawable res1 = new BitmapDrawable(context.getResources(), bitmap1);
         holder.image.setImageDrawable(res1);
 
@@ -172,6 +173,8 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
         public void onCardViewTap(View view, int position);
     }
 
+
+
 //    public void saveToFile(){
 //        String fileName = "visitedOrNot";
 //        //File file = new File(context.getFilesDir(), fileName);
@@ -186,6 +189,14 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
 //        }
 //
 //    }
+
+
+    public void recycleBitmap(){
+
+        bitmap1.recycle();
+        bitmap1 = null;
+        System.gc();
+    }
 
 }
 

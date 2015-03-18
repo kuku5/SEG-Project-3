@@ -63,7 +63,7 @@
                 android:gravity="center_vertical"
                 android:maxLines="2"
                 android:paddingLeft="4dp"
-                android:paddingStart="4dp"
+
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="12sp"
@@ -80,7 +80,7 @@
                 android:gravity="center_vertical"
                 android:maxLines="2"
                 android:paddingLeft="4dp"
-                android:paddingStart="4dp"
+
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="14sp"
@@ -164,7 +164,7 @@
                         android:gravity="center_vertical"
                         android:maxLines="2"
                         android:paddingLeft="0dp"
-                        android:paddingStart="0dp"
+
                         android:textAllCaps="true"
                         android:textSize="14sp"
                         android:textStyle="bold"
@@ -180,7 +180,6 @@
                         android:gravity="center_vertical"
                         android:maxLines="2"
                         android:paddingLeft="0dp"
-                        android:paddingStart="0dp"
                         android:textAllCaps="true"
                         android:textSize="12sp"
                         android:textStyle="italic"
@@ -205,6 +204,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorAccentReal"
+        android:minHeight="?attr/actionBarSize"
+
         >
         <LinearLayout
             android:layout_width="wrap_content"
@@ -216,62 +217,6 @@
             android:paddingLeft="10dp"
 
             >
-            <TextView
-
-                android:id="@+id/comment_list_description_title_streetartwork"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|left"
-                android:gravity="center_vertical"
-                android:maxLines="2"
-                android:paddingLeft="4dp"
-                android:paddingStart="4dp"
-                android:paddingTop="10dp"
-                android:textAllCaps="true"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                android:textStyle="italic"
-
-                android:text="@string/artist_title"
-                />
-            <TextView
-
-                android:id="@+id/comment_list_description_title_artist_streetartist"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|left"
-                android:gravity="center_vertical"
-                android:maxLines="2"
-                android:paddingLeft="4dp"
-                android:paddingStart="4dp"
-                android:paddingBottom="10dp"
-                android:textAllCaps="true"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                android:textStyle="bold"
-
-                android:text="@string/artist_title"
-                />
-
-        </LinearLayout>
-
-
-
-    </RelativeLayout>
-
-    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/moreInfoLinksCard"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        card_view:cardBackgroundColor="@android:color/white"
-        card_view:cardCornerRadius="0dp">
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="vertical"
-            android:padding="3dp">
 
             <TextView
 
@@ -282,31 +227,65 @@
                 android:gravity="center_vertical"
                 android:maxLines="2"
                 android:paddingLeft="4dp"
-                android:paddingStart="4dp"
-                android:paddingTop="10dp"
-                android:textAllCaps="true"
-                android:textSize="12sp"
-                android:textStyle="italic"
-
-                android:text="@string/more_info"
-                />
-            <TextView
-
-                android:id="@+id/comment_list_more_info_links"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|left"
-                android:gravity="center_vertical"
-                android:maxLines="2"
-                android:paddingLeft="4dp"
-                android:paddingStart="4dp"
-                android:paddingBottom="10dp"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
 
                 android:text="@string/more_info"
+                />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/moreInfoLinksCard"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        card_view:cardBackgroundColor="@android:color/white"
+        card_view:cardCornerRadius="0dp"
+        android:layout_margin="5dp"
+
+        >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:padding="3dp">
+
+            <!--<TextView-->
+
+            <!--android:id="@+id/comment_list_more_info_links_title"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center|left"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:maxLines="2"-->
+            <!--android:paddingLeft="4dp"-->
+            <!--android:paddingStart="4dp"-->
+            <!--android:paddingTop="10dp"-->
+            <!--android:textAllCaps="true"-->
+            <!--android:textSize="12sp"-->
+            <!--android:textStyle="italic"-->
+
+            <!--android:text="@string/more_info"-->
+            <!--/>-->
+            <TextView
+                android:textSize="15sp"
+                android:autoLink="web"
+                android:id="@+id/comment_list_more_info_links"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|left"
+                android:gravity="center_vertical"
+                android:paddingLeft="4dp"
+
+                android:maxLines="5"
+
                 />
             <TextView
 
@@ -317,8 +296,7 @@
                 android:gravity="center_vertical"
                 android:maxLines="2"
                 android:paddingLeft="4dp"
-                android:paddingStart="4dp"
-                android:paddingBottom="10dp"
+                android:paddingBottom="1dp"
                 android:textAllCaps="true"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -335,18 +313,17 @@
                 android:gravity="center_vertical"
                 android:maxLines="2"
                 android:paddingLeft="4dp"
-                android:paddingStart="4dp"
-                android:paddingBottom="10dp"
+                android:paddingRight="0dp"
+                android:paddingBottom="1dp"
                 android:textAllCaps="true"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:textColor="@color/com_facebook_blue"
-                android:text=""
+                android:text="Like Post"
                 />
 
+
         </LinearLayout>
-
-
     </android.support.v7.widget.CardView>
 
 
@@ -374,7 +351,6 @@
             android:layout_marginLeft="25dp"
             android:layout_marginTop="6dp"
             android:textStyle="bold" />
-
 
         <View
             android:id="@+id/bottombarline"

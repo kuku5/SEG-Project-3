@@ -207,7 +207,6 @@ public class GoogleMapFragmentSmall extends Fragment {
     public void setUpMap(){
 
 
-        arts = GalleryData.getMapArtwork(getActivity());
         artArrayList = GalleryData.create().GetGalleryData();
         googleMap = mMapView.getMap();
         zoom();
@@ -364,7 +363,6 @@ public class GoogleMapFragmentSmall extends Fragment {
         CameraUpdate update = CameraUpdateFactory.newLatLngZoom(locStart, 13);
 
         googleMap.animateCamera(update);
-
 
 
     }
