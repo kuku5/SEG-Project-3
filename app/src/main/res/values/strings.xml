@@ -29,6 +29,9 @@
     <string name="info_title">Welcome</string>
     <string name="info_description_welcome">Dulwich OutDoor Gallery is a collection of street art on walls
     and pavements in the vicinity of Dulwich Picture Gallery. It has been created by some of the top street artist alive</string>
+    <string name="desc_offline">Dulwich Outdoor Gallery are walls and pavements painted by top international street artists based on works at Dulwich Picture Gallery. http://www.culture24.org.uk/am425827
+</string>
+      <string name="title_offline">Dulwich Outdoor Gallery</string>
     <string name="description_title">Description:</string>
     <string name="artwork_description">Mrs Elizabeth Mood with her sons Samuel and Thomas by Thomas Gainsborough</string>
     <string name="tweet1">
