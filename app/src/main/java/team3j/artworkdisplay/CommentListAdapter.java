@@ -193,24 +193,13 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                 holder.likeFbPost.setVisibility(View.GONE);
             }
 
-            holder.likeFbPost.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(isInternetAvailable()) {
-                        gallerySwipeSingleFragment.likePhotoPost(userLikes);
-
-                    }
-                    else {
-                        Toast.makeText(gallerySwipeSingleFragment.getActivity(), "No internet connection available", Toast.LENGTH_SHORT).show();
-
-                    }
-                }
-            });
 
             String logout = "";
-
+            String numberOfLikesString = "";
             final Session session = Session.getActiveSession();
             if(!(session==null) && session.isOpened()) {
+                //gallerySwipeSingleFragment.getLikes();
+                //numberOfLikesString = numberOfLikesPost + " people like this.";
                 String viewComment = "View comments";
                 logout = "Logout of FB";
                 String htmlTextView = viewComment.replace("View", "<font color = '#009672'> View </font>");
@@ -228,8 +217,23 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                 commentAmount = data.size() + " comments";
             }
             holder.commentTitle.setText(Html.fromHtml(commentAmount));
+            //holder.likeFbPost.setText(numberOfLikesString);
+            holder.logout.setText(Html.fromHtml("<font color = '#009672'>" + logout + "</font>"));
 
-            holder.logout.setText(Html.fromHtml("<font color = '#009672'>"+logout+"</font>"));
+            holder.likeFbPost.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (isInternetAvailable()) {
+                        //gallerySwipeSingleFragment.getLikes();
+                        System.out.println("USER LIKES >>>>>>>>>>>>>" + userLikes);
+                        gallerySwipeSingleFragment.likePhotoPost(userLikes);
+
+                    } else {
+                        Toast.makeText(gallerySwipeSingleFragment.getActivity(), "No internet connection available", Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+            });
             holder.logout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -822,6 +826,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
     public void nameChange(String name){
         this.name = name;
     }
+
     public void likePostChange(String numberOfLikesPost, boolean userLikes){
         this.userLikes = userLikes;
         this.numberOfLikesPost = numberOfLikesPost;

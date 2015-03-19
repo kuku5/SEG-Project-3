@@ -338,6 +338,7 @@ public class GallerySwipeSingleFragment extends Fragment {
                         commentListAdapter.nameChange(user.getFirstName());
                         userId = user.getId();
                         getLikes();
+
                     }
                 }
             }).executeAsync();
@@ -671,12 +672,14 @@ public class GallerySwipeSingleFragment extends Fragment {
                                 //TODO Insert code here for using numberOfLikes and userLikes for post liking
                                 commentListAdapter.likePostChange(Integer.toString(numberOfLikes), userLikes);
 
+
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
                         }
                     }
                 }).executeAsync();
+
     }
 
     public void likePhotoPost(boolean userLikes) {
