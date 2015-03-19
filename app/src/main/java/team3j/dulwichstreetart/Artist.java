@@ -10,11 +10,11 @@ public class Artist {
     private final int artistPhoto;
 
     /**
-     *
-     * @param name
-     * @param description
-     * @param website
-     * @param artistPhoto
+     * Constructs an Artist with the following
+     * @param name Artist name
+     * @param description Description of artist
+     * @param website the artist's website
+     * @param artistPhoto a photo of the artist
      */
     public Artist(String name,String description, String website, int artistPhoto){
 
