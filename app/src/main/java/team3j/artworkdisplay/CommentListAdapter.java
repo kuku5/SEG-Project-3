@@ -194,6 +194,14 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                 holder.likeFbPost.setVisibility(View.GONE);
             }
             // up to here
+            if (userLikes) {
+                holder.likePostButton.setImageResource(R.drawable.thumbsupfilled);
+
+
+            } else {
+                holder.likePostButton.setImageResource(R.drawable.thumbsupholo);
+
+            }
 
             String logout = "";
             //String numberOfLikesString = ""; // vince added

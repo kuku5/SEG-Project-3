@@ -248,8 +248,7 @@
                 android:id="@+id/like_post_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:src="@drawable/ic_map" />
+                android:layout_marginTop="5dp" />
         </LinearLayout>
 
 
