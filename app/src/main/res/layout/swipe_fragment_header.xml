@@ -301,7 +301,6 @@
                 android:layout_gravity="center|left"
                 android:gravity="center_vertical"
                 android:paddingLeft="4dp"
-
                 android:maxLines="5"
 
                 />
