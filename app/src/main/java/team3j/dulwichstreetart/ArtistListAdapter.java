@@ -28,9 +28,9 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
     private Context context;
 
     /**
-     *
-     * @param context
-     * @param data
+     * Constructs an ArtistListAdapter
+     * @param context the activity
+     * @param data the array of artists
      */
     public ArtistListAdapter(Context context,ArrayList<Artist> data){
         this.data=data;
@@ -39,7 +39,7 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
     }
 
     /**
-     *
+     *  View Holder for the display of the artist tab
      * @param parent
      * @param viewType
      * @return
@@ -57,7 +57,7 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
     }
 
     /**
-     *
+     * Properties given to the holder when it starts
      * @param holder
      * @param position
      */
@@ -75,7 +75,7 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
     }
 
     /**
-     *
+     * Size of the view
      * @return
      */
     @Override
@@ -84,7 +84,7 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
     }
 
     /**
-     *
+     * The view type
      * @param position
      * @return
      */
