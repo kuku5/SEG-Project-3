@@ -35,7 +35,7 @@ public class Artist {
 
     /**
      * this method returns the name of the artist
-     * @return
+     * @return name of the artist
      */
     public String getName() {
         return name;
@@ -43,7 +43,7 @@ public class Artist {
 
     /**
      * this method returns the website address of the artist
-     * @return
+     * @return the website address of the artist
      */
     public String getWebsite() {
         return website;
@@ -51,7 +51,7 @@ public class Artist {
 
     /**
      * this method returns the photo location of the artist
-     * @return
+     * @return photo location of the artist
      */
     public int getArtistPhoto () {
         return artistPhoto;
