@@ -24,18 +24,18 @@ public class Art {
 
     /**
      * main constructor passing through art information -
-     * @param name
-     * @param artistName
-     * @param inspirationTitle
-     * @param inspirationArtist
-     * @param desc
-     * @param pic
-     * @param inspiredPic
-     * @param loc
-     * @param fbLink
-     * @param artAddress
-     * @param visited
-     * @param webLinks
+     * @param name Name of the artwork
+     * @param artistName Name of the artist
+     * @param inspirationTitle Name of the inspiration art
+     * @param inspirationArtist Name of the inspiration art artist
+     * @param desc description of the artwork
+     * @param pic the image of the artwork
+     * @param inspiredPic the inspiration artwork
+     * @param loc the coordinates of the location of the artwork
+     * @param fbLink the code that links to the facebook version of the picture
+     * @param artAddress the address of the artwork
+     * @param visited whether the user has visited the artwork or not
+     * @param webLinks array of extra links associated to the artist
      */
 
     public Art(String name, String artistName, String inspirationTitle, String inspirationArtist, String desc, int pic, int inspiredPic, LatLng loc, String fbLink, String artAddress, Boolean visited, String[] webLinks){
