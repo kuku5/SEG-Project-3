@@ -9,7 +9,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -37,7 +36,6 @@ import java.util.Comparator;
 import java.util.List;
 
 import team3j.dulwichstreetart.GalleryData;
-import team3j.dulwichstreetart.GoogleMapFragmentSmall;
 import team3j.dulwichstreetart.R;
 
 
@@ -195,7 +193,6 @@ public class GallerySwipeSingleFragment extends Fragment {
                         if (response != null) {
                             try {
                                 JSONArray data = response.getGraphObject().getInnerJSONObject().getJSONArray("data");
-                                System.out.println(data);
 
                                 int x = data.length();
 
@@ -258,7 +255,6 @@ public class GallerySwipeSingleFragment extends Fragment {
 
                 for(; loopCounter<comments.size(); loopCounter++) {
                     final ArrayList<Comment> replyComments = new ArrayList<Comment>();
-                    //System.out.println(comments.get(loopCounter));
                     supercomments.add(comments.get(loopCounter)); //Add the original comment to the list
                     new Request(Session.getActiveSession(), comments.get(loopCounter).getCommentID()+"/comments", b1, HttpMethod.GET,
                             new Request.Callback() {
@@ -316,7 +312,6 @@ public class GallerySwipeSingleFragment extends Fragment {
             e.printStackTrace();
         }
         loopCounter = 0;
-        System.out.println(supercomments);
 
     }
 
@@ -371,10 +366,6 @@ public class GallerySwipeSingleFragment extends Fragment {
      */
     private void onSessionStateChange(Session session, SessionState state, Exception exception) {
         Session.setActiveSession(session);
-        System.out.println(state);
-        System.out.println(session);
-        System.out.println(Session.getActiveSession());
-        System.out.println(facebookCode);
 
         if(state.equals(SessionState.OPENED_TOKEN_UPDATED)){
 
@@ -398,9 +389,7 @@ public class GallerySwipeSingleFragment extends Fragment {
 //            }
         }
         if (state.isOpened()) {
-            //If logged in, show this
-            Log.i("MainActivity", "Logged in...");
-
+            //If logged in
             //Loads comments after login
             if(facebookCode == 0){
                 onClickLogin();
@@ -409,8 +398,7 @@ public class GallerySwipeSingleFragment extends Fragment {
 
 
         } else if (state.isClosed()) {
-            //If logged out, show this
-            Log.i("GallerySwipeFragment", "Logged out...");
+            //If logged out
 
         }
 
@@ -425,7 +413,6 @@ public class GallerySwipeSingleFragment extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
-            Log.i("GallerySwipeFragment", "Visible" + indexOfArtWork);
 
             if(recyclerView!=null) {
                 recyclerView.getAdapter().notifyDataSetChanged();
@@ -462,9 +449,7 @@ public class GallerySwipeSingleFragment extends Fragment {
 
             //Might not be able to use this method to get permissions
             List<String> permissions = session.getPermissions();
-            System.out.println(permissions);
             if (permissions.contains("publish_actions")) {
-                System.out.println("has publish actions");
                 Bundle params = new Bundle();
                 params.putString("message", comment);
 
@@ -503,7 +488,6 @@ public class GallerySwipeSingleFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         boolean success = Session.getActiveSession().onActivityResult(getActivity(), requestCode, resultCode, data);
-        System.out.println("OnActivityResult" + indexOfArtWork);
         if(success) {
             Session session = Session.getActiveSession();
             if (session.isPermissionGranted("publish_actions")) {
@@ -593,7 +577,6 @@ public class GallerySwipeSingleFragment extends Fragment {
 
             //Might not be able to use this method to get permissions
             List<String> permissions = session.getPermissions();
-            System.out.println(permissions);
             HttpMethod method;
             if (userLikes) {
                 method = HttpMethod.DELETE;
@@ -603,7 +586,6 @@ public class GallerySwipeSingleFragment extends Fragment {
                 code = 3;
             }
             if (permissions.contains("publish_actions")) {
-                System.out.println("has publish actions");
                 Bundle params = new Bundle();
 
             /* make the API call */
@@ -612,7 +594,6 @@ public class GallerySwipeSingleFragment extends Fragment {
                         new Request.Callback() {
                             public void onCompleted(Response response) {
                                 try {
-                                    System.out.println(response.getError());
                                     boolean success = response.getGraphObject().getInnerJSONObject().getBoolean("success");
 
                                     if (success) {
@@ -666,7 +647,6 @@ public class GallerySwipeSingleFragment extends Fragment {
                                         break;
                                     }
                                 }
-                                //TODO Insert code here for using numberOfLikes and userLikes for post liking
                                 commentListAdapter.likePostChange(Integer.toString(numberOfLikes), userLikes);
 
 
@@ -686,7 +666,6 @@ public class GallerySwipeSingleFragment extends Fragment {
 
             //Might not be able to use this method to get permissions
             List<String> permissions = session.getPermissions();
-            System.out.println(permissions);
             HttpMethod method;
             if (userLikes) {
                 method = HttpMethod.DELETE;
@@ -696,7 +675,6 @@ public class GallerySwipeSingleFragment extends Fragment {
 
             }
             if (permissions.contains("publish_actions")) {
-                System.out.println("has publish actions");
                 Bundle params = new Bundle();
 
             /* make the API call */
@@ -705,7 +683,6 @@ public class GallerySwipeSingleFragment extends Fragment {
                         new Request.Callback() {
                             public void onCompleted(Response response) {
                                 try {
-                                    System.out.println(response.getError());
                                     boolean success = response.getGraphObject().getInnerJSONObject().getBoolean("success");
 
                                     if (success) {
