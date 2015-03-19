@@ -246,8 +246,9 @@
 
             <ImageView
                 android:id="@+id/like_post_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50"
+                android:layout_height="50"
+                android:layout_marginRight="7dp"
                 android:layout_marginTop="5dp" />
         </LinearLayout>
 
