@@ -41,7 +41,8 @@ dependencies {
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.daimajia.slider:library:1.1.2@aar'
     compile 'com.android.support:recyclerview-v7:21.0.0-rc1'
-    compile 'com.pkmmte.view:circularimageview:1.1'
+//    compile 'com.pkmmte.view:circularimageview:1.1'
+    compile 'de.hdodenhof:circleimageview:1.2.2'
     compile project(':facebook')
 
 }
