@@ -21,25 +21,10 @@
             android:orientation="vertical">
 
             <RelativeLayout
+                android:id="@+id/cardRelative"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-
-                <!--<com.pkmmte.view.CircularImageView-->
-                <!--android:id="@+id/image_area"-->
-                <!--android:layout_width="40dp"-->
-                <!--android:layout_height="40dp"-->
-                <!--android:layout_alignParentLeft="true"-->
-                <!--android:layout_marginLeft="5dp"-->
-                <!--android:layout_marginTop="5dp"-->
-                <!--android:paddingBottom="15dp"-->
-                <!--android:paddingLeft="15dp"-->
-                <!--android:paddingTop="4dp"-->
-                <!--app:border="true"-->
-                <!--app:border_color="#EEEEEE"-->
-                <!--app:border_width="4dp"-->
-                <!--app:shadow="true" />-->
-
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/image_area"

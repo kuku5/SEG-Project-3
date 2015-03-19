@@ -16,8 +16,7 @@ import java.util.ArrayList;
 
 /**
  * @author Team 3-J
- *This is the adapter that puts elements into the Gallery
- *
+ *         This is the adapter that puts elements into the Gallery
  */
 public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHolderVisited> {
 
@@ -34,21 +33,19 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
 
 
     /**
-     *
      * @param context
      * @param itemTouchListener
      * @param galleryData
      */
-    public VisitedAdapter(Context context, OnItemTouchListener itemTouchListener, ArrayList<Art> galleryData){
-        this.inflater=LayoutInflater.from(context);
-        this.context=context;
+    public VisitedAdapter(Context context, OnItemTouchListener itemTouchListener, ArrayList<Art> galleryData) {
+        this.inflater = LayoutInflater.from(context);
+        this.context = context;
         this.onItemTouchListener = itemTouchListener;
         this.galleryData = galleryData;
     }
 
 
     /**
-     *
      * @param parent
      * @param viewType
      * @return
@@ -64,7 +61,6 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
     }
 
     /**
-     *
      * @param position
      * @return
      */
@@ -75,7 +71,6 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
     }
 
     /**
-     *
      * @param holder
      * @param position
      */
@@ -83,14 +78,12 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
     public void onBindViewHolder(VisitedAdapter.MyViewHolderVisited holder, int position) {
 
 
-
         //add image and description to the view for each gallery item
         holder.txtLineOne.setText("" + galleryData.get(position).getName());
 
-        if(galleryData.get(position).getVisited() == true){
+        if (galleryData.get(position).getVisited() == true) {
             holder.visitedQuestion_textView.setText("Visited");
-        }
-        else if(galleryData.get(position).getVisited() == false) {
+        } else if (galleryData.get(position).getVisited() == false) {
             holder.visitedQuestion_textView.setText("Not Visited");
         }
 
@@ -104,13 +97,9 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
         // holder.art_info_area.setText("" + galleryData.get(position).getDesc());
 
 
-
-
-
     }
 
     /**
-     *
      * @return
      */
     @Override
@@ -120,7 +109,7 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
 
     //custom viewHolder for each item in recycle view
 
-    class MyViewHolderVisited extends RecyclerView.ViewHolder  {
+    class MyViewHolderVisited extends RecyclerView.ViewHolder {
         // view holder for each grid  cell
         TextView txtLineOne;
         TextView art_info_area;
@@ -128,8 +117,11 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
         TextView visitedQuestion_textView;
         RelativeLayout expandArea;
         ImageView image;
+        RelativeLayout cardRelative;
+        android.support.v7.widget.CardView card;
 
-        boolean expanded=true;
+        boolean expanded = true;
+
         public MyViewHolderVisited(View itemView, int viewType) {
             super(itemView);
 
@@ -139,36 +131,22 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
             image = (ImageView) itemView.findViewById(R.id.image_area);
             art_info_area = (TextView) itemView.findViewById(R.id.visited_description);
             art_address = (TextView) itemView.findViewById(R.id.art_address);
-            visitedQuestion_textView = (TextView)itemView.findViewById(R.id.visitedQuestion_textView);
-
-            if(expanded){
-                expandArea.setVisibility(View.GONE);
-
-                expanded=false;
-            }else{
-                expandArea.setVisibility(View.VISIBLE);
-                expanded=true;
-
-            }
+            visitedQuestion_textView = (TextView) itemView.findViewById(R.id.visitedQuestion_textView);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(expanded){
+                    if (expanded) {
                         expandArea.setVisibility(View.GONE);
-
-                        expanded=false;
-                    }else{
+                        expanded = false;
+                    } else {
                         expandArea.setVisibility(View.VISIBLE);
-                        expanded=true;
+                        expanded = true;
 
                     }
 
                 }
             });
-
-
-
 
 
         }
@@ -181,7 +159,6 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
     public interface OnItemTouchListener {
         public void onCardViewTap(View view, int position);
     }
-
 
 
 //    public void saveToFile(){
@@ -198,8 +175,6 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
 //        }
 //
 //    }
-
-
 
 
 }
