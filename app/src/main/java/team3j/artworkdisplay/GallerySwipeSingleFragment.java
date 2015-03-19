@@ -337,7 +337,7 @@ public class GallerySwipeSingleFragment extends Fragment {
                     if (user != null) {
                         commentListAdapter.nameChange(user.getFirstName());
                         userId = user.getId();
-                        getLikes();
+                        getLikes(); // vince : comment this out when using my new code
 
                     }
                 }

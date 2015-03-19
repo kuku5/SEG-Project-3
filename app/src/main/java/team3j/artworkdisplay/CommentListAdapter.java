@@ -184,6 +184,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                 }
             });
 
+            //vince : i would comment this block out when trying what i did
             if (numberOfLikesPost!= null) {
 
                 holder.likeFbPost.setText(numberOfLikesPost + " people like this." );
@@ -192,16 +193,16 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             } else {
                 holder.likeFbPost.setVisibility(View.GONE);
             }
-
+            // up to here
 
             String logout = "";
-            String numberOfLikesString = "";
+            //String numberOfLikesString = ""; // vince added
             final Session session = Session.getActiveSession();
             if(!(session==null) && session.isOpened()) {
-                //gallerySwipeSingleFragment.getLikes();
-                //numberOfLikesString = numberOfLikesPost + " people like this.";
+                //gallerySwipeSingleFragment.getLikes(); // vince added
+                //numberOfLikesString = numberOfLikesPost + " people like this.";// vince added
                 String viewComment = "View comments";
-                logout = "Logout of FB";
+                logout = "Logout of Facebook";
                 String htmlTextView = viewComment.replace("View", "<font color = '#009672'> View </font>");
                 commentAmount = htmlTextView;
                 checkIfLogIn = true;
@@ -217,15 +218,15 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                 commentAmount = data.size() + " comments";
             }
             holder.commentTitle.setText(Html.fromHtml(commentAmount));
-            //holder.likeFbPost.setText(numberOfLikesString);
+            //holder.likeFbPost.setText(numberOfLikesString); // vince added
             holder.logout.setText(Html.fromHtml("<font color = '#009672'>" + logout + "</font>"));
 
-            holder.likeFbPost.setOnClickListener(new View.OnClickListener() {
+            holder.likePostButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (isInternetAvailable()) {
-                        //gallerySwipeSingleFragment.getLikes();
-                        System.out.println("USER LIKES >>>>>>>>>>>>>" + userLikes);
+                        //gallerySwipeSingleFragment.getLikes(); // vince added
+                        System.out.println("USER LIKES >>>>>>>>>>>>>" + userLikes); // vince added
                         gallerySwipeSingleFragment.likePhotoPost(userLikes);
 
                     } else {
@@ -633,6 +634,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
      *
      */
     class MyViewHolder extends RecyclerView.ViewHolder {
+        private ImageView likePostButton;
         // view holder for each grid  cell
         private TextView posterName;
         private TextView logout;
@@ -701,6 +703,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
                     linkToFbPost = (TextView) itemView.findViewById(R.id.comment_list_fb_links);
                     likeFbPost = (TextView) itemView.findViewById(R.id.like_post);
+                    likePostButton = (ImageView) itemView.findViewById(R.id.like_post_icon);
 
                     //streetArtistTitle = (TextView) itemView.findViewById(R.id.comment_list_description_title_streetartwork);
                     //streetArtistTitleArtist = (TextView) itemView.findViewById(R.id.comment_list_description_title_artist_streetartist);

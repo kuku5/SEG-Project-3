@@ -209,9 +209,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_centerVertical="true"
             android:paddingLeft="10dp"
+            android:layout_toLeftOf="@+id/right_part_for_like"
 
             >
 
@@ -232,6 +233,23 @@
                 android:text="@string/more_info"
                 />
 
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/right_part_for_like">
+
+            <ImageView
+                android:id="@+id/like_post_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/ic_map" />
         </LinearLayout>
 
 
@@ -342,7 +360,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="6dp"
-            android:layout_marginLeft="25dp"
+            android:layout_marginLeft="50dp"
             android:layout_marginTop="6dp"
             android:textStyle="bold" />
 
