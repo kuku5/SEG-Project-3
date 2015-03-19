@@ -118,14 +118,6 @@ public class VisitedTabFragment extends Fragment implements MaterialTabListener 
     }
 
 
-    @Override
-    public void onStop() {
-
-       //visitedAdapter.recycleBitmap();
-
-        super.onStop();
-    }
-
 
 
 }

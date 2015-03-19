@@ -129,7 +129,7 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
         RelativeLayout expandArea;
         ImageView image;
 
-        boolean expanded=false;
+        boolean expanded=true;
         public MyViewHolderVisited(View itemView, int viewType) {
             super(itemView);
 
@@ -141,6 +141,15 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
             art_address = (TextView) itemView.findViewById(R.id.art_address);
             visitedQuestion_textView = (TextView)itemView.findViewById(R.id.visitedQuestion_textView);
 
+            if(expanded){
+                expandArea.setVisibility(View.GONE);
+
+                expanded=false;
+            }else{
+                expandArea.setVisibility(View.VISIBLE);
+                expanded=true;
+
+            }
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -191,12 +200,7 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
 //    }
 
 
-    public void recycleBitmap(){
 
-        bitmap1.recycle();
-        bitmap1 = null;
-        System.gc();
-    }
 
 }
 
