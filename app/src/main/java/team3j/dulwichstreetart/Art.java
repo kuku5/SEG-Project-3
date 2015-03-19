@@ -23,7 +23,7 @@ public class Art {
     private Boolean visited;
 
     /**
-     *  @param name
+     * @param name
      * @param artistName
      * @param inspirationTitle
      * @param inspirationArtist

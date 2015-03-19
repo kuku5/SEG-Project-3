@@ -91,7 +91,7 @@ public enum SessionState {
     /**
      * Returns a boolean indicating whether the state represents a successfully
      * opened state in which the Session can be used with a {@link Request}.
-     * 
+     *
      * @return a boolean indicating whether the state represents a successfully
      *         opened state in which the Session can be used with a
      *         {@link Request}.
@@ -103,7 +103,7 @@ public enum SessionState {
     /**
      * Returns a boolean indicating whether the state represents a closed
      * Session that can no longer be used with a {@link Request}.
-     * 
+     *
      * @return a boolean indicating whether the state represents a closed
      * Session that can no longer be used with a {@link Request}.
      */

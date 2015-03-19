@@ -12,7 +12,7 @@
     android:layout_below="@+id/com_facebook_tooltip_bubble_view_top_pointer"
     android:layout_centerHorizontal="true"
     android:background="@drawable/com_facebook_tooltip_blue_background">
-      <ImageView 
+      <ImageView
         android:id="@+id/com_facebook_button_xout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

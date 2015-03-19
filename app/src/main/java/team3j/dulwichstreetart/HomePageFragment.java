@@ -32,7 +32,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Timer;
 
 import twitter4j.Status;
 import twitter4j.Twitter;
@@ -43,34 +42,31 @@ import twitter4j.conf.ConfigurationBuilder;
 
 /**
  * @author Team 3-J
- * This is the fragment of the Homepage to be displayed in the tab
+ *         This is the fragment of the Homepage to be displayed in the tab
  */
 
 
 public class HomePageFragment extends Fragment {
 
-    private TextView textView;
+    Animation slide_in_left, slide_out_right;
     private CardView cardView;
     private CardView cardView2;
     private LinearLayout linearLayout;
     private ViewFlipper viewFlipper;
     private com.etsy.android.grid.util.DynamicHeightImageView aboutDulwich;
-
-
     private SliderLayout mDemoSlider;
-
-    Animation slide_in_left, slide_out_right;
     private DynamicHeightImageView mapButton;
 
-    private ArrayList<Status> todaysTweets ;
-
-    private TextView twitView1,twitView2, twitTime1, twitTime2;
+    private ArrayList<Status> todaysTweets;
+    private String twitterUser = "DulwichGallery";
+    private TextView twitView1, twitView2, twitTime1, twitTime2;
 
     private View layout;
 
 
     /**
      * return an instance of this Fragment with a bundle into the tab adapter
+     *
      * @param position
      * @return myFragmentTab
      */
@@ -90,7 +86,6 @@ public class HomePageFragment extends Fragment {
     }
 
     /**
-     *
      * @param inflater
      * @param container
      * @param savedInstanceState
@@ -100,32 +95,27 @@ public class HomePageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         //non facebook setup
-
         layout = inflater.inflate(R.layout.fragment_home_page, container, false);
 
         setRetainInstance(true);
 
-
         setupOnScreenElements(layout);
         //Get Today's Tweets
 
-            if (GalleryData.get().getTodaysTweets().isEmpty()) {
-                // Restore last state for checked position.
-                if (isOnline()) {
+        if (GalleryData.get().getTodaysTweets().isEmpty()) {
+            // Restore last state for checked position.
+            if (isOnline()) {
 
-                    getTweets();
-                    Log.d("tweets","online");
-
-                }
-            }else{
-                todaysTweets=GalleryData.get().getTodaysTweets();
-                Log.d("tweets","no tweets call");
-
-                setupTweetsAnimations(layout);
-
+                getTweets();
+                Log.d("tweets", "online");
 
             }
+        } else {
+            todaysTweets = GalleryData.get().getTodaysTweets();
+            Log.d("tweets", "no tweets call");
 
+            setupTweetsAnimations(layout);
+        }
 
 
         setupLibraryAnimations(layout);
@@ -153,10 +143,7 @@ public class HomePageFragment extends Fragment {
     }
 
 
-
-
     /**
-     *
      * @param requestCode
      * @param resultCode
      * @param data
@@ -169,15 +156,12 @@ public class HomePageFragment extends Fragment {
     }
 
     /**
-     *
      * @param layout
      */
     private void setupOnScreenElements(View layout) {
         cardView = (CardView) layout.findViewById(R.id.card_view_1_welcome1);
         cardView2 = (CardView) layout.findViewById(R.id.car_view_22);
         linearLayout = (LinearLayout) layout.findViewById(R.id.welcomeView);
-        //name = (TextView) layout.findViewById(R.id.atsymbol);
-        //name.setText("    @DulwichGallery      14h");
         mapButton = (DynamicHeightImageView) layout.findViewById(R.id.map_image);
 
 
@@ -198,15 +182,9 @@ public class HomePageFragment extends Fragment {
 
 
     /**
-     *
      * @param layout
      */
     public void setupTweetsAnimations(View layout) {
-
-        twitView1 = (TextView) layout.findViewById(R.id.DisplayTweet1);
-        twitView2 = (TextView) layout.findViewById(R.id.DisplayTweet2);
-        twitTime1 = (TextView) layout.findViewById(R.id.statusTime1);
-        twitTime2 = (TextView) layout.findViewById(R.id.statusTime2);
 
         Bundle bundle = getArguments();
 
@@ -231,48 +209,49 @@ public class HomePageFragment extends Fragment {
         viewFlipper.setInAnimation(slide_in_left);
         viewFlipper.setOutAnimation(slide_out_right);
 
-            viewFlipper.getInAnimation().setAnimationListener(new Animation.AnimationListener() {
-                int i = 0;
-                boolean t1 = false;
-                boolean welcomed = false;
+        twitView1 = (TextView) layout.findViewById(R.id.DisplayTweet1);
+        twitView2 = (TextView) layout.findViewById(R.id.DisplayTweet2);
+        twitTime1 = (TextView) layout.findViewById(R.id.statusTime1);
+        twitTime2 = (TextView) layout.findViewById(R.id.statusTime2);
 
-                public void onAnimationStart(Animation animation) {
-                    if(!todaysTweets.isEmpty()){
-                    if (i == 4) i = 0;
+        viewFlipper.getInAnimation().setAnimationListener(new Animation.AnimationListener() {
+            private final SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            int i = 0;
+            boolean t1 = false; // true if currently displaying twitView1
+            boolean welcomed = false;
+
+            public void onAnimationStart(Animation animation) {
+                if (!todaysTweets.isEmpty()) {
+                    if (i == todaysTweets.size()) i = 0;
 
                     if (t1 == false) {
                         twitView1.setText(todaysTweets.get(i).getText());
-                        //date.toGMTString().slice(0, -4)
-                        final SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-                        if(todaysTweets.get(i)!=null) {
-                                twitTime1.setText(df.format(todaysTweets.get(i).getCreatedAt()).toString());
-                                t1 = true;
+                        if (todaysTweets.get(i) != null) {
+                            twitTime1.setText(df.format(todaysTweets.get(i).getCreatedAt()).toString());
+                            t1 = true;
 
                         }
                         i++;
                     } else {
                         twitView2.setText(todaysTweets.get(i).getText());
-                        final SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-
                         twitTime2.setText(df.format(todaysTweets.get(i).getCreatedAt()).toString());
                         t1 = false;
                         i++;
                     }
-                    }
                 }
+            }
 
-                public void onAnimationRepeat(Animation animation) {
+            public void onAnimationRepeat(Animation animation) {
 
+            }
+
+            public void onAnimationEnd(Animation animation) {
+                if (!welcomed) {
+                    twitView2.setTextSize(12);
+                    welcomed = true;
                 }
-
-                public void onAnimationEnd(Animation animation) {
-                    if (!welcomed) {
-                        twitView2.setTextSize(12);
-                        welcomed = true;
-                    }
-                }
-            });
-
+            }
+        });
 
 
         cardView2.setOnClickListener(new View.OnClickListener() {
@@ -288,10 +267,7 @@ public class HomePageFragment extends Fragment {
     }
 
 
-
-
     /**
-     *
      * @param layout
      */
     private void setupLibraryAnimations(View layout) {
@@ -306,8 +282,6 @@ public class HomePageFragment extends Fragment {
         file_maps.put("Walter Kershaw", R.drawable.lowreswalterlandscape);
         file_maps.put("Stik", R.drawable.lowresstikthreeboys);
         file_maps.put("RUN", R.drawable.lowresrunstrita);
-
-
 
 
         for (String name : file_maps.keySet()) {
@@ -338,7 +312,7 @@ public class HomePageFragment extends Fragment {
 
 
     /**
-     *ShowMessage() - this method shows the about us information for the outdoor gallery in an
+     * ShowMessage() - this method shows the about us information for the outdoor gallery in an
      * AlertDialog
      */
     private void showMessage() {
@@ -363,7 +337,7 @@ public class HomePageFragment extends Fragment {
     }
 
     /**
-     *showMessagePictureGallery - this method shows the about information about the picture gallery
+     * showMessagePictureGallery() - this method shows the about information about the picture gallery
      */
     private void showMessagePictureGallery() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -389,15 +363,14 @@ public class HomePageFragment extends Fragment {
     }
 
     /**
-     *
+     * getTweets() - this method retrieves the latest 5 tweets from a twitter user
      */
     public void getTweets() {
 
-        Thread thread = new Thread(new Runnable(){
+        Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
 
-                //Date currentDate = new Date();
                 ConfigurationBuilder cb = new ConfigurationBuilder();
                 cb.setDebugEnabled(true) //authentication:
                         .setOAuthConsumerKey("5ZSHBFnviFgB1IVwBwO0ownXl")
@@ -407,29 +380,26 @@ public class HomePageFragment extends Fragment {
                 TwitterFactory tf = new TwitterFactory(cb.build());
                 Twitter twitter = tf.getInstance();
                 try {
-                    List<Status> statuses = twitter.getUserTimeline("DulwichGallery");
+                    List<Status> statuses = twitter.getUserTimeline(twitterUser);
                     Log.i("Status Count", statuses.size() + " Feeds");
 
                     String status;
                     int i = 0;
                     int c = 0;
 
-                    do {
+                    while (i < 20 && c < 6) {
                         status = statuses.get(i).getText();
-                        if(!status.substring(0,2).equals("RT") && !status.substring(0, 1).equals("@")) {
+                        if (!status.substring(0, 2).equals("RT") && !status.substring(0, 1).equals("@")) {
                             GalleryData.get().getTodaysTweets().add(statuses.get(i));
                             c++;
                         }
                         i++;
-                    } while (i<20 && c<5);
-                    //statuses.get(i).getCreatedAt().equals(currentDate)
-
-                    //fos.write(todaysTweets.get(0).getText().getBytes());
+                    }
 
                 } catch (TwitterException e) {
                     e.printStackTrace();
                 }
-                todaysTweets=GalleryData.get().getTodaysTweets();
+                todaysTweets = GalleryData.get().getTodaysTweets();
 
                 setupTweetsAnimations(layout);
 
@@ -441,8 +411,7 @@ public class HomePageFragment extends Fragment {
     }
 
     /**
-     *
-     * @return
+     * @return boolean value for whether or not devise is online.
      */
     public boolean isOnline() {
         ConnectivityManager cm =

@@ -31,7 +31,7 @@ public class FacebookException extends RuntimeException {
 
     /**
      * Constructs a new FacebookException.
-     * 
+     *
      * @param message
      *            the detail message of this exception
      */
@@ -41,7 +41,7 @@ public class FacebookException extends RuntimeException {
 
     /**
      * Constructs a new FacebookException.
-     * 
+     *
      * @param message
      *            the detail message of this exception
      * @param throwable
@@ -53,7 +53,7 @@ public class FacebookException extends RuntimeException {
 
     /**
      * Constructs a new FacebookException.
-     * 
+     *
      * @param throwable
      *            the cause of this exception
      */

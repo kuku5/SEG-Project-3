@@ -31,7 +31,7 @@ public class FacebookGraphObjectException extends FacebookException {
 
     /**
      * Constructs a new FacebookGraphObjectException.
-     * 
+     *
      * @param message
      *            the detail message of this exception
      */
@@ -41,7 +41,7 @@ public class FacebookGraphObjectException extends FacebookException {
 
     /**
      * Constructs a new FacebookGraphObjectException.
-     * 
+     *
      * @param message
      *            the detail message of this exception
      * @param throwable
@@ -53,7 +53,7 @@ public class FacebookGraphObjectException extends FacebookException {
 
     /**
      * Constructs a new FacebookGraphObjectException.
-     * 
+     *
      * @param throwable
      *            the cause of this exception
      */

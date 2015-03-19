@@ -25,14 +25,14 @@ package com.facebook.model;
 public interface GraphLocation extends GraphObject {
     /**
      * Returns the street component of the location.
-     * 
+     *
      * @return the street component of the location, or null
      */
     public String getStreet();
 
     /**
      * Sets the street component of the location.
-     * 
+     *
      * @param street
      *            the street component of the location, or null
      */
@@ -40,14 +40,14 @@ public interface GraphLocation extends GraphObject {
 
     /**
      * Gets the city component of the location.
-     * 
+     *
      * @return the city component of the location
      */
     public String getCity();
 
     /**
      * Sets the city component of the location.
-     * 
+     *
      * @param city
      *            the city component of the location
      */
@@ -55,14 +55,14 @@ public interface GraphLocation extends GraphObject {
 
     /**
      * Returns the state component of the location.
-     * 
+     *
      * @return the state component of the location
      */
     public String getState();
 
     /**
      * Sets the state component of the location.
-     * 
+     *
      * @param state
      *            the state component of the location
      */
@@ -70,14 +70,14 @@ public interface GraphLocation extends GraphObject {
 
     /**
      * Returns the country component of the location.
-     * 
+     *
      * @return the country component of the location
      */
     public String getCountry();
 
     /**
      * Sets the country component of the location
-     * 
+     *
      * @param country
      *            the country component of the location
      */
@@ -85,14 +85,14 @@ public interface GraphLocation extends GraphObject {
 
     /**
      * Returns the postal code component of the location.
-     * 
+     *
      * @return the postal code component of the location
      */
     public String getZip();
 
     /**
      * Sets the postal code component of the location.
-     * 
+     *
      * @param zip
      *            the postal code component of the location
      */
@@ -100,14 +100,14 @@ public interface GraphLocation extends GraphObject {
 
     /**
      * Returns the latitude component of the location.
-     * 
+     *
      * @return the latitude component of the location
      */
     public double getLatitude();
 
     /**
      * Sets the latitude component of the location.
-     * 
+     *
      * @param latitude
      *            the latitude component of the location
      */
@@ -115,14 +115,14 @@ public interface GraphLocation extends GraphObject {
 
     /**
      * Returns the longitude component of the location.
-     * 
+     *
      * @return the longitude component of the location
      */
     public double getLongitude();
 
     /**
      * Sets the longitude component of the location.
-     * 
+     *
      * @param longitude
      *            the longitude component of the location
      */

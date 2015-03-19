@@ -1036,11 +1036,11 @@ public class Session implements Serializable {
     public static Session openActiveSession(Activity activity, boolean allowLoginUI,
             List<String> permissions, StatusCallback callback) {
         return openActiveSession(
-                activity, 
-                allowLoginUI, 
+                activity,
+                allowLoginUI,
                 new OpenRequest(activity).setCallback(callback).setPermissions(permissions));
     }
-    
+
     /**
      * If allowLoginUI is true, this will create a new Session, make it active, and
      * open it. If the default token cache is not available, then this will request
@@ -1063,7 +1063,7 @@ public class Session implements Serializable {
             boolean allowLoginUI, StatusCallback callback) {
         return openActiveSession(context, allowLoginUI, new OpenRequest(fragment).setCallback(callback));
     }
-    
+
     /**
      * If allowLoginUI is true, this will create a new Session, make it active, and
      * open it. If the default token cache is not available, then this will request
@@ -1087,8 +1087,8 @@ public class Session implements Serializable {
     public static Session openActiveSession(Context context, Fragment fragment,
             boolean allowLoginUI, List<String> permissions, StatusCallback callback) {
         return openActiveSession(
-                context, 
-                allowLoginUI, 
+                context,
+                allowLoginUI,
                 new OpenRequest(fragment).setCallback(callback).setPermissions(permissions));
     }
 
