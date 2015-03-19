@@ -143,7 +143,6 @@ public class GallerySwipeSingleFragment extends Fragment {
             }
         };
         recyclerView.setLayoutManager(linearLayoutManager);
-        //recyclerView.smoothScrollToPosition(1);
         return layout;
     }
 
@@ -184,13 +183,11 @@ public class GallerySwipeSingleFragment extends Fragment {
      * @param customProcessDialog the process dialog
      */
     public void getFbData(final int code, final CustomProcessDialog customProcessDialog) {
-        //customProcessDialog.show();
         comments = new ArrayList<Comment>();
 
         Bundle b1 = new Bundle();
         b1.putBoolean("summary", true);     //includes a summary in the request
-        b1.putString("filter", "toplevel");
-        //b1.putString("filter", "stream");   //gets the chronological order of comments
+        b1.putString("filter", "toplevel");  //gets the chronological order of comments
         b1.putString("limit", "100");        //gets max of 100
         new Request(Session.getActiveSession(), facebookPostID + "/comments", b1, HttpMethod.GET,
                 new Request.Callback() {

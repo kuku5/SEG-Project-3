@@ -208,7 +208,6 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             String logout = "";
             final Session session = Session.getActiveSession();
             if(!(session==null) && session.isOpened()) {
-                gallerySwipeSingleFragment.getLikes();
                 String viewComment = "View comments and likes";
                 logout = "Logout (Facebook)";
                 String htmlTextView = viewComment.replace("View", "<font color = '#009672'> View </font>");
