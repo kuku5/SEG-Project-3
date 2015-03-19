@@ -32,7 +32,7 @@ public class FacebookAuthorizationException extends FacebookException {
 
     /**
      * Constructs a FacebookAuthorizationException with a message.
-     * 
+     *
      * @param message
      *            A String to be returned from getMessage.
      */
@@ -43,7 +43,7 @@ public class FacebookAuthorizationException extends FacebookException {
     /**
      * Constructs a FacebookAuthorizationException with a message and inner
      * error.
-     * 
+     *
      * @param message
      *            A String to be returned from getMessage.
      * @param throwable
@@ -55,7 +55,7 @@ public class FacebookAuthorizationException extends FacebookException {
 
     /**
      * Constructs a FacebookAuthorizationException with an inner error.
-     * 
+     *
      * @param throwable
      *            A Throwable to be returned from getCause.
      */

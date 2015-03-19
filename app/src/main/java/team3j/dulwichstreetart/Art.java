@@ -24,7 +24,7 @@ public class Art {
 
     /**
      * main constructor passing through art information -
-     *  @param name
+     * @param name
      * @param artistName
      * @param inspirationTitle
      * @param inspirationArtist

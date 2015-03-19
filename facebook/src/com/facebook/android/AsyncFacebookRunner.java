@@ -27,7 +27,7 @@ import java.net.MalformedURLException;
  * A sample implementation of asynchronous API requests. This class provides
  * the ability to execute API methods and have the call return immediately,
  * without blocking the calling thread. This is necessary when accessing the
- * API in the UI thread, for instance. The request response is returned to 
+ * API in the UI thread, for instance. The request response is returned to
  * the caller via a callback interface, which the developer must implement.
  *
  * This sample implementation simply spawns a new thread for each request,

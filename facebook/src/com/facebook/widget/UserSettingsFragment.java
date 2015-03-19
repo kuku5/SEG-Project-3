@@ -55,7 +55,7 @@ public class UserSettingsFragment extends FacebookFragment {
     private static final String ID = "id";
     private static final String PICTURE = "picture";
     private static final String FIELDS = "fields";
-    
+
     private static final String REQUEST_FIELDS = TextUtils.join(",", new String[] {ID, NAME, PICTURE});
 
     private LoginButton loginButton;
@@ -80,7 +80,7 @@ public class UserSettingsFragment extends FacebookFragment {
             loginButton.setSession(session);
         }
         connectedStateLabel = (TextView) view.findViewById(R.id.com_facebook_usersettingsfragment_profile_name);
-        
+
         // if no background is set for some reason, then default to Facebook blue
         if (view.getBackground() == null) {
             view.setBackgroundColor(getResources().getColor(R.color.com_facebook_blue));
@@ -365,7 +365,7 @@ public class UserSettingsFragment extends FacebookFragment {
             user = null;
         }
     }
-    
+
     private void updateUI() {
         if (!isAdded()) {
             return;
@@ -374,7 +374,7 @@ public class UserSettingsFragment extends FacebookFragment {
             connectedStateLabel.setTextColor(getResources().getColor(R.color.com_facebook_usersettingsfragment_connected_text_color));
             connectedStateLabel.setShadowLayer(1f, 0f, -1f,
                     getResources().getColor(R.color.com_facebook_usersettingsfragment_connected_shadow_color));
-            
+
             if (user != null) {
                 ImageRequest request = getImageRequest();
                 if (request != null) {

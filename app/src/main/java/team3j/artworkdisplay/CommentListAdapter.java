@@ -174,7 +174,6 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             holder.inspirationTitle.setText("\""+galleryData.get(indexOfArtwork).getInspirationTitle()+"\"");
             holder.inspirationTitleArtist.setText("By "+galleryData.get(indexOfArtwork).getInspirationArtist());
             Settings.sdkInitialize(context);
-
             holder.linkToFbPost.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -343,6 +342,8 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             if(commentInfo.getIsAReply()){
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 params.setMargins(75, 0, 0, 0);
+                //holder.likeIcon.getLayoutParams().height=30;
+                //holder.likeIcon.getLayoutParams().width=30;
                 holder.message.setTextSize(13);
                 holder.numberLikes.setTextSize(11);
                 holder.likeWord.setTextSize(11);
@@ -358,6 +359,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                     @Override
                     public void onClick(View v) {
                         if (isInternetAvailable()) {
+                            // TODO implement listener for replying to comment.
                             showCommentsDialog(commentInfo);
 
                         } else {
@@ -446,12 +448,6 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         onActivityResult(requestCode, resultCode, data);
         LikeView.handleOnActivityResult(context, requestCode, resultCode, data);
     }
-
-    /**
-     * Sets hyperlinks to take you to the requested link on facebook app
-     * @param link The link requested
-     * @param isPage if it is a "facebook page" or not
-     */
     public void linkToFb (String link, boolean isPage) {
         String facebookUrl = "https://www.facebook.com/"+link;
         try {
@@ -599,6 +595,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         builder.setTitle("Reply to " + commentInfo.getPosterName());
         builder.setMessage(commentInfo.getMessage());
         final EditText input = new EditText(context);
+        //input.setHorizontallyScrolling(false);
         input.setSingleLine(false);
         input.setMaxLines(3);
         input.setTextColor(Color.BLACK);
@@ -710,6 +707,9 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                     linkToFbPost = (TextView) itemView.findViewById(R.id.comment_list_fb_links);
                     likeFbPost = (TextView) itemView.findViewById(R.id.like_post);
                     likePostButton = (ImageView) itemView.findViewById(R.id.like_post_icon);
+
+                    //streetArtistTitle = (TextView) itemView.findViewById(R.id.comment_list_description_title_streetartwork);
+                    //streetArtistTitleArtist = (TextView) itemView.findViewById(R.id.comment_list_description_title_artist_streetartist);
 
                     commentTitle = (TextView) itemView.findViewById(R.id.commentAmount);
                     shareButton = (ImageView) itemView.findViewById(R.id.shareIcon);
@@ -839,9 +839,6 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         notifyDataSetChanged();
     }
 
-    /**
-     * Recycle bit map
-     */
     public void recycleBitmap(){
 
         bitmap.recycle();

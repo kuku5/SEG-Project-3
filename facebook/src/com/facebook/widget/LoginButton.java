@@ -59,19 +59,19 @@ import java.util.List;
  * the {@link #setSession(com.facebook.Session)} method.
  */
 public class LoginButton extends Button {
-    
+
     public static enum ToolTipMode {
         /**
          * Default display mode. A server query will determine if the tool tip should be displayed
          * and, if so, what the string shown to the user should be.
          */
         DEFAULT,
-        
+
         /**
-         * Display the tool tip with a local string--regardless of what the server returns 
+         * Display the tool tip with a local string--regardless of what the server returns
          */
         DISPLAY_ALWAYS,
-        
+
         /**
          * Never display the tool tip--regardless of what the server says
          */
@@ -259,7 +259,7 @@ public class LoginButton extends Button {
         parseAttributes(attrs);
         if (!isInEditMode()) {
             initializeActiveSessionWithCachedToken(context);
-        }        
+        }
     }
 
     /**
@@ -497,7 +497,7 @@ public class LoginButton extends Button {
     public Session.StatusCallback getSessionStatusCallback() {
         return properties.getSessionStatusCallback();
     }
-    
+
     /**
      * Sets the style (background) of the Tool Tip popup. Currently a blue style and a black
      * style are supported. Blue is default
@@ -506,7 +506,7 @@ public class LoginButton extends Button {
     public void setToolTipStyle(ToolTipPopup.Style nuxStyle) {
         this.nuxStyle = nuxStyle;
     }
-    
+
     /**
      * Sets the mode of the Tool Tip popup. Currently supported modes are default (normal
      * behavior), always_on (popup remains up until forcibly dismissed), and always_off (popup
@@ -516,7 +516,7 @@ public class LoginButton extends Button {
     public void setToolTipMode(ToolTipMode nuxMode) {
         this.nuxMode = nuxMode;
     }
-    
+
     /**
      * Return the current {@link ToolTipMode} for this LoginButton
      * @return The {@link ToolTipMode}
@@ -524,9 +524,9 @@ public class LoginButton extends Button {
     public ToolTipMode getToolTipMode() {
         return nuxMode;
     }
-    
+
     /**
-     * Sets the amount of time (in milliseconds) that the tool tip will be shown to the user. The 
+     * Sets the amount of time (in milliseconds) that the tool tip will be shown to the user. The
      * default is {@value ToolTipPopup#DEFAULT_POPUP_DISPLAY_TIME}. Any value that is less than or
      * equal to zero will cause the tool tip to be displayed indefinitely.
      * @param displayTime The amount of time (in milliseconds) that the tool tip will be displayed
@@ -535,7 +535,7 @@ public class LoginButton extends Button {
     public void setToolTipDisplayTime(long displayTime) {
         this.nuxDisplayTime = displayTime;
     }
-    
+
     /**
      * Gets the current amount of time (in ms) that the tool tip will be displayed to the user
      * @return
@@ -640,7 +640,7 @@ public class LoginButton extends Button {
             setButtonText();
         }
     }
-    
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -660,21 +660,21 @@ public class LoginButton extends Button {
 
 
     }
-    
+
     private void showNuxPerSettings(FetchedAppSettings settings) {
         if (settings != null && settings.getNuxEnabled() && getVisibility() == View.VISIBLE) {
             String nuxString = settings.getNuxContent();
             displayNux(nuxString);
         }
     }
-    
+
     private void displayNux(String nuxString) {
         nuxPopup = new ToolTipPopup(nuxString, this);
         nuxPopup.setStyle(nuxStyle);
         nuxPopup.setNuxDisplayTime(nuxDisplayTime);
         nuxPopup.show();
     }
-    
+
     private void checkNuxSettings() {
         if (nuxMode == ToolTipMode.DISPLAY_ALWAYS) {
             String nuxString = getResources().getString(R.string.com_facebook_tooltip_default);
