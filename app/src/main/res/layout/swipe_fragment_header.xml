@@ -154,8 +154,6 @@
                     android:padding="3dp">
 
 
-
-
                     <TextView
                         android:id="@+id/comment_list_description_title_artist"
                         android:layout_width="wrap_content"
