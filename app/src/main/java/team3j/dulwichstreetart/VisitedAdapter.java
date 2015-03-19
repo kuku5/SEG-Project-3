@@ -94,7 +94,7 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
             holder.visitedQuestion_textView.setText("Not Visited");
         }
 
-         bitmap1 = BitmapFactory.decodeResource(context.getResources(), galleryData.get(position).getPic());
+        bitmap1 = BitmapFactory.decodeResource(context.getResources(), galleryData.get(position).getPic());
         BitmapDrawable res1 = new BitmapDrawable(context.getResources(), bitmap1);
         holder.image.setImageDrawable(res1);
 
