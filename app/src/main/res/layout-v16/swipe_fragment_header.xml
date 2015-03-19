@@ -246,10 +246,10 @@
 
             <ImageView
                 android:id="@+id/like_post_icon"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginRight="7dp"
-                android:layout_marginTop="5dp" />
+                android:layout_marginTop="15dp" />
         </LinearLayout>
 
 
