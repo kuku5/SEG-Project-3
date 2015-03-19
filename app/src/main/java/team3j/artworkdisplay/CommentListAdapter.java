@@ -60,9 +60,6 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
     private final LayoutInflater inflater;
     private final int indexOfArtwork;
-    private final int Header_View_Type = 1;
-    private final int Comment_View_Type = 0;
-    private final int Post_View_Type = 2;
     private GallerySwipeSingleFragment gallerySwipeSingleFragment;
     private String commentAmount = null;
     private ArrayList<Comment> data;
@@ -70,6 +67,9 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
     private Context context;
     private Bitmap bitmap;
     private Bitmap bitmap1;
+    private final int Header_View_Type = 1;
+    private final int Comment_View_Type = 0;
+    private final int Post_View_Type = 2;
     private boolean checkIfLogIn = false;
     private String name;
     private OnMapButtonPressTouchListener onMapButtonPressTouchListener;
@@ -633,45 +633,6 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
     }
 
     /**
-     * Notifies when comments data has changed
-     * @param data The "new" data
-     */
-    public void commentsChanged(ArrayList<Comment> data){
-        this.data = data;
-        notifyDataSetChanged();
-    }
-
-    /**
-     * For the poster's name
-     * @param name Poster's name
-     */
-    public void nameChange(String name){
-        this.name = name;
-    }
-
-    public void likePostChange(String numberOfLikesPost, boolean userLikes){
-        this.userLikes = userLikes;
-        this.numberOfLikesPost = numberOfLikesPost;
-        notifyDataSetChanged();
-    }
-
-    public void recycleBitmap(){
-
-        bitmap.recycle();
-        bitmap = null;
-        bitmap1.recycle();
-        bitmap1 = null;
-        System.gc();
-    }
-
-    /**
-     * This is the Interface for allowing clicks to go to the maps
-     */
-    public interface OnMapButtonPressTouchListener {
-        public void onMapButtonPress( boolean filter, String name);
-    }
-
-    /**
      * Recycler view's details, based on the view type cases
      *
      */
@@ -845,6 +806,46 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         }
 
 
+    }
+
+    /**
+     * Notifies when comments data has changed
+     * @param data The "new" data
+     */
+    public void commentsChanged(ArrayList<Comment> data){
+        this.data = data;
+        notifyDataSetChanged();
+    }
+
+
+    /**
+     * This is the Interface for allowing clicks to go to the maps
+     */
+    public interface OnMapButtonPressTouchListener {
+        public void onMapButtonPress( boolean filter, String name);
+    }
+
+    /**
+     * For the poster's name
+     * @param name Poster's name
+     */
+    public void nameChange(String name){
+        this.name = name;
+    }
+
+    public void likePostChange(String numberOfLikesPost, boolean userLikes){
+        this.userLikes = userLikes;
+        this.numberOfLikesPost = numberOfLikesPost;
+        notifyDataSetChanged();
+    }
+
+    public void recycleBitmap(){
+
+        bitmap.recycle();
+        bitmap = null;
+        bitmap1.recycle();
+        bitmap1 = null;
+        System.gc();
     }
 
 }
