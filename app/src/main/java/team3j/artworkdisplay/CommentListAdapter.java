@@ -172,11 +172,6 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             holder.inspirationTitle.setText("\""+galleryData.get(indexOfArtwork).getInspirationTitle()+"\"");
             holder.inspirationTitleArtist.setText("By "+galleryData.get(indexOfArtwork).getInspirationArtist());
             Settings.sdkInitialize(context);
-            //holder.likeView.setLikeViewStyle(LikeView.Style.STANDARD);
-            //holder.likeView.setObjectId("https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xaf1/v/t1.0-9/s720x720/10405661_783165585098971_4975770454349316368_n.jpg?oh=c9abd7ef41b9693561dc7381539bf319&oe=55B84B51&__gda__=1438361014_3a3da4e0a308610d8f24c2a512190db8");
-            //holder.likeView.setObjectId("https://www.facebook.com/dulwichoutdoorgallerydisplay");
-            //holder.likeView.setObjectId("https://www.facebook.com/dulwichoutdoorgallerydisplay/photos/"+galleryData.get(indexOfArtwork).getFbLink());
-            //holder.likeView.setForegroundColor(-256);
             holder.linkToFbPost.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -186,22 +181,30 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
             //vince : i would comment this block out when trying what i did
             if (numberOfLikesPost!= null) {
+                if (userLikes) {
+                    holder.likePostButton.setImageResource(R.drawable.thumbsupfilled);
 
+                } else {
+                    holder.likePostButton.setImageResource(R.drawable.thumbsupholo);
+
+                }
                 holder.likeFbPost.setText(numberOfLikesPost + " people like this." );
                 holder.likeFbPost.setVisibility(View.VISIBLE);
+                holder.likePostButton.setVisibility(View.VISIBLE);
 
             } else {
+                holder.likePostButton.setVisibility(View.GONE);
                 holder.likeFbPost.setVisibility(View.GONE);
             }
             // up to here
-            if (userLikes) {
-                holder.likePostButton.setImageResource(R.drawable.thumbsupfilled);
-
-
-            } else {
-                holder.likePostButton.setImageResource(R.drawable.thumbsupholo);
-
-            }
+//            if (userLikes) {
+//                holder.likePostButton.setImageResource(R.drawable.thumbsupfilled);
+//
+//
+//            } else {
+//                holder.likePostButton.setImageResource(R.drawable.thumbsupholo);
+//
+//            }
 
             String logout = "";
             //String numberOfLikesString = ""; // vince added
@@ -209,14 +212,14 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             if(!(session==null) && session.isOpened()) {
                 //gallerySwipeSingleFragment.getLikes(); // vince added
                 //numberOfLikesString = numberOfLikesPost + " people like this.";// vince added
-                String viewComment = "View comments";
-                logout = "Logout of Facebook";
+                String viewComment = "View comments and likes";
+                logout = "Logout (Facebook)";
                 String htmlTextView = viewComment.replace("View", "<font color = '#009672'> View </font>");
                 commentAmount = htmlTextView;
                 checkIfLogIn = true;
             }
             else {
-                String login = "Log in to Facebook to view comments";
+                String login = "Log in to Facebook to view comments and likes";
                 String htmlTextLog = login.replace("Log in", "<font color = '#009672'> Log in </font>");
                 commentAmount = htmlTextLog;
                 checkIfLogIn = false;
