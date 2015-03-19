@@ -22,7 +22,7 @@
         android:background="@color/white">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
@@ -33,7 +33,7 @@
             <TextView
 
                 android:id="@+id/artist_title"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|left"
                 android:gravity="center_vertical"
@@ -72,15 +72,18 @@
         card_view:cardPreventCornerOverlap="false"
         card_view:contentPadding="8dp">
 
+
         <LinearLayout
             android:id="@+id/artist_list_item_relative"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:orientation="vertical"
+            android:visibility="gone"
             android:weightSum="1">
 
             <!--Circular image view is a holder that holds the images in a circular way-->
+
             <com.pkmmte.view.CircularImageView
                 android:id="@+id/artistPhoto"
                 android:layout_width="100dp"

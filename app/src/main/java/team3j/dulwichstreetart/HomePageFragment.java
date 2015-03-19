@@ -304,6 +304,10 @@ public class HomePageFragment extends Fragment {
         //file_maps - used to display images in the top homepage slider
         file_maps.put("Conor Harrington", R.drawable.lowresconorharrington);
         file_maps.put("Walter Kershaw", R.drawable.lowreswalterlandscape);
+        file_maps.put("Stik", R.drawable.lowresstikthreeboys);
+        file_maps.put("RUN", R.drawable.lowresrunstrita);
+
+
 
 
         for (String name : file_maps.keySet()) {
@@ -363,7 +367,7 @@ public class HomePageFragment extends Fragment {
      */
     private void showMessagePictureGallery() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("About Dulwich Picture Gallery");
+        builder.setTitle("About Dulwich Gallery");
         builder.setMessage(R.string.art_picture_gallery_about);
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override

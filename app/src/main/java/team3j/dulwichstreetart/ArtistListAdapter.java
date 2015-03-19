@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -103,6 +104,7 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
         ImageView artistPhoto;
         boolean expanded=false;
         CardView expandArea;
+        LinearLayout artist_list_item_relative;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -111,17 +113,20 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
             website = (TextView) itemView.findViewById(R.id.website);
             artistPhoto = (ImageView)itemView.findViewById(R.id.artistPhoto);
             expandArea= (CardView) itemView.findViewById(R.id.artist_list_card);
+            artist_list_item_relative = (LinearLayout) itemView.findViewById(R.id.artist_list_item_relative);
 
 
-            itemView.setOnClickListener(new View.OnClickListener() {
+            title.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(expanded){
                         expandArea.setVisibility(View.GONE);
-
+                        artist_list_item_relative.setVisibility(View.GONE);
                         expanded=false;
                     }else{
                         expandArea.setVisibility(View.VISIBLE);
+                        artist_list_item_relative.setVisibility(View.VISIBLE);
+
                         expanded=true;
 
                     }
