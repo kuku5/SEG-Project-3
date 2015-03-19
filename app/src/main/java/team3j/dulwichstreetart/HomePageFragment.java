@@ -363,7 +363,7 @@ public class HomePageFragment extends Fragment {
     }
 
     /**
-     * getTweets() - this method retrieves the latest 5 tweets from a twitter user
+     * getTweets() - this method retrieves the latest 5 tweets from a twitterUser
      */
     public void getTweets() {
 
