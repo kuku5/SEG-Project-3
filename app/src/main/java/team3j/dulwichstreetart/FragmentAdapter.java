@@ -32,8 +32,8 @@ public class FragmentAdapter extends FragmentStatePagerAdapter {
 
     /**
      * this gets the correct artwork fragment for each position in the viewpager
-     * @param i
-     * @return
+     * @param i item position
+     * @return position in the viewpager
      */
     @Override
     public Fragment getItem(int i) {
@@ -45,7 +45,7 @@ public class FragmentAdapter extends FragmentStatePagerAdapter {
 
     /**
      * this returns the count of the artwork
-     * @return
+     * @return the count of the artwork
      */
     //todo change this to final number
     @Override

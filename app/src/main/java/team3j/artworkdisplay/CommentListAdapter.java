@@ -218,6 +218,8 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                 String htmlTextLog = login.replace("Log in", "<font color = '#009672'> Log in </font>");
                 commentAmount = htmlTextLog;
                 checkIfLogIn = false;
+                holder.likePostButton.setVisibility(View.GONE);
+                holder.likeFbPost.setVisibility(View.GONE);
             }
             if(data.size() > 0){
 

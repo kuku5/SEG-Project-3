@@ -15,8 +15,7 @@ import java.util.ArrayList;
 
 /**
  * @author Team 3-J
- *         <p/>
- *         This is the Fragment for the artist layout
+ * This is the Fragment for the artist layout
  */
 
 
@@ -27,6 +26,7 @@ public class ArtistListFragment extends Fragment {
 
 
     /**
+     *
      * @param position
      * @return
      */
@@ -39,6 +39,7 @@ public class ArtistListFragment extends Fragment {
     }
 
     /**
+     * Creates the Artist fragment with the layous and adapter
      * @param inflater
      * @param container
      * @param savedInstanceState
