@@ -87,8 +87,6 @@ public class GalleryFragment extends Fragment {
         GalleryAdapter.OnItemTouchListener itemTouchListener = new GalleryAdapter.OnItemTouchListener() {
             @Override
             public void onCardViewTap(View view, int position) {
-                //tap the entire view
-                Toast.makeText(getActivity(), "Tapped " + position, Toast.LENGTH_SHORT).show();
                 //open Activity to display for Artwork Display
                 Intent i = new Intent(getActivity(), GallerySwipeHolder.class);
                 i.putExtra("indexOfArtWork", position);
