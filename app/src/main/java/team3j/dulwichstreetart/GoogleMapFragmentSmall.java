@@ -1,6 +1,7 @@
 package team3j.dulwichstreetart;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
@@ -19,6 +20,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -34,6 +36,8 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import team3j.artworkdisplay.GallerySwipeSingleFragment;
 
@@ -57,6 +61,7 @@ public class GoogleMapFragmentSmall extends Fragment {
     public static String name;
     private Marker filterMarker;
     private View v;
+    private Calendar currentDate = new GregorianCalendar();
 
 
     /**
@@ -130,7 +135,9 @@ public class GoogleMapFragmentSmall extends Fragment {
                 }else {
                     for(int i=0; i<artArrayList.size(); i++)
                     {
-
+                        //TODO: the funcional tolerence level is for testing only, the commented one above is the actual tolerence level
+                        //TODO: change before sending off!
+//                        double tolerance=0.000200;
                         double tolerance=1000;
                         //checks all locations
                         LatLng artLoc = artArrayList.get(i).getLoc();
@@ -150,7 +157,21 @@ public class GoogleMapFragmentSmall extends Fragment {
 //                                }
 
 
-                                artArrayList.get(i).setVisited();
+                                //artArrayList.get(i).setVisited();
+                                SplashActivity.artArrayList.get(i).setVisited();
+                                int date = currentDate.get(Calendar.DATE);
+                                int month = currentDate.get(Calendar.MONTH) +1;
+                                if(month == 13)
+                                {
+                                    month = 1;
+                                }
+                                int year = currentDate.get(Calendar.YEAR);
+
+                                //String date = Integer.toString(currentDate.get(Calendar.DATE))+ "/" + Integer.toString(currentDate.get(Calendar.MONTH))+ "/" + Integer.toString(currentDate.get(Calendar.YEAR));
+                                String fullDate = date + "/" + month + "/" + year;
+                                SplashActivity.artArrayList.get(i).setDateVisited(fullDate);
+                                updateVisited(i, fullDate);
+
 
                             }
                         }
@@ -341,16 +362,16 @@ public class GoogleMapFragmentSmall extends Fragment {
                 LatLng latLng = arg0.getPosition();
 
 
-                if (latLng.equals(new LatLng(51.452656, -0.102931))) {
-
-                    ImageView picView = (ImageView) v.findViewById(R.id.pic);
-                    Bitmap bitmap = BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.dulwichpicturegallery);
-                    BitmapDrawable res = new BitmapDrawable(getActivity().getResources(), bitmap);
-                    picView.setImageDrawable(res);
-                    TextView txtView = (TextView) v.findViewById(R.id.markerName);
-                    txtView.setText("The Inspiration Dulwich Picture Gallery 1811");
-
-                }
+//                if (latLng.equals(new LatLng(51.452656, -0.102931))) {
+//
+//                    ImageView picView = (ImageView) v.findViewById(R.id.pic);
+//                    Bitmap bitmap = BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.dulwichpicturegallery);
+//                    BitmapDrawable res = new BitmapDrawable(getActivity().getResources(), bitmap);
+//                    picView.setImageDrawable(res);
+//                    TextView txtView = (TextView) v.findViewById(R.id.markerName);
+//                    txtView.setText("The Inspiration Dulwich Picture Gallery 1811");
+//
+//                }
 
                 for (int i = 0; i < artArrayList.size(); i++) {
                     if (latLng.equals(artArrayList.get(i).getLoc())) {
@@ -426,6 +447,17 @@ public class GoogleMapFragmentSmall extends Fragment {
         InputStream buffer = new BufferedInputStream((assets.open("" + filename + ".jpg")));
         Bitmap bitmap = BitmapFactory.decodeStream(buffer);
         return new BitmapDrawable(context.getResources(), bitmap);
+    }
+
+
+    public void updateVisited(int index, String fullDate)
+    {
+        artArrayList.get(index).setVisited();
+        SharedPreferences visitedPref = getActivity().getSharedPreferences("VisitedList", Context.MODE_PRIVATE);
+        SharedPreferences datePref = getActivity().getSharedPreferences("VisitedDate", Context.MODE_PRIVATE);
+        visitedPref.edit().putBoolean(SplashActivity.artArrayList.get(index).getName(),true).apply();
+        datePref.edit().putString(SplashActivity.artArrayList.get(index).getName(), fullDate).apply();
+        Toast.makeText(this.getActivity(), "Updated", Toast.LENGTH_SHORT).show();
     }
 
 }

@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +16,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -88,9 +87,20 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
         //add image and description to the view for each gallery item
         holder.txtLineOne.setText("" + galleryData.get(position).getName());
 
-        if (galleryData.get(position).getVisited() == true) {
+//        if (galleryData.get(position).getVisited() == true) {
+//            holder.visitedQuestion_textView.setText("Visited");
+//        } else if (galleryData.get(position).getVisited() == false) {
+//            holder.visitedQuestion_textView.setText("Not Visited");
+//        }
+
+        if(SplashActivity.artArrayList.get(position).getVisited() == true){
             holder.visitedQuestion_textView.setText("Visited");
-        } else if (galleryData.get(position).getVisited() == false) {
+            holder.visitedCard.setCardBackgroundColor(context.getResources().getColor(R.color.colorHighlight));
+            holder.txtLineOne.setTextColor(context.getResources().getColor(R.color.white));
+            holder.visitedQuestion_textView.setTextColor(context.getResources().getColor(R.color.white));
+
+        }
+        else if(SplashActivity.artArrayList.get(position).getVisited() == false) {
             holder.visitedQuestion_textView.setText("Not Visited");
         }
 
@@ -101,6 +111,8 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        holder.visited_description.setText("You last visited this art on: " + SplashActivity.artArrayList.get(position).getDateVisited());
 
         holder.art_address.setText("Address: " + galleryData.get(position).getArtAddress());
 
@@ -132,10 +144,11 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
         TextView art_info_area;
         TextView art_address;
         TextView visitedQuestion_textView;
+        TextView visited_description;
         RelativeLayout expandArea;
         ImageView image;
         RelativeLayout cardRelative;
-        android.support.v7.widget.CardView card;
+        android.support.v7.widget.CardView visitedCard;
 
         boolean expanded = true;
 
@@ -149,6 +162,8 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
             art_info_area = (TextView) itemView.findViewById(R.id.visited_description);
             art_address = (TextView) itemView.findViewById(R.id.art_address);
             visitedQuestion_textView = (TextView) itemView.findViewById(R.id.visitedQuestion_textView);
+            visited_description = (TextView)itemView.findViewById(R.id.visited_description);
+            visitedCard = (CardView) itemView.findViewById(R.id.card_view_1_welcome1);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

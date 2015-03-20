@@ -2,9 +2,13 @@ package team3j.dulwichstreetart;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+
+import java.util.ArrayList;
 
 /**
  * @author Team 3-J
@@ -17,6 +21,7 @@ public class SplashActivity extends Activity {
 
 
     private long TIMER=500;
+    public static ArrayList<Art> artArrayList = GalleryData.create().GetGalleryData();
 
     /**
      * onCreate setups up the onscreen elements showing the splash logo
@@ -32,6 +37,17 @@ public class SplashActivity extends Activity {
         ////also read from txt file if it existed then continue
         //
        // GalleryData.get().getArtworkList()
+
+        if(initialRun())
+        {
+            initiateVisited();
+
+
+        }else
+        {
+            loadVisited();
+
+        }
 
         setContentView(R.layout.activity_splash);
 
@@ -49,6 +65,64 @@ public class SplashActivity extends Activity {
         }, TIMER);
 
 
+    }
+
+    private boolean initialRun()
+    {
+        SharedPreferences firstPref = getPreferences(MODE_PRIVATE);
+        boolean hasRun = firstPref.getBoolean("hasRun", false);
+        if (!hasRun) {
+            SharedPreferences.Editor editor = firstPref.edit();
+            editor.putBoolean("hasRun", true);
+            editor.commit();
+        }
+        return !hasRun;
+    }
+
+
+
+    public void initiateVisited()
+    {
+        SharedPreferences visitedPref = this.getSharedPreferences("VisitedList", Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = visitedPref.edit();
+
+        SharedPreferences datePref = this.getSharedPreferences("VisitedDate", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editDate = visitedPref.edit();
+
+        for(int i=0; i<artArrayList.size(); i++)
+        {
+            edit.putBoolean(artArrayList.get(i).getName(), false);
+            editDate.putString(artArrayList.get(i).getName(),"--/--/----");
+        }
+
+        edit.apply();
+        editDate.apply();
+        System.out.println("First time");
+
+
+    }
+
+
+    public void loadVisited()
+    {
+        SharedPreferences visitedPref = this.getSharedPreferences("VisitedList", Context.MODE_PRIVATE);
+        SharedPreferences datePref = this.getSharedPreferences("VisitedDate", Context.MODE_PRIVATE);
+        String date;
+        boolean hasVisit;
+        for(int i = 0; i<artArrayList.size(); i++)
+        {
+            hasVisit = visitedPref.getBoolean(artArrayList.get(i).getName(),false);
+            date = datePref.getString(artArrayList.get(i).getName(), "--/--/----");
+            if(hasVisit == true)
+            {
+                artArrayList.get(i).setVisited();
+                artArrayList.get(i).setDateVisited(date);
+            }
+
+
+            System.out.println("Not First time");
+
+        }
     }
 
 

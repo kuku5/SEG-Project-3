@@ -21,6 +21,7 @@ public class Art {
     private String fbLink;
     private String artAddress;
     private Boolean visited;
+    private String dateVisited;
 
     /**
      * main constructor passing through art information -
@@ -36,12 +37,13 @@ public class Art {
      * @param artAddress the address of the artwork
      * @param visited whether the user has visited the artwork or not
      * @param webLinks array of extra links associated to the artist
+     * @param  dateVisited date once the art work is visited
      */
 
 
     //main constructor passing through art information -
 
-    public Art(String name, String artistName, String inspirationTitle, String inspirationArtist, String desc, String pic, String inspiredPic, LatLng loc, String fbLink, String artAddress, Boolean visited, String[] webLinks){
+    public Art(String name, String artistName, String inspirationTitle, String inspirationArtist, String desc, String pic, String inspiredPic, LatLng loc, String fbLink, String artAddress, Boolean visited, String[] webLinks, String dateVisited){
         this.name=name;
         this.artistName = artistName;
         this.desc=desc;
@@ -54,6 +56,7 @@ public class Art {
         this.artAddress = artAddress;
         this.visited = visited;
         this.webLinks=webLinks;
+        this.dateVisited = dateVisited;
     }
 
     /**
@@ -151,4 +154,16 @@ public class Art {
     public String[] getWebLinks() {
         return webLinks;
     }
+
+    /**
+     * Gets the date when the art-work was visited
+     * @return
+     */
+    public String getDateVisited(){ return dateVisited;}
+
+    /**
+     * Sets the date of the visited artwork. Default is "--/--/----"
+     * @param newDate
+     */
+    public void setDateVisited(String newDate){this.dateVisited = newDate;}
 }
