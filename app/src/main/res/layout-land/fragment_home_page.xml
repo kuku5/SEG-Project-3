@@ -313,9 +313,10 @@
                                     />
                                 <ImageView
                                     android:layout_width="20dp"
+                                    android:id="@+id/twitterbird"
                                     android:layout_height="20dp"
                                     android:layout_gravity="right"
-                                    android:src="@drawable/twitterbird"/>
+                                    />
                             </LinearLayout>
 
 
@@ -354,7 +355,6 @@
                             android:id="@+id/aboutDulwich"
                             android:layout_width="fill_parent"
                             android:layout_height="100dp"
-                            android:src="@drawable/dulwichpicturegallery"
                             android:layout_centerInParent="true"
                             android:scaleType="centerCrop"
                             android:adjustViewBounds="true"
@@ -398,7 +398,6 @@
                             android:id="@+id/map_image"
                             android:layout_width="fill_parent"
                             android:layout_height="100dp"
-                            android:src="@drawable/mapbannersquare"
                             android:layout_centerInParent="true"
                             android:scaleType="centerCrop"
                             android:adjustViewBounds="true"

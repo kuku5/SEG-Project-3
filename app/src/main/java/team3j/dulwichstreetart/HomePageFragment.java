@@ -176,7 +176,7 @@ public class HomePageFragment extends Fragment {
     public static Drawable getAssetImage(Context context, String filename) throws IOException {
         AssetManager assets = context.getResources().getAssets();
         String exte=".jpg";
-        if(filename.contains("twit")){
+        if(filename.contains("twitterbird")){
             exte=".png";
         }
         InputStream buffer = new BufferedInputStream((assets.open("" + filename + exte)));
