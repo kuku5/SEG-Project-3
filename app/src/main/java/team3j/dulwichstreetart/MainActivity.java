@@ -73,7 +73,7 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
         viewPager.setOffscreenPageLimit(10);
 
 
-        tabHost.setPrimaryColor(getResources().getColor(R.color.white));
+        tabHost.setPrimaryColor(getResources().getColor(R.color.colorAccentReal));
         //adds the titles to each tab and changes colors of text
 
         for (int i = 0; i < adapter.getCount(); i++) {
@@ -85,10 +85,10 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
                             .setTabListener(this);
             tabHost.addTab(materialTab);
 
-            materialTab.setTextColor(getResources().getColor(R.color.colorAccentReal));
+            materialTab.setTextColor(getResources().getColor(R.color.white));
 
         }
-        tabHost.setAccentColor(getResources().getColor(R.color.colorAccentReal));
+        tabHost.setAccentColor(getResources().getColor(R.color.white));
     }
 
 

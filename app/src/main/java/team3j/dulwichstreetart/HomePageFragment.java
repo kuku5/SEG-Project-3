@@ -289,7 +289,7 @@ public class HomePageFragment extends Fragment {
             textSliderView
                     .description(name)
                     .image(file_maps.get(name))
-                    .setScaleType(BaseSliderView.ScaleType.FitCenterCrop);
+                    .setScaleType(BaseSliderView.ScaleType.Fit);
             //add your extra information
             textSliderView.getBundle()
                     .putString("extra", name);
