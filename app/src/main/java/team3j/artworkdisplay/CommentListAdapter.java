@@ -163,6 +163,20 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         Bitmap bitmap = BitmapFactory.decodeStream(buffer);
         return new BitmapDrawable(context.getResources(), bitmap);
     }
+    public static Bitmap getBitmapAssetImage(Context context, String filename) throws IOException {
+        AssetManager assets = context.getResources().getAssets();
+
+        if(filename.equals("ic_map")||filename.equals("ic_share")){
+            filename+=".png";
+        }else {
+            filename+=".jpg";
+
+        }
+        InputStream buffer = new BufferedInputStream((assets.open(filename)));
+
+        Bitmap bitmap = BitmapFactory.decodeStream(buffer);
+        return bitmap;
+    }
     @TargetApi(Build.VERSION_CODES.GINGERBREAD)
     @Override
     // The details of/actions of the layout depending on which layout is at that position
@@ -804,7 +818,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                                 output = new FileOutputStream(file);
 
                                 // Compress into png format image from 0% - 100%
-                                bitmap.compress(Bitmap.CompressFormat.PNG, 100, output);
+                                getBitmapAssetImage(context,galleryData.get(indexOfArtwork).getInspiredPic()).compress(Bitmap.CompressFormat.PNG, 100, output);
                                 output.flush();
                                 output.close();
 
