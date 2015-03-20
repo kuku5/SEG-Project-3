@@ -137,8 +137,8 @@ public class GoogleMapFragmentSmall extends Fragment {
                     {
                         //TODO: the funcional tolerence level is for testing only, the commented one above is the actual tolerence level
                         //TODO: change before sending off!
-//                        double tolerance=0.000200;
-                        double tolerance=1000;
+                         double tolerance=0.000250;
+
                         //checks all locations
                         LatLng artLoc = artArrayList.get(i).getLoc();
                         if((googleMap.getMyLocation().getLatitude()<= artLoc.latitude + tolerance) && (googleMap.getMyLocation().getLatitude()>= artLoc.latitude - tolerance) )

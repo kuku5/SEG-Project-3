@@ -8,6 +8,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,7 +69,7 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
         //add data to for each layout of the list
 
         holder.title.setText(data.get(position).getName());
-        holder.description.setText(data.get(position).getDescription());
+        holder.description.setText(Html.fromHtml(data.get(position).getDescription()));
         holder.website.setText(data.get(position).getWebsite());
 
         try {

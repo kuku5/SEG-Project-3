@@ -87,7 +87,7 @@ public class SplashActivity extends Activity {
         SharedPreferences.Editor edit = visitedPref.edit();
 
         SharedPreferences datePref = this.getSharedPreferences("VisitedDate", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editDate = visitedPref.edit();
+        SharedPreferences.Editor editDate = datePref.edit();
 
         for(int i=0; i<artArrayList.size(); i++)
         {
