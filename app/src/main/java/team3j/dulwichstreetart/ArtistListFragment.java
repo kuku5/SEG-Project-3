@@ -39,7 +39,7 @@ public class ArtistListFragment extends Fragment {
     }
 
     /**
-     * Creates the Artist fragment with the layous and adapter
+     * Creates the Artist fragment with the layouts and adapter
      * @param inflater
      * @param container
      * @param savedInstanceState

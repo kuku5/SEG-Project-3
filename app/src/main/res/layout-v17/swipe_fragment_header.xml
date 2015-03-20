@@ -26,6 +26,7 @@
             android:layout_height="wrap_content"
             android:maxHeight="400dp"
             android:layout_gravity="center"
+            android:src="@drawable/lowresconorharrington"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
             />
@@ -42,6 +43,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorAccentReal"
+        android:minHeight="?attr/actionBarSize"
+
         >
         <LinearLayout
             android:layout_width="wrap_content"
@@ -62,7 +65,7 @@
                 android:gravity="center_vertical"
                 android:maxLines="2"
                 android:paddingLeft="4dp"
-                android:paddingStart="4dp"
+
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="12sp"
@@ -79,7 +82,7 @@
                 android:gravity="center_vertical"
                 android:maxLines="2"
                 android:paddingLeft="4dp"
-                android:paddingStart="4dp"
+
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="14sp"
@@ -90,27 +93,27 @@
 
         </LinearLayout>
 
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentRight="true"
-    android:layout_alignParentEnd="true"
-    android:id="@+id/right_part">
-
-        <ImageView
-            android:id="@+id/shareIcon"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-             />
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/right_part">
 
-        <ImageView
-            android:id="@+id/mapIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-             />
-</LinearLayout>
+            <ImageView
+                android:id="@+id/shareIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/ic_share" />
+
+            <ImageView
+                android:id="@+id/mapIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/ic_map" />
+        </LinearLayout>
 
     </RelativeLayout>
     <!--layout for title bar below  end -->
@@ -122,80 +125,77 @@
         android:orientation="vertical"
         android:layout_margin="5dp"
         >
-    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/artwork_display_description"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        card_view:cardBackgroundColor="@android:color/white"
-        card_view:cardCornerRadius="0dp">
-
-        <LinearLayout
+        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/artwork_display_description"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="horizontal"
-            android:padding="3dp">
-
-            <com.etsy.android.grid.util.DynamicHeightImageView
-                android:id="@+id/inspiration_artwork"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="0dp"
-                android:adjustViewBounds="true"
-                android:background="@color/superlightgrey"
-                android:scaleType="fitStart"
-                android:visibility="visible" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            card_view:cardBackgroundColor="@android:color/white"
+            card_view:cardCornerRadius="0dp">
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:padding="3dp">
 
-
-
-
-                <TextView
-                    android:id="@+id/comment_list_description_title_artist"
-                    android:layout_width="wrap_content"
+                <com.etsy.android.grid.util.DynamicHeightImageView
+                    android:id="@+id/inspiration_artwork"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center|left"
-                    android:gravity="center_vertical"
-                    android:maxLines="2"
-                    android:paddingLeft="0dp"
-                    android:paddingStart="0dp"
-                    android:textAllCaps="true"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:text="@string/artist_title"
-                    />
+                    android:layout_marginBottom="0dp"
+                    android:adjustViewBounds="true"
+                    android:background="@color/superlightgrey"
+                    android:scaleType="fitStart"
+                    android:visibility="visible" />
 
-                <TextView
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical"
+                    android:padding="3dp">
 
-                    android:id="@+id/comment_list_description_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center|left"
-                    android:gravity="center_vertical"
-                    android:maxLines="2"
-                    android:paddingLeft="0dp"
-                    android:paddingStart="0dp"
-                    android:textAllCaps="true"
-                    android:textSize="12sp"
-                    android:textStyle="italic"
 
-                    android:text="@string/artist_title"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/description"
-                    android:text="AP is the only stencil artist in this project. Once cut, stencil paintings can be reproduced easily, by anyone.  The work of art AP chose to interpret was a sketch by Rubens, highly prized because it is by him alone, whereas the finished piece would have had a great deal of workshop input.  "
-                    android:textSize="11sp" />
+                    <TextView
+                        android:id="@+id/comment_list_description_title_artist"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|left"
+                        android:gravity="center_vertical"
+                        android:maxLines="2"
+                        android:paddingLeft="0dp"
+
+                        android:textAllCaps="true"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:text="@string/artist_title"
+                        />
+
+                    <TextView
+
+                        android:id="@+id/comment_list_description_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|left"
+                        android:gravity="center_vertical"
+                        android:maxLines="2"
+                        android:paddingLeft="0dp"
+                        android:textAllCaps="true"
+                        android:textSize="12sp"
+                        android:textStyle="italic"
+
+                        android:text="@string/artist_title"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/description"
+                        android:text="AP is the only stencil artist in this project. Once cut, stencil paintings can be reproduced easily, by anyone.  The work of art AP chose to interpret was a sketch by Rubens, highly prized because it is by him alone, whereas the finished piece would have had a great deal of workshop input.  "
+                        android:textSize="11sp" />
+                </LinearLayout>
+
             </LinearLayout>
-
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
+        </android.support.v7.widget.CardView>
 
 
     </LinearLayout>
@@ -252,12 +252,11 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginRight="7dp"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="10dp" />
         </LinearLayout>
 
 
     </RelativeLayout>
-
 
     <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/moreInfoLinksCard"
@@ -278,23 +277,23 @@
 
             <!--<TextView-->
 
-                <!--android:id="@+id/comment_list_more_info_links_title"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="center|left"-->
-                <!--android:gravity="center_vertical"-->
-                <!--android:maxLines="2"-->
-                <!--android:paddingLeft="4dp"-->
-                <!--android:paddingStart="4dp"-->
-                <!--android:paddingTop="10dp"-->
-                <!--android:textAllCaps="true"-->
-                <!--android:textSize="12sp"-->
-                <!--android:textStyle="italic"-->
+            <!--android:id="@+id/comment_list_more_info_links_title"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center|left"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:maxLines="2"-->
+            <!--android:paddingLeft="4dp"-->
+            <!--android:paddingStart="4dp"-->
+            <!--android:paddingTop="10dp"-->
+            <!--android:textAllCaps="true"-->
+            <!--android:textSize="12sp"-->
+            <!--android:textStyle="italic"-->
 
-                <!--android:text="@string/more_info"-->
-                <!--/>-->
+            <!--android:text="@string/more_info"-->
+            <!--/>-->
             <TextView
-                android:textSize="14sp"
+                android:textSize="15sp"
                 android:autoLink="web"
                 android:id="@+id/comment_list_more_info_links"
                 android:layout_width="fill_parent"
@@ -302,7 +301,6 @@
                 android:layout_gravity="center|left"
                 android:gravity="center_vertical"
                 android:paddingLeft="4dp"
-
                 android:maxLines="5"
 
                 />
@@ -315,10 +313,9 @@
                 android:gravity="center_vertical"
                 android:maxLines="2"
                 android:paddingLeft="4dp"
-                android:paddingStart="4dp"
                 android:paddingBottom="1dp"
                 android:textAllCaps="true"
-                android:textSize="15sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 android:textColor="@color/com_facebook_blue"
                 android:text="See this on Facebook!"
@@ -333,7 +330,7 @@
                 android:gravity="center_vertical"
                 android:maxLines="2"
                 android:paddingLeft="4dp"
-                android:paddingStart="4dp"
+                android:paddingRight="0dp"
                 android:paddingBottom="1dp"
                 android:textAllCaps="true"
                 android:textSize="14sp"
@@ -367,6 +364,7 @@
             android:id="@+id/logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
             android:layout_marginBottom="6dp"
             android:layout_marginLeft="40dp"
             android:layout_marginTop="6dp"

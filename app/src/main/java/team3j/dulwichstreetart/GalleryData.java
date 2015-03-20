@@ -20,8 +20,6 @@ import twitter4j.Status;
 public class GalleryData {
 
 
-    public static ArrayList<Art> visited = new ArrayList<>();
-    public static ArrayList<Art> toVisit = new ArrayList<>();
     private  ArrayList<Status> todaysTweets ;
     private ArrayList<Art> artworkList;
     private static GalleryData mGalleryData;
@@ -51,7 +49,7 @@ public class GalleryData {
     }
 
     /**
-     *
+     * create one static list of gallery data
      * @return
      */
     public static GalleryData create() {
@@ -75,7 +73,6 @@ public class GalleryData {
      * Gets data of all the artwork, by setting them into an arraylist to return
      * @return data of artwork
      */
-
 
     public ArrayList<Art> GetGalleryData() {
 

@@ -30,7 +30,7 @@ public class GalleryFragment extends Fragment {
 
 
     /**
-     *
+     * This returns an Instance of Gallery Fragment to be displayed in Gallery Tab
      * @param position
      * @return
      */

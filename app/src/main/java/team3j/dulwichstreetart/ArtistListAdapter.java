@@ -82,6 +82,7 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
 
     }
 
+
     public static Drawable getAssetImage(Context context, String filename) throws IOException {
         AssetManager assets = context.getResources().getAssets();
         InputStream buffer = new BufferedInputStream((assets.open("" + filename + ".jpg")));
@@ -90,7 +91,7 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
     }
 
     /**
-     * Size of the view
+     * this method returns the number of items in the Artist list
      * @return
      */
     @Override

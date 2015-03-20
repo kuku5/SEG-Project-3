@@ -151,7 +151,15 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
     public static Drawable getAssetImage(Context context, String filename) throws IOException {
         AssetManager assets = context.getResources().getAssets();
-        InputStream buffer = new BufferedInputStream((assets.open("" + filename + ".jpg")));
+
+        if(filename.equals("ic_map")||filename.equals("ic_share")){
+            filename+=".png";
+        }else {
+            filename+=".jpg";
+
+        }
+        InputStream buffer = new BufferedInputStream((assets.open(filename)));
+
         Bitmap bitmap = BitmapFactory.decodeStream(buffer);
         return new BitmapDrawable(context.getResources(), bitmap);
     }
@@ -167,7 +175,9 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             try {
 
                 holder.dynamicHeightImageView.setImageDrawable(getAssetImage(context,galleryData.get(indexOfArtwork).getPic()));
-                holder.inspirationArtworkImageView.setImageDrawable(getAssetImage(context,galleryData.get(indexOfArtwork).getPic()));
+                holder.inspirationArtworkImageView.setImageDrawable(getAssetImage(context,galleryData.get(indexOfArtwork).getInspiredPic()));
+                holder.shareButton.setImageDrawable(getAssetImage(context,"ic_share"));
+                holder.mapButton.setImageDrawable(getAssetImage(context,"ic_map"));
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -712,6 +722,9 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
                     descriptionTitle = (TextView) itemView.findViewById(R.id.comment_list_description_title);
                     descriptionTitleArtist = (TextView) itemView.findViewById(R.id.comment_list_description_title_artist);
+
+                    likePostButton = (ImageView) itemView.findViewById(R.id.shareIcon);
+
 
                     inspirationTitle = (TextView) itemView.findViewById(R.id.comment_list_inspiration_title);
                     inspirationTitleArtist = (TextView) itemView.findViewById(R.id.comment_list_inspiration_title_artist);

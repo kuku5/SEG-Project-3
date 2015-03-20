@@ -42,7 +42,7 @@ import twitter4j.conf.ConfigurationBuilder;
 
 /**
  * @author Team 3-J
- *         This is the fragment of the Homepage to be displayed in the tab
+ * This is the fragment of the Homepage to be displayed in the tab
  */
 
 
@@ -79,13 +79,10 @@ public class HomePageFragment extends Fragment {
         return myFragmentTab;
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putInt("curChoice", 1);
-    }
+
 
     /**
+     * onCreateView sets up the layout
      * @param inflater
      * @param container
      * @param savedInstanceState
@@ -412,7 +409,7 @@ public class HomePageFragment extends Fragment {
     }
 
     /**
-     * @return boolean value for whether or not devise is online.
+     * @return boolean value for whether or not device is online.
      */
     public boolean isOnline() {
         ConnectivityManager cm =
