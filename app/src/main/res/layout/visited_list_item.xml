@@ -12,7 +12,7 @@
         android:layout_gravity="center"
         android:layout_margin="4dp"
         android:animateLayoutChanges="true"
-        card_view:cardBackgroundColor="#EEEEEE"
+        card_view:cardBackgroundColor="#fffbfbfb"
         card_view:cardCornerRadius="4dp">
 
         <LinearLayout
