@@ -39,9 +39,9 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
     /**
      * This is the Constructor for the Gallery adapter and takes the gallery data and click listeners as parameters
      * so they can be used to setup the recycler view
-     * @param context
-     * @param galleryData
-     * @param itemTouchListener
+     * @param context activity
+     * @param galleryData arraylist of gallery information
+     * @param itemTouchListener listener for clicking in gallery tab
      */
     public GalleryAdapter(Context context,ArrayList<Art> galleryData, OnItemTouchListener itemTouchListener){
         this.inflater=LayoutInflater.from(context);
@@ -240,7 +240,6 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
 
 
 
-
     /**
      * interface need for Recycle Views to handle clicks
      */
@@ -251,7 +250,6 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
     /**
      *
      */
-
     class BitmapWorkerTask extends AsyncTask<Integer, Void, Bitmap> {
         private final WeakReference<ImageView> imageViewReference;
         private int data = 0;
