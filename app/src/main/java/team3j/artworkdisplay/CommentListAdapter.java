@@ -240,7 +240,17 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                     holder.likePostButton.setImageDrawable(likeunpressed);
 
                 }
-                holder.likeFbPost.setText(numberOfLikesPost + " people like this.");
+                String people = "";
+                if (Integer.parseInt(numberOfLikesPost) == 1) {
+                    holder.likeFbPost.setText(numberOfLikesPost + " person likes this.");
+
+                } else if (Integer.parseInt(numberOfLikesPost) == 0) {
+                    holder.likeFbPost.setText("No one likes this yet. Be the first!");
+                }
+
+                else {
+                    holder.likeFbPost.setText(numberOfLikesPost + " people like this.");
+                }
                 holder.likeFbPost.setVisibility(View.VISIBLE);
                 holder.likePostButton.setVisibility(View.VISIBLE);
 
