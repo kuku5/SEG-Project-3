@@ -18,7 +18,6 @@ import java.util.ArrayList;
  * This is the Fragment for the artist layout
  */
 
-
 public class ArtistListFragment extends Fragment {
 
     private RecyclerView recyclerView;
