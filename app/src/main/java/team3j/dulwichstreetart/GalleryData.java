@@ -26,20 +26,34 @@ public class GalleryData {
     private ArrayList<Art> artworkList;
     private static GalleryData mGalleryData;
 
-
+    /**
+     * Gets the data of all the artworks
+     * @return
+     */
     public static GalleryData get() {
         return mGalleryData;
     }
 
+    /**
+     * Constructs a GalleryData
+     */
     public GalleryData() {
         artworkList=GetGalleryData();
         todaysTweets=new ArrayList<>();
     }
 
+    /**
+     * Get tweets
+     * @return tweets
+     */
     public ArrayList<Status> getTodaysTweets() {
         return todaysTweets;
     }
 
+    /**
+     *
+     * @return
+     */
     public static GalleryData create() {
         if (mGalleryData == null) {
             mGalleryData = new GalleryData();
@@ -48,12 +62,19 @@ public class GalleryData {
         return mGalleryData;
     }
 
+    /**
+     * List of artwork information
+     * @return arraylist of artwork information
+     */
     public ArrayList<Art> getArtworkList() {
         return artworkList;
     }
 
 
-
+    /**
+     * Gets data of all the artwork, by setting them into an arraylist to return
+     * @return data of artwork
+     */
     public ArrayList<Art> GetGalleryData() {
 
 
@@ -107,8 +128,11 @@ public class GalleryData {
     }
 
 
-
-
+    /**
+     * Gets data of all the artists, by setting them into an arraylist to return
+     * @param context activity
+     * @return array of artist information
+     */
     public static ArrayList<Artist> GetArtistsDataReal(Activity context) {
         final ArrayList<Artist> data = new ArrayList<Artist>();
 
