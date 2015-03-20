@@ -24,8 +24,9 @@ public class SplashActivity extends Activity {
     public static ArrayList<Art> artArrayList = GalleryData.create().GetGalleryData();
 
     /**
-     * onCreate setups up the onscreen elements showing the splash logo
-     * also sets up static instance of GalleryData to be used through out the app
+     * onCreate setups up the onscreen elements showing the splash logo.
+     * also sets up static instance of GalleryData to be used through out the app.
+     * Calls methods to check if the application has been run for the first time.
      * @param savedInstanceState
      */
     @Override
@@ -33,11 +34,8 @@ public class SplashActivity extends Activity {
         super.onCreate(savedInstanceState);
         //create Gallery Data instance
         GalleryData.create();
-        //loop thorugh all
-        ////also read from txt file if it existed then continue
-        //
-       // GalleryData.get().getArtworkList()
 
+        //call to method to check first-time run of application
         if(initialRun())
         {
             initiateVisited();
@@ -67,6 +65,10 @@ public class SplashActivity extends Activity {
 
     }
 
+    /**
+     * Checks if the user has opened/started the app for the first time.
+     * @return boolean value defining if the app has been run before. If it returns false then it has been run.
+     */
     private boolean initialRun()
     {
         SharedPreferences firstPref = getPreferences(MODE_PRIVATE);
@@ -80,7 +82,11 @@ public class SplashActivity extends Activity {
     }
 
 
-
+    /**
+     * Initialises the two shared preferences needed in the functionality of the visited tab-
+     * visitedPref and datePref
+     * This only runs the first time the app is opened
+     */
     public void initiateVisited()
     {
         SharedPreferences visitedPref = this.getSharedPreferences("VisitedList", Context.MODE_PRIVATE);
@@ -102,7 +108,9 @@ public class SplashActivity extends Activity {
 
     }
 
-
+    /**
+     * On reopening the app the values stored in the shared preferences are reloaded into the artArrayList
+     */
     public void loadVisited()
     {
         SharedPreferences visitedPref = this.getSharedPreferences("VisitedList", Context.MODE_PRIVATE);

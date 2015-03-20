@@ -334,6 +334,7 @@ public class GoogleMapFragmentSmall extends Fragment {
 
 
 
+
         googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
 
             // Use default InfoWindow frame
@@ -350,48 +351,46 @@ public class GoogleMapFragmentSmall extends Fragment {
                 v = getActivity().getLayoutInflater().inflate(R.layout.infowindow, null);
 
 
-
-
                 LatLng latLng = arg0.getPosition();
 
 
-//                if (latLng.equals(new LatLng(51.452656, -0.102931))) {
-//
-//                    ImageView picView = (ImageView) v.findViewById(R.id.pic);
-//                    Bitmap bitmap = BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.dulwichpicturegallery);
-//                    BitmapDrawable res = new BitmapDrawable(getActivity().getResources(), bitmap);
-//                    picView.setImageDrawable(res);
-//                    TextView txtView = (TextView) v.findViewById(R.id.markerName);
-//                    txtView.setText("The Inspiration Dulwich Picture Gallery 1811");
-//
-//                }
+                if (latLng.equals(new LatLng(51.445988, -0.0863601))) {
 
-                for (int i = 0; i < artArrayList.size(); i++) {
-                    if (latLng.equals(artArrayList.get(i).getLoc())) {
+                    ImageView picView = (ImageView) v.findViewById(R.id.pic);
 
-                        ImageView picView = (ImageView) v.findViewById(R.id.pic);
+                    try {
+                        picView.setImageDrawable(getAssetImage(getActivity(),"dulwichpicturegallery"));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
 
-                        try {
-                            picView.setImageDrawable(getAssetImage(getActivity(),artArrayList.get(i).getPic()));
+                    TextView txtView = (TextView) v.findViewById(R.id.markerName);
+                    txtView.setText("The Inspiration Dulwich Picture Gallery 1811");
 
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                }else {
+
+                    for (int i = 0; i < artArrayList.size(); i++) {
+                        if (latLng.equals(artArrayList.get(i).getLoc())) {
+
+                            ImageView picView = (ImageView) v.findViewById(R.id.pic);
+
+                            try {
+                                picView.setImageDrawable(getAssetImage(getActivity(), artArrayList.get(i).getPic()));
+
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            TextView txtView = (TextView) v.findViewById(R.id.markerName);
+                            txtView.setText(artArrayList.get(i).getName());
+
+
                         }
-                        TextView txtView = (TextView) v.findViewById(R.id.markerName);
-                        txtView.setText(artArrayList.get(i).getName());
-
 
 
                     }
 
-
                 }
-
-
-
                 return v;
-
-
 
 
             }

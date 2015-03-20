@@ -39,7 +39,7 @@ public class FragmentAdapter extends FragmentStatePagerAdapter {
      */
     @Override
     public int getCount() {
-        return 22;
+        return GalleryData.get().getArtworkList().size();
     }
 
 }
