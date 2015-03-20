@@ -19,11 +19,57 @@
         android:background="@color/superlightgrey"
         android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccentReal"
+            android:orientation="horizontal"
+            android:padding="0dp"
+            android:minHeight="?attr/actionBarSize"
+            android:layout_gravity="top"
+            android:id="@+id/toolbar_quick_return"
+            >
+
+            <ImageButton
+                android:id="@+id/back_button"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@android:color/transparent"
+                android:clickable="true"
+                android:padding="12dp"
+                android:src="@drawable/ic_action_back"
+                android:tint="@color/white"
+                />
+
+            <TextView
+
+                android:id="@+id/position"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center|left"
+                android:layout_weight="0.8"
+                android:maxLines="1"
+                android:padding="12dp"
+                android:layout_marginTop="2dp"
+
+                android:text="@string/hello_world"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:background="@color/colorAccentReal"
+                />
+
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+
+
             <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="fill_parent"
@@ -37,49 +83,6 @@
                     android:layout_marginBottom="0dp" />
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorAccentReal"
-                    android:orientation="horizontal"
-                    android:padding="0dp"
-                    android:minHeight="?attr/actionBarSize"
-                    android:layout_gravity="top"
-                    android:id="@+id/toolbar_quick_return"
-                    >
-
-                    <ImageButton
-                        android:id="@+id/back_button"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:background="@android:color/transparent"
-                        android:clickable="true"
-                        android:padding="12dp"
-                        android:src="@drawable/ic_action_back"
-                        android:tint="@color/white"
-                        />
-
-                    <TextView
-
-                        android:id="@+id/position"
-                        android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
-                        android:layout_gravity="center|left"
-                        android:layout_weight="0.8"
-                        android:maxLines="1"
-                        android:padding="12dp"
-                        android:layout_marginTop="2dp"
-
-                        android:text="@string/hello_world"
-                        android:textAllCaps="true"
-                        android:textColor="@color/white"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:background="@color/colorAccentReal"
-                        />
-
-
-                </LinearLayout>
 
 
             </FrameLayout>

@@ -1,7 +1,13 @@
 package team3j.artworkdisplay;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -29,6 +35,9 @@ import com.facebook.model.GraphUser;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -117,6 +126,13 @@ public class GallerySwipeSingleFragment extends Fragment {
         backButton=(ImageButton) layout.findViewById(R.id.back_button);
 
 
+        try {
+            backButton.setImageDrawable(getAssetImage(getActivity(),"ic_action_back"));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -143,6 +159,17 @@ public class GallerySwipeSingleFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
         return layout;
     }
+
+    public static Drawable getAssetImage(Context context, String filename) throws IOException {
+        AssetManager assets = context.getResources().getAssets();
+
+           String exte=".png";
+
+        InputStream buffer = new BufferedInputStream((assets.open("" + filename + exte)));
+        Bitmap bitmap = BitmapFactory.decodeStream(buffer);
+        return new BitmapDrawable(context.getResources(), bitmap);
+    }
+
 
     /**
      * The action of the map button on the fragment
