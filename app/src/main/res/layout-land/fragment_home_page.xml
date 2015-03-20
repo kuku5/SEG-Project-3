@@ -421,8 +421,10 @@
 
                 </android.support.v7.widget.CardView>
 
-            </LinearLayout>
 
+
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -457,10 +459,12 @@
                     ></com.facebook.widget.LikeView>
 
 
+
+
             </LinearLayout>
 
-        </LinearLayout>
 
+        </LinearLayout>
     </ScrollView>
 
 </LinearLayout>
