@@ -102,7 +102,7 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
 
 
     /**
-     *  this method gets when a tab is reselected
+     *  this method gets when a tab is reselected by the user
      * @param materialTab
      */
     @Override
