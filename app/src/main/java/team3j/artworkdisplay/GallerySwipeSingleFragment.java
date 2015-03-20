@@ -1,13 +1,7 @@
 package team3j.artworkdisplay;
 
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.AssetManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -35,9 +29,6 @@ import com.facebook.model.GraphUser;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -198,7 +189,7 @@ public class GallerySwipeSingleFragment extends Fragment {
         Bundle b1 = new Bundle();
         b1.putBoolean("summary", true);     //includes a summary in the request
         b1.putString("filter", "toplevel");  //gets the chronological order of comments
-        b1.putString("limit", "100");        //gets max of 100
+        b1.putString("limit", "10000");        //gets max of 100
         new Request(Session.getActiveSession(), facebookPostID + "/comments", b1, HttpMethod.GET,
                 new Request.Callback() {
                     public void onCompleted(Response response) {
@@ -220,14 +211,14 @@ public class GallerySwipeSingleFragment extends Fragment {
                                     }
                                     //Setting comment information such as; number of likes, message, time, url of the post etc..
                                     Comment commentInfo = new Comment();
-                                    commentInfo.setNumberLikes((int)data.getJSONObject(i).getInt("like_count"));
+                                    commentInfo.setNumberLikes(data.getJSONObject(i).getInt("like_count"));
                                     commentInfo.setPosterURL(data.getJSONObject(i).getJSONObject("from").get("id").toString());
                                     commentInfo.setPosterName(data.getJSONObject(i).getJSONObject("from").get("name").toString());
                                     commentInfo.setMessage(data.getJSONObject(i).get("message").toString());
                                     commentInfo.setTime(data.getJSONObject(i).get("created_time").toString());
                                     commentInfo.setCommentID(data.getJSONObject(i).get("id").toString());
-                                    commentInfo.setUserLikes((Boolean) data.getJSONObject(i).get("user_likes"));
-                                    commentInfo.setCanDelete((Boolean) data.getJSONObject(i).get("can_remove"));
+                                    commentInfo.setUserLikes(data.getJSONObject(i).getBoolean("user_likes"));
+                                    commentInfo.setCanDelete(data.getJSONObject(i).getBoolean("can_remove"));
                                     commentInfo.setIsPage(isPage);
                                     commentInfo.setIsAReply(false);
                                     comments.add(commentInfo); //adding the comment information to array
@@ -289,14 +280,14 @@ public class GallerySwipeSingleFragment extends Fragment {
                                                         continue;
                                                     }
                                                     Comment commentInfo = new Comment();
-                                                    commentInfo.setNumberLikes((int)data.getJSONObject(i).getInt("like_count"));
+                                                    commentInfo.setNumberLikes(data.getJSONObject(i).getInt("like_count"));
                                                     commentInfo.setPosterURL(data.getJSONObject(i).getJSONObject("from").get("id").toString());
                                                     commentInfo.setPosterName(data.getJSONObject(i).getJSONObject("from").get("name").toString());
                                                     commentInfo.setMessage(data.getJSONObject(i).get("message").toString());
                                                     commentInfo.setTime(data.getJSONObject(i).get("created_time").toString());
                                                     commentInfo.setCommentID(data.getJSONObject(i).get("id").toString());
-                                                    commentInfo.setUserLikes((Boolean) data.getJSONObject(i).get("user_likes"));
-                                                    commentInfo.setCanDelete((Boolean) data.getJSONObject(i).get("can_remove"));
+                                                    commentInfo.setUserLikes(data.getJSONObject(i).getBoolean("user_likes"));
+                                                    commentInfo.setCanDelete(data.getJSONObject(i).getBoolean("can_remove"));
                                                     commentInfo.setIsPage(isPage);
                                                     commentInfo.setIsAReply(true);
                                                     replyComments.add(commentInfo);
@@ -379,27 +370,6 @@ public class GallerySwipeSingleFragment extends Fragment {
     private void onSessionStateChange(Session session, SessionState state, Exception exception) {
         Session.setActiveSession(session);
 
-        if(state.equals(SessionState.OPENED_TOKEN_UPDATED)){
-
-            System.out.println(session.getPermissions());
-//            if(session.isPermissionGranted("publish_actions")) {
-//                if (facebookCode == 1) {
-//                    postComment(comment, commentID);
-//                    facebookCode = 10;
-//                    comment = null;
-//                    commentID = null;
-//                } else if (facebookCode == 2) {
-//                    deleteComment(commentID);
-//                    facebookCode = 10;
-//                    commentID = null;
-//                } else if (facebookCode == 3) {
-//                    likeComment(commentID, userLikes);
-//                    facebookCode = 10;
-//                    commentID = null;
-//
-//                }
-//            }
-        }
         if (state.isOpened()) {
             //If logged in
             //Loads comments after login
@@ -411,14 +381,13 @@ public class GallerySwipeSingleFragment extends Fragment {
 
         } else if (state.isClosed()) {
             //If logged out
-
         }
 
     }
 
 
     /**
-     *
+     * Checks if any session changes have occured and notify data changes
      * @param isVisibleToUser
      */
     @Override
@@ -432,10 +401,6 @@ public class GallerySwipeSingleFragment extends Fragment {
                 if((session==null) || session.isClosed()) {
                     commentListAdapter.commentsChanged(new ArrayList<Comment>());
                     commentListAdapter.likePostChange(null,false);
-                }
-                else {
-//                    session.removeCallback(statusCallback);
-//                    session.addCallback(statusCallback);
                 }
             }
         }
@@ -478,8 +443,6 @@ public class GallerySwipeSingleFragment extends Fragment {
                 //Request posting permissions
                 dialog.hide();
                 Session.getActiveSession().requestNewPublishPermissions(new Session.NewPermissionsRequest(this, Arrays.asList("publish_actions")));
-                //TODO something after the request been made
-
                 this.comment = comment;
                 this.commentID = commentID;
                 facebookCode = 1;
@@ -492,10 +455,10 @@ public class GallerySwipeSingleFragment extends Fragment {
     }
 
     /**
-     *
-     * @param requestCode
-     * @param resultCode
-     * @param data
+     * Handles results from any facebook dialog and recalls the method which was used to invoke the dialog
+     * @param requestCode request code of result
+     * @param resultCode result code of result
+     * @param data Any data from the result
      */
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -569,7 +532,6 @@ public class GallerySwipeSingleFragment extends Fragment {
                 //Request posting permissions
                 dialog.hide();
                 Session.getActiveSession().requestNewPublishPermissions(new Session.NewPermissionsRequest(this, Arrays.asList("publish_actions")));
-                //TODO something after the request been made
                 this.commentID = commentID;
                 facebookCode = 2;
 
@@ -626,7 +588,6 @@ public class GallerySwipeSingleFragment extends Fragment {
             } else {
                 //Request posting permissions
                 Session.getActiveSession().requestNewPublishPermissions(new Session.NewPermissionsRequest(this, Arrays.asList("publish_actions")));
-                //TODO something after the request been made
                 facebookCode = 3;
                 this.commentID = commentID;
                 this.userLikes = userLikes;
@@ -636,22 +597,19 @@ public class GallerySwipeSingleFragment extends Fragment {
     }
 
     /**
-     *
-     *
+     * Gets the number of likes on a post as well as if the user likes the post
      */
     public void getLikes(){
         Bundle b1 = new Bundle();
         b1.putBoolean("summary", true);     //includes a summary in the request
         b1.putString("filter", "toplevel");
-        //b1.putString("filter", "stream");   //gets the chronological order of comments
-        b1.putString("limit", "100");        //gets max of 100
+        b1.putString("limit", "10000");        //gets max of 100
         new Request(Session.getActiveSession(), facebookPostID + "/likes" , b1, HttpMethod.GET,
                 new Request.Callback() {
                     public void onCompleted(Response response) {
                         if (response != null) {
                             try {
-                                //TODO error checking (if post has more then 100 likes we'll get index out of bound error)
-                                int numberOfLikes = response.getGraphObject().getInnerJSONObject().getJSONObject("summary").getInt("total_count");
+                                int numberOfLikes = response.getGraphObject().getInnerJSONObject().getJSONArray("data").length();
                                 boolean userLikes = false;
                                 for(int i = 0; i < numberOfLikes; i++){
                                     if(response.getGraphObject().getInnerJSONObject().getJSONArray("data").getJSONObject(i).get("id").equals(userId)){
@@ -660,20 +618,20 @@ public class GallerySwipeSingleFragment extends Fragment {
                                     }
                                 }
                                 commentListAdapter.likePostChange(Integer.toString(numberOfLikes), userLikes);
-
-
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
                         }
                     }
                 }).executeAsync();
-
     }
 
+    /**
+     * Likes and delikes the facebook post
+     * @param userLikes true if user likes, false if not
+     */
     public void likePhotoPost(boolean userLikes) {
         if(checkIfActiveSession()) {
-
             Session session = Session.getActiveSession();
 
             //Might not be able to use this method to get permissions
@@ -696,9 +654,7 @@ public class GallerySwipeSingleFragment extends Fragment {
                             public void onCompleted(Response response) {
                                 try {
                                     boolean success = response.getGraphObject().getInnerJSONObject().getBoolean("success");
-
                                     if (success) {
-
                                         getLikes();
                                     }
 
@@ -713,7 +669,6 @@ public class GallerySwipeSingleFragment extends Fragment {
             } else {
                 //Request posting permissions
                 Session.getActiveSession().requestNewPublishPermissions(new Session.NewPermissionsRequest(this, Arrays.asList("publish_actions")));
-                //TODO something after the request been made
                 facebookCode = 4;
                 this.userLikes = userLikes;
             }
