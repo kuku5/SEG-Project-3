@@ -286,7 +286,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                 @Override
                 public void onClick(View v) {
                     if (isInternetAvailable()) {
-                        showLogoutDialog(session);
+                        showLogoutDialog();
                     }
                     else {
                         Toast.makeText(gallerySwipeSingleFragment.getActivity(), "No internet connection available", Toast.LENGTH_SHORT).show();
@@ -624,9 +624,8 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
     /**
      * Shows a FB Logout confirmation dialog
-     * @param session The session that is currently running
      */
-    private void showLogoutDialog(final Session session) {
+    private void showLogoutDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(gallerySwipeSingleFragment.getActivity());
         builder.setTitle("Log out of Facebook");
         builder.setMessage(R.string.logout_fb);
