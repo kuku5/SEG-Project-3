@@ -87,7 +87,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
      */
     public CommentListAdapter(GallerySwipeSingleFragment gallerySwipeSingleFragment, Context context, int position,ArrayList<Art> galleryData,OnMapButtonPressTouchListener onMapButtonPressTouchListener) {
 
-        data = new ArrayList<Comment>();
+        data = new ArrayList<>();
         this.galleryData=galleryData;
         inflater = LayoutInflater.from(context);
         this.context = context;
@@ -185,8 +185,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         }
         InputStream buffer = new BufferedInputStream((assets.open(filename)));
 
-        Bitmap bitmap = BitmapFactory.decodeStream(buffer);
-        return bitmap;
+        return BitmapFactory.decodeStream(buffer);
     }
 
     /**
@@ -255,20 +254,17 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             if(!(session==null) && session.isOpened()) {
                 String viewComment = "View comments and likes";
                 logout = "Logout (Facebook)";
-                String htmlTextView = viewComment.replace("View", "<font color = '#009672'> View </font>");
-                commentAmount = htmlTextView;
+                commentAmount = viewComment.replace("View", "<font color = '#009672'> View </font>");
                 checkIfLogIn = true;
             }
             else {
                 String login = "Log in to Facebook to view comments and likes";
-                String htmlTextLog = login.replace("Log in", "<font color = '#009672'> Log in </font>");
-                commentAmount = htmlTextLog;
+                commentAmount = login.replace("Log in", "<font color = '#009672'> Log in </font>");
                 checkIfLogIn = false;
                 holder.likePostButton.setVisibility(View.GONE);
                 holder.likeFbPost.setVisibility(View.GONE);
             }
             if(data.size() > 0){
-
                 commentAmount = data.size() + " comments";
             }
             holder.commentTitle.setText(Html.fromHtml(commentAmount));
@@ -290,7 +286,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                 @Override
                 public void onClick(View v) {
                     if (isInternetAvailable()) {
-                        showLogoutDialog(session);
+                        showLogoutDialog();
                     }
                     else {
                         Toast.makeText(gallerySwipeSingleFragment.getActivity(), "No internet connection available", Toast.LENGTH_SHORT).show();
@@ -448,7 +444,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             int minute = Integer.parseInt(commentInfo.getTime().substring(14, 16));
             Calendar postDate = GregorianCalendar.getInstance();
             postDate.set(year, month, day, hour, minute);
-            Map<TimeUnit, Long> timeSincePost = getTimeDifference(postDate.getTime(), new Date());
+            Map<TimeUnit, Long> timeSincePost = getTimeDifference(postDate.getTime());
 
             if (timeSincePost.get(TimeUnit.DAYS) > 0 && timeSincePost.get(TimeUnit.DAYS) < 8) {
                 if (timeSincePost.get(TimeUnit.DAYS) == 1) {
@@ -477,10 +473,11 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        onActivityResult(requestCode, resultCode, data);
-        LikeView.handleOnActivityResult(context, requestCode, resultCode, data);
-    }
+    /**
+     * Opens a link in the facebook app if it is installed on the users phone else it will open on a web browser
+     * @param link
+     * @param isPage
+     */
     public void linkToFb (String link, boolean isPage) {
         String facebookUrl = "https://www.facebook.com/"+link;
         try {
@@ -497,7 +494,6 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                     uri = Uri.parse("fb://facewebmodal/f?href=" + facebookUrl);
 
                 }
-
                 context.startActivity(new Intent(Intent.ACTION_VIEW, uri));
             } else {
                 // open the Facebook app using the old method (fb://profile/id or fb://page/id)
@@ -519,14 +515,18 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         }
     }
 
-
-    //Calculates difference between two dates and returns as Map containing keys for DAY, HOURS, MINUTES, SECONDS, MILLISECONDS etc etc...
-    public Map<TimeUnit, Long> getTimeDifference(Date date1, Date date2) {
+    /**
+     * Calculates difference between two dates and returns as Map containing keys for DAY, HOURS, MINUTES, SECONDS, MILLISECONDS etc etc...
+     * @param date1 Date of Facebook comment
+     * @return Difference in date and time between comment and current time
+     */
+    public Map<TimeUnit, Long> getTimeDifference(Date date1) {
+        Date date2 = new Date();
         long diffInMill = date2.getTime() - date1.getTime();
         List<TimeUnit> units = new ArrayList<TimeUnit>(EnumSet.allOf(TimeUnit.class));
         Collections.reverse(units);
 
-        Map<TimeUnit, Long> result = new LinkedHashMap<TimeUnit, Long>();
+        Map<TimeUnit, Long> result = new LinkedHashMap<>();
         long millRest = diffInMill;
         for (TimeUnit unit : units) {
             long diff = unit.convert(millRest, TimeUnit.MILLISECONDS);
@@ -535,6 +535,41 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             result.put(unit, diff);
         }
         return result;
+    }
+    /**
+     * Notifies when comments data has changed
+     * @param data The "new" data
+     */
+    public void commentsChanged(ArrayList<Comment> data){
+        this.data = data;
+        notifyDataSetChanged();
+    }
+
+
+    /**
+     * This is the Interface for allowing clicks to go to the maps
+     */
+    public interface OnMapButtonPressTouchListener {
+        public void onMapButtonPress( boolean filter, String name);
+    }
+
+    /**
+     * Changes the poster's name
+     * @param name Poster's name
+     */
+    public void nameChange(String name){
+        this.name = name;
+    }
+
+    /**
+     * Changes the number of likes and whether the user likes the post
+     * @param numberOfLikesPost Number of likes on the facebook post
+     * @param userLikes true if user likes the post
+     */
+    public void likePostChange(String numberOfLikesPost, boolean userLikes){
+        this.userLikes = userLikes;
+        this.numberOfLikesPost = numberOfLikesPost;
+        notifyDataSetChanged();
     }
 
     /**
@@ -589,20 +624,19 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
     /**
      * Shows a FB Logout confirmation dialog
-     * @param session The session that is currently running
      */
-    private void showLogoutDialog(final Session session) {
+    private void showLogoutDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(gallerySwipeSingleFragment.getActivity());
         builder.setTitle("Log out of Facebook");
         builder.setMessage(R.string.logout_fb);
         builder.setPositiveButton("Log out", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if (session.getActiveSession() != null) {
-                    session.getActiveSession().closeAndClearTokenInformation();
+                if (Session.getActiveSession() != null) {
+                    Session.getActiveSession().closeAndClearTokenInformation();
                 }
 
-                session.setActiveSession(null);
+                Session.setActiveSession(null);
                 numberOfLikesPost = null;
                 data.clear();
                 notifyDataSetChanged();
@@ -628,7 +662,6 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         builder.setTitle("Reply to " + commentInfo.getPosterName());
         builder.setMessage(commentInfo.getMessage());
         final EditText input = new EditText(context);
-        //input.setHorizontallyScrolling(false);
         input.setSingleLine(false);
         input.setMaxLines(3);
         input.setTextColor(Color.BLACK);
@@ -670,8 +703,8 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
      *
      */
     class MyViewHolder extends RecyclerView.ViewHolder {
-        private ImageView likePostButton;
         // view holder for each grid  cell
+        private ImageView likePostButton;
         private TextView posterName;
         private TextView logout;
         private EditText postBox;
@@ -681,8 +714,6 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         private TextView description;
         private TextView descriptionTitle;
         private TextView descriptionTitleArtist;
-        private TextView streetArtistTitle;
-        private TextView streetArtistTitleArtist;
         private TextView likeWord;
         private TextView numberLikes;
         private TextView reply;
@@ -732,8 +763,6 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                     descriptionTitle = (TextView) itemView.findViewById(R.id.comment_list_description_title);
                     descriptionTitleArtist = (TextView) itemView.findViewById(R.id.comment_list_description_title_artist);
 
-                    likePostButton = (ImageView) itemView.findViewById(R.id.shareIcon);
-
 
                     inspirationTitle = (TextView) itemView.findViewById(R.id.comment_list_inspiration_title);
                     inspirationTitleArtist = (TextView) itemView.findViewById(R.id.comment_list_inspiration_title_artist);
@@ -744,8 +773,6 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                     likeFbPost = (TextView) itemView.findViewById(R.id.like_post);
                     likePostButton = (ImageView) itemView.findViewById(R.id.like_post_icon);
 
-                    //streetArtistTitle = (TextView) itemView.findViewById(R.id.comment_list_description_title_streetartwork);
-                    //streetArtistTitleArtist = (TextView) itemView.findViewById(R.id.comment_list_description_title_artist_streetartist);
 
                     commentTitle = (TextView) itemView.findViewById(R.id.commentAmount);
                     shareButton = (ImageView) itemView.findViewById(R.id.shareIcon);
@@ -756,18 +783,16 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                         @Override
                         public void onClick(View v) {
                             if (isInternetAvailable()) {
-                                if (checkIfLogIn == true) {
+                                if (checkIfLogIn) {
                                     //if logged in just get the comments and show
                                     gallerySwipeSingleFragment.onClickLogin();
-                                } else if (checkIfLogIn == false) {
+                                } else if (!checkIfLogIn) {
                                     // if not logged in show dialog box telling them what happens if they log in
                                     showLoginDialog();
-
                                 }
                             }
                             else {
                                 Toast.makeText(gallerySwipeSingleFragment.getActivity(), "No internet connection available", Toast.LENGTH_SHORT).show();
-
                             }
                         }
                     });
@@ -776,11 +801,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                         @Override
                         public void onClick(View v) {
                             MainActivity.viewPager.setCurrentItem(3, true);
-
                             onMapButtonPressTouchListener.onMapButtonPress(false, galleryData.get(indexOfArtwork).getName());
-
-
-
                         }
                     });
 
@@ -835,44 +856,12 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
                     });
 
-
                     break;
             }
 
         }
 
 
-    }
-
-    /**
-     * Notifies when comments data has changed
-     * @param data The "new" data
-     */
-    public void commentsChanged(ArrayList<Comment> data){
-        this.data = data;
-        notifyDataSetChanged();
-    }
-
-
-    /**
-     * This is the Interface for allowing clicks to go to the maps
-     */
-    public interface OnMapButtonPressTouchListener {
-        public void onMapButtonPress( boolean filter, String name);
-    }
-
-    /**
-     * For the poster's name
-     * @param name Poster's name
-     */
-    public void nameChange(String name){
-        this.name = name;
-    }
-
-    public void likePostChange(String numberOfLikesPost, boolean userLikes){
-        this.userLikes = userLikes;
-        this.numberOfLikesPost = numberOfLikesPost;
-        notifyDataSetChanged();
     }
 
 }
