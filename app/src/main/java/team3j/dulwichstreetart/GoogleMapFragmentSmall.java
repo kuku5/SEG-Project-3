@@ -147,14 +147,7 @@ public class GoogleMapFragmentSmall extends Fragment {
                             {
                                 //if the user is at the street art
 
-//                                for(int j=0; j<GalleryData.toVisit.size(); j++)
-//                                {
-//                                    if(GalleryData.toVisit.get(j)== artArrayList.get(i))
-//                                    {
-//                                        GalleryData.visited.add(artArrayList.get(i));
-//                                        GalleryData.toVisit.remove(j);
-//                                    }
-//                                }
+
 
 
                                 //artArrayList.get(i).setVisited();
