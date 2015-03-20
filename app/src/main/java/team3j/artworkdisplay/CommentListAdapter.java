@@ -633,11 +633,11 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         builder.setPositiveButton("Log out", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if (session.getActiveSession() != null) {
-                    session.getActiveSession().closeAndClearTokenInformation();
+                if (Session.getActiveSession() != null) {
+                    Session.getActiveSession().closeAndClearTokenInformation();
                 }
 
-                session.setActiveSession(null);
+                Session.setActiveSession(null);
                 numberOfLikesPost = null;
                 data.clear();
                 notifyDataSetChanged();
