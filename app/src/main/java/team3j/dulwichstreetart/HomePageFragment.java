@@ -341,7 +341,7 @@ public class HomePageFragment extends Fragment {
      */
     private void showMessagePictureGallery() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("About Dulwich Gallery");
+        builder.setTitle("About Dulwich Picture Gallery");
         builder.setMessage(R.string.art_picture_gallery_about);
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
