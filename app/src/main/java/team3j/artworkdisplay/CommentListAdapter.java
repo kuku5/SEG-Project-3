@@ -259,7 +259,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         } else if (position == 1) {
             if(name!=null){
 
-                holder.postBox.setHint(Html.fromHtml("<i>" + "Posting as " + name + "</i>"));
+                holder.postBox.setHint(Html.fromHtml("<b>" + "Posting as " + name + "</b>"));
             }
 
             holder.postBox.addTextChangedListener(new TextWatcher() {
