@@ -26,9 +26,9 @@ public class ArtistListFragment extends Fragment {
 
 
     /**
-     *
-     * @param position
-     * @return
+     * returns an instance of the fragment
+     * @param position position of tab
+     * @return the instance of the fragment
      */
     public static ArtistListFragment getInstance(int position) {
         ArtistListFragment myGalleryFragmentTab = new ArtistListFragment();
@@ -43,7 +43,7 @@ public class ArtistListFragment extends Fragment {
      * @param inflater
      * @param container
      * @param savedInstanceState
-     * @return
+     * @return layout
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, @Nullable Bundle savedInstanceState) {
