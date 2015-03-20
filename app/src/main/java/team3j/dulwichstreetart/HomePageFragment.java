@@ -150,11 +150,12 @@ public class HomePageFragment extends Fragment {
 
 
     /**
+     * Handles the web log in and likeview
      * @param requestCode
      * @param resultCode
      * @param data
      */
-    //Handles the web log in and likeview
+
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Session.getActiveSession().onActivityResult(getActivity(), requestCode, resultCode, data);
@@ -189,6 +190,7 @@ public class HomePageFragment extends Fragment {
 
 
     /**
+     * Sets up the twitter rotations
      * @param layout
      */
     public void setupTweetsAnimations(View layout) {
@@ -275,6 +277,7 @@ public class HomePageFragment extends Fragment {
 
 
     /**
+     * Sets up the artwork on rotations
      * @param layout
      */
     private void setupLibraryAnimations(View layout) {
