@@ -40,6 +40,7 @@ import com.facebook.widget.LikeView;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.SQLOutput;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -167,12 +168,10 @@ public class HomePageFragment extends Fragment {
      * @param resultCode
      * @param data
      */
-
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Session.getActiveSession().onActivityResult(getActivity(), requestCode, resultCode, data);
         LikeView.handleOnActivityResult(getActivity(), requestCode, resultCode, data);
-
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     public static Drawable getAssetImage(Context context, String filename) throws IOException {
