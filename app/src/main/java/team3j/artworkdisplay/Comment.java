@@ -1,18 +1,14 @@
 package team3j.artworkdisplay;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 /**
  * @author Team 3-J
  * Stores the details of a particular comment from a facebook post
  */
-public class Comment implements Parcelable {
+public class Comment{
 
     private String message;
     private String posterName;
     private String time;
-    private int icon;
     private String posterURL;
     private String commentID;
     private Boolean userLikes;
@@ -21,14 +17,7 @@ public class Comment implements Parcelable {
     private Boolean canDelete;
     private boolean isPage;
 
-    /**
-     * Set profile picture of the post
-     * @param icon The picture to be set
-     */
-    public void setIcon(int icon) {
-        this.icon = icon;
 
-    }
 
     /**
      * Sets the message for the post
@@ -62,7 +51,6 @@ public class Comment implements Parcelable {
      * @param posterURL The link of the poster's profile page on facebook
      */
     public void setPosterURL(String posterURL) {
-
         this.posterURL = posterURL;
     }
 
@@ -72,7 +60,6 @@ public class Comment implements Parcelable {
      */
     public void setTime(String time) {
         this.time = time;
-
     }
 
     /**
@@ -86,7 +73,7 @@ public class Comment implements Parcelable {
 
     /**
      * Sets if the user has liked the comment or not
-     * @param userLikes boolean true if the user has "liked" the specified comment
+     * @param userLikes boolean true if the user has "liked" the specified comment false if not
      */
     public void setUserLikes(Boolean userLikes) {
         this.userLikes = userLikes;
@@ -95,7 +82,7 @@ public class Comment implements Parcelable {
 
     /**
      * Sets the comment as a reply comment to a top level comment
-     * @param isAReply boolean true if it is a reply comment
+     * @param isAReply boolean true if it is a reply comment false if it is a top level comment
      */
     public void setIsAReply(Boolean isAReply){
 
@@ -104,16 +91,15 @@ public class Comment implements Parcelable {
 
     /**
      * Sets the comments to "deletable" that are available to be deleted by the user
-     * @param canDelete boolean true if the user is able to delete the specified comment
+     * @param canDelete boolean true if the user is able to delete the specified comment false if not
      */
     public void setCanDelete(Boolean canDelete) {
         this.canDelete = canDelete;
-
     }
 
     /**
      * Returns if the user is able to delete the specified comment or not
-     * @return boolean true if the user can delete the comment
+     * @return boolean true if the user can delete the comment false if not
      */
     public boolean getCanDelete() {
         return canDelete;
@@ -190,13 +176,6 @@ public class Comment implements Parcelable {
     }
 
     /**
-     * Gets the profile picture of the poster
-     * @return the profile picture
-     */
-    public int getIcon() {
-        return icon;
-    }
-    /**
      * Set's if the profile is a page or a regular profile
      * @param isPage boolean true if it is a page
      */
@@ -213,17 +192,7 @@ public class Comment implements Parcelable {
     }
 
     public String toString(){
-        return posterName + " " + message + " " + commentID + " " + userLikes;
+        return posterName + " " + message;
     }
 
-    @Override
-    public int describeContents() {
-
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-
-    }
 }
