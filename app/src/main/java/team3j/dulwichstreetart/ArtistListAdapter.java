@@ -84,7 +84,6 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
 
     public static Drawable getAssetImage(Context context, String filename) throws IOException {
         AssetManager assets = context.getResources().getAssets();
-        filename="lowresdogrun";
         InputStream buffer = new BufferedInputStream((assets.open("" + filename + ".jpg")));
         Bitmap bitmap = BitmapFactory.decodeStream(buffer);
         return new BitmapDrawable(context.getResources(), bitmap);
