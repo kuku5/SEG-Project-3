@@ -51,6 +51,7 @@ public class VisitedTabFragment extends Fragment implements MaterialTabListener 
         return visitedTabFragment;
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, @Nullable Bundle savedInstanceState) {
         //get layout and elements

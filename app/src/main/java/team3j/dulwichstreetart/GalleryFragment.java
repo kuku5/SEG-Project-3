@@ -120,6 +120,7 @@ public class GalleryFragment extends Fragment {
             //For landscape mode
             recyclerView.setLayoutManager(new StaggeredGridLayoutManager(4, 1));
         }
+        System.gc();
 
     }
 

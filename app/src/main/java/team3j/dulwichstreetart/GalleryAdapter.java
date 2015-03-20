@@ -1,6 +1,7 @@
 package team3j.dulwichstreetart;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -20,6 +21,9 @@ import android.widget.TextView;
 
 import com.etsy.android.grid.util.DynamicHeightImageView;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
@@ -75,18 +79,32 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
      * @param holder
      * @param position
      */
+
     @Override
     public void onBindViewHolder(GalleryAdapter.MyViewHolder holder, int position) {
         //add image and description to the view for each gallery item
 
        //load bitmap in background thread
-       loadBitmap( galleryData.get(position).getPic(),  holder.dynamicHeightImageView);
+      // loadBitmap( galleryData.get(position).getPic(),  holder.dynamicHeightImageView);
         //holder allows you to display the content onto the page - through the adapter
+        try {
+            holder.dynamicHeightImageView.setImageDrawable(getAssetImage(context,galleryData.get(position).getPic()));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
        holder.txtLineOne.setText(galleryData.get(position).getName());
        holder.descriptionTextView.setText(galleryData.get(position).getDesc());
 
 
 
+    }
+
+    public static Drawable getAssetImage(Context context, String filename) throws IOException {
+        AssetManager assets = context.getResources().getAssets();
+        InputStream buffer = new BufferedInputStream((assets.open("" + filename + ".jpg")));
+        Bitmap bitmap = BitmapFactory.decodeStream(buffer);
+        return new BitmapDrawable(context.getResources(), bitmap);
     }
 
     /**

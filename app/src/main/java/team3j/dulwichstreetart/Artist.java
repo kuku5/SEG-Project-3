@@ -7,7 +7,7 @@ public class Artist {
     private final String name;
     private final String description;
     private final String website;
-    private final int artistPhoto;
+    private final String artistPhoto;
 
     /**
      * Constructs an Artist with the following
@@ -16,7 +16,7 @@ public class Artist {
      * @param website the artist's website
      * @param artistPhoto a photo of the artist
      */
-    public Artist(String name,String description, String website, int artistPhoto){
+    public Artist(String name,String description, String website, String artistPhoto){
 
         this.name=name;
         this.description=description;
@@ -24,6 +24,8 @@ public class Artist {
         this.artistPhoto = artistPhoto;
 
     }
+
+
 
     /**
      * this method returns the description of the artist
@@ -53,7 +55,7 @@ public class Artist {
      * this method returns the photo location of the artist
      * @return photo location of the artist
      */
-    public int getArtistPhoto () {
+    public String getArtistPhoto () {
         return artistPhoto;
     }
 }

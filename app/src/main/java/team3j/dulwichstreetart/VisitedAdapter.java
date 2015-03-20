@@ -1,9 +1,11 @@
 package team3j.dulwichstreetart;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,11 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 /**
@@ -87,9 +94,13 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
             holder.visitedQuestion_textView.setText("Not Visited");
         }
 
-        bitmap1 = BitmapFactory.decodeResource(context.getResources(), galleryData.get(position).getPic());
-        BitmapDrawable res1 = new BitmapDrawable(context.getResources(), bitmap1);
-        holder.image.setImageDrawable(res1);
+      //   bitmap1 = BitmapFactory.decodeResource(context.getResources(), galleryData.get(position).getPic());
+      //  BitmapDrawable res1 = new BitmapDrawable(context.getResources(), bitmap1);
+        try {
+            holder.image.setImageDrawable(getAssetImage(context,galleryData.get(position).getPic()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         holder.art_address.setText("Address: " + galleryData.get(position).getArtAddress());
 
@@ -97,6 +108,12 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
         // holder.art_info_area.setText("" + galleryData.get(position).getDesc());
 
 
+    }
+    public static Drawable getAssetImage(Context context, String filename) throws IOException {
+        AssetManager assets = context.getResources().getAssets();
+        InputStream buffer = new BufferedInputStream((assets.open(filename + ".jpg")));
+        Bitmap bitmap = BitmapFactory.decodeStream(buffer);
+        return new BitmapDrawable(context.getResources(), bitmap);
     }
 
     /**

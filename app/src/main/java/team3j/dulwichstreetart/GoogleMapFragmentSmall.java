@@ -1,10 +1,13 @@
 package team3j.dulwichstreetart;
 
+import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -27,6 +30,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import team3j.artworkdisplay.GallerySwipeSingleFragment;
@@ -317,9 +323,13 @@ public class GoogleMapFragmentSmall extends Fragment {
                     if (latLng.equals(artArrayList.get(i).getLoc())) {
 
                         ImageView picView = (ImageView) v.findViewById(R.id.pic);
-                        Bitmap bitmap = BitmapFactory.decodeResource(getActivity().getResources(), artArrayList.get(i).getPic());
-                        BitmapDrawable res = new BitmapDrawable(getActivity().getResources(), bitmap);
-                        picView.setImageDrawable(res);
+
+                        try {
+                            picView.setImageDrawable(getAssetImage(getActivity(),artArrayList.get(i).getPic()));
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                         TextView txtView = (TextView) v.findViewById(R.id.markerName);
                         txtView.setText(artArrayList.get(i).getName());
 
@@ -370,5 +380,11 @@ public class GoogleMapFragmentSmall extends Fragment {
 
 
 
+    public static Drawable getAssetImage(Context context, String filename) throws IOException {
+        AssetManager assets = context.getResources().getAssets();
+        InputStream buffer = new BufferedInputStream((assets.open("" + filename + ".jpg")));
+        Bitmap bitmap = BitmapFactory.decodeStream(buffer);
+        return new BitmapDrawable(context.getResources(), bitmap);
+    }
 
 }

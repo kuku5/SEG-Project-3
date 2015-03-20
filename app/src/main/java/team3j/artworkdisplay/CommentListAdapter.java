@@ -6,10 +6,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -34,8 +36,11 @@ import com.facebook.Session;
 import com.facebook.Settings;
 import com.facebook.widget.LikeView;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -144,6 +149,12 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
     }
 
+    public static Drawable getAssetImage(Context context, String filename) throws IOException {
+        AssetManager assets = context.getResources().getAssets();
+        InputStream buffer = new BufferedInputStream((assets.open("" + filename + ".jpg")));
+        Bitmap bitmap = BitmapFactory.decodeStream(buffer);
+        return new BitmapDrawable(context.getResources(), bitmap);
+    }
     @TargetApi(Build.VERSION_CODES.GINGERBREAD)
     @Override
     // The details of/actions of the layout depending on which layout is at that position
@@ -151,16 +162,17 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
         if (position == 0) {
 
-            bitmap1 = BitmapFactory.decodeResource(context.getResources(), galleryData.get(indexOfArtwork).getInspiredPic());
-            BitmapDrawable res1 = new BitmapDrawable(context.getResources(), bitmap1);
-
-            bitmap = BitmapFactory.decodeResource(context.getResources(), galleryData.get(indexOfArtwork).getPic());
-            BitmapDrawable res = new BitmapDrawable(context.getResources(), bitmap);
 
             //update header
-            holder.dynamicHeightImageView.setImageDrawable(res1);
+            try {
 
-            holder.inspirationArtworkImageView.setImageDrawable(res);
+                holder.dynamicHeightImageView.setImageDrawable(getAssetImage(context,galleryData.get(indexOfArtwork).getPic()));
+                holder.inspirationArtworkImageView.setImageDrawable(getAssetImage(context,galleryData.get(indexOfArtwork).getPic()));
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
 
             holder.descriptionTitle.setText(galleryData.get(indexOfArtwork).getName());
             holder.descriptionTitleArtist.setText("By "+galleryData.get(indexOfArtwork).getArtistName());
@@ -843,10 +855,10 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
     public void recycleBitmap(){
 
-        bitmap.recycle();
-        bitmap = null;
-        bitmap1.recycle();
-        bitmap1 = null;
+//        bitmap.recycle();
+//        bitmap = null;
+//        bitmap1.recycle();
+//        bitmap1 = null;
         System.gc();
     }
 

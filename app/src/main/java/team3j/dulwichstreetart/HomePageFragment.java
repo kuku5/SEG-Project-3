@@ -54,7 +54,7 @@ public class HomePageFragment extends Fragment {
     private LinearLayout linearLayout;
     private ViewFlipper viewFlipper;
     private com.etsy.android.grid.util.DynamicHeightImageView aboutDulwich;
-    private SliderLayout mDemoSlider;
+    static SliderLayout mDemoSlider;
     private DynamicHeightImageView mapButton;
 
     private ArrayList<Status> todaysTweets;
@@ -106,7 +106,7 @@ public class HomePageFragment extends Fragment {
             // Restore last state for checked position.
             if (isOnline()) {
 
-                getTweets();
+               // getTweets();
                 Log.d("tweets", "online");
 
             }
@@ -114,7 +114,7 @@ public class HomePageFragment extends Fragment {
             todaysTweets = GalleryData.get().getTodaysTweets();
             Log.d("tweets", "no tweets call");
 
-            setupTweetsAnimations(layout);
+            ///setupTweetsAnimations(layout);
         }
 
 
@@ -275,13 +275,14 @@ public class HomePageFragment extends Fragment {
         mDemoSlider = (SliderLayout) layout.findViewById(R.id.slider);
 
 
+
         HashMap<String, Integer> file_maps = new HashMap<String, Integer>();
 
         //file_maps - used to display images in the top homepage slider
         file_maps.put("Conor Harrington", R.drawable.lowresconorharrington);
         file_maps.put("Walter Kershaw", R.drawable.lowreswalterlandscape);
-        file_maps.put("Stik", R.drawable.lowresstikthreeboys);
-        file_maps.put("RUN", R.drawable.lowresrunstrita);
+    //    file_maps.put("Stik", R.drawable.lowresstikthreeboys);
+  //      file_maps.put("RUN", R.drawable.lowresrunstrita);
 
 
         for (String name : file_maps.keySet()) {
@@ -291,7 +292,7 @@ public class HomePageFragment extends Fragment {
             textSliderView
                     .description(name)
                     .image(file_maps.get(name))
-                    .setScaleType(BaseSliderView.ScaleType.Fit);
+                    .setScaleType(BaseSliderView.ScaleType.FitCenterCrop);
             //add your extra information
             textSliderView.getBundle()
                     .putString("extra", name);

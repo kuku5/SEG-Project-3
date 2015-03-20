@@ -16,8 +16,8 @@ public class Art {
     private String name;
     private String artistName;
     private LatLng loc;
-    private int pic;
-    private int inspiredPic;
+    private String pic;
+    private String inspiredPic;
     private String fbLink;
     private String artAddress;
     private Boolean visited;
@@ -38,7 +38,10 @@ public class Art {
      * @param webLinks array of extra links associated to the artist
      */
 
-    public Art(String name, String artistName, String inspirationTitle, String inspirationArtist, String desc, int pic, int inspiredPic, LatLng loc, String fbLink, String artAddress, Boolean visited, String[] webLinks){
+
+    //main constructor passing through art information -
+
+    public Art(String name, String artistName, String inspirationTitle, String inspirationArtist, String desc, String pic, String inspiredPic, LatLng loc, String fbLink, String artAddress, Boolean visited, String[] webLinks){
         this.name=name;
         this.artistName = artistName;
         this.desc=desc;
@@ -74,7 +77,7 @@ public class Art {
      * Get the artwork itself
      * @return the picture of the artwork
      */
-    public int getPic(){
+    public String getPic(){
         return pic;
     }
 
@@ -82,7 +85,7 @@ public class Art {
      *  Gets the inspiration picture
      * @return the inspiration artwork
      */
-    public int getInspiredPic() {return inspiredPic;}
+    public String getInspiredPic() {return inspiredPic;}
 
     /**
      * Gets the description of the artwork

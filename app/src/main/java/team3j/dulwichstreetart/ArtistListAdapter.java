@@ -1,9 +1,11 @@
 package team3j.dulwichstreetart;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +15,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 /**
@@ -69,9 +74,20 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
         holder.description.setText(data.get(position).getDescription());
         holder.website.setText(data.get(position).getWebsite());
 
-        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), data.get(position).getArtistPhoto());
-        BitmapDrawable res = new BitmapDrawable(context.getResources(), bitmap);
-        holder.artistPhoto.setImageDrawable(res);
+        try {
+            holder.artistPhoto.setImageDrawable(getAssetImage(context,data.get(position).getArtistPhoto()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static Drawable getAssetImage(Context context, String filename) throws IOException {
+        AssetManager assets = context.getResources().getAssets();
+        filename="lowresdogrun";
+        InputStream buffer = new BufferedInputStream((assets.open("" + filename + ".jpg")));
+        Bitmap bitmap = BitmapFactory.decodeStream(buffer);
+        return new BitmapDrawable(context.getResources(), bitmap);
     }
 
     /**
