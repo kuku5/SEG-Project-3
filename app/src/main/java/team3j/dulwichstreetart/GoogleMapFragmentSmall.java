@@ -59,9 +59,11 @@ public class GoogleMapFragmentSmall extends Fragment {
     private View v;
 
 
-
-
-
+    /**
+     *
+     * @param position
+     * @return
+     */
     public static GoogleMapFragmentSmall getInstance(int position) {
         GoogleMapFragmentSmall myFragmentTab = new GoogleMapFragmentSmall();
         Bundle args = new Bundle();
@@ -72,7 +74,13 @@ public class GoogleMapFragmentSmall extends Fragment {
 
     }
 
-
+    /**
+     * Creates the google maps fragment with the correct layout
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -109,6 +117,9 @@ public class GoogleMapFragmentSmall extends Fragment {
         return v;
     }
 
+    /**
+     *
+     */
     private void setUpVisitedListener() {
 
         googleMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
@@ -154,6 +165,10 @@ public class GoogleMapFragmentSmall extends Fragment {
 
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isGoogleMapsInstalled()
     {
         try
@@ -166,6 +181,10 @@ public class GoogleMapFragmentSmall extends Fragment {
             return false;
         }
     }
+
+    /**
+     *
+     */
     @Override
     public void onResume() {
         super.onResume();
@@ -183,6 +202,9 @@ public class GoogleMapFragmentSmall extends Fragment {
         GoogleMapFragmentSmall.filter = false;
     }
 
+    /**
+     *
+     */
     @Override
     public void onPause() {
         super.onPause();
@@ -191,25 +213,36 @@ public class GoogleMapFragmentSmall extends Fragment {
         }
     }
 
+    /**
+     *
+     */
     @Override
     public void onDestroy() {
         super.onDestroy();
         mMapView.onDestroy();
     }
 
+    /**
+     *
+     */
     @Override
     public void onLowMemory() {
         super.onLowMemory();
         mMapView.onLowMemory();
     }
 
-
+    /**
+     *
+     */
     public void setUpNoFilterMap()
     {
         GallerySwipeSingleFragment.filt = false;
         setUpMap();
     }
 
+    /**
+     *
+     */
     public void setUpMap(){
 
 
@@ -366,6 +399,9 @@ public class GoogleMapFragmentSmall extends Fragment {
 
     }
 
+    /**
+     *
+     */
     public void zoom(){
 
         locStart = new LatLng(51.454013, -0.080496);
@@ -378,8 +414,13 @@ public class GoogleMapFragmentSmall extends Fragment {
     }
 
 
-
-
+    /**
+     *
+     * @param context
+     * @param filename
+     * @return
+     * @throws IOException
+     */
     public static Drawable getAssetImage(Context context, String filename) throws IOException {
         AssetManager assets = context.getResources().getAssets();
         InputStream buffer = new BufferedInputStream((assets.open("" + filename + ".jpg")));
