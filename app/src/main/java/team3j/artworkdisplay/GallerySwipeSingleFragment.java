@@ -91,7 +91,7 @@ public class GallerySwipeSingleFragment extends Fragment {
 
     @Override
     public void onDetach() {
-        commentListAdapter.recycleBitmap();
+        System.gc();
         super.onDetach();
     }
 
@@ -126,12 +126,6 @@ public class GallerySwipeSingleFragment extends Fragment {
         backButton=(ImageButton) layout.findViewById(R.id.back_button);
 
 
-        try {
-            backButton.setImageDrawable(getAssetImage(getActivity(),"ic_action_back"));
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,15 +154,6 @@ public class GallerySwipeSingleFragment extends Fragment {
         return layout;
     }
 
-    public static Drawable getAssetImage(Context context, String filename) throws IOException {
-        AssetManager assets = context.getResources().getAssets();
-
-           String exte=".png";
-
-        InputStream buffer = new BufferedInputStream((assets.open("" + filename + exte)));
-        Bitmap bitmap = BitmapFactory.decodeStream(buffer);
-        return new BitmapDrawable(context.getResources(), bitmap);
-    }
 
 
     /**
