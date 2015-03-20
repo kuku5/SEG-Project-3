@@ -44,10 +44,7 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
     }
 
     /**
-     *  View Holder for the display of the artist tab
-     * @param parent
-     * @param viewType
-     * @return
+     *  {@inheritDoc}
      */
     @Override
     public ArtistListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -63,8 +60,8 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
 
     /**
      * Properties given to the holder when it starts
-     * @param holder
-     * @param position
+     * @param holder viewholder
+     * @param position current position
      */
     @Override
     public void onBindViewHolder(ArtistListAdapter.MyViewHolder holder, int position) {
@@ -82,7 +79,13 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
 
     }
 
-
+    /**
+     * Reads the image from Assets and returns a bitmap drawable
+     * @param context Context of Activity
+     * @param filename Filename of the image
+     * @return BitmapDrawable of the image
+     * @throws IOException If the image can not be found
+     */
     public static Drawable getAssetImage(Context context, String filename) throws IOException {
         AssetManager assets = context.getResources().getAssets();
         InputStream buffer = new BufferedInputStream((assets.open("" + filename + ".jpg")));
@@ -92,7 +95,7 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
 
     /**
      * this method returns the number of items in the Artist list
-     * @return
+     * @return data size
      */
     @Override
     public int getItemCount() {
@@ -101,8 +104,8 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
 
     /**
      * The view type
-     * @param position
-     * @return
+     * @param position current position
+     * @return current position
      */
     @Override
     public int getItemViewType(int position) {
@@ -110,17 +113,17 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
     }
 
     /**
-     * This Class is the Viewholder for each item in the
+     * This Class is the Viewholder for each item in the list
      */
     class MyViewHolder extends RecyclerView.ViewHolder{
         // view holder for each grid  cell
-        TextView title;
-        TextView description;
-        TextView website;
-        ImageView artistPhoto;
-        boolean expanded=false;
-        CardView expandArea;
-        LinearLayout artist_list_item_relative;
+        private TextView title;
+        private TextView description;
+        private TextView website;
+        private ImageView artistPhoto;
+        private boolean expanded=false;
+        private CardView expandArea;
+        private LinearLayout artist_list_item_relative;
 
         public MyViewHolder(View itemView) {
             super(itemView);
