@@ -29,7 +29,7 @@ import java.util.ArrayList;
 
 /**
  * @author Team 3-J
- *This is the RecyclerView.Adapter for the Gallery recycler view and loads images in background thread
+ * This is the RecyclerView.Adapter for the Gallery recycler view and loads images in background thread
  *
  */
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHolder> {
@@ -76,16 +76,15 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
 
     /**
      * onBindViewHolder is called to fill elements in each viewholder in the gallery with information
-     * @param holder
-     * @param position
+     * @param holder view holder
+     * @param position current position
      */
 
     @Override
     public void onBindViewHolder(GalleryAdapter.MyViewHolder holder, int position) {
         //add image and description to the view for each gallery item
-
-       //load bitmap in background thread
-      // loadBitmap( galleryData.get(position).getPic(),  holder.dynamicHeightImageView);
+        //load bitmap in background thread
+        // loadBitmap( galleryData.get(position).getPic(),  holder.dynamicHeightImageView);
         //holder allows you to display the content onto the page - through the adapter
         try {
             holder.dynamicHeightImageView.setImageDrawable(getAssetImage(context,galleryData.get(position).getPic()));
@@ -99,7 +98,13 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
 
 
     }
-
+    /**
+     * Reads the image from Assets and returns a bitmap drawable
+     * @param context Context of Activity
+     * @param filename Filename of the image
+     * @return BitmapDrawable of the image
+     * @throws IOException If the image can not be found
+     */
     public static Drawable getAssetImage(Context context, String filename) throws IOException {
         AssetManager assets = context.getResources().getAssets();
         InputStream buffer = new BufferedInputStream((assets.open("" + filename + ".jpg")));
@@ -217,8 +222,8 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
     }
 
     /**
-     *
-     * @return
+     * Returns number of items in the gallery
+     * @return gallery data size
      */
     @Override
     public int getItemCount() {
@@ -232,10 +237,10 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
 
     class MyViewHolder extends RecyclerView.ViewHolder  {
         // view holder for each grid  cell
-        TextView txtLineOne;
-        TextView descriptionTextView;
-        DynamicHeightImageView dynamicHeightImageView;
-        CardView cardView;
+        private TextView txtLineOne;
+        private TextView descriptionTextView;
+        private DynamicHeightImageView dynamicHeightImageView;
+        private CardView cardView;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -247,8 +252,6 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
                 @Override
                 public void onClick(View v) {
                     onItemTouchListener.onCardViewTap(v, getPosition());
-
-
                 }
             });
 
