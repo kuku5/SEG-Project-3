@@ -1,469 +1,377 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:custom="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/superlightgrey">
+    android:orientation="vertical"
+    >
 
-
-
-
-    <ScrollView
+    <!--layout for inspiration image  begin -->
+    <LinearLayout
+        android:id="@+id/image1"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:background="@color/superlightgrey"
+        android:layout_height="wrap_content"
         android:animateLayoutChanges="true"
-        >
+        android:layout_centerInParent="true"
 
+        android:background="@color/colorAccent"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+
+        android:padding="0dp">
+
+
+        <com.etsy.android.grid.util.DynamicHeightImageView
+            android:id="@+id/dynamic_imageview_artwork_display"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:maxHeight="500dp"
+            android:layout_gravity="center"
+            android:src="@drawable/lowresconorharrington"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            />
+
+
+    </LinearLayout>
+    <!--layout for inspiration image  end -->
+
+    <!--////////////////-->
+
+    <!--layout for title bar below  begin -->
+    <RelativeLayout
+        android:id="@+id/shareButtonLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccentReal"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            android:paddingLeft="10dp"
+
+            android:layout_toLeftOf="@+id/right_part">
+            <TextView
+
+                android:id="@+id/comment_list_inspiration_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|left"
+                android:gravity="center_vertical"
+                android:maxLines="2"
+                android:paddingLeft="4dp"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="italic"
+
+                android:text="@string/artist_title"
+                />
+            <TextView
+
+                android:id="@+id/comment_list_inspiration_title_artist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|left"
+                android:gravity="center_vertical"
+                android:maxLines="2"
+                android:paddingLeft="4dp"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
+
+                android:text="@string/artist_title"
+                />
+
+        </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:animateLayoutChanges="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/right_part">
+
+            <ImageView
+                android:id="@+id/shareIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/ic_share" />
+
+            <ImageView
+                android:id="@+id/mapIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/ic_map" />
+        </LinearLayout>
+
+    </RelativeLayout>
+    <!--layout for title bar below  end -->
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="5dp"
+        >
+        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/artwork_display_description"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            card_view:cardBackgroundColor="@android:color/white"
+            card_view:cardCornerRadius="0dp">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="horizontal"
+                android:padding="3dp">
+
+                <com.etsy.android.grid.util.DynamicHeightImageView
+                    android:id="@+id/inspiration_artwork"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="0dp"
+                    android:adjustViewBounds="true"
+                    android:background="@color/superlightgrey"
+                    android:scaleType="fitStart"
+                    android:visibility="visible" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical"
+                    android:padding="3dp">
+
+
+
+
+                    <TextView
+                        android:id="@+id/comment_list_description_title_artist"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|left"
+                        android:gravity="center_vertical"
+                        android:maxLines="2"
+                        android:paddingLeft="0dp"
+                        android:textAllCaps="true"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:text="@string/artist_title"
+                        />
+
+                    <TextView
+
+                        android:id="@+id/comment_list_description_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|left"
+                        android:gravity="center_vertical"
+                        android:maxLines="2"
+                        android:paddingLeft="0dp"
+                        android:textAllCaps="true"
+                        android:textSize="12sp"
+                        android:textStyle="italic"
+
+                        android:text="@string/artist_title"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/description"
+                        android:text="AP is the only stencil artist in this project. Once cut, stencil paintings can be reproduced easily, by anyone.  The work of art AP chose to interpret was a sketch by Rubens, highly prized because it is by him alone, whereas the finished piece would have had a great deal of workshop input.  "
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccentReal"
+        android:minHeight="?attr/actionBarSize"
+
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:orientation="horizontal"
+            android:layout_centerVertical="true"
+            android:paddingLeft="10dp"
+            android:layout_toLeftOf="@+id/right_part_for_like"
 
             >
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:orientation="vertical"
-                android:background="@color/colorTertiary"
-                android:padding="0dp"
-                android:id="@+id/welcomeView"
-                android:animateLayoutChanges="true"
+            <TextView
 
-                android:visibility="gone"
-                >
-
-
-                <android.support.v7.widget.CardView
-                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="8dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:id="@+id/card_view_1_welcome1"
-                    android:animateLayoutChanges="true"
-                    android:padding="4dp"
-
-                    card_view:cardBackgroundColor="@android:color/white"
-                    card_view:cardCornerRadius="4dp">
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-
-                        >
-
-                        <TextView
-                            android:id="@+id/info_title"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="2dp"
-                            android:textColor="@color/text_grey"
-                            android:text="Tap Here"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:visibility="invisible"
-                            />
-
-                        <!--android:text="@string/info_title"-->
-
-                        <TextView
-                            android:id="@+id/info_description"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="2dp"
-                            android:text="@string/info_description_welcome"
-                            android:textColor="#1f3133"
-                            android:textSize="12sp"
-                            android:visibility="invisible"
-                            />
-
-                        <!--<ImageView-->
-
-                        <!--android:layout_width="300dp"-->
-                        <!--android:layout_height="100dp"-->
-                        <!--android:background="@color/white"-->
-                        <!--/>-->
-
-                    </LinearLayout>
-
-
-
-
-                </android.support.v7.widget.CardView>
-                <!--<View-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="100dp"-->
-                <!--android:id="@+id/title_view"-->
-                <!--android:background="@color/white"-->
-                <!---->
-                <!--/>-->
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="fill_parent"
-                android:layout_height="60dp"
-                android:background="@color/lightgrey"
-                android:visibility="gone"
-                android:id="@+id/welcomeView2"
-                android:animateLayoutChanges="true"
-                >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="DULWICH OUTDOOR GALLERY"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-
-
-                    android:layout_gravity="center"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="@color/superlightgrey"
-                android:visibility="visible"
-                android:animateLayoutChanges="true"
-                android:layout_gravity="center"
-
-                >
-
-                <android.support.v7.widget.CardView
-                    android:id="@+id/card_view_2_double34"
-                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center|top"
-                    android:layout_margin="4dp"
-                    card_view:cardBackgroundColor="@android:color/white"
-                    card_view:cardCornerRadius="4dp"
-                    card_view:cardPreventCornerOverlap="false"
-                    >
-                    <LinearLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:orientation="vertical">
-
-
-                        <com.daimajia.slider.library.SliderLayout
-                            android:id="@+id/slider"
-                            android:layout_width="match_parent"
-                            android:layout_height="200dp"
-                            />
-                        <!--<FrameLayout-->
-                        <!--android:id="@+id/small_map"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="100dp"-->
-                        <!--class="com.google.android.gms.maps.SupportMapFragment"-->
-                        <!-->-->
-
-                        <!--</FrameLayout>-->
-
-
-
-
-                    </LinearLayout>
-                </android.support.v7.widget.CardView>
-
-                //card view and right maps
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    //maps
-                    <android.support.v7.widget.CardView
-                        android:id="@+id/car_view_22"
-                        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center|top"
-                        android:layout_margin="4dp"
-                        card_view:cardBackgroundColor="@android:color/white"
-                        card_view:cardCornerRadius="4dp"
-                        card_view:cardPreventCornerOverlap="false"
-
-                        >
-                        <LinearLayout
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
-                            android:orientation="vertical">
-                            <ViewFlipper
-                                android:id="@+id/view_animator"
-                                android:layout_width="match_parent"
-                                android:layout_height="60dp"
-                                android:autoStart="true"
-                                >
-                                <LinearLayout
-                                    android:layout_width="fill_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical">
-                                    <RelativeLayout
-                                        android:layout_width="fill_parent"
-                                        android:layout_height="fill_parent"
-                                        android:orientation="horizontal">
-
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="@string/app_name"
-                                            android:textSize="12sp"
-                                            android:textStyle="bold"
-
-                                            />
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_alignParentRight="true"
-                                            android:text=""
-                                            android:textSize="11sp"
-                                            android:textStyle="bold"
-                                            android:id="@+id/statusTime2"
-                                            android:layout_marginRight="3dp"
-
-                                            android:autoLink="web"
-                                            /></RelativeLayout>
-
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="@string/desc_offline"
-                                        android:id = "@+id/DisplayTweet2"
-                                        android:textSize="12sp"
-                                        android:autoLink="web"
-                                        />
-
-                                </LinearLayout>
-
-
-                                <LinearLayout
-                                    android:layout_width="fill_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical">
-                                    <RelativeLayout
-                                        android:layout_width="fill_parent"
-                                        android:layout_height="fill_parent"
-                                        android:orientation="horizontal">
-
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="@string/app_name"
-                                            android:textSize="12sp"
-                                            android:textStyle="bold"
-
-                                            />
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_alignParentRight="true"
-                                            android:text=""
-                                            android:textSize="11sp"
-                                            android:textStyle="bold"
-                                            android:id="@+id/statusTime1"
-                                            android:layout_marginRight="3dp"
-                                            android:autoLink="web"
-
-                                            /></RelativeLayout>
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="@string/desc_offline"
-                                        android:id = "@+id/DisplayTweet1"
-                                        android:textSize="12sp"
-                                        android:autoLink="web"
-                                        />
-
-
-                                </LinearLayout>
-
-                            </ViewFlipper>
-
-
-                            <LinearLayout
-                                android:layout_width="fill_parent"
-                                android:layout_height="fill_parent"
-                                android:orientation="horizontal">
-                                <TextView
-                                    android:id="@+id/title_featured"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_margin="4dp"
-                                    android:text="Latest Updates from Dulwich Gallery"
-                                    android:textAllCaps="true"
-                                    android:textColor="#1f3133"
-                                    android:textSize="14sp"
-                                    android:gravity="left"
-                                    android:textStyle="bold"
-                                    />
-                                <ImageView
-                                    android:layout_width="20dp"
-                                    android:id="@+id/twitterbird"
-                                    android:layout_height="20dp"
-                                    android:layout_gravity="right"
-                                    />
-                            </LinearLayout>
-
-
-
-                        </LinearLayout>
-
-                    </android.support.v7.widget.CardView>
-
-
-
-                </LinearLayout>
-
-
-
-                //aboutcard
-                <android.support.v7.widget.CardView
-                    android:id="@+id/card22"
-                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center|top"
-                    android:layout_margin="4dp"
-                    card_view:cardBackgroundColor="@android:color/white"
-                    card_view:cardCornerRadius="4dp"
-                    card_view:cardPreventCornerOverlap="false"
-                    android:layout_weight="0.5"
-
-                    >
-                    <LinearLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:orientation="vertical">
-
-
-                        <com.etsy.android.grid.util.DynamicHeightImageView
-                            android:id="@+id/aboutDulwich"
-                            android:layout_width="fill_parent"
-                            android:layout_height="100dp"
-                            android:layout_centerInParent="true"
-                            android:scaleType="centerCrop"
-                            android:adjustViewBounds="true"
-                            android:paddingBottom="2dp" />
-
-                        <TextView
-                            android:id="@+id/title_maps11"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="4dp"
-                            android:text="About Dulwich Gallery"
-                            android:textAllCaps="true"
-                            android:textColor="#1f3133"
-                            android:textSize="14sp"
-                            android:textStyle="bold"
-                            />
-
-                    </LinearLayout>
-
-                </android.support.v7.widget.CardView>
-
-                //map button card
-                <android.support.v7.widget.CardView
-                    android:id="@+id/card_view_2_double"
-                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center|top"
-                    android:layout_margin="4dp"
-                    card_view:cardBackgroundColor="@android:color/white"
-                    card_view:cardCornerRadius="4dp"
-                    card_view:cardPreventCornerOverlap="false"
-                    >
-                    <LinearLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:orientation="vertical">
-
-
-                        <com.etsy.android.grid.util.DynamicHeightImageView
-                            android:id="@+id/map_image"
-                            android:layout_width="fill_parent"
-                            android:layout_height="100dp"
-                            android:layout_centerInParent="true"
-                            android:scaleType="centerCrop"
-                            android:adjustViewBounds="true"
-
-                            android:paddingBottom="2dp"
-                            />
-                        <TextView
-                            android:id="@+id/title_maps"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="4dp"
-                            android:text="Locate Nearest ArtWork"
-                            android:textAllCaps="true"
-                            android:textColor="#1f3133"
-                            android:textSize="14sp"
-                            android:textStyle="bold"
-                            />
-
-                    </LinearLayout>
-
-                </android.support.v7.widget.CardView>
-
-
-
-
-            </LinearLayout>
-
-            <LinearLayout
+                android:id="@+id/comment_list_more_info_links_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_horizontal">
+                android:layout_gravity="center|left"
+                android:gravity="center_vertical"
+                android:maxLines="2"
+                android:paddingLeft="4dp"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
 
+                android:text="@string/more_info"
+                />
 
-                <TextView
-                    android:text="http://www.dulwichpicturegallery.org.uk/"
-                    android:layout_gravity="center_horizontal"
-                    android:gravity="center_horizontal"
-                    android:autoLink="web"
-                    android:textColor="#000"
-                    android:layout_marginTop="5dp"
-
-                    android:layout_marginRight="2.5dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <com.facebook.widget.LikeView
-                    android:id="@+id/like_view"
-                    android:layout_width="75dp"
-                    android:layout_gravity="center_horizontal"
-                    android:gravity="center_horizontal"
-                    android:layout_height="25dp"
-
-                    android:layout_marginLeft="2.5dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="7dp"
-
-                    ></com.facebook.widget.LikeView>
-
-
-
-
-            </LinearLayout>
 
 
         </LinearLayout>
-    </ScrollView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/right_part_for_like">
+
+            <ImageView
+                android:id="@+id/like_post_icon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="7dp"
+                android:layout_marginTop="10dp" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/moreInfoLinksCard"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        card_view:cardBackgroundColor="@android:color/white"
+        card_view:cardCornerRadius="0dp"
+        android:layout_margin="5dp"
+
+        >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:padding="3dp">
+
+            <!--<TextView-->
+
+            <!--android:id="@+id/comment_list_more_info_links_title"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center|left"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:maxLines="2"-->
+            <!--android:paddingLeft="4dp"-->
+            <!--android:paddingStart="4dp"-->
+            <!--android:paddingTop="10dp"-->
+            <!--android:textAllCaps="true"-->
+            <!--android:textSize="12sp"-->
+            <!--android:textStyle="italic"-->
+
+            <!--android:text="@string/more_info"-->
+            <!--/>-->
+            <TextView
+                android:textSize="15sp"
+                android:autoLink="web"
+                android:id="@+id/comment_list_more_info_links"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|left"
+                android:gravity="center_vertical"
+                android:paddingLeft="4dp"
+
+                android:maxLines="5"
+
+                />
+            <TextView
+
+                android:id="@+id/comment_list_fb_links"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|left"
+                android:gravity="center_vertical"
+                android:maxLines="2"
+                android:paddingLeft="4dp"
+                android:paddingBottom="1dp"
+                android:textAllCaps="true"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/com_facebook_blue"
+                android:text="See this on Facebook!"
+                />
+            <TextView
+
+                android:id="@+id/like_post"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|left"
+                android:gravity="center_vertical"
+                android:maxLines="2"
+                android:paddingLeft="4dp"
+                android:paddingBottom="1dp"
+                android:textAllCaps="true"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/com_facebook_blue"
+                android:text="Like Post"
+                />
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/commentAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="6dp"
+            android:text="@string/commentAmount"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="6dp"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/bottombarline"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey"
+            android:visibility="visible" />
+
+    </LinearLayout>
+
 
 </LinearLayout>
