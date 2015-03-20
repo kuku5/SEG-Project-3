@@ -1,6 +1,7 @@
 package team3j.dulwichstreetart;
 
 /**
+ * Holds a representation of an Artist object
  * @author Team 3-J
  */
 public class Artist {
