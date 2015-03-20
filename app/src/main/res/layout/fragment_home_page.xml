@@ -423,20 +423,39 @@
 
         </LinearLayout>
 
+
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal">
 
 
                 <TextView
                     android:text="http://www.dulwichpicturegallery.org.uk/"
                     android:layout_gravity="center_horizontal"
-                    android:gravity="center"
+                    android:gravity="center_horizontal"
                     android:autoLink="web"
                     android:textColor="#000"
-                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="5dp"
+
+                    android:layout_marginRight="2.5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
+
+                <com.facebook.widget.LikeView
+                    android:id="@+id/like_view"
+                    android:layout_width="75dp"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:layout_height="25dp"
+
+                    android:layout_marginLeft="2.5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="7dp"
+
+                    ></com.facebook.widget.LikeView>
+
 
             </LinearLayout>
 

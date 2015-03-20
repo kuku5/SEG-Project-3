@@ -27,6 +27,9 @@ import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.etsy.android.grid.util.DynamicHeightImageView;
 import com.facebook.Session;
+import com.facebook.Settings;
+import com.facebook.UiLifecycleHelper;
+import com.facebook.widget.LikeView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -94,6 +97,12 @@ public class HomePageFragment extends Fragment {
         //non facebook setup
         layout = inflater.inflate(R.layout.fragment_home_page, container, false);
 
+        //LikeView setups
+        Settings.sdkInitialize(getActivity());
+        LikeView likeView = (LikeView) layout.findViewById(R.id.like_view);
+        likeView.setObjectId("https://www.facebook.com/DulwichOutdoorGallery");
+        likeView.setForegroundColor(-256);
+
         setRetainInstance(true);
 
         setupOnScreenElements(layout);
@@ -145,10 +154,11 @@ public class HomePageFragment extends Fragment {
      * @param resultCode
      * @param data
      */
-    //Handles the web log in
+    //Handles the web log in and likeview
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Session.getActiveSession().onActivityResult(getActivity(), requestCode, resultCode, data);
+        LikeView.handleOnActivityResult(getActivity(), requestCode, resultCode, data);
 
     }
 
