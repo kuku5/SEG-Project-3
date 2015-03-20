@@ -4,6 +4,7 @@ package team3j.dulwichstreetart;
 import com.google.android.gms.maps.model.LatLng;
 
 /**
+ * Holds a representation of an Art object
  * @author Team 3-J
  */
 public class Art {
@@ -39,10 +40,6 @@ public class Art {
      * @param webLinks array of extra links associated to the artist
      * @param  dateVisited date once the art work is visited
      */
-
-
-    //main constructor passing through art information -
-
     public Art(String name, String artistName, String inspirationTitle, String inspirationArtist, String desc, String pic, String inspiredPic, LatLng loc, String fbLink, String artAddress, Boolean visited, String[] webLinks, String dateVisited){
         this.name=name;
         this.artistName = artistName;
@@ -124,13 +121,13 @@ public class Art {
 
     /**
      * Gets the facebook code for the picture
-     * @return
+     * @return Facebook code
      */
     public String getFbLink() {return fbLink;}
 
     /**
      * Gets the actual address of the artwork
-     * @return
+     * @return Art address
      */
     public String getArtAddress() { return artAddress;}
 
@@ -157,13 +154,13 @@ public class Art {
 
     /**
      * Gets the date when the art-work was visited
-     * @return
+     * @return Date visited
      */
     public String getDateVisited(){ return dateVisited;}
 
     /**
      * Sets the date of the visited artwork. Default is "--/--/----"
-     * @param newDate
+     * @param newDate Date string
      */
     public void setDateVisited(String newDate){this.dateVisited = newDate;}
 }
