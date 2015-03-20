@@ -24,8 +24,6 @@ import it.neokree.materialtabs.MaterialTabListener;
  *
  */
 
-//TODO This
-
 
 public class MainActivity extends ActionBarActivity implements MaterialTabListener {
 
@@ -104,7 +102,7 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
 
 
     /**
-     *  this method gets when a tab is reselected
+     *  this method gets when a tab is reselected by the user
      * @param materialTab
      */
     @Override
