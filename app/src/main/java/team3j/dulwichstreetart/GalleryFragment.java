@@ -45,7 +45,7 @@ public class GalleryFragment extends Fragment {
 
 
     /**
-     *
+     * Creates the view of the gallery with the appropriate layouts and given adapter
      * @param inflater
      * @param container
      * @param savedInstanceState
