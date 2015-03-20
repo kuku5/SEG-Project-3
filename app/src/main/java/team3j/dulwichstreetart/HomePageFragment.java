@@ -63,6 +63,7 @@ public class HomePageFragment extends Fragment {
     Animation slide_in_left, slide_out_right;
     private CardView cardView;
     private CardView cardView2;
+    private LikeView likeView;
     private LinearLayout linearLayout;
     private ViewFlipper viewFlipper;
     private com.etsy.android.grid.util.DynamicHeightImageView aboutDulwich;
@@ -109,9 +110,10 @@ public class HomePageFragment extends Fragment {
 
         //LikeView setups
         Settings.sdkInitialize(getActivity());
-        LikeView likeView = (LikeView) layout.findViewById(R.id.like_view);
+        likeView = (LikeView) layout.findViewById(R.id.like_view);
         likeView.setObjectId("https://www.facebook.com/DulwichOutdoorGallery");
         likeView.setForegroundColor(-256);
+        likeView.setLikeViewStyle(LikeView.Style.STANDARD);
 
         setRetainInstance(true);
 
