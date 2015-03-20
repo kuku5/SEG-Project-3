@@ -5,6 +5,11 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -17,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
@@ -31,6 +37,9 @@ import com.facebook.Settings;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.widget.LikeView;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -59,6 +68,7 @@ public class HomePageFragment extends Fragment {
     private com.etsy.android.grid.util.DynamicHeightImageView aboutDulwich;
     static SliderLayout mDemoSlider;
     private DynamicHeightImageView mapButton;
+    private ImageView tweetBird;
 
     private ArrayList<Status> todaysTweets;
     private String twitterUser = "DulwichGallery";
@@ -163,6 +173,17 @@ public class HomePageFragment extends Fragment {
 
     }
 
+    public static Drawable getAssetImage(Context context, String filename) throws IOException {
+        AssetManager assets = context.getResources().getAssets();
+        String exte=".jpg";
+        if(filename.contains("twit")){
+            exte=".png";
+        }
+        InputStream buffer = new BufferedInputStream((assets.open("" + filename + exte)));
+        Bitmap bitmap = BitmapFactory.decodeStream(buffer);
+        return new BitmapDrawable(context.getResources(), bitmap);
+    }
+
     /**
      * @param layout
      */
@@ -173,6 +194,7 @@ public class HomePageFragment extends Fragment {
         mapButton = (DynamicHeightImageView) layout.findViewById(R.id.map_image);
 
 
+
         mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -180,6 +202,17 @@ public class HomePageFragment extends Fragment {
             }
         });
         aboutDulwich = (DynamicHeightImageView) layout.findViewById(R.id.aboutDulwich);
+        tweetBird = (ImageView) layout.findViewById(R.id.twitterbird);
+
+
+        try {
+            mapButton.setImageDrawable(getAssetImage(getActivity(),"mapbannersquare"));
+            aboutDulwich.setImageDrawable(getAssetImage(getActivity(),"dulwichpicturegallery"));
+            tweetBird.setImageDrawable(getAssetImage(getActivity(),"twitterbird"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         aboutDulwich.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
