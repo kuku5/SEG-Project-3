@@ -24,8 +24,6 @@ import it.neokree.materialtabs.MaterialTabListener;
  *
  */
 
-//TODO This
-
 
 public class MainActivity extends ActionBarActivity implements MaterialTabListener {
 
