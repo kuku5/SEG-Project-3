@@ -1,6 +1,5 @@
 package team3j.artworkdisplay;
 
-import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,7 +14,6 @@ import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Environment;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -70,18 +68,13 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
     private ArrayList<Comment> data;
     private ArrayList<Art> galleryData;
     private Context context;
-    private Bitmap bitmap;
-    private Bitmap bitmap1;
     private final int Header_View_Type = 1;
-    private final int Comment_View_Type = 0;
     private final int Post_View_Type = 2;
     private boolean checkIfLogIn = false;
     private String name;
     private OnMapButtonPressTouchListener onMapButtonPressTouchListener;
     private String numberOfLikesPost;
     private boolean userLikes;
-    private Bitmap bitmaplikeun;
-    private Bitmap bitmaplike;
 
 
     /**
@@ -121,13 +114,18 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
     }
 
+    /**
+     * Determines the XML Layout that matches with the particular view type and inflates it
+     * @param parent ViewGroup
+     * @param viewType viewType
+     * @return ViewHolder
+     */
     @Override
-    // Determines the XML Layout that matches with the particular view type
     public CommentListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //add view to the grid cell for the first time
         //this stores the view in the cache meaning the images dont have to be reloaded over
         //and over mean its should be faster than a Listview/Gridview which does
-        View view ;
+        View view;
         MyViewHolder myViewHolder;
 
         if (viewType == Header_View_Type) {
@@ -145,10 +143,15 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         myViewHolder = new MyViewHolder(view, viewType);
 
         return myViewHolder;
-
-
     }
 
+    /**
+     * Reads the image from Assets and returns a bitmap drawable
+     * @param context Context of Activity
+     * @param filename Filename of the image
+     * @return BitmapDrawable of the image
+     * @throws IOException If the image can not be found
+     */
     public static Drawable getAssetImage(Context context, String filename) throws IOException {
         AssetManager assets = context.getResources().getAssets();
 
@@ -163,6 +166,14 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         Bitmap bitmap = BitmapFactory.decodeStream(buffer);
         return new BitmapDrawable(context.getResources(), bitmap);
     }
+
+    /**
+     * Reads the image from Assets and returns a bitmap
+     * @param context Context of Activity
+     * @param filename Filename of the image
+     * @return Bitmap image
+     * @throws IOException If the image can not be found
+     */
     public static Bitmap getBitmapAssetImage(Context context, String filename) throws IOException {
         AssetManager assets = context.getResources().getAssets();
 
@@ -177,15 +188,16 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         Bitmap bitmap = BitmapFactory.decodeStream(buffer);
         return bitmap;
     }
-    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
+
+    /**
+     * Binds the actions of the layout depending on which layout is at that position
+     * @param holder Holder of CommentListAdapter
+     * @param position Position of view
+     */
     @Override
-    // The details of/actions of the layout depending on which layout is at that position
     public void onBindViewHolder(final CommentListAdapter.MyViewHolder holder, int position) {
-
         if (position == 0) {
-
-
-            //update header
+            //Set images
             try {
 
                 holder.dynamicHeightImageView.setImageDrawable(getAssetImage(context,galleryData.get(indexOfArtwork).getPic()));
@@ -197,7 +209,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                 e.printStackTrace();
             }
 
-
+            //Set the text and links
             holder.descriptionTitle.setText(galleryData.get(indexOfArtwork).getName());
             holder.descriptionTitleArtist.setText("By "+galleryData.get(indexOfArtwork).getArtistName());
             holder.description.setText(galleryData.get(indexOfArtwork).getDesc());
@@ -206,10 +218,9 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                 linksText+=galleryData.get(indexOfArtwork).getWebLinks()[i]+"\n";
             }
             holder.extraLinksText.setText(linksText);
-
             holder.inspirationTitle.setText("\""+galleryData.get(indexOfArtwork).getInspirationTitle()+"\"");
             holder.inspirationTitleArtist.setText("By "+galleryData.get(indexOfArtwork).getInspirationArtist());
-            Settings.sdkInitialize(context);
+            //OnClickListener for opening facebook profile
             holder.linkToFbPost.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -217,8 +228,8 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                 }
             });
 
-            bitmaplikeun = BitmapFactory.decodeResource(context.getResources(), R.drawable.likeunpressed);
-            bitmaplike = BitmapFactory.decodeResource(context.getResources(), R.drawable.likepressed);
+            Bitmap bitmaplikeun = BitmapFactory.decodeResource(context.getResources(), R.drawable.likeunpressed);
+            Bitmap bitmaplike = BitmapFactory.decodeResource(context.getResources(), R.drawable.likepressed);
             BitmapDrawable likeunpressed = new BitmapDrawable(context.getResources(), bitmaplikeun);
             BitmapDrawable likepressed = new BitmapDrawable(context.getResources(), bitmaplike);
 
@@ -238,7 +249,6 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                 holder.likePostButton.setVisibility(View.GONE);
                 holder.likeFbPost.setVisibility(View.GONE);
             }
-
 
             String logout = "";
             final Session session = Session.getActiveSession();
@@ -284,15 +294,14 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                     }
                     else {
                         Toast.makeText(gallerySwipeSingleFragment.getActivity(), "No internet connection available", Toast.LENGTH_SHORT).show();
-
                     }
-
                 }
 
             });
 
 
         } else if (position == 1) {
+            //Post box item
             if(name!=null){
 
                 holder.postBox.setHint(Html.fromHtml("<b>" + "Posting as " + name + "</b>"));
@@ -323,14 +332,11 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             holder.post.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     if (isInternetAvailable()) {
                         gallerySwipeSingleFragment.postComment(holder.postBox.getText().toString(), "");
                         holder.postBox.setText("");
-
                     } else {
                         Toast.makeText(gallerySwipeSingleFragment.getActivity(), "No internet connection available", Toast.LENGTH_SHORT).show();
-
                     }
 
 
@@ -339,9 +345,8 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
         }
 
-
         else {
-
+            //Comment Items
             final Comment commentInfo = data.get(position - 2);
             holder.posterName.setText(commentInfo.getPosterName());
             holder.posterName.setOnClickListener(new View.OnClickListener() {
@@ -372,16 +377,12 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
                     } else {
                         Toast.makeText(gallerySwipeSingleFragment.getActivity(), "No internet connection available", Toast.LENGTH_SHORT).show();
-
                     }
-
                 }
             });
             if(commentInfo.getIsAReply()){
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 params.setMargins(75, 0, 0, 0);
-                //holder.likeIcon.getLayoutParams().height=30;
-                //holder.likeIcon.getLayoutParams().width=30;
                 holder.message.setTextSize(13);
                 holder.numberLikes.setTextSize(11);
                 holder.likeWord.setTextSize(11);
@@ -397,12 +398,9 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                     @Override
                     public void onClick(View v) {
                         if (isInternetAvailable()) {
-                            // TODO implement listener for replying to comment.
                             showCommentsDialog(commentInfo);
-
                         } else {
                             Toast.makeText(gallerySwipeSingleFragment.getActivity(), "No internet connection available", Toast.LENGTH_SHORT).show();
-
                         }
                     }
                 });
@@ -413,7 +411,6 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                 holder.timestamp.setTextSize(13);
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 params.setMargins(0, 0, 0, 0);
-
                 holder.itemView.setLayoutParams(params);
             }
             if (commentInfo.getNumberLikes()>=1) {
@@ -438,10 +435,8 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                 public void onClick(View v) {
                     if (isInternetAvailable()) {
                         gallerySwipeSingleFragment.likeComment(commentInfo.getCommentID(), commentInfo.getUserLikes());
-
                     } else {
                         Toast.makeText(gallerySwipeSingleFragment.getActivity(), "No internet connection available", Toast.LENGTH_SHORT).show();
-
                     }
                 }
             });
@@ -878,15 +873,6 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         this.userLikes = userLikes;
         this.numberOfLikesPost = numberOfLikesPost;
         notifyDataSetChanged();
-    }
-
-    public void recycleBitmap(){
-
-//        bitmap.recycle();
-//        bitmap = null;
-//        bitmap1.recycle();
-//        bitmap1 = null;
-        System.gc();
     }
 
 }

@@ -91,7 +91,7 @@ public class GallerySwipeSingleFragment extends Fragment {
 
     @Override
     public void onDetach() {
-        commentListAdapter.recycleBitmap();
+        System.gc();
         super.onDetach();
     }
 
