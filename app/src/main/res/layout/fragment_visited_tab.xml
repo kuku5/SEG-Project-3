@@ -11,9 +11,39 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="@color/superlightgrey"
+        android:layout_below="@+id/visited_options"
         >
 
     </android.support.v7.widget.RecyclerView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+
+        android:id ="@+id/visited_options"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/info_button_visited"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:padding="5dp"
+            android:textColor="@color/white"
+            android:background="@color/colorHighlight"
+            android:text="Information"/>
+
+        <Button
+            android:id="@+id/reset_button_visited"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:padding="5dp"
+            android:textColor="@color/white"
+            android:background="@color/colorHighlight"
+            android:text="Reset"/>
+    </LinearLayout>
 
 
 </RelativeLayout>

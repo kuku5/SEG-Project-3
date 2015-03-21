@@ -142,7 +142,7 @@ public class Art {
     /**
      * Sets whether they have visited the artwork or not
      */
-    public void setVisited(){this.visited = true;}
+    public void setVisited(boolean visited){this.visited = visited;}
 
     /**
      * Gets the array of extra links for the artist

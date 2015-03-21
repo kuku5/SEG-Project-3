@@ -1,33 +1,22 @@
 package team3j.dulwichstreetart;
 
 
-import android.content.Intent;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Button;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.model.LatLng;
-
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-
 import it.neokree.materialtabs.MaterialTab;
-import it.neokree.materialtabs.MaterialTabHost;
 import it.neokree.materialtabs.MaterialTabListener;
 
 /**
@@ -41,7 +30,9 @@ public class VisitedTabFragment extends Fragment implements MaterialTabListener 
 
     private RecyclerView recyclerView;
     private VisitedAdapter visitedAdapter;
-
+    private Button infoButton;
+    private Button resetButton;
+    final Context context = this.context;
 
     public static VisitedTabFragment getInstance(int position) {
         VisitedTabFragment visitedTabFragment = new VisitedTabFragment();
@@ -71,6 +62,9 @@ public class VisitedTabFragment extends Fragment implements MaterialTabListener 
             visitedAdapter = new VisitedAdapter(getActivity(), getVisitedClickListener(), GalleryData.get().getArtworkList());
             recyclerView.setAdapter(visitedAdapter);
 
+            infoButton = (Button) layout.findViewById(R.id.info_button_visited);
+            resetButton = (Button) layout.findViewById(R.id.reset_button_visited);
+
             //Set Layout Animation
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity()) {
                 @Override
@@ -82,7 +76,46 @@ public class VisitedTabFragment extends Fragment implements MaterialTabListener 
 
             recyclerView.setLayoutManager(linearLayoutManager);
 
+        infoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder infoDialogBuilder = new AlertDialog.Builder( v.getContext());
+                infoDialogBuilder.setTitle("Information")
 
+                        .setMessage("The Visited tab displays and keeps track of the " +
+                                "arts that have been visited" +
+                                " and the ones that are " +
+                                "yet to be visited.")
+                        .setPositiveButton("Ok", null);
+                AlertDialog infoAlert = infoDialogBuilder.create();
+                infoAlert.setCanceledOnTouchOutside(true);
+                infoAlert.show();
+            }
+        });
+
+
+        resetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder resetDialogBuilder = new AlertDialog.Builder( v.getContext());
+                resetDialogBuilder.setTitle("Caution")
+
+                        .setMessage("All the arts will be set as \"Not Visited\" and cannot be restored. Do you wish to continue?");
+                resetDialogBuilder.setNeutralButton("Cancel", null);
+                        resetDialogBuilder.setPositiveButton("Reset", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                resetVisitedList();
+                            }
+                        });
+
+
+
+                AlertDialog resetAlert = resetDialogBuilder.create();
+                resetAlert.setCanceledOnTouchOutside(true);
+                resetAlert.show();
+            }
+        });
         return layout;
     }
 
@@ -99,6 +132,26 @@ public class VisitedTabFragment extends Fragment implements MaterialTabListener 
         };
 
         return itemTouchListener;
+
+    }
+
+
+    public void resetVisitedList()
+    {
+        SharedPreferences visitedPref = getActivity().getSharedPreferences("VisitedList", Context.MODE_PRIVATE);
+        SharedPreferences datePref = getActivity().getSharedPreferences("VisitedDate", Context.MODE_PRIVATE);
+        for (int i = 0; i < SplashActivity.artArrayList.size(); i++)
+        {
+            VisitedAdapter.galleryData.get(i).setVisited(false);
+            SplashActivity.artArrayList.get(i).setVisited(false);
+            SplashActivity.artArrayList.get(i).setDateVisited("--/--/----");
+
+            visitedPref.edit().putBoolean(SplashActivity.artArrayList.get(i).getName(),false).apply();
+            datePref.edit().putString(SplashActivity.artArrayList.get(i).getName(), "--/--/----").apply();
+
+
+        }
+
 
     }
 

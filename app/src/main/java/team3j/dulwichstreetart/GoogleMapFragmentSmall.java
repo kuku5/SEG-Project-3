@@ -137,7 +137,9 @@ public class GoogleMapFragmentSmall extends Fragment {
                     {
                         //TODO: the funcional tolerence level is for testing only, the commented one above is the actual tolerence level
                         //TODO: change before sending off!
-                         double tolerance=0.000250;
+                        // double tolerance=0.000250;
+
+                        double tolerance=1000;
 
                         //checks all locations
                         LatLng artLoc = artArrayList.get(i).getLoc();
@@ -151,7 +153,7 @@ public class GoogleMapFragmentSmall extends Fragment {
 
 
                                 //artArrayList.get(i).setVisited();
-                                SplashActivity.artArrayList.get(i).setVisited();
+                                SplashActivity.artArrayList.get(i).setVisited(true);
                                 int date = currentDate.get(Calendar.DATE);
                                 int month = currentDate.get(Calendar.MONTH) +1;
                                 if(month == 13)
@@ -444,7 +446,7 @@ public class GoogleMapFragmentSmall extends Fragment {
 
     public void updateVisited(int index, String fullDate)
     {
-        artArrayList.get(index).setVisited();
+        artArrayList.get(index).setVisited(true);
         SharedPreferences visitedPref = getActivity().getSharedPreferences("VisitedList", Context.MODE_PRIVATE);
         SharedPreferences datePref = getActivity().getSharedPreferences("VisitedDate", Context.MODE_PRIVATE);
         visitedPref.edit().putBoolean(SplashActivity.artArrayList.get(index).getName(),true).apply();

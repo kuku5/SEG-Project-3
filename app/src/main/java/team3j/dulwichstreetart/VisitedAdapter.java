@@ -34,8 +34,9 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
 
     private final LayoutInflater inflater;
     private Context context;
-    private ArrayList<Art> galleryData;
+    public static ArrayList<Art> galleryData;
     private Bitmap bitmap1;
+
 
 
     /**
@@ -81,7 +82,9 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
      * @param position
      */
     @Override
-    public void onBindViewHolder(VisitedAdapter.MyViewHolderVisited holder, int position) {
+    public void onBindViewHolder(final VisitedAdapter.MyViewHolderVisited holder,final int position) {
+
+
 
 
         //add image and description to the view for each gallery item
@@ -92,7 +95,6 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
 //        } else if (galleryData.get(position).getVisited() == false) {
 //            holder.visitedQuestion_textView.setText("Not Visited");
 //        }
-
         if(SplashActivity.artArrayList.get(position).getVisited() == true){
             holder.visitedQuestion_textView.setText("Visited");
             holder.visitedCard.setCardBackgroundColor(context.getResources().getColor(R.color.colorHighlight));
@@ -102,10 +104,12 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
         }
         else if(SplashActivity.artArrayList.get(position).getVisited() == false) {
             holder.visitedQuestion_textView.setText("Not Visited");
+            holder.visitedCard.setCardBackgroundColor(context.getResources().getColor(R.color.white));
+            holder.txtLineOne.setTextColor(context.getResources().getColor(R.color.colorHighlight));
+            holder.visitedQuestion_textView.setTextColor(context.getResources().getColor(R.color.colorHighlight));
         }
-
-      //   bitmap1 = BitmapFactory.decodeResource(context.getResources(), galleryData.get(position).getPic());
-      //  BitmapDrawable res1 = new BitmapDrawable(context.getResources(), bitmap1);
+        //   bitmap1 = BitmapFactory.decodeResource(context.getResources(), galleryData.get(position).getPic());
+        //  BitmapDrawable res1 = new BitmapDrawable(context.getResources(), bitmap1);
         try {
             holder.image.setImageDrawable(getAssetImage(context,galleryData.get(position).getPic()));
         } catch (IOException e) {
@@ -118,6 +122,11 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
 
         //holder.art_info_area.setText("" + GalleryData.toVisit.get(position-1).getDesc());
         // holder.art_info_area.setText("" + galleryData.get(position).getDesc());
+
+
+
+
+
 
 
     }
@@ -149,8 +158,14 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
         ImageView image;
         RelativeLayout cardRelative;
         android.support.v7.widget.CardView visitedCard;
+//        Button infoButton;
+//        Button resetButton;
 
         boolean expanded = true;
+
+
+
+
 
         public MyViewHolderVisited(View itemView, int viewType) {
             super(itemView);
@@ -164,6 +179,9 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
             visitedQuestion_textView = (TextView) itemView.findViewById(R.id.visitedQuestion_textView);
             visited_description = (TextView)itemView.findViewById(R.id.visited_description);
             visitedCard = (CardView) itemView.findViewById(R.id.card_view_1_welcome1);
+//            infoButton = (Button) itemView.findViewById(R.id.info_button_visited);
+//            resetButton = (Button) itemView.findViewById(R.id.reset_button_visited);
+
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -181,6 +199,8 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
             });
 
 
+
+
         }
     }
 
@@ -191,6 +211,8 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
     public interface OnItemTouchListener {
         public void onCardViewTap(View view, int position);
     }
+
+
 
 
 //    public void saveToFile(){

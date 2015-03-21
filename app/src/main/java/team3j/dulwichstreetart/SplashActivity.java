@@ -123,7 +123,7 @@ public class SplashActivity extends Activity {
             date = datePref.getString(artArrayList.get(i).getName(), "--/--/----");
             if(hasVisit == true)
             {
-                artArrayList.get(i).setVisited();
+                artArrayList.get(i).setVisited(true);
                 artArrayList.get(i).setDateVisited(date);
             }
 
