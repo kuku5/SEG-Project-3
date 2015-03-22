@@ -52,7 +52,7 @@
                         card_view:cardBackgroundColor="@android:color/white"
                         card_view:cardCornerRadius="4dp"
                         card_view:cardPreventCornerOverlap="false"
-                        android:layout_weight="6"
+                        android:layout_weight="0.4"
                         >
                         <LinearLayout
                             android:layout_width="fill_parent"
@@ -60,16 +60,16 @@
                             android:orientation="vertical">
 
 
-                            <com.daimajia.slider.library.SliderLayout
-                                android:id="@+id/slider"
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/height"
-                                />
+                            <!--<com.daimajia.slider.library.SliderLayout-->
+                                <!--android:id="@+id/slider"-->
+                                <!--android:layout_width="match_parent"-->
+                                <!--android:layout_height="@dimen/height"-->
+                                <!--/>-->
 
-                            <!--<ImageView-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="200dp"-->
-                            <!--android:src="@drawable/lowresconorharrington"/>-->
+                            <ImageView
+                            android:layout_width="match_parent"
+                                android:layout_height="@dimen/height"
+                            android:src="@drawable/lowresconorharrington"/>
 
                             <!--<FrameLayout-->
                             <!--android:id="@+id/small_map"-->

@@ -26,7 +26,6 @@ import java.util.ArrayList;
 public class GalleryFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    static boolean goToMaps=false;
 
 
     /**
@@ -101,7 +100,6 @@ public class GalleryFragment extends Fragment {
 
     }
 
-    //adapt recycle view for the Screen Rotation
 
     /**
      * This method adapt recycler view for the Screen Rotation by updating
@@ -109,6 +107,7 @@ public class GalleryFragment extends Fragment {
      *
      */
     public void updateLayoutForRotation(){
+        //adapt recycle view for the Screen Rotation
         int screenOrientation = this.getResources().getConfiguration().orientation;
 
         if (screenOrientation == Surface.ROTATION_0 + 1) {

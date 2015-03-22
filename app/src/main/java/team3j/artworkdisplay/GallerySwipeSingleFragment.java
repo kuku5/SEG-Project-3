@@ -80,21 +80,23 @@ public class GallerySwipeSingleFragment extends Fragment {
     }
 
 
+    /**
+     * This method overrides when the fragment detach's from the activity and calls Garage Collection
+     */
     @Override
     public void onDetach() {
         System.gc();
         super.onDetach();
     }
 
+    /**
+     * onCreateView of swipe fragment and sets up elements in the fragment
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
-    // Menu for the fragment
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_splash, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    // Given details of/actions of the swipe fragment
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
 
@@ -693,18 +695,22 @@ public class GallerySwipeSingleFragment extends Fragment {
             this.code = code;
         }
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-        }
-
+        /**
+         * This method gets Comment Replies for each comment in the background
+         * @param params
+         * @return
+         */
         protected Void doInBackground(Void... params) {
 
             getReplies();
             return null;
         }
 
+        /**
+         * This method runs on completion of the background task
+         * and displays a toast to display what the task achieved
+         * @param result
+         */
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
             if (success) {

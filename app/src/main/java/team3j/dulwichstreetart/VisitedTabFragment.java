@@ -21,21 +21,19 @@ import it.neokree.materialtabs.MaterialTabListener;
 
 /**
  * @author Team 3-J
- * Gallery Fragment for to be displayed in the tab Fragment
+ * Visited Tab Fragment for to be displayed in the tab Fragment
  */
 
-//TODO maybe add different button to cardviews, also add final images
 
-public class VisitedTabFragment extends Fragment implements MaterialTabListener {
+public class VisitedTabFragment extends Fragment  {
 
     private RecyclerView recyclerView;
     private VisitedAdapter visitedAdapter;
     private Button infoButton;
     private Button resetButton;
-    final Context context = this.context;
 
     /**
-     *
+     * this returns an instance of the visited tab fragment to be used in viewpager
      * @param position
      * @return
      */
@@ -69,7 +67,7 @@ public class VisitedTabFragment extends Fragment implements MaterialTabListener 
             //create recycle view Adapter
 
             //set adapter
-            visitedAdapter = new VisitedAdapter(getActivity(), getVisitedClickListener(), GalleryData.get().getArtworkList());
+            visitedAdapter = new VisitedAdapter(getActivity(), GalleryData.get().getArtworkList());
             recyclerView.setAdapter(visitedAdapter);
 
             infoButton = (Button) layout.findViewById(R.id.info_button_visited);
@@ -129,23 +127,6 @@ public class VisitedTabFragment extends Fragment implements MaterialTabListener 
         return layout;
     }
 
-    /**
-     * return a Click Listener for the Recycle View
-     * @return itemTouchListener
-     */
-    public VisitedAdapter.OnItemTouchListener getVisitedClickListener(){
-        VisitedAdapter.OnItemTouchListener itemTouchListener = new VisitedAdapter.OnItemTouchListener() {
-            @Override
-            public void onCardViewTap(View view, int position) {
-                //tap the entire view
-                Toast.makeText(getActivity(), "Tapped " + position, Toast.LENGTH_SHORT).show();
-                //open Activity to display for Artwork Display
-            }
-        };
-
-        return itemTouchListener;
-
-    }
 
     /**
      * Resets the data saved back to default value.
@@ -170,19 +151,6 @@ public class VisitedTabFragment extends Fragment implements MaterialTabListener 
 
     }
 
-    @Override
-    public void onTabSelected(MaterialTab materialTab) {
 
-    }
-
-    @Override
-    public void onTabReselected(MaterialTab materialTab) {
-
-    }
-
-    @Override
-    public void onTabUnselected(MaterialTab materialTab) {
-
-    }
 
 }

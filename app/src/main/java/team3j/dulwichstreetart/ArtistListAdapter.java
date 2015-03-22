@@ -126,6 +126,10 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
         private CardView expandArea;
         private LinearLayout artist_list_item_relative;
 
+        /**
+         * Constructs the Viewholder for each artist in the list
+         * @param itemView
+         */
         public MyViewHolder(View itemView) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.artist_title);

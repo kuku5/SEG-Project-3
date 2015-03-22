@@ -97,8 +97,12 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
     }
 
 
+    /**
+     * The view type of the recycler view, depending on the position on the recycler view
+     * @param position the position of the view in the recycler view
+     * @return
+     */
     @Override
-    // The view type of the recycler view, depending on the position on the recycler view
     public int getItemViewType(int position) {
         int viewType = 100 ;
 

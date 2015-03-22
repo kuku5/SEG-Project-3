@@ -146,11 +146,14 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
         }
 
 
+        /**
+         * this returns a fragment for each tab space
+         * @param num
+         * @return
+         */
         public Fragment getItem(int num) {
 
            // this returns a fragment for each tab space
-
-
             switch (num) {
                 case 0:
                     return HomePageFragment.getInstance(num);

@@ -1,9 +1,18 @@
 package team3j.dulwichstreetart;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import twitter4j.Status;
@@ -197,6 +206,7 @@ public class GalleryData {
 
         return data;
     }
+
 
 
 }

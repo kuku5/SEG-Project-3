@@ -26,16 +26,10 @@ import java.util.ArrayList;
  */
 public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHolderVisited> {
 
-    /*TODO potentially add a pre lollipop curve to cards
-        or just set up to put a separate grid view for the
-        for lollipop and pre lollipop
-     */
-    private OnItemTouchListener onItemTouchListener;
 
     private final LayoutInflater inflater;
     private Context context;
     public static ArrayList<Art> galleryData;
-    private Bitmap bitmap1;
 
 
 
@@ -43,13 +37,11 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
      * This is the Constructor for the Visited adapter and takes the gallery data and click listeners as parameters
      * so they can be used to setup the recycler view
      * @param context
-     * @param itemTouchListener
      * @param galleryData
      */
-    public VisitedAdapter(Context context, OnItemTouchListener itemTouchListener, ArrayList<Art> galleryData) {
+    public VisitedAdapter(Context context,  ArrayList<Art> galleryData) {
         this.inflater = LayoutInflater.from(context);
         this.context = context;
-        this.onItemTouchListener = itemTouchListener;
         this.galleryData = galleryData;
     }
 
@@ -134,7 +126,7 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
     }
 
     /**
-     * @return size of galleryData
+     * @return size of of the Visited list
      */
     @Override
     public int getItemCount() {
@@ -190,12 +182,6 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
         }
     }
 
-    /**
-     * Interface needed for Recycle Views to handle clicks
-     */
-    public interface OnItemTouchListener {
-        public void onCardViewTap(View view, int position);
-    }
 
 }
 

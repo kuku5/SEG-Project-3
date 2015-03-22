@@ -66,10 +66,8 @@ import twitter4j.conf.ConfigurationBuilder;
 public class HomePageFragment extends Fragment {
 
     Animation slide_in_left, slide_out_right;
-    private CardView cardView;
     private CardView cardView2;
     private LikeView likeView;
-    private LinearLayout linearLayout;
     private ViewFlipper viewFlipper;
     private com.etsy.android.grid.util.DynamicHeightImageView aboutDulwich;
     static SliderLayout mDemoSlider;
@@ -85,7 +83,6 @@ public class HomePageFragment extends Fragment {
 
     /**
      * return an instance of this Fragment with a bundle into the tab adapter
-     *
      * @param position
      * @return myFragmentTab
      */
@@ -98,15 +95,6 @@ public class HomePageFragment extends Fragment {
         return myFragmentTab;
     }
 
-    private void setupGoogleMapsCard(View layout) {
-        FragmentManager fm = getFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-
-        GoogleMapFragmentSmall fragmentSmall = GoogleMapFragmentSmall.getInstance(0);
-        ft.replace(R.id.small_map, fragmentSmall);
-        ft.commit();
-
-    }
 
 
     /**
@@ -138,7 +126,7 @@ public class HomePageFragment extends Fragment {
             // Restore last state for checked position.
             if (isOnline()) {
 
-               // getTweets();
+                getTweets();
                 Log.d("tweets", "online");
 
             }
@@ -146,7 +134,7 @@ public class HomePageFragment extends Fragment {
             todaysTweets = GalleryData.get().getTodaysTweets();
             Log.d("tweets", "no tweets call");
 
-            ///setupTweetsAnimations(layout);
+            setupTweetsAnimations(layout);
         }
 
 
@@ -175,10 +163,14 @@ public class HomePageFragment extends Fragment {
         return layout;
     }
 
+    /**
+     * this detects the Screen Size so the correct elements are initiated
+     */
     private void screenSize() {
         if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE) {
             Toast.makeText(getActivity(), "Large screen", Toast.LENGTH_LONG).show();
-            setupGoogleMapsCard(layout);
+            showLargeScreenElements();
+           // setupGoogleMapsCard(layout);
         }
         else if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_NORMAL) {
             Toast.makeText(getActivity(), "Normal sized screen", Toast.LENGTH_LONG).show();
@@ -190,6 +182,11 @@ public class HomePageFragment extends Fragment {
             Toast.makeText(getActivity(), "Screen size is neither large, normal or small", Toast.LENGTH_LONG).show();
 
         }
+    }
+
+    private void showLargeScreenElements() {
+
+
     }
 
 
@@ -205,6 +202,13 @@ public class HomePageFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    /**
+     * Reads the image from Assets and returns a bitmap drawable
+     * @param context Context of Activity
+     * @param filename Filename of the image
+     * @return BitmapDrawable of the image
+     * @throws IOException If the image can not be found
+     */
     public static Drawable getAssetImage(Context context, String filename) throws IOException {
         AssetManager assets = context.getResources().getAssets();
         String exte=".jpg";
@@ -217,12 +221,11 @@ public class HomePageFragment extends Fragment {
     }
 
     /**
+     * This method sets up all the onScreen Elements for the Home Page
      * @param layout
      */
     private void setupOnScreenElements(View layout) {
-        cardView = (CardView) layout.findViewById(R.id.card_view_1_welcome1);
         cardView2 = (CardView) layout.findViewById(R.id.car_view_22);
-        linearLayout = (LinearLayout) layout.findViewById(R.id.welcomeView);
         mapButton = (DynamicHeightImageView) layout.findViewById(R.id.map_image);
 
 
@@ -255,24 +258,10 @@ public class HomePageFragment extends Fragment {
 
 
     /**
-     * Sets up the twitter rotations
+     * Sets up the twitter animations and adds tweet listener to auto update
      * @param layout
      */
     public void setupTweetsAnimations(View layout) {
-
-        Bundle bundle = getArguments();
-
-        if (bundle != null) {
-
-            cardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    linearLayout.setVisibility(View.GONE);
-
-                }
-            });
-        }
-
 
         viewFlipper = (ViewFlipper) layout.findViewById(R.id.view_animator);
         viewFlipper.setFlipInterval(3500);
@@ -294,6 +283,10 @@ public class HomePageFragment extends Fragment {
             boolean t1 = false; // true if currently displaying twitView1
             boolean welcomed = false;
 
+            /**
+             * this method updates the tweets when the animation begins
+             * @param animation
+             */
             public void onAnimationStart(Animation animation) {
                 if (!todaysTweets.isEmpty()) {
                     if (i == todaysTweets.size()) i = 0;
@@ -315,16 +308,17 @@ public class HomePageFragment extends Fragment {
                 }
             }
 
-            public void onAnimationRepeat(Animation animation) {
+            /**
+             * this method is called when animation in the tweet viewer is animated
+             * @param animation
+             */
+            public void onAnimationRepeat(Animation animation) {}
 
-            }
-
-            public void onAnimationEnd(Animation animation) {
-                if (!welcomed) {
-                    twitView2.setTextSize(12);
-                    welcomed = true;
-                }
-            }
+            /**
+             * this method is called when animation in the tweet viewer is ended
+             * @param animation
+             */
+            public void onAnimationEnd(Animation animation) {}
         });
 
 
@@ -342,7 +336,7 @@ public class HomePageFragment extends Fragment {
 
 
     /**
-     * Sets up the artwork on rotations
+     * this method setups the animation and adds images to the image slider
      * @param layout
      */
     private void setupLibraryAnimations(View layout) {
@@ -368,21 +362,13 @@ public class HomePageFragment extends Fragment {
                     .description(name)
                     .image(file_maps.get(name))
                     .setScaleType(BaseSliderView.ScaleType.Fit);
-            //add your extra information
-            textSliderView.getBundle()
-                    .putString("extra", name);
 
             mDemoSlider.addSlider(textSliderView);
         }
 
         mDemoSlider.setPresetTransformer(SliderLayout.Transformer.FlipHorizontal);
-        //mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Tablet);
-        //mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         mDemoSlider.setCustomAnimation(new DescriptionAnimation());
         mDemoSlider.setDuration(5000);
-
-        // mDemoSlider.setPresetTransformer(((TextView) view).getText().toString());
-
 
     }
 

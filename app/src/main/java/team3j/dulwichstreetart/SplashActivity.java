@@ -5,9 +5,18 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.ImageView;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 /**
@@ -22,6 +31,7 @@ public class SplashActivity extends Activity {
 
     private long TIMER=500;
     public static ArrayList<Art> artArrayList = GalleryData.create().GetGalleryData();
+    private ImageView splashImage;
 
     /**
      * onCreate setups up the onscreen elements showing the splash logo.
@@ -34,12 +44,14 @@ public class SplashActivity extends Activity {
         super.onCreate(savedInstanceState);
         //create Gallery Data instance
         GalleryData.create();
+        setContentView(R.layout.activity_splash);
+
+        splashImage= (ImageView) findViewById(R.id.splashView);
 
         //call to method to check first-time run of application
         if(initialRun())
         {
             initiateVisited();
-
 
         }else
         {
@@ -47,7 +59,6 @@ public class SplashActivity extends Activity {
 
         }
 
-        setContentView(R.layout.activity_splash);
 
 
         //display splash screen for half a second
@@ -79,6 +90,25 @@ public class SplashActivity extends Activity {
             editor.commit();
         }
         return !hasRun;
+    }
+
+    /**
+     * Reads the image from Assets and returns a bitmap drawable
+     * @param context Context of Activity
+     * @param filename Filename of the image
+     * @param isPng
+     * @return BitmapDrawable of the image
+     * @throws java.io.IOException If the image can not be found
+     */
+    public static Drawable getAssetImage(Context context, String filename, boolean isPng) throws IOException {
+        AssetManager assets = context.getResources().getAssets();
+        String ext=".jpg";
+        if(isPng){
+            ext=".png";
+        }
+        InputStream buffer = new BufferedInputStream((assets.open("" + filename +ext)));
+        Bitmap bitmap = BitmapFactory.decodeStream(buffer);
+        return new BitmapDrawable(context.getResources(), bitmap);
     }
 
 

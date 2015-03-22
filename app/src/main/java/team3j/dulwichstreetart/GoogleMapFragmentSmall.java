@@ -42,7 +42,7 @@ import java.util.GregorianCalendar;
 import team3j.artworkdisplay.GallerySwipeSingleFragment;
 
 /**
- * A fragment that launches other parts of the demo application.
+ * GoogleMap Fragment for to be displayed in the tab viewer
  */
 
 
@@ -65,7 +65,7 @@ public class GoogleMapFragmentSmall extends Fragment {
 
 
     /**
-     *
+     * This method returns an instance of the GoogleMapFragmentSmall for the ViewPager
      * @param position
      * @return
      */
@@ -123,7 +123,6 @@ public class GoogleMapFragmentSmall extends Fragment {
     }
 
     /**
-     *
      */
     private void setUpVisitedListener() {
 
