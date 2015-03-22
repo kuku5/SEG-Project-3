@@ -145,6 +145,7 @@ public class VisitedTabFragment extends Fragment  {
 
             visitedPref.edit().putBoolean(SplashActivity.artArrayList.get(i).getName(),false).apply();
             datePref.edit().putString(SplashActivity.artArrayList.get(i).getName(), "--/--/----").apply();
+            visitedAdapter.notifyDataSetChanged();
 
 
         }
