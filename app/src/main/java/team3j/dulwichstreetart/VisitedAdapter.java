@@ -40,6 +40,8 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
 
 
     /**
+     * This is the Constructor for the Visited adapter and takes the gallery data and click listeners as parameters
+     * so they can be used to setup the recycler view
      * @param context
      * @param itemTouchListener
      * @param galleryData
@@ -53,6 +55,7 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
 
 
     /**
+     * This method inflates the layout for each individual ViewHolder item in the visited tab cards
      * @param parent
      * @param viewType
      * @return
@@ -69,7 +72,7 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
 
     /**
      * @param position
-     * @return
+     * @return position
      */
     @Override
     public int getItemViewType(int position) {
@@ -78,23 +81,17 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
     }
 
     /**
+     *
+     * onBindViewHolder is called to fill elements in each card in the visited tab with its respective information and design
      * @param holder
      * @param position
      */
     @Override
     public void onBindViewHolder(final VisitedAdapter.MyViewHolderVisited holder,final int position) {
 
-
-
-
         //add image and description to the view for each gallery item
         holder.txtLineOne.setText("" + galleryData.get(position).getName());
 
-//        if (galleryData.get(position).getVisited() == true) {
-//            holder.visitedQuestion_textView.setText("Visited");
-//        } else if (galleryData.get(position).getVisited() == false) {
-//            holder.visitedQuestion_textView.setText("Not Visited");
-//        }
         if(SplashActivity.artArrayList.get(position).getVisited() == true){
             holder.visitedQuestion_textView.setText("Visited");
             holder.visitedCard.setCardBackgroundColor(context.getResources().getColor(R.color.colorHighlight));
@@ -108,8 +105,7 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
             holder.txtLineOne.setTextColor(context.getResources().getColor(R.color.colorHighlight));
             holder.visitedQuestion_textView.setTextColor(context.getResources().getColor(R.color.colorHighlight));
         }
-        //   bitmap1 = BitmapFactory.decodeResource(context.getResources(), galleryData.get(position).getPic());
-        //  BitmapDrawable res1 = new BitmapDrawable(context.getResources(), bitmap1);
+
         try {
             holder.image.setImageDrawable(getAssetImage(context,galleryData.get(position).getPic()));
         } catch (IOException e) {
@@ -120,16 +116,16 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
 
         holder.art_address.setText("Address: " + galleryData.get(position).getArtAddress());
 
-        //holder.art_info_area.setText("" + GalleryData.toVisit.get(position-1).getDesc());
-        // holder.art_info_area.setText("" + galleryData.get(position).getDesc());
-
-
-
-
-
-
-
     }
+
+    /**
+     *
+     * Reads the image from Assets and returns a bitmap drawable
+     * @param context
+     * @param filename
+     * @return BitmapDrawable of the image
+     * @throws IOException If the image cannot be found
+     */
     public static Drawable getAssetImage(Context context, String filename) throws IOException {
         AssetManager assets = context.getResources().getAssets();
         InputStream buffer = new BufferedInputStream((assets.open(filename + ".jpg")));
@@ -138,15 +134,16 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
     }
 
     /**
-     * @return
+     * @return size of galleryData
      */
     @Override
     public int getItemCount() {
         return galleryData.size();
     }
 
-    //custom viewHolder for each item in recycle view
-
+    /**
+     * Custom viewHolder for each item in recycle view
+     */
     class MyViewHolderVisited extends RecyclerView.ViewHolder {
         // view holder for each grid  cell
         TextView txtLineOne;
@@ -163,13 +160,8 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
 
         boolean expanded = true;
 
-
-
-
-
         public MyViewHolderVisited(View itemView, int viewType) {
             super(itemView);
-
 
             txtLineOne = (TextView) itemView.findViewById(R.id.textview_visited_item);
             expandArea = (RelativeLayout) itemView.findViewById(R.id.expand_area);
@@ -179,9 +171,6 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
             visitedQuestion_textView = (TextView) itemView.findViewById(R.id.visitedQuestion_textView);
             visited_description = (TextView)itemView.findViewById(R.id.visited_description);
             visitedCard = (CardView) itemView.findViewById(R.id.card_view_1_welcome1);
-//            infoButton = (Button) itemView.findViewById(R.id.info_button_visited);
-//            resetButton = (Button) itemView.findViewById(R.id.reset_button_visited);
-
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -198,38 +187,15 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
                 }
             });
 
-
-
-
         }
     }
 
     /**
-     *
+     * Interface needed for Recycle Views to handle clicks
      */
-    //interface need for Recycle Views to handle clicks
     public interface OnItemTouchListener {
         public void onCardViewTap(View view, int position);
     }
-
-
-
-
-//    public void saveToFile(){
-//        String fileName = "visitedOrNot";
-//        //File file = new File(context.getFilesDir(), fileName);
-//
-//        FileOutputStream outputStream;
-//
-//        try {
-//            //outputStream = openFileOutput(fileName, Context.MODE_PRIVATE);
-//            outputStream = openFileOutput("visitedOrNot", Context.MODE_PRIVATE);
-//            outputStream.write();
-//
-//        }
-//
-//    }
-
 
 }
 
