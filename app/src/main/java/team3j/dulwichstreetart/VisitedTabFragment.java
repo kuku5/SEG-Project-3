@@ -90,7 +90,7 @@ public class VisitedTabFragment extends Fragment  {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder infoDialogBuilder = new AlertDialog.Builder( v.getContext());
-                infoDialogBuilder.setTitle("Information")
+                infoDialogBuilder.setTitle("How To Use")
 
                         .setMessage("The Visited tab displays and keeps track of the " +
                                 "arts that have been visited" +
