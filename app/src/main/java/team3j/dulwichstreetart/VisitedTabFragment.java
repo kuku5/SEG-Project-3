@@ -26,7 +26,7 @@ import it.neokree.materialtabs.MaterialTabListener;
 
 
 public class VisitedTabFragment extends Fragment  {
-
+    private static VisitedTabFragment visitedTabFragment;
     private RecyclerView recyclerView;
     private VisitedAdapter visitedAdapter;
     private Button infoButton;
@@ -38,10 +38,13 @@ public class VisitedTabFragment extends Fragment  {
      * @return
      */
     public static VisitedTabFragment getInstance(int position) {
-        VisitedTabFragment visitedTabFragment = new VisitedTabFragment();
-        Bundle args = new Bundle();
-        args.putInt("position", position);
-        visitedTabFragment.setArguments(args);
+        if(visitedTabFragment == null){
+            visitedTabFragment = new VisitedTabFragment();
+            Bundle args = new Bundle();
+            args.putInt("position", position);
+            visitedTabFragment.setArguments(args);
+            return visitedTabFragment;
+        }
         return visitedTabFragment;
     }
 
@@ -59,7 +62,6 @@ public class VisitedTabFragment extends Fragment  {
         //get layout and elements
         View layout = inflater.inflate(R.layout.fragment_visited_tab, container, false);
         setRetainInstance(true);
-
         // add data
 
             recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view_visited);
@@ -145,11 +147,17 @@ public class VisitedTabFragment extends Fragment  {
 
             visitedPref.edit().putBoolean(SplashActivity.artArrayList.get(i).getName(),false).apply();
             datePref.edit().putString(SplashActivity.artArrayList.get(i).getName(), "--/--/----").apply();
-            visitedAdapter.notifyDataSetChanged();
 
 
         }
+        updateList();
 
+    }
+
+    public void updateList(){
+        if(visitedAdapter != null) {
+            visitedAdapter.notifyDataSetChanged();
+        }
     }
 
 

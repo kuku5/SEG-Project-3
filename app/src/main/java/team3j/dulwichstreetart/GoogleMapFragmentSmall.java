@@ -451,6 +451,7 @@ public class GoogleMapFragmentSmall extends Fragment {
         visitedPref.edit().putBoolean(SplashActivity.artArrayList.get(index).getName(),true).apply();
         datePref.edit().putString(SplashActivity.artArrayList.get(index).getName(), fullDate).apply();
         Toast.makeText(this.getActivity(), "Updated", Toast.LENGTH_SHORT).show();
+        VisitedTabFragment.getInstance(4).updateList(); //Update the screen
     }
 
 }
