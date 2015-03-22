@@ -33,7 +33,7 @@
             android:padding="10dp"
             android:textColor="@color/white"
             android:background="@color/colorHighlight"
-            android:text="Information"/>
+            android:text="How To Use"/>
 
         <Button
             android:id="@+id/reset_button_visited"
