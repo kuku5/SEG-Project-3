@@ -19,6 +19,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,8 +32,6 @@ import android.widget.Toast;
 
 import com.etsy.android.grid.util.DynamicHeightImageView;
 import com.facebook.Session;
-import com.facebook.Settings;
-import com.facebook.widget.LikeView;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -100,7 +99,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
     /**
      * The view type of the recycler view, depending on the position on the recycler view
      * @param position the position of the view in the recycler view
-     * @return
+     * @return viewType
      */
     @Override
     public int getItemViewType(int position) {
@@ -672,12 +671,24 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
     private void showCommentsDialog(final Comment commentInfo) {
         AlertDialog.Builder builder = new AlertDialog.Builder(gallerySwipeSingleFragment.getActivity());
         builder.setTitle("Reply to " + commentInfo.getPosterName());
-        builder.setMessage(commentInfo.getMessage());
+        LinearLayout linearLayout = new LinearLayout(context);
+        linearLayout.setOrientation(LinearLayout.VERTICAL);
+        linearLayout.setPadding(50, 0, 50,0);
+        TextView message = new TextView(context);
+        message.setText(commentInfo.getMessage());
+        message.setMaxLines(7);
+        message.setTextColor(Color.BLACK);
+        message.setMovementMethod(new ScrollingMovementMethod());
+
         final EditText input = new EditText(context);
         input.setSingleLine(false);
         input.setMaxLines(3);
         input.setTextColor(Color.BLACK);
-        builder.setView(input);
+        linearLayout.addView(message);
+        linearLayout.addView(input);
+        builder.setView(linearLayout);
+
+
         builder.setPositiveButton("Post", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -693,7 +704,6 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             }
         });
         AlertDialog dialog = builder.create();
-        dialog.getWindow().setLayout(400, 400);
         dialog.show();
     }
 
