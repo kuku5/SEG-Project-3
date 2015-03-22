@@ -199,10 +199,8 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             //Set images
             try {
 
-                holder.dynamicHeightImageView.setImageDrawable(getAssetImage(context,galleryData.get(indexOfArtwork).getPic()));
-                holder.inspirationArtworkImageView.setImageDrawable(getAssetImage(context,galleryData.get(indexOfArtwork).getInspiredPic()));
-                holder.shareButton.setImageDrawable(getAssetImage(context,"ic_share"));
-                holder.mapButton.setImageDrawable(getAssetImage(context,"ic_map"));
+                holder.dynamicHeightImageView.setImageDrawable(getAssetImage(context,galleryData.get(indexOfArtwork).getInspiredPic()));
+                holder.inspirationArtworkImageView.setImageDrawable(getAssetImage(context,galleryData.get(indexOfArtwork).getPic()));
 
             } catch (IOException e) {
                 e.printStackTrace();

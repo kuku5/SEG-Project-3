@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.AssetManager;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -15,6 +16,8 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,6 +28,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
@@ -94,6 +98,15 @@ public class HomePageFragment extends Fragment {
         return myFragmentTab;
     }
 
+    private void setupGoogleMapsCard(View layout) {
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+
+        GoogleMapFragmentSmall fragmentSmall = GoogleMapFragmentSmall.getInstance(0);
+        ft.replace(R.id.small_map, fragmentSmall);
+        ft.commit();
+
+    }
 
 
     /**
@@ -137,6 +150,7 @@ public class HomePageFragment extends Fragment {
         }
 
 
+        screenSize();
         setupLibraryAnimations(layout);
 
         //  ---------- KEYHASH GENERATOR -----------//
@@ -159,6 +173,23 @@ public class HomePageFragment extends Fragment {
 
         //slideDown();
         return layout;
+    }
+
+    private void screenSize() {
+        if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE) {
+            Toast.makeText(getActivity(), "Large screen", Toast.LENGTH_LONG).show();
+            setupGoogleMapsCard(layout);
+        }
+        else if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_NORMAL) {
+            Toast.makeText(getActivity(), "Normal sized screen", Toast.LENGTH_LONG).show();
+        }
+        else if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_SMALL) {
+            Toast.makeText(getActivity(), "Small sized screen", Toast.LENGTH_LONG).show();
+        }
+        else {
+            Toast.makeText(getActivity(), "Screen size is neither large, normal or small", Toast.LENGTH_LONG).show();
+
+        }
     }
 
 

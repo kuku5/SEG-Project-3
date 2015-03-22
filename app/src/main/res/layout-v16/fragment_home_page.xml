@@ -151,7 +151,7 @@
                         <com.daimajia.slider.library.SliderLayout
                             android:id="@+id/slider"
                             android:layout_width="match_parent"
-                            android:layout_height="200dp" />
+                            android:layout_height="@dimen/height" />
                         <!--<FrameLayout-->
                         <!--android:id="@+id/small_map"-->
                         <!--android:layout_width="wrap_content"-->
