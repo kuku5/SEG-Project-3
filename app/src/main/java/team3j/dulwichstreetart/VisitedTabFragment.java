@@ -34,6 +34,11 @@ public class VisitedTabFragment extends Fragment implements MaterialTabListener 
     private Button resetButton;
     final Context context = this.context;
 
+    /**
+     *
+     * @param position
+     * @return
+     */
     public static VisitedTabFragment getInstance(int position) {
         VisitedTabFragment visitedTabFragment = new VisitedTabFragment();
         Bundle args = new Bundle();
@@ -42,7 +47,15 @@ public class VisitedTabFragment extends Fragment implements MaterialTabListener 
         return visitedTabFragment;
     }
 
-
+    /**
+     * Creates the visited tab fragment with the correct layout.
+     * Sets onClickListener for both buttons - Information and Reset button.
+     * Dialog box created for each button press.
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, @Nullable Bundle savedInstanceState) {
         //get layout and elements
@@ -50,9 +63,6 @@ public class VisitedTabFragment extends Fragment implements MaterialTabListener 
         setRetainInstance(true);
 
         // add data
-
-
-
 
             recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view_visited);
 
@@ -119,8 +129,10 @@ public class VisitedTabFragment extends Fragment implements MaterialTabListener 
         return layout;
     }
 
-
-    //return a Click Listener for the Recycle View
+    /**
+     * return a Click Listener for the Recycle View
+     * @return itemTouchListener
+     */
     public VisitedAdapter.OnItemTouchListener getVisitedClickListener(){
         VisitedAdapter.OnItemTouchListener itemTouchListener = new VisitedAdapter.OnItemTouchListener() {
             @Override
@@ -135,7 +147,11 @@ public class VisitedTabFragment extends Fragment implements MaterialTabListener 
 
     }
 
-
+    /**
+     * Resets the data saved back to default value.
+     * Updates both SharedPreferences - visitedPref and datePref to save the default value and remove the user data.
+     * Updates both instances of the arrayList in GalleryData and SplashActivity.
+     */
     public void resetVisitedList()
     {
         SharedPreferences visitedPref = getActivity().getSharedPreferences("VisitedList", Context.MODE_PRIVATE);
@@ -152,9 +168,7 @@ public class VisitedTabFragment extends Fragment implements MaterialTabListener 
 
         }
 
-
     }
-
 
     @Override
     public void onTabSelected(MaterialTab materialTab) {
@@ -170,8 +184,5 @@ public class VisitedTabFragment extends Fragment implements MaterialTabListener 
     public void onTabUnselected(MaterialTab materialTab) {
 
     }
-
-
-
 
 }
