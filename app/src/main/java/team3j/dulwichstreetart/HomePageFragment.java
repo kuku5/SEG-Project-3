@@ -59,13 +59,13 @@ import twitter4j.conf.ConfigurationBuilder;
 
 /**
  * @author Team 3-J
- *         This is the fragment of the Homepage to be displayed in the tab
+ * This is the fragment of the Homepage to be displayed in the tab
  */
 
 
 public class HomePageFragment extends Fragment {
 
-    Animation slide_in_left, slide_out_right;
+    private Animation slide_in_left, slide_out_right;
     private CardView cardView2;
     private LikeView likeView;
     private ViewFlipper viewFlipper;
@@ -82,10 +82,10 @@ public class HomePageFragment extends Fragment {
 
 
     /**
-     * return an instance of this Fragment with a bundle into the tab adapter
+     * returns an instance of the fragment
      *
-     * @param position
-     * @return myFragmentTab
+     * @param position position of tab
+     * @return the instance of the fragment
      */
 
     public static HomePageFragment getInstance(int position) {
@@ -98,12 +98,12 @@ public class HomePageFragment extends Fragment {
 
 
     /**
-     * onCreateView sets up the layout
+     * Sets up the layout
      *
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return
+     * @param inflater LayoutInflator
+     * @param container Viewgroup
+     * @param savedInstanceState bundle of instance
+     * @return layout view
      */
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -117,7 +117,6 @@ public class HomePageFragment extends Fragment {
         likeView.setObjectId("https://www.facebook.com/DulwichOutdoorGallery");
         likeView.setForegroundColor(-256);
         likeView.setLikeViewStyle(LikeView.Style.STANDARD);
-//
         setRetainInstance(true);
 
         setupOnScreenElements(layout);
@@ -161,7 +160,6 @@ public class HomePageFragment extends Fragment {
         }
         */
 
-        //slideDown();
         return layout;
     }
 
@@ -186,9 +184,9 @@ public class HomePageFragment extends Fragment {
     /**
      * Handles the web log in and likeview
      *
-     * @param requestCode
-     * @param resultCode
-     * @param data
+     * @param requestCode requestcode of the request
+     * @param resultCode result code of the request
+     * @param data intent data
      */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -200,7 +198,7 @@ public class HomePageFragment extends Fragment {
     /**
      * This method sets up all the onScreen Elements for the Home Page
      *
-     * @param layout
+     * @param layout view
      */
     private void setupOnScreenElements(View layout) {
         cardView2 = (CardView) layout.findViewById(R.id.car_view_22);
@@ -234,7 +232,7 @@ public class HomePageFragment extends Fragment {
     /**
      * Sets up the twitter animations and adds tweet listener to auto update
      *
-     * @param layout
+     * @param layout view
      */
     public void setupTweetsAnimations(View layout) {
 
@@ -265,7 +263,7 @@ public class HomePageFragment extends Fragment {
                 if (!todaysTweets.isEmpty()) {
                     if (i == todaysTweets.size()) i = 0;
 
-                    if (t1 == false) {
+                    if (!t1) {
                         twitView1.setText(todaysTweets.get(i).getText());
                         if (todaysTweets.get(i) != null) {
                             twitTime1.setText(df.format(todaysTweets.get(i).getCreatedAt()).toString());
@@ -314,7 +312,7 @@ public class HomePageFragment extends Fragment {
     /**
      * this method setups the animation and adds images to the image slider
      *
-     * @param layout
+     * @param layout view
      */
     private void setupLibraryAnimations(View layout) {
 
@@ -354,7 +352,7 @@ public class HomePageFragment extends Fragment {
 
 
     /**
-     * ShowMessage() - this method shows the about us information for the outdoor gallery in an
+     * Shows the about us information for the outdoor gallery in an
      * AlertDialog
      */
     private void showMessage() {
@@ -379,7 +377,7 @@ public class HomePageFragment extends Fragment {
     }
 
     /**
-     * showMessagePictureGallery() - this method shows the about information about the picture gallery
+     * Shows the about information about the picture gallery
      */
     private void showMessagePictureGallery() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -405,7 +403,7 @@ public class HomePageFragment extends Fragment {
     }
 
     /**
-     * getTweets() - this method retrieves at most the 5 latest tweets from a twitterUser excluding retweets and mentions, with a range of upto 19
+     * Retrieves at most the 5 latest tweets from a twitterUser excluding retweets and mentions, with a range of upto 19
      *
      */
     public void getTweets() {
@@ -454,13 +452,14 @@ public class HomePageFragment extends Fragment {
     }
 
     /**
+     * Checks if there is an active internet connection
      * @return boolean value for whether or not device is online.
      */
     public boolean isOnline() {
         ConnectivityManager cm =
                 (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        return netInfo != null && netInfo.isConnectedOrConnecting();
+        return netInfo != null && netInfo.isConnected();
     }
 
     @Override
