@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 /**
  * @author Team 3-J
- *         This Activity is the main Activity and is called when the app first launched creates displays splash
+ * This Activity is the main Activity and is called when the app first launched creates displays splash
  */
 
 
@@ -91,27 +91,6 @@ public class SplashActivity extends Activity {
     }
 
     /**
-     * Reads the image from Assets and returns a bitmap drawable
-     *
-     * @param context  Context of Activity
-     * @param filename Filename of the image
-     * @param isPng
-     * @return BitmapDrawable of the image
-     * @throws java.io.IOException If the image can not be found
-     */
-    public static Drawable getAssetImage(Context context, String filename, boolean isPng) throws IOException {
-        AssetManager assets = context.getResources().getAssets();
-        String ext = ".jpg";
-        if (isPng) {
-            ext = ".png";
-        }
-        InputStream buffer = new BufferedInputStream((assets.open("" + filename + ext)));
-        Bitmap bitmap = BitmapFactory.decodeStream(buffer);
-        return new BitmapDrawable(context.getResources(), bitmap);
-    }
-
-
-    /**
      * Initialises the two shared preferences needed in the functionality of the visited tab-
      * visitedPref and datePref
      * This only runs the first time the app is opened
@@ -130,8 +109,6 @@ public class SplashActivity extends Activity {
 
         edit.apply();
         editDate.apply();
-        System.out.println("First time");
-
 
     }
 
@@ -146,13 +123,11 @@ public class SplashActivity extends Activity {
         for (int i = 0; i < artArrayList.size(); i++) {
             hasVisit = visitedPref.getBoolean(artArrayList.get(i).getName(), false);
             date = datePref.getString(artArrayList.get(i).getName(), "--/--/----");
-            if (hasVisit == true) {
+            if (hasVisit) {
                 artArrayList.get(i).setVisited(true);
                 artArrayList.get(i).setDateVisited(date);
             }
 
-
-            System.out.println("Not First time");
 
         }
     }
