@@ -455,27 +455,31 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             int minute = Integer.parseInt(commentInfo.getTime().substring(14, 16));
             Calendar postDate = GregorianCalendar.getInstance();
             postDate.set(year, month, day, hour, minute);
-            Map<TimeUnit, Long> timeSincePost = getTimeDifference(postDate.getTime());
 
-            if (timeSincePost.get(TimeUnit.DAYS) > 0 && timeSincePost.get(TimeUnit.DAYS) < 8) {
-                if (timeSincePost.get(TimeUnit.DAYS) == 1) {
-                    holder.timestamp.setText("One day ago");
-                }
-                else {
-                    holder.timestamp.setText(timeSincePost.get(TimeUnit.DAYS) + " days ago");
-                }
-            } else if (timeSincePost.get(TimeUnit.DAYS) > 7) {
-                holder.timestamp.setText(postDate.getTime().toString().substring(4, 10) +" "+ year+" at " + postDate.getTime().toString().substring(11, 16));
-            } else if (timeSincePost.get(TimeUnit.DAYS) == 0) {
-                if (timeSincePost.get(TimeUnit.HOURS) == 1) {
-                    holder.timestamp.setText("About one hour ago");
-                } else if (timeSincePost.get(TimeUnit.HOURS) > 1) {
-                    holder.timestamp.setText(timeSincePost.get(TimeUnit.HOURS) + " hours ago");
-                } else if (timeSincePost.get(TimeUnit.HOURS) == 0) {
-                    if (timeSincePost.get(TimeUnit.MINUTES) == 1) {
-                        holder.timestamp.setText("About one minute ago");
+            Date d = postDate.getTime();
+            if(d.compareTo(new Date())>0){ //current time is before posttime
+                holder.timestamp.setText(postDate.getTime().toString().substring(4, 10) + " " + year + " at " + postDate.getTime().toString().substring(11, 16));
+            } else {
+                Map<TimeUnit, Long> timeSincePost = getTimeDifference(postDate.getTime());
+                if (timeSincePost.get(TimeUnit.DAYS) > 0 && timeSincePost.get(TimeUnit.DAYS) < 8) {
+                    if (timeSincePost.get(TimeUnit.DAYS) == 1) {
+                        holder.timestamp.setText("One day ago");
                     } else {
-                        holder.timestamp.setText(timeSincePost.get(TimeUnit.MINUTES) + " minutes ago");
+                        holder.timestamp.setText(timeSincePost.get(TimeUnit.DAYS) + " days ago");
+                    }
+                } else if (timeSincePost.get(TimeUnit.DAYS) > 7) {
+                    holder.timestamp.setText(postDate.getTime().toString().substring(4, 10) + " " + year + " at " + postDate.getTime().toString().substring(11, 16));
+                } else if (timeSincePost.get(TimeUnit.DAYS) == 0) {
+                    if (timeSincePost.get(TimeUnit.HOURS) == 1) {
+                        holder.timestamp.setText("About one hour ago");
+                    } else if (timeSincePost.get(TimeUnit.HOURS) > 1) {
+                        holder.timestamp.setText(timeSincePost.get(TimeUnit.HOURS) + " hours ago");
+                    } else if (timeSincePost.get(TimeUnit.HOURS) == 0) {
+                        if (timeSincePost.get(TimeUnit.MINUTES) == 1) {
+                            holder.timestamp.setText("About one minute ago");
+                        } else {
+                            holder.timestamp.setText(timeSincePost.get(TimeUnit.MINUTES) + " minutes ago");
+                        }
                     }
                 }
             }
