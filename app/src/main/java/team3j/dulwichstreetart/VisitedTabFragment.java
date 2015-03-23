@@ -17,11 +17,11 @@ import android.widget.Button;
 
 /**
  * @author Team 3-J
- * Visited Tab Fragment for to be displayed in the tab Fragment
+ *         Visited Tab Fragment for to be displayed in the tab Fragment
  */
 
 
-public class VisitedTabFragment extends Fragment  {
+public class VisitedTabFragment extends Fragment {
     private static VisitedTabFragment visitedTabFragment;
     private RecyclerView recyclerView;
     private VisitedAdapter visitedAdapter;
@@ -30,11 +30,12 @@ public class VisitedTabFragment extends Fragment  {
 
     /**
      * this returns an instance of the visited tab fragment to be used in viewpager
+     *
      * @param position
      * @return
      */
     public static VisitedTabFragment getInstance(int position) {
-        if(visitedTabFragment == null){
+        if (visitedTabFragment == null) {
             visitedTabFragment = new VisitedTabFragment();
             Bundle args = new Bundle();
             args.putInt("position", position);
@@ -48,6 +49,7 @@ public class VisitedTabFragment extends Fragment  {
      * Creates the visited tab fragment with the correct layout.
      * Sets onClickListener for both buttons - Information and Reset button.
      * Dialog box created for each button press.
+     *
      * @param inflater
      * @param container
      * @param savedInstanceState
@@ -60,32 +62,32 @@ public class VisitedTabFragment extends Fragment  {
         setRetainInstance(true);
         // add data
 
-            recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view_visited);
+        recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view_visited);
 
-            //create recycle view Adapter
+        //create recycle view Adapter
 
-            //set adapter
-            visitedAdapter = new VisitedAdapter(getActivity(), GalleryData.get().getArtworkList());
-            recyclerView.setAdapter(visitedAdapter);
+        //set adapter
+        visitedAdapter = new VisitedAdapter(getActivity(), GalleryData.get().getArtworkList());
+        recyclerView.setAdapter(visitedAdapter);
 
-            infoButton = (Button) layout.findViewById(R.id.info_button_visited);
-            resetButton = (Button) layout.findViewById(R.id.reset_button_visited);
+        infoButton = (Button) layout.findViewById(R.id.info_button_visited);
+        resetButton = (Button) layout.findViewById(R.id.reset_button_visited);
 
-            //Set Layout Animation
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity()) {
-                @Override
-                protected int getExtraLayoutSpace(RecyclerView.State state) {
-                    return 200;
-                }
-            };
+        //Set Layout Animation
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity()) {
+            @Override
+            protected int getExtraLayoutSpace(RecyclerView.State state) {
+                return 200;
+            }
+        };
 
 
-            recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setLayoutManager(linearLayoutManager);
 
         infoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder infoDialogBuilder = new AlertDialog.Builder( v.getContext());
+                AlertDialog.Builder infoDialogBuilder = new AlertDialog.Builder(v.getContext());
                 infoDialogBuilder.setTitle("How To Use")
 
                         .setMessage(getString(R.string.howToUseVisited))
@@ -100,18 +102,17 @@ public class VisitedTabFragment extends Fragment  {
         resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder resetDialogBuilder = new AlertDialog.Builder( v.getContext());
+                AlertDialog.Builder resetDialogBuilder = new AlertDialog.Builder(v.getContext());
                 resetDialogBuilder.setTitle("Caution")
 
                         .setMessage("All the arts will be set as \"Not Visited\" and cannot be restored. Do you wish to continue?");
                 resetDialogBuilder.setNeutralButton("Cancel", null);
-                        resetDialogBuilder.setPositiveButton("Reset", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                resetVisitedList();
-                            }
-                        });
-
+                resetDialogBuilder.setPositiveButton("Reset", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        resetVisitedList();
+                    }
+                });
 
 
                 AlertDialog resetAlert = resetDialogBuilder.create();
@@ -128,17 +129,15 @@ public class VisitedTabFragment extends Fragment  {
      * Updates both SharedPreferences - visitedPref and datePref to save the default value and remove the user data.
      * Updates both instances of the arrayList in GalleryData and SplashActivity.
      */
-    public void resetVisitedList()
-    {
+    public void resetVisitedList() {
         SharedPreferences visitedPref = getActivity().getSharedPreferences("VisitedList", Context.MODE_PRIVATE);
         SharedPreferences datePref = getActivity().getSharedPreferences("VisitedDate", Context.MODE_PRIVATE);
-        for (int i = 0; i < SplashActivity.artArrayList.size(); i++)
-        {
+        for (int i = 0; i < SplashActivity.artArrayList.size(); i++) {
             VisitedAdapter.galleryData.get(i).setVisited(false);
             SplashActivity.artArrayList.get(i).setVisited(false);
             SplashActivity.artArrayList.get(i).setDateVisited("--/--/----");
 
-            visitedPref.edit().putBoolean(SplashActivity.artArrayList.get(i).getName(),false).apply();
+            visitedPref.edit().putBoolean(SplashActivity.artArrayList.get(i).getName(), false).apply();
             datePref.edit().putString(SplashActivity.artArrayList.get(i).getName(), "--/--/----").apply();
 
 
@@ -150,8 +149,8 @@ public class VisitedTabFragment extends Fragment  {
     /**
      *
      */
-    public void updateList(){
-        if(visitedAdapter != null) {
+    public void updateList() {
+        if (visitedAdapter != null) {
             visitedAdapter.notifyDataSetChanged();
         }
     }

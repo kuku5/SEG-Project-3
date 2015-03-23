@@ -1,95 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
-    android:layout_height="fill_parent"
     android:layout_width="fill_parent"
-    android:orientation="horizontal"
-    >
+    android:layout_height="fill_parent"
+    android:orientation="horizontal">
 
     <!--<com.facebook.widget.ProfilePictureView-->
-        <!--android:layout_width="80dp"-->
-        <!--android:layout_height="wrap_content"-->
+    <!--android:layout_width="80dp"-->
+    <!--android:layout_height="wrap_content"-->
 
-        <!--android:gravity="center"-->
-        <!--android:padding="4dp"-->
-
-
-        <!--></com.facebook.widget.ProfilePictureView>-->
+    <!--android:gravity="center"-->
+    <!--android:padding="4dp"-->
 
 
+    <!--></com.facebook.widget.ProfilePictureView>-->
 
-    <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="7dp">
 
         <!--<TextView-->
-            <!--android:id="@+id/commenter_name"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="20dp"-->
-            <!--android:text="name"-->
-            <!--android:gravity="center_vertical"-->
-            <!--android:textColor="@color/com_facebook_blue"-->
-            <!--android:textSize="14dp"-->
-            <!--android:textStyle="bold"-->
-            <!--/>-->
+        <!--android:id="@+id/commenter_name"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="20dp"-->
+        <!--android:text="name"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:textColor="@color/com_facebook_blue"-->
+        <!--android:textSize="14dp"-->
+        <!--android:textStyle="bold"-->
+        <!--/>-->
 
         <!--<TextView-->
-            <!--android:id="@+id/comment"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Comment is here."-->
-            <!--android:gravity="center_vertical"-->
-            <!--android:textSize="12dp"-->
-            <!--android:layout_below="@id/name"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_marginLeft="5dp"/>-->
+        <!--android:id="@+id/comment"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Comment is here."-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:textSize="12dp"-->
+        <!--android:layout_below="@id/name"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:layout_marginLeft="5dp"/>-->
         <EditText
+            android:id="@+id/post_box"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/post_box"
-            android:lines="4"
-            android:singleLine="false"
-            android:gravity="top"
-            android:textSize="13dp"
-            android:padding="10dp"
-            android:textColorHint="#BDBDBD"
-            android:hint="@string/posthint"
+            android:layout_marginTop="5dp"
             android:background="@drawable/edittextstyle"
+            android:gravity="top"
+            android:hint="@string/posthint"
+            android:lines="4"
+            android:padding="10dp"
+            android:singleLine="false"
             android:textColor="#000000"
-            android:layout_marginTop="5dp"/>
-
+            android:textColorHint="#BDBDBD"
+            android:textSize="13dp" />
 
 
         <!--<TextView-->
-            <!--android:id="@+id/time"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text=""-->
-            <!--android:gravity="center_vertical"-->
-            <!--android:textSize="10dp"-->
-            <!--android:textColor="@color/lightgrey"-->
-            <!--android:layout_below="@id/post_box"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_marginLeft="20dp"/>-->
+        <!--android:id="@+id/time"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text=""-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:textSize="10dp"-->
+        <!--android:textColor="@color/lightgrey"-->
+        <!--android:layout_below="@id/post_box"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:layout_marginLeft="20dp"/>-->
         <Button
             android:id="@+id/post"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/postbutton"
-            android:gravity="center"
-            android:textSize="13sp"
-            android:layout_marginTop="5dp"
-            android:textColor="#FFF"
-            android:background="@color/facebookblue"
-            android:layout_below="@+id/post_box"
+            android:layout_alignEnd="@+id/post_box"
             android:layout_alignRight="@+id/post_box"
-            android:layout_alignEnd="@+id/post_box" />
+            android:layout_below="@+id/post_box"
+            android:layout_marginTop="5dp"
+            android:background="@color/facebookblue"
+            android:gravity="center"
+            android:text="@string/postbutton"
+            android:textColor="#FFF"
+            android:textSize="13sp" />
 
 
     </RelativeLayout>

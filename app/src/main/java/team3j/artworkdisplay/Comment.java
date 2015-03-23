@@ -2,9 +2,9 @@ package team3j.artworkdisplay;
 
 /**
  * @author Team 3-J
- * Stores the details of a particular comment from a facebook post
+ *         Stores the details of a particular comment from a facebook post
  */
-public class Comment{
+public class Comment {
 
     private String message;
     private String posterName;
@@ -18,9 +18,9 @@ public class Comment{
     private boolean isPage;
 
 
-
     /**
      * Sets the message for the post
+     *
      * @param message The message to be set
      */
     public void setMessage(String message) {
@@ -30,6 +30,7 @@ public class Comment{
 
     /**
      * Sets the poster's name
+     *
      * @param posterName The poster's name
      */
     public void setPosterName(String posterName) {
@@ -39,6 +40,7 @@ public class Comment{
 
     /**
      * Sets number of likes for the comment
+     *
      * @param numberLikes The amount of likes for the comment
      */
     public void setNumberLikes(int numberLikes) {
@@ -48,6 +50,7 @@ public class Comment{
 
     /**
      * Poster's link to their facebook account
+     *
      * @param posterURL The link of the poster's profile page on facebook
      */
     public void setPosterURL(String posterURL) {
@@ -56,6 +59,7 @@ public class Comment{
 
     /**
      * Set the time for the post
+     *
      * @param time The time of the post
      */
     public void setTime(String time) {
@@ -64,6 +68,7 @@ public class Comment{
 
     /**
      * Sets the comment's ID
+     *
      * @param commentID the comment's ID
      */
     public void setCommentID(String commentID) {
@@ -73,6 +78,7 @@ public class Comment{
 
     /**
      * Sets if the user has liked the comment or not
+     *
      * @param userLikes boolean true if the user has "liked" the specified comment false if not
      */
     public void setUserLikes(Boolean userLikes) {
@@ -82,15 +88,17 @@ public class Comment{
 
     /**
      * Sets the comment as a reply comment to a top level comment
+     *
      * @param isAReply boolean true if it is a reply comment false if it is a top level comment
      */
-    public void setIsAReply(Boolean isAReply){
+    public void setIsAReply(Boolean isAReply) {
 
         this.isAReply = isAReply;
     }
 
     /**
      * Sets the comments to "deletable" that are available to be deleted by the user
+     *
      * @param canDelete boolean true if the user is able to delete the specified comment false if not
      */
     public void setCanDelete(Boolean canDelete) {
@@ -99,6 +107,7 @@ public class Comment{
 
     /**
      * Returns if the user is able to delete the specified comment or not
+     *
      * @return boolean true if the user can delete the comment false if not
      */
     public boolean getCanDelete() {
@@ -107,6 +116,7 @@ public class Comment{
 
     /**
      * Gets the message of this specific "Comment"
+     *
      * @return the message itself
      */
     public String getMessage() {
@@ -116,6 +126,7 @@ public class Comment{
 
     /**
      * Gets the name of who posted the comment
+     *
      * @return the name of the poster
      */
     public String getPosterName() {
@@ -125,6 +136,7 @@ public class Comment{
 
     /**
      * Gets the number of likes for the comment
+     *
      * @return number of likes
      */
     public int getNumberLikes() {
@@ -133,6 +145,7 @@ public class Comment{
 
     /**
      * Gets the poster's facebook profile link
+     *
      * @return the link to the poster's facebook profile
      */
     public String getPosterURL() {
@@ -141,6 +154,7 @@ public class Comment{
 
     /**
      * Gets the time of when the comment was posted
+     *
      * @return the time at which the comment was posted
      */
     public String getTime() {
@@ -150,6 +164,7 @@ public class Comment{
 
     /**
      * Gets the ID of the specific comment for identification
+     *
      * @return the comment's ID
      */
     public String getCommentID() {
@@ -159,6 +174,7 @@ public class Comment{
 
     /**
      * Gets the amount of the likes for the comment
+     *
      * @return the amount of likes for the comment
      */
     public boolean getUserLikes() {
@@ -168,15 +184,17 @@ public class Comment{
 
     /**
      * Gets if it is a "reply-type comment"
+     *
      * @return boolean true if it is a reply comment
      */
-    public boolean getIsAReply(){
+    public boolean getIsAReply() {
 
         return isAReply;
     }
 
     /**
      * Set's if the profile is a page or a regular profile
+     *
      * @param isPage boolean true if it is a page
      */
     public void setIsPage(boolean isPage) {
@@ -185,13 +203,14 @@ public class Comment{
 
     /**
      * Returns true if the profile is a page
+     *
      * @return Returns true if the profile is a page
      */
     public boolean isPage() {
         return isPage;
     }
 
-    public String toString(){
+    public String toString() {
         return posterName + " " + message;
     }
 

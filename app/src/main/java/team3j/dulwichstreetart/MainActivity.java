@@ -24,8 +24,7 @@ import it.neokree.materialtabs.MaterialTabListener;
 
 /**
  * @author Team 3-J
- * This is the Main Activity this creates the tabview and adds the fragment for each tab
- *
+ *         This is the Main Activity this creates the tabview and adds the fragment for each tab
  */
 
 
@@ -38,6 +37,7 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
 
     /**
      * onCreate inflates the layout to be viewed for the fragment and setups up the on screen elements
+     *
      * @param savedInstanceState
      */
     @Override
@@ -61,7 +61,7 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
     /**
      * this method creates the tab layout and the viewpager which displays the fragments below the tabs
      */
-    public void setUpTabsAdapter(){
+    public void setUpTabsAdapter() {
         //fragment page adapter for the tabs displays a fragment and handles loading of fragments for each tab
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
@@ -79,7 +79,7 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
         //adds the titles to each   tab and changes colors of text
 
         for (int i = 0; i < adapter.getCount(); i++) {
-            String pageTitle = ""+adapter.getPageTitle(i);
+            String pageTitle = "" + adapter.getPageTitle(i);
 
             MaterialTab materialTab =
                     tabHost.newTab()
@@ -94,9 +94,9 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
     }
 
 
-
     /**
      * this method makes the tab view pager go to the selected tab
+     *
      * @param materialTab
      */
     @Override
@@ -106,7 +106,8 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
 
 
     /**
-     *  this method gets when a tab is reselected by the user
+     * this method gets when a tab is reselected by the user
+     *
      * @param materialTab
      */
     @Override
@@ -116,7 +117,8 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
     }
 
     /**
-     *  this method gets when a tab is Unselected
+     * this method gets when a tab is Unselected
+     *
      * @param materialTab
      */
     @Override
@@ -131,13 +133,14 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
     }
 
     /**
-    ViewPagerAdapter
-    adapter for the tab layout fill each space with a fragment and manages loading
+     * ViewPagerAdapter
+     * adapter for the tab layout fill each space with a fragment and manages loading
      */
     private class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
         /**
          * constructor view pager takes fragment manager as parameter
+         *
          * @param fragmentManager
          */
         public ViewPagerAdapter(FragmentManager fragmentManager) {
@@ -149,12 +152,13 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
 
         /**
          * this returns a fragment for each tab space
+         *
          * @param num
          * @return
          */
         public Fragment getItem(int num) {
 
-           // this returns a fragment for each tab space
+            // this returns a fragment for each tab space
 
 
             switch (num) {
@@ -179,6 +183,7 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
 
         /**
          * this gets the number of pages in the view pager
+         *
          * @return
          */
         @Override
@@ -190,14 +195,15 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
 
         /**
          * this gets the title of each tab depending on the position
+         *
          * @param position
          * @return
          */
         @Override
         public CharSequence getPageTitle(int position) {
             //this returns the page title for each tab from the xml strings file
-            String title=getResources().getStringArray(R.array.tabs)[position];
-            return Html.fromHtml("<html><body><b>"+title+"</b>  </body><html>");
+            String title = getResources().getStringArray(R.array.tabs)[position];
+            return Html.fromHtml("<html><body><b>" + title + "</b>  </body><html>");
         }
 
     }
@@ -209,7 +215,6 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
         System.gc();
 
     }
-
 
 
 }

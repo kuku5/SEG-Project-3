@@ -32,14 +32,14 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
     public static ArrayList<Art> galleryData;
 
 
-
     /**
      * This is the Constructor for the Visited adapter and takes the gallery data and click listeners as parameters
      * so they can be used to setup the recycler view
+     *
      * @param context
      * @param galleryData
      */
-    public VisitedAdapter(Context context,  ArrayList<Art> galleryData) {
+    public VisitedAdapter(Context context, ArrayList<Art> galleryData) {
         this.inflater = LayoutInflater.from(context);
         this.context = context;
         this.galleryData = galleryData;
@@ -48,6 +48,7 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
 
     /**
      * This method inflates the layout for each individual ViewHolder item in the visited tab cards
+     *
      * @param parent
      * @param viewType
      * @return
@@ -73,25 +74,24 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
     }
 
     /**
-     *
      * onBindViewHolder is called to fill elements in each card in the visited tab with its respective information and design
+     *
      * @param holder
      * @param position
      */
     @Override
-    public void onBindViewHolder(final VisitedAdapter.MyViewHolderVisited holder,final int position) {
+    public void onBindViewHolder(final VisitedAdapter.MyViewHolderVisited holder, final int position) {
 
         //add image and description to the view for each gallery item
         holder.txtLineOne.setText("" + galleryData.get(position).getName());
 
-        if(SplashActivity.artArrayList.get(position).getVisited() == true){
+        if (SplashActivity.artArrayList.get(position).getVisited() == true) {
             holder.visitedQuestion_textView.setText("Visited");
             holder.visitedCard.setCardBackgroundColor(context.getResources().getColor(R.color.colorHighlight));
             holder.txtLineOne.setTextColor(context.getResources().getColor(R.color.white));
             holder.visitedQuestion_textView.setTextColor(context.getResources().getColor(R.color.white));
 
-        }
-        else if(SplashActivity.artArrayList.get(position).getVisited() == false) {
+        } else if (SplashActivity.artArrayList.get(position).getVisited() == false) {
             holder.visitedQuestion_textView.setText("Not Visited");
             holder.visitedCard.setCardBackgroundColor(context.getResources().getColor(R.color.visitedTabGrey));
             holder.txtLineOne.setTextColor(context.getResources().getColor(R.color.colorHighlight));
@@ -107,8 +107,8 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
     }
 
     /**
-     *
      * Reads the image from Assets and returns a bitmap drawable
+     *
      * @param context
      * @param filename
      * @return BitmapDrawable of the image
@@ -157,7 +157,7 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
             art_info_area = (TextView) itemView.findViewById(R.id.visited_description);
             art_address = (TextView) itemView.findViewById(R.id.art_address);
             visitedQuestion_textView = (TextView) itemView.findViewById(R.id.visitedQuestion_textView);
-            visited_description = (TextView)itemView.findViewById(R.id.visited_description);
+            visited_description = (TextView) itemView.findViewById(R.id.visited_description);
             visitedCard = (CardView) itemView.findViewById(R.id.card_view_1_welcome1);
 
             itemView.setOnClickListener(new View.OnClickListener() {

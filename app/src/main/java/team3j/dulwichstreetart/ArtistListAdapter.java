@@ -23,9 +23,8 @@ import java.util.ArrayList;
 
 /**
  * @author Team 3-J
- *
- * This is the Recycle View Adapter for the Artist List in the artist tab
- *
+ *         <p/>
+ *         This is the Recycle View Adapter for the Artist List in the artist tab
  */
 public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.MyViewHolder> {
 
@@ -35,33 +34,35 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
 
     /**
      * Constructs an ArtistListAdapter
+     *
      * @param context the activity
-     * @param data the array of artists
+     * @param data    the array of artists
      */
-    public ArtistListAdapter(Context context,ArrayList<Artist> data){
-        this.data=data;
-        inflater=LayoutInflater.from(context);
-        this.context=context;
+    public ArtistListAdapter(Context context, ArrayList<Artist> data) {
+        this.data = data;
+        inflater = LayoutInflater.from(context);
+        this.context = context;
     }
 
     /**
-     *  {@inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public ArtistListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //add view to the grid cell for the first time
         //this stores the view in the cache meaning the images dont have to be reloaded over
         //and over mean its should be faster than a Listview/Gridview which does
-        View view= inflater.inflate(R.layout.artist_list_item,parent,false);
+        View view = inflater.inflate(R.layout.artist_list_item, parent, false);
 
-        MyViewHolder myViewHolder= new MyViewHolder(view);
+        MyViewHolder myViewHolder = new MyViewHolder(view);
 
         return myViewHolder;
     }
 
     /**
      * Properties given to the holder when it starts
-     * @param holder viewholder
+     *
+     * @param holder   viewholder
      * @param position current position
      */
     @Override
@@ -73,7 +74,7 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
         holder.website.setText(data.get(position).getWebsite());
 
         try {
-            holder.artistPhoto.setImageDrawable(getAssetImage(context,data.get(position).getArtistPhoto()));
+            holder.artistPhoto.setImageDrawable(getAssetImage(context, data.get(position).getArtistPhoto()));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -82,7 +83,8 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
 
     /**
      * Reads the image from Assets and returns a bitmap drawable
-     * @param context Context of Activity
+     *
+     * @param context  Context of Activity
      * @param filename Filename of the image
      * @return BitmapDrawable of the image
      * @throws IOException If the image can not be found
@@ -96,6 +98,7 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
 
     /**
      * this method returns the number of items in the Artist list
+     *
      * @return data size
      */
     @Override
@@ -105,29 +108,31 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
 
     /**
      * The view type
+     *
      * @param position current position
      * @return current position
      */
     @Override
     public int getItemViewType(int position) {
-        return position+100;
+        return position + 100;
     }
 
     /**
      * This Class is the Viewholder for each item in the list
      */
-    class MyViewHolder extends RecyclerView.ViewHolder{
+    class MyViewHolder extends RecyclerView.ViewHolder {
         // view holder for each grid  cell
         private TextView title;
         private TextView description;
         private TextView website;
         private ImageView artistPhoto;
-        private boolean expanded=false;
+        private boolean expanded = false;
         private CardView expandArea;
         private LinearLayout artist_list_item_relative;
 
         /**
          * Constructs the Viewholder for each artist in the list
+         *
          * @param itemView
          */
         public MyViewHolder(View itemView) {
@@ -135,23 +140,23 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
             title = (TextView) itemView.findViewById(R.id.artist_title);
             description = (TextView) itemView.findViewById(R.id.artist_description);
             website = (TextView) itemView.findViewById(R.id.website);
-            artistPhoto = (ImageView)itemView.findViewById(R.id.artistPhoto);
-            expandArea= (CardView) itemView.findViewById(R.id.artist_list_card);
+            artistPhoto = (ImageView) itemView.findViewById(R.id.artistPhoto);
+            expandArea = (CardView) itemView.findViewById(R.id.artist_list_card);
             artist_list_item_relative = (LinearLayout) itemView.findViewById(R.id.artist_list_item_relative);
 
 
             title.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(expanded){
+                    if (expanded) {
                         expandArea.setVisibility(View.GONE);
                         artist_list_item_relative.setVisibility(View.GONE);
-                        expanded=false;
-                    }else{
+                        expanded = false;
+                    } else {
                         expandArea.setVisibility(View.VISIBLE);
                         artist_list_item_relative.setVisibility(View.VISIBLE);
 
-                        expanded=true;
+                        expanded = true;
 
                     }
 
@@ -163,8 +168,6 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.My
 
 
     }
-
-
 
 
 }

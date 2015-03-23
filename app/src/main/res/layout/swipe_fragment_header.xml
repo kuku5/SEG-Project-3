@@ -2,20 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <!--layout for inspiration image  begin -->
     <LinearLayout
         android:id="@+id/image1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:animateLayoutChanges="true"
         android:layout_centerInParent="true"
+        android:layout_gravity="center"
 
+        android:animateLayoutChanges="true"
         android:background="@color/colorAccent"
         android:orientation="vertical"
-        android:layout_gravity="center"
 
         android:padding="0dp">
 
@@ -24,12 +23,11 @@
             android:id="@+id/dynamic_imageview_artwork_display"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:maxHeight="400dp"
             android:layout_gravity="center"
-            android:src="@drawable/lowresconorharrington"
             android:adjustViewBounds="true"
+            android:maxHeight="400dp"
             android:scaleType="fitXY"
-            />
+            android:src="@drawable/lowresconorharrington" />
 
 
     </LinearLayout>
@@ -46,16 +44,18 @@
         android:minHeight="?attr/actionBarSize"
 
         >
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:orientation="vertical"
             android:layout_centerVertical="true"
-            android:paddingLeft="10dp"
+            android:layout_toLeftOf="@+id/right_part"
+            android:orientation="vertical"
 
-            android:layout_toLeftOf="@+id/right_part">
+            android:paddingLeft="10dp">
+
             <TextView
 
                 android:id="@+id/comment_list_inspiration_title"
@@ -66,13 +66,13 @@
                 android:maxLines="2"
                 android:paddingLeft="4dp"
 
+                android:text="@string/artist_title"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="12sp"
-                android:textStyle="italic"
 
-                android:text="@string/artist_title"
-                />
+                android:textStyle="italic" />
+
             <TextView
 
                 android:id="@+id/comment_list_inspiration_title_artist"
@@ -83,22 +83,21 @@
                 android:maxLines="2"
                 android:paddingLeft="4dp"
 
+                android:text="@string/artist_title"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="14sp"
-                android:textStyle="bold"
 
-                android:text="@string/artist_title"
-                />
+                android:textStyle="bold" />
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/right_part"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:id="@+id/right_part">
+            android:layout_alignParentRight="true">
 
             <ImageView
                 android:id="@+id/shareIcon"
@@ -122,9 +121,9 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_margin="5dp"
-        >
+        android:orientation="vertical">
+
         <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:id="@+id/artwork_display_description"
             android:layout_width="fill_parent"
@@ -165,11 +164,10 @@
                         android:maxLines="2"
                         android:paddingLeft="0dp"
 
+                        android:text="@string/artist_title"
                         android:textAllCaps="true"
                         android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:text="@string/artist_title"
-                        />
+                        android:textStyle="bold" />
 
                     <TextView
 
@@ -180,16 +178,16 @@
                         android:gravity="center_vertical"
                         android:maxLines="2"
                         android:paddingLeft="0dp"
+                        android:text="@string/artist_title"
                         android:textAllCaps="true"
                         android:textSize="12sp"
-                        android:textStyle="italic"
 
-                        android:text="@string/artist_title"
-                        />
+                        android:textStyle="italic" />
+
                     <TextView
+                        android:id="@+id/description"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/description"
                         android:text="AP is the only stencil artist in this project. Once cut, stencil paintings can be reproduced easily, by anyone.  The work of art AP chose to interpret was a sketch by Rubens, highly prized because it is by him alone, whereas the finished piece would have had a great deal of workshop input.  "
                         android:textSize="11sp" />
                 </LinearLayout>
@@ -207,15 +205,16 @@
         android:minHeight="?attr/actionBarSize"
 
         >
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:orientation="horizontal"
             android:layout_centerVertical="true"
-            android:paddingLeft="10dp"
             android:layout_toLeftOf="@+id/right_part_for_like"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
 
             >
 
@@ -228,24 +227,22 @@
                 android:gravity="center_vertical"
                 android:maxLines="2"
                 android:paddingLeft="4dp"
+                android:text="@string/more_info"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="16sp"
-                android:textStyle="bold"
 
-                android:text="@string/more_info"
-                />
-
+                android:textStyle="bold" />
 
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/right_part_for_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:id="@+id/right_part_for_like">
+            android:layout_alignParentRight="true">
 
             <ImageView
                 android:id="@+id/like_post_icon"
@@ -263,9 +260,9 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_margin="5dp"
         card_view:cardBackgroundColor="@android:color/white"
         card_view:cardCornerRadius="0dp"
-        android:layout_margin="5dp"
 
         >
 
@@ -293,17 +290,18 @@
             <!--android:text="@string/more_info"-->
             <!--/>-->
             <TextView
-                android:textSize="15sp"
-                android:autoLink="web"
                 android:id="@+id/comment_list_more_info_links"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|left"
+                android:autoLink="web"
                 android:gravity="center_vertical"
-                android:paddingLeft="4dp"
                 android:maxLines="5"
+                android:paddingLeft="4dp"
+                android:textSize="15sp"
 
                 />
+
             <TextView
 
                 android:id="@+id/comment_list_fb_links"
@@ -312,14 +310,13 @@
                 android:layout_gravity="center|left"
                 android:gravity="center_vertical"
                 android:maxLines="2"
-                android:paddingLeft="4dp"
                 android:paddingBottom="1dp"
-                android:textAllCaps="true"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:textColor="@color/com_facebook_blue"
+                android:paddingLeft="4dp"
                 android:text="See this on Facebook!"
-                />
+                android:textAllCaps="true"
+                android:textColor="@color/com_facebook_blue"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
             <TextView
 
@@ -329,20 +326,18 @@
                 android:layout_gravity="center|left"
                 android:gravity="center_vertical"
                 android:maxLines="2"
+                android:paddingBottom="1dp"
                 android:paddingLeft="4dp"
                 android:paddingRight="0dp"
-                android:paddingBottom="1dp"
-                android:textAllCaps="true"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:textColor="@color/com_facebook_blue"
                 android:text="Like Post"
-                />
+                android:textAllCaps="true"
+                android:textColor="@color/com_facebook_blue"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
 
         </LinearLayout>
     </android.support.v7.widget.CardView>
-
 
 
     <LinearLayout
@@ -361,6 +356,7 @@
 
             android:text="@string/commentAmount"
             android:textStyle="bold" />
+
         <TextView
             android:id="@+id/logout"
             android:layout_width="wrap_content"

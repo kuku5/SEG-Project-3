@@ -2,6 +2,7 @@ package team3j.dulwichstreetart;
 
 /**
  * Holds a representation of an Artist object
+ *
  * @author Team 3-J
  */
 public class Artist {
@@ -12,24 +13,25 @@ public class Artist {
 
     /**
      * Constructs an Artist with the following
-     * @param name Artist name
+     *
+     * @param name        Artist name
      * @param description Description of artist
-     * @param website the artist's website
+     * @param website     the artist's website
      * @param artistPhoto a photo of the artist
      */
-    public Artist(String name,String description, String website, String artistPhoto){
+    public Artist(String name, String description, String website, String artistPhoto) {
 
-        this.name=name;
-        this.description=description;
-        this.website=website;
+        this.name = name;
+        this.description = description;
+        this.website = website;
         this.artistPhoto = artistPhoto;
 
     }
 
 
-
     /**
      * this method returns the description of the artist
+     *
      * @return description of artist
      */
     public String getDescription() {
@@ -38,6 +40,7 @@ public class Artist {
 
     /**
      * this method returns the name of the artist
+     *
      * @return name of the artist
      */
     public String getName() {
@@ -46,6 +49,7 @@ public class Artist {
 
     /**
      * this method returns the website address of the artist
+     *
      * @return the website address of the artist
      */
     public String getWebsite() {
@@ -54,9 +58,10 @@ public class Artist {
 
     /**
      * this method returns the photo location of the artist
+     *
      * @return photo location of the artist
      */
-    public String getArtistPhoto () {
+    public String getArtistPhoto() {
         return artistPhoto;
     }
 }

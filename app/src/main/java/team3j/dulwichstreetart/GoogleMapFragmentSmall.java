@@ -65,6 +65,7 @@ public class GoogleMapFragmentSmall extends Fragment {
 
     /**
      * This method returns an instance of the GoogleMapFragmentSmall for the ViewPager
+     *
      * @param position
      * @return
      */
@@ -82,11 +83,12 @@ public class GoogleMapFragmentSmall extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-       // mMapView.onSaveInstanceState(outState);
+        // mMapView.onSaveInstanceState(outState);
     }
 
     /**
      * Creates the google maps fragment with the correct layout
+     *
      * @param inflater
      * @param container
      * @param savedInstanceState
@@ -103,14 +105,11 @@ public class GoogleMapFragmentSmall extends Fragment {
         mMapView = (MapView) v.findViewById(R.id.mapView);
         if (savedInstanceState == null) {
             // First incarnation of this activity.
-          setRetainInstance(true);
+            setRetainInstance(true);
             mMapView.onCreate(savedInstanceState);
-            imageButton= (ImageButton) v.findViewById(R.id.fab_image_button);
+            imageButton = (ImageButton) v.findViewById(R.id.fab_image_button);
 
             mMapView.onResume();// needed to get the map to display immediately
-
-
-
 
 
             try {
@@ -120,7 +119,7 @@ public class GoogleMapFragmentSmall extends Fragment {
             }
 
 
-            if(isGoogleMapsInstalled()) {
+            if (isGoogleMapsInstalled()) {
 
                 setUpMap();
 
@@ -149,34 +148,30 @@ public class GoogleMapFragmentSmall extends Fragment {
         googleMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
             @Override
             public void onMyLocationChange(Location location) {
-                if(googleMap.getMyLocation()==null){
+                if (googleMap.getMyLocation() == null) {
 
-                }else {
-                    for(int i=0; i<artArrayList.size(); i++)
-                    {
+                } else {
+                    for (int i = 0; i < artArrayList.size(); i++) {
                         //TODO: the funcional tolerence level is for testing only, the commented one above is the actual tolerence level
                         //TODO: change before sending off!
                         // double tolerance=0.000250;
 
-                        double tolerance=1000;
+                        double tolerance = 1000;
 
                         //checks all locations
                         LatLng artLoc = artArrayList.get(i).getLoc();
-                        if((googleMap.getMyLocation().getLatitude()<= artLoc.latitude + tolerance) && (googleMap.getMyLocation().getLatitude()>= artLoc.latitude - tolerance) )
-                        {
-                            if((googleMap.getMyLocation().getLongitude()<= artLoc.longitude + tolerance) &&(googleMap.getMyLocation().getLongitude()>= artLoc.longitude - tolerance) )
-                            {
+                        if ((googleMap.getMyLocation().getLatitude() <= artLoc.latitude + tolerance) && (googleMap.getMyLocation().getLatitude() >= artLoc.latitude - tolerance)) {
+                            if ((googleMap.getMyLocation().getLongitude() <= artLoc.longitude + tolerance) && (googleMap.getMyLocation().getLongitude() >= artLoc.longitude - tolerance)) {
                                 //if the user is at the street art
                                 int date = currentDate.get(Calendar.DATE);
-                                int month = currentDate.get(Calendar.MONTH) +1;
-                                if(month == 13)
-                                {
+                                int month = currentDate.get(Calendar.MONTH) + 1;
+                                if (month == 13) {
                                     month = 1;
                                 }
                                 int year = currentDate.get(Calendar.YEAR);
                                 String fullDate = date + "/" + month + "/" + year;
                                 //Haven't visited OR Have visited but the date is different
-                                if((!SplashActivity.artArrayList.get(i).getVisited()) || (SplashActivity.artArrayList.get(i).getVisited() && !fullDate.equals(SplashActivity.artArrayList.get(i).getDateVisited()))){
+                                if ((!SplashActivity.artArrayList.get(i).getVisited()) || (SplashActivity.artArrayList.get(i).getVisited() && !fullDate.equals(SplashActivity.artArrayList.get(i).getDateVisited()))) {
                                     SplashActivity.artArrayList.get(i).setDateVisited(fullDate);
                                     SplashActivity.artArrayList.get(i).setVisited(true);
                                     updateVisited(i, fullDate);
@@ -196,20 +191,15 @@ public class GoogleMapFragmentSmall extends Fragment {
     }
 
     /**
-     *
      * @return
      */
-    public boolean isGoogleMapsInstalled()
-    {
-        try
-        {
-            ApplicationInfo info = getActivity().getPackageManager().getApplicationInfo("com.google.android.apps.maps", 0 );
+    public boolean isGoogleMapsInstalled() {
+        try {
+            ApplicationInfo info = getActivity().getPackageManager().getApplicationInfo("com.google.android.apps.maps", 0);
 
 
             return true;
-        }
-        catch(PackageManager.NameNotFoundException e)
-        {
+        } catch (PackageManager.NameNotFoundException e) {
             return false;
         }
     }
@@ -220,19 +210,20 @@ public class GoogleMapFragmentSmall extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if(googleMap!=null){
-        filter = GallerySwipeSingleFragment.filt;
-        name = GallerySwipeSingleFragment.ind;
-        System.out.println("on resume filter: "+GoogleMapFragmentSmall.filter+" index: "+name);
+        if (googleMap != null) {
+            filter = GallerySwipeSingleFragment.filt;
+            name = GallerySwipeSingleFragment.ind;
+            System.out.println("on resume filter: " + GoogleMapFragmentSmall.filter + " index: " + name);
 
-        if(isGoogleMapsInstalled()) {
+            if (isGoogleMapsInstalled()) {
 
-            setUpMap();
+                setUpMap();
 
+            }
+            mMapView.onResume();
+
+            GoogleMapFragmentSmall.filter = false;
         }
-        mMapView.onResume();
-
-        GoogleMapFragmentSmall.filter = false;}
     }
 
     /**
@@ -241,7 +232,7 @@ public class GoogleMapFragmentSmall extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        if(mMapView!=null) {
+        if (mMapView != null) {
             mMapView.onPause();
         }
     }
@@ -268,8 +259,7 @@ public class GoogleMapFragmentSmall extends Fragment {
     /**
      *
      */
-    public void setUpNoFilterMap()
-    {
+    public void setUpNoFilterMap() {
         GallerySwipeSingleFragment.filt = false;
         setUpMap();
     }
@@ -277,7 +267,7 @@ public class GoogleMapFragmentSmall extends Fragment {
     /**
      *
      */
-    public void setUpMap(){
+    public void setUpMap() {
 
 
         artArrayList = GalleryData.get().getArtworkList();
@@ -296,9 +286,6 @@ public class GoogleMapFragmentSmall extends Fragment {
         filter = preference.getBoolean("filter",true);
         index = preference.getInt("index", 0);
         */
-
-
-
 
 
         googleMap.clear();
@@ -344,15 +331,12 @@ public class GoogleMapFragmentSmall extends Fragment {
 
             if (filter == true && name == artArrayList.get(i).getName()) {
                 filterMarker = googleMap.addMarker(new MarkerOptions().position(artArrayList.get(i).getLoc()).title(title));
-            } else
-            {
+            } else {
                 googleMap.addMarker(new MarkerOptions().position(artArrayList.get(i).getLoc()).title(title));
             }
 
         }
         googleMap.addMarker(new MarkerOptions().position(new LatLng(51.445988, -0.0863601)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)).title("The Inspiration Dulwich Picture Gallery 1811"));
-
-
 
 
         googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
@@ -379,7 +363,7 @@ public class GoogleMapFragmentSmall extends Fragment {
                     ImageView picView = (ImageView) v.findViewById(R.id.pic);
 
                     try {
-                        picView.setImageDrawable(getAssetImage(getActivity(),"dulwichpicturegallery"));
+                        picView.setImageDrawable(getAssetImage(getActivity(), "dulwichpicturegallery"));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -387,14 +371,14 @@ public class GoogleMapFragmentSmall extends Fragment {
                     TextView txtView = (TextView) v.findViewById(R.id.markerName);
                     txtView.setText("The Inspiration Dulwich Picture Gallery 1811");
 
-                }else {
+                } else {
 
                     for (int i = 0; i < artArrayList.size(); i++) {
                         if (latLng.equals(artArrayList.get(i).getLoc())) {
 
                             ImageView picView = (ImageView) v.findViewById(R.id.pic);
 
-                                picView.setImageDrawable( artArrayList.get(i).getDrawableStreet());
+                            picView.setImageDrawable(artArrayList.get(i).getDrawableStreet());
 
 
                             TextView txtView = (TextView) v.findViewById(R.id.markerName);
@@ -415,9 +399,7 @@ public class GoogleMapFragmentSmall extends Fragment {
         });
 
 
-
-        if(filter == true)
-        {
+        if (filter == true) {
 
             CameraUpdate update = CameraUpdateFactory.newLatLngZoom(filterMarker.getPosition(), 13);
             googleMap.animateCamera(update);
@@ -432,7 +414,7 @@ public class GoogleMapFragmentSmall extends Fragment {
     /**
      *
      */
-    public void zoom(){
+    public void zoom() {
 
         locStart = new LatLng(51.454013, -0.080496);
 
@@ -445,7 +427,6 @@ public class GoogleMapFragmentSmall extends Fragment {
 
 
     /**
-     *
      * @param context
      * @param filename
      * @return
@@ -459,12 +440,11 @@ public class GoogleMapFragmentSmall extends Fragment {
     }
 
 
-    public void updateVisited(int index, String fullDate)
-    {
+    public void updateVisited(int index, String fullDate) {
         artArrayList.get(index).setVisited(true);
         SharedPreferences visitedPref = getActivity().getSharedPreferences("VisitedList", Context.MODE_PRIVATE);
         SharedPreferences datePref = getActivity().getSharedPreferences("VisitedDate", Context.MODE_PRIVATE);
-        visitedPref.edit().putBoolean(SplashActivity.artArrayList.get(index).getName(),true).apply();
+        visitedPref.edit().putBoolean(SplashActivity.artArrayList.get(index).getName(), true).apply();
         datePref.edit().putString(SplashActivity.artArrayList.get(index).getName(), fullDate).apply();
         Toast.makeText(this.getActivity(), "Updated", Toast.LENGTH_SHORT).show();
         VisitedTabFragment.getInstance(4).updateList(); //Update the screen

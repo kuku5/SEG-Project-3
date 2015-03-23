@@ -22,17 +22,18 @@ import java.util.ArrayList;
 
 /**
  * @author Team 3-J
- * Gallery Fragment for to be displayed in the tab Fragment
+ *         Gallery Fragment for to be displayed in the tab Fragment
  */
 
 public class GalleryFragment extends Fragment {
 
     public static RecyclerView recyclerView;
 
-    int positionToScroll=0;
+    int positionToScroll = 0;
 
     /**
      * This returns an Instance of Gallery Fragment to be displayed in Gallery Tab
+     *
      * @param position
      * @return
      */
@@ -45,9 +46,9 @@ public class GalleryFragment extends Fragment {
     }
 
 
-
     /**
      * Creates the view of the gallery with the appropriate layouts and given adapter
+     *
      * @param inflater
      * @param container
      * @param savedInstanceState
@@ -63,7 +64,7 @@ public class GalleryFragment extends Fragment {
         recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view_grid);
 
         //get Image Locations and descriptions
-        ArrayList<Art> galleryData= GalleryData.get().getArtworkList();
+        ArrayList<Art> galleryData = GalleryData.get().getArtworkList();
         //create recycle view Adapter
 
 
@@ -75,10 +76,8 @@ public class GalleryFragment extends Fragment {
         //adapt view for the Screen orientation
 
 
-
         return layout;
     }
-
 
 
     /**
@@ -86,7 +85,7 @@ public class GalleryFragment extends Fragment {
      *
      * @return itemTouchListener - Gallery ClickListener
      */
-    public GalleryAdapter.OnItemTouchListener getGalleryClickListener(){
+    public GalleryAdapter.OnItemTouchListener getGalleryClickListener() {
         GalleryAdapter.OnItemTouchListener itemTouchListener = new GalleryAdapter.OnItemTouchListener() {
 
             @Override
@@ -98,7 +97,7 @@ public class GalleryFragment extends Fragment {
                 getActivity().overridePendingTransition(R.anim.swipeback_slide_right_in,
                         R.anim.swipeback_stack_to_back);
 
-                positionToScroll=position;
+                positionToScroll = position;
             }
         };
 
@@ -110,9 +109,8 @@ public class GalleryFragment extends Fragment {
     /**
      * This method adapt recycler view for the Screen Rotation by updating
      * the Layout Manager of the recycler view
-     *
      */
-    public void updateLayoutForRotation(){
+    public void updateLayoutForRotation() {
         //adapt recycle view for the Screen Rotation
         int screenOrientation = this.getResources().getConfiguration().orientation;
 
@@ -138,7 +136,7 @@ public class GalleryFragment extends Fragment {
         super.onDestroyView();
 
 
-        Log.d("testingRot","onDestroyView11");
+        Log.d("testingRot", "onDestroyView11");
 
     }
 

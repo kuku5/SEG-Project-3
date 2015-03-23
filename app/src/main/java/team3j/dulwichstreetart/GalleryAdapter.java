@@ -29,8 +29,7 @@ import java.util.ArrayList;
 
 /**
  * @author Team 3-J
- * This is the RecyclerView.Adapter for the Gallery recycler view and loads images in background thread
- *
+ *         This is the RecyclerView.Adapter for the Gallery recycler view and loads images in background thread
  */
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHolder> {
 
@@ -43,21 +42,23 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
     /**
      * This is the Constructor for the Gallery adapter and takes the gallery data and click listeners as parameters
      * so they can be used to setup the recycler view
-     * @param context activity
-     * @param galleryData arraylist of gallery information
+     *
+     * @param context           activity
+     * @param galleryData       arraylist of gallery information
      * @param itemTouchListener listener for clicking in gallery tab
      */
-    public GalleryAdapter(Context context,ArrayList<Art> galleryData, OnItemTouchListener itemTouchListener){
-        this.inflater=LayoutInflater.from(context);
-        this.context=context;
-        this.galleryData=galleryData;
+    public GalleryAdapter(Context context, ArrayList<Art> galleryData, OnItemTouchListener itemTouchListener) {
+        this.inflater = LayoutInflater.from(context);
+        this.context = context;
+        this.galleryData = galleryData;
         this.onItemTouchListener = itemTouchListener;
-        mPlaceHolderBitmap = BitmapFactory.decodeResource(context.getResources(),R.drawable.loadimage);
+        mPlaceHolderBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.loadimage);
     }
 
 
     /**
      * This method inflates the layout for each individual ViewHolder item in the gallery cells
+     *
      * @param parent
      * @param viewType
      * @return
@@ -66,9 +67,9 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
     public GalleryAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //add view to the grid cell for the first time
         //this stores the view in the cache meaning the images dont have to be reloaded over
-        View view= inflater.inflate(R.layout.grid_item,parent,false);
+        View view = inflater.inflate(R.layout.grid_item, parent, false);
 
-        MyViewHolder myViewHolder= new MyViewHolder(view);
+        MyViewHolder myViewHolder = new MyViewHolder(view);
 
         return myViewHolder;
     }
@@ -76,21 +77,24 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
 
     /**
      * onBindViewHolder is called to fill elements in each viewholder in the gallery with information
-     * @param holder view holder
+     *
+     * @param holder   view holder
      * @param position current position
      */
 
     @Override
     public void onBindViewHolder(GalleryAdapter.MyViewHolder holder, int position) {
 
-       holder.dynamicHeightImageView.setImageDrawable(galleryData.get(position).getDrawableStreet());
-       holder.txtLineOne.setText(galleryData.get(position).getName());
-       holder.descriptionTextView.setText(galleryData.get(position).getDesc());
+        holder.dynamicHeightImageView.setImageDrawable(galleryData.get(position).getDrawableStreet());
+        holder.txtLineOne.setText(galleryData.get(position).getName());
+        holder.descriptionTextView.setText(galleryData.get(position).getDesc());
 
     }
+
     /**
      * Reads the image from Assets and returns a bitmap drawable
-     * @param context Context of Activity
+     *
+     * @param context  Context of Activity
      * @param filename Filename of the image
      * @return BitmapDrawable of the image
      * @throws IOException If the image can not be found
@@ -103,11 +107,9 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
     }
 
 
-
-
-
     /**
      * Returns number of items in the gallery
+     *
      * @return gallery data size
      */
     @Override
@@ -120,7 +122,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
      * extends RecyclerView.ViewHolder
      */
 
-    class MyViewHolder extends RecyclerView.ViewHolder  {
+    class MyViewHolder extends RecyclerView.ViewHolder {
         // view holder for each grid  cell
         private TextView txtLineOne;
         private TextView descriptionTextView;
@@ -132,7 +134,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
             txtLineOne = (TextView) itemView.findViewById(R.id.txt_line1);
             dynamicHeightImageView = (DynamicHeightImageView) itemView.findViewById(R.id.dynamic_imageView);
             descriptionTextView = (TextView) itemView.findViewById(R.id.description_textview);
-            cardView= (CardView) itemView.findViewById(R.id.card_view_1_large_image);
+            cardView = (CardView) itemView.findViewById(R.id.card_view_1_large_image);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -149,9 +151,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
      */
     public interface OnItemTouchListener {
         public void onCardViewTap(View view, int position);
-        }
-
-
+    }
 
 
 }

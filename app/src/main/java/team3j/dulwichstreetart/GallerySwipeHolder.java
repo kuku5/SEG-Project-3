@@ -13,7 +13,7 @@ import com.hannesdorfmann.swipeback.SwipeBack;
 
 /**
  * @author Team 3-J
- * This class is the Holder for the Swipe Gallery
+ *         This class is the Holder for the Swipe Gallery
  */
 
 public class GallerySwipeHolder extends FragmentActivity {
@@ -44,6 +44,7 @@ public class GallerySwipeHolder extends FragmentActivity {
 
     /**
      * onCreate set up the gallery view pager which displays all the artwork
+     *
      * @param savedInstanceState
      */
     @Override
@@ -51,11 +52,11 @@ public class GallerySwipeHolder extends FragmentActivity {
         super.onCreate(savedInstanceState);
 
         Intent myIntent = getIntent(); // gets the previously created intent
-         indexOfArtWork = myIntent.getIntExtra("indexOfArtWork", 0);
+        indexOfArtWork = myIntent.getIntExtra("indexOfArtWork", 0);
 
 
-         // uses library for swiping to create swipe effect
-         SwipeBack.attach(this, Position.LEFT)
+        // uses library for swiping to create swipe effect
+        SwipeBack.attach(this, Position.LEFT)
                 .setContentView(R.layout.view_pager)
                 .setSwipeBackView(R.layout.custom_swipeback)
                 .setDividerAsSolidColor(Color.WHITE)
@@ -75,7 +76,7 @@ public class GallerySwipeHolder extends FragmentActivity {
                         });
 
 
-          //      setContentView(R.layout.view_pager);
+        //      setContentView(R.layout.view_pager);
 
         //creates fragment adapter to display all images
         viewPager = (ViewPager) findViewById(R.id.viewPager);
@@ -88,10 +89,10 @@ public class GallerySwipeHolder extends FragmentActivity {
 
 
                 viewPager.getCurrentItem();
-                mPagerPosition=position;
+                mPagerPosition = position;
                 mPagerOffsetPixels = 90;
-                if(position==indexOfArtWork){
-                    mPagerPosition=0;
+                if (position == indexOfArtWork) {
+                    mPagerPosition = 0;
                     mPagerOffsetPixels = 0;
 
                 }
@@ -104,7 +105,7 @@ public class GallerySwipeHolder extends FragmentActivity {
 
         viewPager.setPageTransformer(true, new ZoomOutPageTransformer());
 
-        viewPager.setCurrentItem(indexOfArtWork,true);
+        viewPager.setCurrentItem(indexOfArtWork, true);
 
     }
 

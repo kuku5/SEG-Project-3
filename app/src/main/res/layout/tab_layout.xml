@@ -7,7 +7,6 @@
     tools:context=".MainActivity">
 
 
-
     <it.neokree.materialtabs.MaterialTabHost
         android:id="@+id/materialTabHost"
         android:layout_width="match_parent"

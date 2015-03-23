@@ -59,7 +59,7 @@ import twitter4j.conf.ConfigurationBuilder;
 
 /**
  * @author Team 3-J
- * This is the fragment of the Homepage to be displayed in the tab
+ *         This is the fragment of the Homepage to be displayed in the tab
  */
 
 
@@ -83,6 +83,7 @@ public class HomePageFragment extends Fragment {
 
     /**
      * return an instance of this Fragment with a bundle into the tab adapter
+     *
      * @param position
      * @return myFragmentTab
      */
@@ -96,9 +97,9 @@ public class HomePageFragment extends Fragment {
     }
 
 
-
     /**
      * onCreateView sets up the layout
+     *
      * @param inflater
      * @param container
      * @param savedInstanceState
@@ -112,7 +113,7 @@ public class HomePageFragment extends Fragment {
 
         //LikeView setups
         Settings.sdkInitialize(getActivity());
-       likeView = (LikeView) layout.findViewById(R.id.like_view);
+        likeView = (LikeView) layout.findViewById(R.id.like_view);
         likeView.setObjectId("https://www.facebook.com/DulwichOutdoorGallery");
         likeView.setForegroundColor(-256);
         likeView.setLikeViewStyle(LikeView.Style.STANDARD);
@@ -126,7 +127,7 @@ public class HomePageFragment extends Fragment {
             // Restore last state for checked position.
             if (isOnline()) {
 
-               getTweets();
+                getTweets();
                 Log.d("tweets", "online");
 
             }
@@ -171,23 +172,20 @@ public class HomePageFragment extends Fragment {
         if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE) {
             Toast.makeText(getActivity(), "Large screen", Toast.LENGTH_LONG).show();
 
-        }
-        else if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_NORMAL) {
+        } else if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_NORMAL) {
             Toast.makeText(getActivity(), "Normal sized screen", Toast.LENGTH_LONG).show();
-        }
-        else if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_SMALL) {
+        } else if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_SMALL) {
             Toast.makeText(getActivity(), "Small sized screen", Toast.LENGTH_LONG).show();
-        }
-        else {
+        } else {
             Toast.makeText(getActivity(), "Screen size is neither large, normal or small", Toast.LENGTH_LONG).show();
 
         }
     }
 
 
-
     /**
      * Handles the web log in and likeview
+     *
      * @param requestCode
      * @param resultCode
      * @param data
@@ -201,12 +199,12 @@ public class HomePageFragment extends Fragment {
 
     /**
      * This method sets up all the onScreen Elements for the Home Page
+     *
      * @param layout
      */
     private void setupOnScreenElements(View layout) {
         cardView2 = (CardView) layout.findViewById(R.id.car_view_22);
         mapButton = (DynamicHeightImageView) layout.findViewById(R.id.map_image);
-
 
 
         mapButton.setOnClickListener(new View.OnClickListener() {
@@ -224,7 +222,6 @@ public class HomePageFragment extends Fragment {
         tweetBird.setImageDrawable(GalleryData.get().getTweetBird());
 
 
-
         aboutDulwich.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -236,6 +233,7 @@ public class HomePageFragment extends Fragment {
 
     /**
      * Sets up the twitter animations and adds tweet listener to auto update
+     *
      * @param layout
      */
     public void setupTweetsAnimations(View layout) {
@@ -288,13 +286,15 @@ public class HomePageFragment extends Fragment {
              * this method is called when animation in the tweet viewer is animated
              * @param animation
              */
-            public void onAnimationRepeat(Animation animation) {}
+            public void onAnimationRepeat(Animation animation) {
+            }
 
             /**
              * this method is called when animation in the tweet viewer is ended
              * @param animation
              */
-            public void onAnimationEnd(Animation animation) {}
+            public void onAnimationEnd(Animation animation) {
+            }
         });
 
 
@@ -313,6 +313,7 @@ public class HomePageFragment extends Fragment {
 
     /**
      * this method setups the animation and adds images to the image slider
+     *
      * @param layout
      */
     private void setupLibraryAnimations(View layout) {
@@ -320,16 +321,16 @@ public class HomePageFragment extends Fragment {
         mDemoSlider = (SliderLayout) layout.findViewById(R.id.slider);
 
 
-
         HashMap<String, Integer> file_maps = new HashMap<String, Integer>();
 
         //file_maps - used to display images in the top homepage slider
         file_maps.put("Conor Harrington", R.drawable.lowresconorharrington);
         file_maps.put("Walter Kershaw", R.drawable.lowreswalterlandscape);
-    //    file_maps.put("Stik", R.drawable.lowresstikthreeboys);
-  //      file_maps.put("RUN", R.drawable.lowresrunstrita);
+        //    file_maps.put("Stik", R.drawable.lowresstikthreeboys);
+        //      file_maps.put("RUN", R.drawable.lowresrunstrita);
 
-        BaseSliderView.ScaleType scale = BaseSliderView.ScaleType.Fit;;
+        BaseSliderView.ScaleType scale = BaseSliderView.ScaleType.Fit;
+        ;
         if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE) {
             Toast.makeText(getActivity(), "Large screen", Toast.LENGTH_LONG).show();
             scale = BaseSliderView.ScaleType.CenterInside;

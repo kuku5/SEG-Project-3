@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 /**
  * @author Team 3-J
- * This is the Fragment for the artist layout
+ *         This is the Fragment for the artist layout
  */
 
 public class ArtistListFragment extends Fragment {
@@ -27,6 +27,7 @@ public class ArtistListFragment extends Fragment {
 
     /**
      * returns an instance of the fragment
+     *
      * @param position position of tab
      * @return the instance of the fragment
      */
@@ -40,6 +41,7 @@ public class ArtistListFragment extends Fragment {
 
     /**
      * Creates the Artist fragment with the layouts and adapter
+     *
      * @param inflater
      * @param container
      * @param savedInstanceState
@@ -73,7 +75,6 @@ public class ArtistListFragment extends Fragment {
 
         System.gc();
         super.onDestroyView();
-
 
 
     }

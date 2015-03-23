@@ -5,8 +5,8 @@ import android.content.Context;
 
 /**
  * Process dialog with specific settings
- * @author Team 3-J
  *
+ * @author Team 3-J
  */
 
 public class CustomProcessDialog {
