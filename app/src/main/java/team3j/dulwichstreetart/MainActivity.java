@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
@@ -71,7 +72,7 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
                 tabHost.setSelectedNavigationItem(position);
             }
         });
-        viewPager.setOffscreenPageLimit(10);
+        viewPager.setOffscreenPageLimit(5);
 
 
         tabHost.setPrimaryColor(getResources().getColor(R.color.colorAccentReal));
@@ -135,13 +136,13 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
      */
     private class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
-
         /**
          * constructor view pager takes fragment manager as parameter
          * @param fragmentManager
          */
         public ViewPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
+
 
         }
 
@@ -154,6 +155,8 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
         public Fragment getItem(int num) {
 
            // this returns a fragment for each tab space
+
+
             switch (num) {
                 case 0:
                     return HomePageFragment.getInstance(num);
@@ -198,6 +201,15 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
         }
 
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        System.gc();
+
+    }
+
 
 
 }

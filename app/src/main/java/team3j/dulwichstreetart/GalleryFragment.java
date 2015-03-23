@@ -1,6 +1,7 @@
 package team3j.dulwichstreetart;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Surface;
 import android.view.View;
@@ -25,8 +27,9 @@ import java.util.ArrayList;
 
 public class GalleryFragment extends Fragment {
 
-    private RecyclerView recyclerView;
+    public static RecyclerView recyclerView;
 
+    int positionToScroll=0;
 
     /**
      * This returns an Instance of Gallery Fragment to be displayed in Gallery Tab
@@ -77,6 +80,7 @@ public class GalleryFragment extends Fragment {
     }
 
 
+
     /**
      * This method creates and returns a Gallery CLick Listener for the Gallery recycler view
      *
@@ -84,6 +88,7 @@ public class GalleryFragment extends Fragment {
      */
     public GalleryAdapter.OnItemTouchListener getGalleryClickListener(){
         GalleryAdapter.OnItemTouchListener itemTouchListener = new GalleryAdapter.OnItemTouchListener() {
+
             @Override
             public void onCardViewTap(View view, int position) {
                 //open Activity to display for Artwork Display
@@ -93,6 +98,7 @@ public class GalleryFragment extends Fragment {
                 getActivity().overridePendingTransition(R.anim.swipeback_slide_right_in,
                         R.anim.swipeback_stack_to_back);
 
+                positionToScroll=position;
             }
         };
 
@@ -121,5 +127,19 @@ public class GalleryFragment extends Fragment {
 
     }
 
+
+    /**
+     *
+     */
+    @Override
+    public void onDestroyView() {
+
+        System.gc();
+        super.onDestroyView();
+
+
+        Log.d("testingRot","onDestroyView11");
+
+    }
 
 }

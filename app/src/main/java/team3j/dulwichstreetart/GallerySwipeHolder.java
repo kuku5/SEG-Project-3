@@ -35,6 +35,9 @@ public class GallerySwipeHolder extends FragmentActivity {
         viewPager.removeAllViews();
         viewPager.destroyDrawingCache();
         viewPager = null;
+
+        GalleryFragment.recyclerView.getAdapter().notifyDataSetChanged();
+
         System.gc();
 
     }

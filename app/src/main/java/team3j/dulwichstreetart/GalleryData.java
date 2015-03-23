@@ -33,7 +33,9 @@ public class GalleryData {
     private  ArrayList<Status> todaysTweets ;
     private ArrayList<Art> artworkList;
     private static GalleryData mGalleryData;
-
+    private Drawable mapButton;
+    private Drawable aboutDulwich;
+    private Drawable tweetBird;
     /**
      * Gets the data of all the artworks
      * @return
@@ -44,11 +46,44 @@ public class GalleryData {
 
     /**
      * Constructs a GalleryData
+     * @param context
      */
-    public GalleryData() {
-        artworkList=GetGalleryData();
+    public GalleryData(Context context) {
+        artworkList=CreateGalleryData(context);
+
+        //setup homepage elements
         todaysTweets=new ArrayList<>();
+
+        try {
+            mapButton=getAssetImage(context,"mapbannersquare");
+            aboutDulwich=getAssetImage(context,"dulwichpicturegallery");
+            tweetBird=getAssetImage(context,"twitterbird");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
+
+
+    /**
+     * Reads the image from Assets and returns a bitmap drawable
+     * @param context Context of Activity
+     * @param filename Filename of the image
+     * @return BitmapDrawable of the image
+     * @throws IOException If the image can not be found
+     */
+    public static Drawable getAssetImage(Context context, String filename) throws IOException {
+        AssetManager assets = context.getResources().getAssets();
+        String exte=".jpg";
+        if(filename.contains("twitterbird")){
+            exte=".png";
+        }
+        InputStream buffer = new BufferedInputStream((assets.open("" + filename + exte)));
+        Bitmap bitmap = BitmapFactory.decodeStream(buffer);
+        return new BitmapDrawable(context.getResources(), bitmap);
+    }
+
 
     /**
      * Get tweets
@@ -62,13 +97,15 @@ public class GalleryData {
      *
      * @return
      */
-    public static GalleryData create() {
+    public static GalleryData create(Context context) {
         if (mGalleryData == null) {
-            mGalleryData = new GalleryData();
+            mGalleryData = new GalleryData(context);
         }
 
         return mGalleryData;
     }
+
+
 
     /**
      * List of artwork information
@@ -82,57 +119,58 @@ public class GalleryData {
     /**
      * Gets data of all the artwork, by setting them into an arraylist to return
      * @return data of artwork
+     * @param context
      */
 
 
-    public ArrayList<Art> GetGalleryData() {
+    public ArrayList<Art> CreateGalleryData(Context context) {
 
 
         ArrayList<Art> artArrayList = new ArrayList<>();
 
-        artArrayList.add(new Art("The Guardian Angel ","Stik","The Guardian Angel 1716 ","Marcantonio Franceschini","Stik takes portraits of wealthy, fashionable, landed gentry by Gainsborough, and strips away all pretention, leaving his simple stick figures to brilliantly convey the emotion and relationships behind the symbols of status.","lowresstikguardianangel","lowresinspiredtheguardianangel",new LatLng(51.456219, -0.076794),"783162061765990", "Blackwater Court, London, SE22 8RS", false, new String[]{"www.stik.org.uk", "https://www.youtube.com/watch?v=Vu_DcXWAjzk"}, "--/--/----"));
-        artArrayList.add(new Art("Three Boys","Stik","Three Boys","Bartolomé Esteban Murillo","Stik takes portraits of wealthy, fashionable, landed gentry by Gainsborough, and strips away all pretention, leaving his simple stick figures to brilliantly convey the emotion and relationships behind the symbols of status. ","lowresstikthreeboys","lowresinspiredthreeboys",new LatLng(51.445317, -0.079216),"783162051765991", "The Bowling Building Dulwich Park", false, new String[]{"www.stik.org.uk"}, "--/--/----"));
-        artArrayList.add(new Art("Triumph of David Village","RUN","Triumph of David","Nicolas Poussin","RUN chose a detail from ‘The Translation of St Rita of Cascia’ by Poussin, the saint herself. ‘St Rita, I felt, was such a destroyed soul that I want to give her a bit of peace in her life.’","lowresdogrun","lowresinspiredtriumphofdavid",new LatLng(51.449318, -0.085131),"783162055099324", "265 Lordship Lane, London SE22", false, new String[]{"www.runabc.org"}, "--/--/----"));
+        artArrayList.add(new Art(context,"The Guardian Angel ","Stik","The Guardian Angel 1716 ","Marcantonio Franceschini","Stik takes portraits of wealthy, fashionable, landed gentry by Gainsborough, and strips away all pretention, leaving his simple stick figures to brilliantly convey the emotion and relationships behind the symbols of status.","lowresstikguardianangel","lowresinspiredtheguardianangel",new LatLng(51.456219, -0.076794),"783162061765990", "Blackwater Court, London, SE22 8RS", false, new String[]{"www.stik.org.uk", "https://www.youtube.com/watch?v=Vu_DcXWAjzk"}, "--/--/----"));
+        artArrayList.add(new Art(context,"Three Boys","Stik","Three Boys","Bartolomé Esteban Murillo","Stik takes portraits of wealthy, fashionable, landed gentry by Gainsborough, and strips away all pretention, leaving his simple stick figures to brilliantly convey the emotion and relationships behind the symbols of status. ","lowresstikthreeboys","lowresinspiredthreeboys",new LatLng(51.445317, -0.079216),"783162051765991", "The Bowling Building Dulwich Park", false, new String[]{"www.stik.org.uk"}, "--/--/----"));
+        artArrayList.add(new Art(context,"Triumph of David Village","RUN","Triumph of David","Nicolas Poussin","RUN chose a detail from ‘The Translation of St Rita of Cascia’ by Poussin, the saint herself. ‘St Rita, I felt, was such a destroyed soul that I want to give her a bit of peace in her life.’","lowresdogrun","lowresinspiredtriumphofdavid",new LatLng(51.449318, -0.085131),"783162055099324", "265 Lordship Lane, London SE22", false, new String[]{"www.runabc.org"}, "--/--/----"));
         ///Phlegm
-        artArrayList.add(new Art("The Triumph of David 2013", "Phlegm", "The Triumph of David 1628,31", "Nicolas Poussin", "The 9 year old son of the owner of the wall helped Phlegm paint his picture.  His mum said, ‘My son loved giving him a hand and I am so grateful to him for letting him have an input.  He feels proud to be part of it and now feels very protective towards the wall.’ ", "lowresphlegm", "lowresinspiredtriumphofdavid",new LatLng(51.451632, -0.071597),"783165355098994", "Side of 206 Barry Road, London, SE22 0JW", false, new String[]{"www.phlegmcomics.com"}, "--/--/----"));
+        artArrayList.add(new Art(context,"The Triumph of David 2013", "Phlegm", "The Triumph of David 1628,31", "Nicolas Poussin", "The 9 year old son of the owner of the wall helped Phlegm paint his picture.  His mum said, ‘My son loved giving him a hand and I am so grateful to him for letting him have an input.  He feels proud to be part of it and now feels very protective towards the wall.’ ", "lowresphlegm", "lowresinspiredtriumphofdavid",new LatLng(51.451632, -0.071597),"783165355098994", "Side of 206 Barry Road, London, SE22 0JW", false, new String[]{"www.phlegmcomics.com"}, "--/--/----"));
 
         //Mear One
-        artArrayList.add(new Art("New World Revolution 2013", "Mear One", "The Madonna of The Rosary 1670-80", "Bartolomé Esteban Murillo", "Mear One modernised Murillo’s delicate Virgin of the Rosary by turning her and her child into powerful, mixed race  characters giving power salutes. ‘Equality’ is inscribed on her halo.  ", "lowresmearone", "lowresinspiredtriumphofdavid",new LatLng(51.454552, -0.077042),"783165361765660", "On the side of The Patch, 211 Lordship Lane, London SE22 8HA", false, new String[]{"www.mearone.com"}, "--/--/----"));
+        artArrayList.add(new Art(context,"New World Revolution 2013", "Mear One", "The Madonna of The Rosary 1670-80", "Bartolomé Esteban Murillo", "Mear One modernised Murillo’s delicate Virgin of the Rosary by turning her and her child into powerful, mixed race  characters giving power salutes. ‘Equality’ is inscribed on her halo.  ", "lowresmearone", "lowresinspiredtriumphofdavid",new LatLng(51.454552, -0.077042),"783165361765660", "On the side of The Patch, 211 Lordship Lane, London SE22 8HA", false, new String[]{"www.mearone.com"}, "--/--/----"));
 
         //Conor Harrington
-        artArrayList.add(new Art("Fight Club", "Conor Harrington", "The Massacre of The Innocents", "Charles Le Brun", "Harrington’s fighting men in Regency costume continue their fight on 4 more walls in the USA and Costa Rica.  The bald guy wins.", "lowresconorharrington", "lowresinspiredthemassacreoftheinnocentsbycharleslebrun",new LatLng(51.460628, -0.075084),"783165351765661", "Spurling Road, Opposite East Dulwich Tavern, London, SE22 8EW", false, new String[]{"www.conorsaysboom.wordpress.com", "https://www.youtube.com/watch?v=D2Zst2qjmNA"}, "--/--/----"));
+        artArrayList.add(new Art(context,"Fight Club", "Conor Harrington", "The Massacre of The Innocents", "Charles Le Brun", "Harrington’s fighting men in Regency costume continue their fight on 4 more walls in the USA and Costa Rica.  The bald guy wins.", "lowresconorharrington", "lowresinspiredthemassacreoftheinnocentsbycharleslebrun",new LatLng(51.460628, -0.075084),"783165351765661", "Spurling Road, Opposite East Dulwich Tavern, London, SE22 8EW", false, new String[]{"www.conorsaysboom.wordpress.com", "https://www.youtube.com/watch?v=D2Zst2qjmNA"}, "--/--/----"));
 
         //Agent Provocateur
-        artArrayList.add(new Art("Happy Hour", "Agent Provocateur", "The Three Graces", "Sir Peter Paul Rubens ", "AP is the only stencil artist in this project.  Once cut, stencil paintings can be reproduced easily, by anyone.  The work of art AP chose to interpret was a sketch by Rubens, highly prized because it is by him alone, whereas the finished piece would have had a great deal of workshop input.", "lowresagentprovocateur", "lowresinspiredthethreegracesbysirpeterpaulrubens",new LatLng(51.440805, -0.056619),"783165371765659", "30 Waldenshaw Road, Forest Hill, London, SE23 3XP", false, new String[]{"www.aprovocateur.co.uk"}, "--/--/----"));
+        artArrayList.add(new Art(context,"Happy Hour", "Agent Provocateur", "The Three Graces", "Sir Peter Paul Rubens ", "AP is the only stencil artist in this project.  Once cut, stencil paintings can be reproduced easily, by anyone.  The work of art AP chose to interpret was a sketch by Rubens, highly prized because it is by him alone, whereas the finished piece would have had a great deal of workshop input.", "lowresagentprovocateur", "lowresinspiredthethreegracesbysirpeterpaulrubens",new LatLng(51.440805, -0.056619),"783165371765659", "30 Waldenshaw Road, Forest Hill, London, SE23 3XP", false, new String[]{"www.aprovocateur.co.uk"}, "--/--/----"));
         //Ben Wilson
-        artArrayList.add(new Art("Saint Catherine", "Ben Wilson", "St Catherine of Siena", "Carlo Dolci", "Wilson beautifies the disgusting old bits of chewing gum trodden into pavements.  He took the sad St Catherine of Siena and cheered her up by giving her a vision of a banana.  ", "lowresstcatherinestone", "lowresinspiredstcatherineofsienabycarlodolci",new LatLng(51.445672, -0.085659),"783165365098993", "Dulwich Picture Gallery, Gallery Road, London SE21 7AD", false, new String[]{"http://en.wikipedia.org/wiki/Ben_Wilson_(artist)"}, "--/--/----"));
+        artArrayList.add(new Art(context,"Saint Catherine", "Ben Wilson", "St Catherine of Siena", "Carlo Dolci", "Wilson beautifies the disgusting old bits of chewing gum trodden into pavements.  He took the sad St Catherine of Siena and cheered her up by giving her a vision of a banana.  ", "lowresstcatherinestone", "lowresinspiredstcatherineofsienabycarlodolci",new LatLng(51.445672, -0.085659),"783165365098993", "Dulwich Picture Gallery, Gallery Road, London SE21 7AD", false, new String[]{"http://en.wikipedia.org/wiki/Ben_Wilson_(artist)"}, "--/--/----"));
 
         //David Shillinglaw
-        artArrayList.add(new Art("Samson and Delilah 2013", "David Shillinglaw", "Samson and Delilah 1618", "Anthony van Dyck", "Shillinglaw took Van Dyke’s Samson and Delilah – ‘the long hair, the scissors, the broken heart, the beautiful girl and the powerful man’ and mixed them creating a single figure ‘sharing the same body, 2 hearts, 4 eyes and a whole lot of heartbreak’.  ", "lowresdavidshillinglaw", "lowresinspiredsamsonanddelilahbyanthonyvandyckinterpretedbydavidshillinglaw",new LatLng(51.452656, -0.102931),"783165358432327", "Side of The Florence, 131-133 Dulwich Road, London, London SE24 0NG", false, new String[]{"www.cargocollective.com/davidshillinglaw"}, "--/--/----"));
+        artArrayList.add(new Art(context,"Samson and Delilah 2013", "David Shillinglaw", "Samson and Delilah 1618", "Anthony van Dyck", "Shillinglaw took Van Dyke’s Samson and Delilah – ‘the long hair, the scissors, the broken heart, the beautiful girl and the powerful man’ and mixed them creating a single figure ‘sharing the same body, 2 hearts, 4 eyes and a whole lot of heartbreak’.  ", "lowresdavidshillinglaw", "lowresinspiredsamsonanddelilahbyanthonyvandyckinterpretedbydavidshillinglaw",new LatLng(51.452656, -0.102931),"783165358432327", "Side of The Florence, 131-133 Dulwich Road, London, London SE24 0NG", false, new String[]{"www.cargocollective.com/davidshillinglaw"}, "--/--/----"));
         //Faith47
-        artArrayList.add(new Art("Europa and the Winged Bird", "Faith47", "Europa and the Bull", "Guido Reni", "The absence of the bull and the introduction of a guiding bird are suggestive of a premonition of the abduction to come, her inner emotions and thoughts or perhaps a new interpretation of the ancient fable. ", "lowreseuropaandthebull", "lowresinspiredeuropaandthebullbyguidoreni",new LatLng(51.465731, -0.061023),"783165415098988", "Consort Road SE15", false, new String[]{"www.faith47.com"}, "--/--/----"));
+        artArrayList.add(new Art(context,"Europa and the Winged Bird", "Faith47", "Europa and the Bull", "Guido Reni", "The absence of the bull and the introduction of a guiding bird are suggestive of a premonition of the abduction to come, her inner emotions and thoughts or perhaps a new interpretation of the ancient fable. ", "lowreseuropaandthebull", "lowresinspiredeuropaandthebullbyguidoreni",new LatLng(51.465731, -0.061023),"783165415098988", "Consort Road SE15", false, new String[]{"www.faith47.com"}, "--/--/----"));
         //Inkie, Pure Evil, AP is going to have custom view for each for zoomed in view of each artist  NEEDS A CUSTOM setup
-        artArrayList.add(new Art("Old Nun's Head Mural", "Inkie, Pure Evil and AP", "St Catherine of Siena", "Carlo Dolci", "Three different internationally renowned street artists have painted a panel each on The Old Nun’s Head pub in Nunhead.  They have taken their inspiration from the same painting in Dulwich Picture Gallery, one of a nun’s head, St Catherine of Siena, painted in 1665 by Carlo Dolci. ", "lowresoldnunsheadmurals", "lowresinspiredstcatherineofsienabycarlodolci",new LatLng(51.465289, -0.059352),"783165411765655", "The Old Nuns Head, 15 Nunhead Green, London SE15 3QQ", false, new String[]{"www.inkie.co.uk", "https://www.youtube.com/watch?v=pfVioeN_gUw"}, "--/--/----"));
+        artArrayList.add(new Art(context,"Old Nun's Head Mural", "Inkie, Pure Evil and AP", "St Catherine of Siena", "Carlo Dolci", "Three different internationally renowned street artists have painted a panel each on The Old Nun’s Head pub in Nunhead.  They have taken their inspiration from the same painting in Dulwich Picture Gallery, one of a nun’s head, St Catherine of Siena, painted in 1665 by Carlo Dolci. ", "lowresoldnunsheadmurals", "lowresinspiredstcatherineofsienabycarlodolci",new LatLng(51.465289, -0.059352),"783165411765655", "The Old Nuns Head, 15 Nunhead Green, London SE15 3QQ", false, new String[]{"www.inkie.co.uk", "https://www.youtube.com/watch?v=pfVioeN_gUw"}, "--/--/----"));
         //MadC need better scaled image may crop width    NEEDS A CUSTOM setup
-        artArrayList.add(new Art("Vase With Flowers 2013", "MadC", "Vase with Flowers c1720", "Jan van Huysum", "One of only two female artist in the project, MadC, took elements from a 17th century Dutch flower painting, the insects, tulips and butterflies, and added them to her tag, creating an astonishingly beautiful back to a tennis practice wall in Belair Park.  ", "lowresmadc", "lowresinspiredvasewithflowersbyjanvanhuysum",new LatLng(51.441452, -0.091381),"783165445098985", "•\tThe back of the tennis practice wall, Belair Park, near South Circular Road, London, SE21", false, new String[]{"www.madc.tv", "https://www.youtube.com/watch?v=66YTtq6bB0s"}, "--/--/----"));
+        artArrayList.add(new Art(context,"Vase With Flowers 2013", "MadC", "Vase with Flowers c1720", "Jan van Huysum", "One of only two female artist in the project, MadC, took elements from a 17th century Dutch flower painting, the insects, tulips and butterflies, and added them to her tag, creating an astonishingly beautiful back to a tennis practice wall in Belair Park.  ", "lowresmadc", "lowresinspiredvasewithflowersbyjanvanhuysum",new LatLng(51.441452, -0.091381),"783165445098985", "•\tThe back of the tennis practice wall, Belair Park, near South Circular Road, London, SE21", false, new String[]{"www.madc.tv", "https://www.youtube.com/watch?v=66YTtq6bB0s"}, "--/--/----"));
         //Reka
-        artArrayList.add(new Art("Europa and the Bull c1700", "Reka", "Europa and the Bull 2013", "Guido Reni", "Reka’s  Europa from Reni’s ‘Europa and the Bull’ beautifies a wall of a South London pub.  Her hair curls delicately around its windows.", "lowresreka", "lowresinspiredeuropaandthebull",new LatLng(51.427863, -0.086302),"783165465098983", "The Paxton Pub, 255 Gipsy Road, London, SE27 9QY", false, new String[]{"www.rekaone.com"}, "--/--/----"));
+        artArrayList.add(new Art(context,"Europa and the Bull c1700", "Reka", "Europa and the Bull 2013", "Guido Reni", "Reka’s  Europa from Reni’s ‘Europa and the Bull’ beautifies a wall of a South London pub.  Her hair curls delicately around its windows.", "lowresreka", "lowresinspiredeuropaandthebull",new LatLng(51.427863, -0.086302),"783165465098983", "The Paxton Pub, 255 Gipsy Road, London, SE27 9QY", false, new String[]{"www.rekaone.com"}, "--/--/----"));
         //Remi Rough and System // NEEDS A CUSTOM setup
-        artArrayList.add(new Art("Girl at a Window 2013", "Remi Rough and System", "Girl at a Window 1645", "Rembrandt van Rijn", "System’s modernised ‘Girl at a Window’ by Rembrandt, leans out from Remi Roughs abstraction of ‘The Triumph of David’ by Poussin.  This ordinary young girl in a hoodie and cap with spray cans at her elbow, parallels Rembrandt’s 17th century serving girl.  ", "lowresremiroughandsystem", "lowresinspiredgirlatthewindow",new LatLng(51.461675, -0.079872),"783165368432326", "17 Grove Vale, London, SE22 8ET", false, new String[]{"www.remirough.com"}, "--/--/----"));
+        artArrayList.add(new Art(context,"Girl at a Window 2013", "Remi Rough and System", "Girl at a Window 1645", "Rembrandt van Rijn", "System’s modernised ‘Girl at a Window’ by Rembrandt, leans out from Remi Roughs abstraction of ‘The Triumph of David’ by Poussin.  This ordinary young girl in a hoodie and cap with spray cans at her elbow, parallels Rembrandt’s 17th century serving girl.  ", "lowresremiroughandsystem", "lowresinspiredgirlatthewindow",new LatLng(51.461675, -0.079872),"783165368432326", "17 Grove Vale, London, SE22 8ET", false, new String[]{"www.remirough.com"}, "--/--/----"));
         //ROA
-        artArrayList.add(new Art("Landscape with Sportsmen and Game", "ROA", "Landscape with Sportsmen and Game c.1665", "Adam Pynacker", "ROA chose a detail of Pynacker’s ‘Sportsman with Game’ - a shitting dog that Pynacker placed in the foreground of his painting.  ROA’s version has provoked some criticism, people being more shockable in the 21st century than in the 17th century.", "lowresdoginlandscape", "lowresinspiredlandscapewithsportsman",new LatLng(51.467224, -0.072160),"783165451765651", "Side of Victoria Inn, 77-79 Choumert Road, London, SE15 4AR", false, new String[]{"www.roaweb.tumblr.com", "https://www.youtube.com/watch?v=Spye5Yk_awY"}, "--/--/----"));
+        artArrayList.add(new Art(context,"Landscape with Sportsmen and Game", "ROA", "Landscape with Sportsmen and Game c.1665", "Adam Pynacker", "ROA chose a detail of Pynacker’s ‘Sportsman with Game’ - a shitting dog that Pynacker placed in the foreground of his painting.  ROA’s version has provoked some criticism, people being more shockable in the 21st century than in the 17th century.", "lowresdoginlandscape", "lowresinspiredlandscapewithsportsman",new LatLng(51.467224, -0.072160),"783165451765651", "Side of Victoria Inn, 77-79 Choumert Road, London, SE15 4AR", false, new String[]{"www.roaweb.tumblr.com", "https://www.youtube.com/watch?v=Spye5Yk_awY"}, "--/--/----"));
         //RUN
-        artArrayList.add(new Art("The Translation of Saint Rita of Cascia", "RUN", "The Translation of Saint Rita of Cascia c1630", "Nicolas Poussin", "RUN chose a detail from ‘The Translation of St Rita of Cascia’ by Poussin, the saint herself. ‘St Rita, I felt, was such a destroyed soul that I want to give her a bit of peace in her life.’  ", "lowresrunstrita", "lowresinspiredtranslationofstrita",new LatLng(51.437918, -0.054667),"783165475098982", "30 Dartmouth Road, Forest Hill, London, SE23 3XZ", false, new String[]{"www.runabc.org"}, "--/--/----"));
+        artArrayList.add(new Art(context,"The Translation of Saint Rita of Cascia", "RUN", "The Translation of Saint Rita of Cascia c1630", "Nicolas Poussin", "RUN chose a detail from ‘The Translation of St Rita of Cascia’ by Poussin, the saint herself. ‘St Rita, I felt, was such a destroyed soul that I want to give her a bit of peace in her life.’  ", "lowresrunstrita", "lowresinspiredtranslationofstrita",new LatLng(51.437918, -0.054667),"783165475098982", "30 Dartmouth Road, Forest Hill, London, SE23 3XZ", false, new String[]{"www.runabc.org"}, "--/--/----"));
         //STIK
-        artArrayList.add(new Art("The Fall of Man", "Stik", "The Fall of Man", "Pieter Coecke van Aelst", "Stik takes portraits of wealthy, fashionable, landed gentry by Gainsborough, and strips away all pretention, leaving his simple stick figures to brilliantly convey the emotion and relationships behind the symbols of status. ", "lowresstikfallofman", "lowresinspiredfallofman",new LatLng(51.453060, -0.078765),"783165481765648", "The Moorings Townley Road/Beauval Road, London, SE22 8SW", false, new String[]{"www.stik.org.uk", "https://www.youtube.com/watch?v=RCVECYTJ-0U"}, "--/--/----"));
-        artArrayList.add(new Art("Eliza and Mary Davidson", "Stik", "Eliza and Mary Davidson", "Tilly Kettlesm", "Stik takes portraits of wealthy, fashionable, landed gentry by Gainsborough, and strips away all pretention, leaving his simple stick figures to brilliantly convey the emotion and relationships behind the symbols of status.  ", "lowresstikelizaandmarydavidsontilly", "lowresinspiredelizaandmarydavidson",new LatLng(51.447416, -0.076093),"783165488432314", "150 Court Lane, London, SE21 7EB", false, new String[]{"www.stik.org.uk"}, "--/--/----"));
-        artArrayList.add(new Art("Eliza and Mary Linley", "Stik", "Eliza and Mary Linley", "Thomas Gainsborough", "Stik takes portraits of wealthy, fashionable, landed gentry by Gainsborough, and strips away all pretention, leaving his simple stick figures to brilliantly convey the emotion and relationships behind the symbols of status.  ", "lowresstikelizabethandmary", "lowresinspiredelizabethandlinley",new LatLng(51.446414, -0.073434),"783165538432309", "184 Court Lane, London, SE21 7EB", false, new String[]{"www.stik.org.uk"}, "--/--/----"));
-        artArrayList.add(new Art("A Couple in a Landscape", "Stik", "A Couple in a Landscape", "Thomas Gainsborough", "Stik takes portraits of wealthy, fashionable, landed gentry by Gainsborough, and strips away all pretention, leaving his simple stick figures to brilliantly convey the emotion and relationships behind the symbols of status.  ", "lowresstikacoupleinlandscape", "lowresinspiredacoupleinalandscape",new LatLng(51.456109, -0.076058),"783165478432315", "On the side of Property In estate agent on the corner of Hansler Road and 133 Lordship Lane, London, SE22 8HX", false, new String[]{"www.stik.org.uk", "https://www.youtube.com/watch?v=RqYOzLoHBf0"}, "--/--/----"));
+        artArrayList.add(new Art(context,"The Fall of Man", "Stik", "The Fall of Man", "Pieter Coecke van Aelst", "Stik takes portraits of wealthy, fashionable, landed gentry by Gainsborough, and strips away all pretention, leaving his simple stick figures to brilliantly convey the emotion and relationships behind the symbols of status. ", "lowresstikfallofman", "lowresinspiredfallofman",new LatLng(51.453060, -0.078765),"783165481765648", "The Moorings Townley Road/Beauval Road, London, SE22 8SW", false, new String[]{"www.stik.org.uk", "https://www.youtube.com/watch?v=RCVECYTJ-0U"}, "--/--/----"));
+        artArrayList.add(new Art(context,"Eliza and Mary Davidson", "Stik", "Eliza and Mary Davidson", "Tilly Kettlesm", "Stik takes portraits of wealthy, fashionable, landed gentry by Gainsborough, and strips away all pretention, leaving his simple stick figures to brilliantly convey the emotion and relationships behind the symbols of status.  ", "lowresstikelizaandmarydavidsontilly", "lowresinspiredelizaandmarydavidson",new LatLng(51.447416, -0.076093),"783165488432314", "150 Court Lane, London, SE21 7EB", false, new String[]{"www.stik.org.uk"}, "--/--/----"));
+        artArrayList.add(new Art(context,"Eliza and Mary Linley", "Stik", "Eliza and Mary Linley", "Thomas Gainsborough", "Stik takes portraits of wealthy, fashionable, landed gentry by Gainsborough, and strips away all pretention, leaving his simple stick figures to brilliantly convey the emotion and relationships behind the symbols of status.  ", "lowresstikelizabethandmary", "lowresinspiredelizabethandlinley",new LatLng(51.446414, -0.073434),"783165538432309", "184 Court Lane, London, SE21 7EB", false, new String[]{"www.stik.org.uk"}, "--/--/----"));
+        artArrayList.add(new Art(context,"A Couple in a Landscape", "Stik", "A Couple in a Landscape", "Thomas Gainsborough", "Stik takes portraits of wealthy, fashionable, landed gentry by Gainsborough, and strips away all pretention, leaving his simple stick figures to brilliantly convey the emotion and relationships behind the symbols of status.  ", "lowresstikacoupleinlandscape", "lowresinspiredacoupleinalandscape",new LatLng(51.456109, -0.076058),"783165478432315", "On the side of Property In estate agent on the corner of Hansler Road and 133 Lordship Lane, London, SE22 8HX", false, new String[]{"www.stik.org.uk", "https://www.youtube.com/watch?v=RqYOzLoHBf0"}, "--/--/----"));
 
         //Thierry Noir
-        artArrayList.add(new Art("Context", "Thierry Noir", "Joseph Receiving Pharaoh’s Ring", "Giambattista Tiepolo", "Famed for painting the Berlin Wall at risk of his life for 10 years in the 1980s, Noir’s simple style was born of need for speed and clarity.  His versions of the characters in Tiepolo’s ‘Joseph Receiving Pharaoh’s Ring’ interact similarly, but with Noir, size relates to importance as in medieval times.   ", "lowresnoir", "lowresinspiredthierrynoir",new LatLng(51.445228, -0.079050),"783165548432308", "The Bowling Building, Dulwich Park, London, SE21", false, new String[]{"www.galerie-noir.de", "https://www.youtube.com/watch?v=jGZ9Ou_xFfo"}, "--/--/----"));
+        artArrayList.add(new Art(context,"Context", "Thierry Noir", "Joseph Receiving Pharaoh’s Ring", "Giambattista Tiepolo", "Famed for painting the Berlin Wall at risk of his life for 10 years in the 1980s, Noir’s simple style was born of need for speed and clarity.  His versions of the characters in Tiepolo’s ‘Joseph Receiving Pharaoh’s Ring’ interact similarly, but with Noir, size relates to importance as in medieval times.   ", "lowresnoir", "lowresinspiredthierrynoir",new LatLng(51.445228, -0.079050),"783165548432308", "The Bowling Building, Dulwich Park, London, SE21", false, new String[]{"www.galerie-noir.de", "https://www.youtube.com/watch?v=jGZ9Ou_xFfo"}, "--/--/----"));
         //Walter Kershaw
-        artArrayList.add(new Art("Finished Wall", "Walter Kershaw", "Landscape with Windmills Near Haarlem", "Jacob Van Ruisdael", "‘Landscape with Windmills near Haarlem’ painted first by Jacob Van Ruisdael in c 1650, then copied by John Constable in c 1830, then copied by Walter Kershaw as a huge mural in 2014.  Spot the differences!  ", "lowreswalterlandscape", "lowresinspiredlandscapewithwindmill",new LatLng(51.467546, -0.072552),"783165585098971", "166 Bellenden Road, London, SE15 4QY", false, new String[]{"http://www.walterkershaw.co.uk/"}, "--/--/----"));
+        artArrayList.add(new Art(context,"Finished Wall", "Walter Kershaw", "Landscape with Windmills Near Haarlem", "Jacob Van Ruisdael", "‘Landscape with Windmills near Haarlem’ painted first by Jacob Van Ruisdael in c 1650, then copied by John Constable in c 1830, then copied by Walter Kershaw as a huge mural in 2014.  Spot the differences!  ", "lowreswalterlandscape", "lowresinspiredlandscapewithwindmill",new LatLng(51.467546, -0.072552),"783165585098971", "166 Bellenden Road, London, SE15 4QY", false, new String[]{"http://www.walterkershaw.co.uk/"}, "--/--/----"));
 
         return artArrayList;
     }
@@ -208,5 +246,26 @@ public class GalleryData {
     }
 
 
+    /**
+     * get drawable for map button homepage
+     * @return
+     */
+    public Drawable getMapButton() {
+        return mapButton;
+    }
+    /**
+     * get drawable for about button homepage
+     * @return
+     */
+    public Drawable getAboutDulwich() {
+        return aboutDulwich;
+    }
+    /**
+     * get drawable for tweet bird homepage
+     * @return
+     */
+    public Drawable getTweetBird() {
+        return tweetBird;
+    }
 
 }

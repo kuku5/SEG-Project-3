@@ -76,6 +76,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
     private boolean userLikes;
 
 
+
     /**
      * Constructs a CommentListAdapter, with the specified data that will be shown on the recycler view
      * @param gallerySwipeSingleFragment The instance of GallerySwipeSingleFragment
@@ -170,6 +171,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         return new BitmapDrawable(context.getResources(), bitmap);
     }
 
+
     /**
      * Reads the image from Assets and returns a bitmap
      * @param context Context of Activity
@@ -200,14 +202,16 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
     public void onBindViewHolder(final CommentListAdapter.MyViewHolder holder, int position) {
         if (position == 0) {
             //Set images
-            try {
 
-                holder.dynamicHeightImageView.setImageDrawable(getAssetImage(context,galleryData.get(indexOfArtwork).getInspiredPic()));
-                holder.inspirationArtworkImageView.setImageDrawable(getAssetImage(context,galleryData.get(indexOfArtwork).getPic()));
+
+            try {
+                holder.dynamicHeightImageView.setImageDrawable(getAssetImage(context, galleryData.get(indexOfArtwork).getPic()));
+                holder.inspirationArtworkImageView.setImageDrawable(getAssetImage(context, galleryData.get(indexOfArtwork).getInspiredPic()));
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
 
             //Set the text and links
             holder.descriptionTitle.setText(galleryData.get(indexOfArtwork).getName());

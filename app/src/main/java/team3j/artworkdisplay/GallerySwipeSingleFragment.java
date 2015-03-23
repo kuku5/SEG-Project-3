@@ -9,9 +9,8 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -113,7 +112,7 @@ public class GallerySwipeSingleFragment extends Fragment {
         Bundle bundle = getArguments();
 
         indexOfArtWork = bundle.getInt("indexOfArtWork");
-        String title = GalleryData.get().GetGalleryData().get(indexOfArtWork).getName();
+        String title = GalleryData.get().getArtworkList().get(indexOfArtWork).getName();
         textView.setText(title);
 
         backButton=(ImageButton) layout.findViewById(R.id.back_button);
@@ -146,6 +145,7 @@ public class GallerySwipeSingleFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
         return layout;
     }
+
 
 
 
@@ -731,5 +731,20 @@ public class GallerySwipeSingleFragment extends Fragment {
             }
             customProcessDialog.hide();
         }
+    }
+    @Override
+    public void onDestroyView() {
+
+        recyclerView.removeAllViews();
+        System.gc();
+        super.onDestroyView();
+
+    }
+
+    @Override
+    public void onDestroy() {
+        recyclerView.removeAllViews();
+
+        super.onDestroy();
     }
 }

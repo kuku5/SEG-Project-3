@@ -112,11 +112,11 @@ public class HomePageFragment extends Fragment {
 
         //LikeView setups
         Settings.sdkInitialize(getActivity());
-        likeView = (LikeView) layout.findViewById(R.id.like_view);
+       likeView = (LikeView) layout.findViewById(R.id.like_view);
         likeView.setObjectId("https://www.facebook.com/DulwichOutdoorGallery");
         likeView.setForegroundColor(-256);
         likeView.setLikeViewStyle(LikeView.Style.STANDARD);
-
+//
         setRetainInstance(true);
 
         setupOnScreenElements(layout);
@@ -126,7 +126,7 @@ public class HomePageFragment extends Fragment {
             // Restore last state for checked position.
             if (isOnline()) {
 
-                getTweets();
+               getTweets();
                 Log.d("tweets", "online");
 
             }
@@ -138,8 +138,9 @@ public class HomePageFragment extends Fragment {
         }
 
 
-        screenSize();
         setupLibraryAnimations(layout);
+
+        setupForScreenSize();
 
         //  ---------- KEYHASH GENERATOR -----------//
         /*
@@ -166,11 +167,10 @@ public class HomePageFragment extends Fragment {
     /**
      * this detects the Screen Size so the correct elements are initiated
      */
-    private void screenSize() {
+    private void setupForScreenSize() {
         if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE) {
             Toast.makeText(getActivity(), "Large screen", Toast.LENGTH_LONG).show();
-            showLargeScreenElements();
-           // setupGoogleMapsCard(layout);
+
         }
         else if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_NORMAL) {
             Toast.makeText(getActivity(), "Normal sized screen", Toast.LENGTH_LONG).show();
@@ -184,10 +184,6 @@ public class HomePageFragment extends Fragment {
         }
     }
 
-    private void showLargeScreenElements() {
-
-
-    }
 
 
     /**
@@ -202,23 +198,6 @@ public class HomePageFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    /**
-     * Reads the image from Assets and returns a bitmap drawable
-     * @param context Context of Activity
-     * @param filename Filename of the image
-     * @return BitmapDrawable of the image
-     * @throws IOException If the image can not be found
-     */
-    public static Drawable getAssetImage(Context context, String filename) throws IOException {
-        AssetManager assets = context.getResources().getAssets();
-        String exte=".jpg";
-        if(filename.contains("twitterbird")){
-            exte=".png";
-        }
-        InputStream buffer = new BufferedInputStream((assets.open("" + filename + exte)));
-        Bitmap bitmap = BitmapFactory.decodeStream(buffer);
-        return new BitmapDrawable(context.getResources(), bitmap);
-    }
 
     /**
      * This method sets up all the onScreen Elements for the Home Page
@@ -240,13 +219,11 @@ public class HomePageFragment extends Fragment {
         tweetBird = (ImageView) layout.findViewById(R.id.twitterbird);
 
 
-        try {
-            mapButton.setImageDrawable(getAssetImage(getActivity(),"mapbannersquare"));
-            aboutDulwich.setImageDrawable(getAssetImage(getActivity(),"dulwichpicturegallery"));
-            tweetBird.setImageDrawable(getAssetImage(getActivity(),"twitterbird"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        mapButton.setImageDrawable(GalleryData.get().getMapButton());
+        aboutDulwich.setImageDrawable(GalleryData.get().getAboutDulwich());
+        tweetBird.setImageDrawable(GalleryData.get().getTweetBird());
+
+
 
         aboutDulwich.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -281,7 +258,6 @@ public class HomePageFragment extends Fragment {
             private final SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
             int i = 0;
             boolean t1 = false; // true if currently displaying twitView1
-            boolean welcomed = false;
 
             /**
              * this method updates the tweets when the animation begins
@@ -353,7 +329,11 @@ public class HomePageFragment extends Fragment {
     //    file_maps.put("Stik", R.drawable.lowresstikthreeboys);
   //      file_maps.put("RUN", R.drawable.lowresrunstrita);
 
-
+        BaseSliderView.ScaleType scale = BaseSliderView.ScaleType.Fit;;
+        if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE) {
+            Toast.makeText(getActivity(), "Large screen", Toast.LENGTH_LONG).show();
+            scale = BaseSliderView.ScaleType.CenterInside;
+        }
         for (String name : file_maps.keySet()) {
             TextSliderView textSliderView = new TextSliderView(getActivity());
             // initialize a SliderLayout
@@ -361,7 +341,7 @@ public class HomePageFragment extends Fragment {
             textSliderView
                     .description(name)
                     .image(file_maps.get(name))
-                    .setScaleType(BaseSliderView.ScaleType.Fit);
+                    .setScaleType(scale);
 
             mDemoSlider.addSlider(textSliderView);
         }
@@ -482,7 +462,11 @@ public class HomePageFragment extends Fragment {
         return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
-
+    @Override
+    public void onDestroyView() {
+        System.gc();
+        super.onDestroyView();
+    }
 }
 
 

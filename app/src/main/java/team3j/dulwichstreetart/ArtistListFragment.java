@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,4 +68,13 @@ public class ArtistListFragment extends Fragment {
     }
 
 
+    @Override
+    public void onDestroyView() {
+
+        System.gc();
+        super.onDestroyView();
+
+
+
+    }
 }

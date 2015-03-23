@@ -30,7 +30,7 @@ public class SplashActivity extends Activity {
 
 
     private long TIMER=500;
-    public static ArrayList<Art> artArrayList = GalleryData.create().GetGalleryData();
+    public static ArrayList<Art> artArrayList ;
     private ImageView splashImage;
 
     /**
@@ -43,7 +43,8 @@ public class SplashActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //create Gallery Data instance
-        GalleryData.create();
+        GalleryData.create(getApplicationContext());
+        artArrayList=GalleryData.get().getArtworkList();
         setContentView(R.layout.activity_splash);
 
         splashImage= (ImageView) findViewById(R.id.splashView);

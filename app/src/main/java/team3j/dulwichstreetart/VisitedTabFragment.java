@@ -14,10 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
-
-import it.neokree.materialtabs.MaterialTab;
-import it.neokree.materialtabs.MaterialTabListener;
 
 /**
  * @author Team 3-J
@@ -151,12 +147,24 @@ public class VisitedTabFragment extends Fragment  {
 
     }
 
+    /**
+     *
+     */
     public void updateList(){
         if(visitedAdapter != null) {
             visitedAdapter.notifyDataSetChanged();
         }
     }
 
+    /**
+     *
+     */
+    @Override
+    public void onDestroyView() {
 
+        System.gc();
+        super.onDestroyView();
+
+    }
 
 }

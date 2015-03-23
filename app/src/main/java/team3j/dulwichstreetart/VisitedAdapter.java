@@ -98,11 +98,7 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
             holder.visitedQuestion_textView.setTextColor(context.getResources().getColor(R.color.colorHighlight));
         }
 
-        try {
-            holder.image.setImageDrawable(getAssetImage(context,galleryData.get(position).getPic()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        holder.image.setImageDrawable(galleryData.get(position).getDrawableStreet());
 
         holder.visited_description.setText("You last visited this art on: " + SplashActivity.artArrayList.get(position).getDateVisited());
 

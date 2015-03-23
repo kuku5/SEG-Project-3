@@ -13,6 +13,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,13 +50,11 @@ import team3j.artworkdisplay.GallerySwipeSingleFragment;
 public class GoogleMapFragmentSmall extends Fragment {
 
 
-    public static MapView mMapView;
+    public MapView mMapView;
     private GoogleMap googleMap;
-    private LinearLayout linearLayout2;
-    private CardView cardView;
+
     private ImageButton imageButton;
     private LatLng locStart;
-    private Art[] arts;
     private ArrayList<Art> artArrayList;
     public static boolean filter;
     public static String name;
@@ -79,6 +78,13 @@ public class GoogleMapFragmentSmall extends Fragment {
 
     }
 
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+       // mMapView.onSaveInstanceState(outState);
+    }
+
     /**
      * Creates the google maps fragment with the correct layout
      * @param inflater
@@ -89,34 +95,48 @@ public class GoogleMapFragmentSmall extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // inflat and return the layout
+        // inflaet and return the layout
         View v = inflater.inflate(R.layout.fragment_location_info, container,
                 false);
-        setRetainInstance(true);
+
 
         mMapView = (MapView) v.findViewById(R.id.mapView);
-        mMapView.onCreate(savedInstanceState);
-        imageButton= (ImageButton) v.findViewById(R.id.fab_image_button);
+        if (savedInstanceState == null) {
+            // First incarnation of this activity.
+          setRetainInstance(true);
+            mMapView.onCreate(savedInstanceState);
+            imageButton= (ImageButton) v.findViewById(R.id.fab_image_button);
 
-        mMapView.onResume();// needed to get the map to display immediately
+            mMapView.onResume();// needed to get the map to display immediately
 
 
 
 
 
-        try {
-            MapsInitializer.initialize(getActivity().getApplicationContext());
-        } catch (Exception e) {
-            e.printStackTrace();
+            try {
+                MapsInitializer.initialize(getActivity().getApplicationContext());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+            if(isGoogleMapsInstalled()) {
+
+                setUpMap();
+
+                setUpVisitedListener();
+            }
+        } else {
+            // Reincarnated activity. The obtained map is the same map instance in the previous
+            // activity life cycle. There is no need to reinitialize it.
+
+            mMapView.onCreate(savedInstanceState);
+            mMapView.onResume();// needed to get the map to display immediately
+
+
+            googleMap = mMapView.getMap();
         }
 
-
-        if(isGoogleMapsInstalled()) {
-
-            setUpMap();
-
-            setUpVisitedListener();
-        }
 
         // Perform any camera updates here
         return v;
@@ -200,6 +220,7 @@ public class GoogleMapFragmentSmall extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        if(googleMap!=null){
         filter = GallerySwipeSingleFragment.filt;
         name = GallerySwipeSingleFragment.ind;
         System.out.println("on resume filter: "+GoogleMapFragmentSmall.filter+" index: "+name);
@@ -211,7 +232,7 @@ public class GoogleMapFragmentSmall extends Fragment {
         }
         mMapView.onResume();
 
-        GoogleMapFragmentSmall.filter = false;
+        GoogleMapFragmentSmall.filter = false;}
     }
 
     /**
@@ -231,6 +252,7 @@ public class GoogleMapFragmentSmall extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
+
         mMapView.onDestroy();
     }
 
@@ -258,7 +280,7 @@ public class GoogleMapFragmentSmall extends Fragment {
     public void setUpMap(){
 
 
-        artArrayList = GalleryData.create().GetGalleryData();
+        artArrayList = GalleryData.get().getArtworkList();
         googleMap = mMapView.getMap();
         zoom();
         googleMap.setMyLocationEnabled(true);
@@ -372,12 +394,9 @@ public class GoogleMapFragmentSmall extends Fragment {
 
                             ImageView picView = (ImageView) v.findViewById(R.id.pic);
 
-                            try {
-                                picView.setImageDrawable(getAssetImage(getActivity(), artArrayList.get(i).getPic()));
+                                picView.setImageDrawable( artArrayList.get(i).getDrawableStreet());
 
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
+
                             TextView txtView = (TextView) v.findViewById(R.id.markerName);
                             txtView.setText(artArrayList.get(i).getName());
 
@@ -449,6 +468,15 @@ public class GoogleMapFragmentSmall extends Fragment {
         datePref.edit().putString(SplashActivity.artArrayList.get(index).getName(), fullDate).apply();
         Toast.makeText(this.getActivity(), "Updated", Toast.LENGTH_SHORT).show();
         VisitedTabFragment.getInstance(4).updateList(); //Update the screen
+    }
+
+    @Override
+    public void onDestroyView() {
+
+
+        System.gc();
+        super.onDestroyView();
+
     }
 
 }

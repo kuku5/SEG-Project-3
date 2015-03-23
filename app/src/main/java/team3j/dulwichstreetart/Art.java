@@ -1,7 +1,18 @@
 package team3j.dulwichstreetart;
 
 
+import android.content.Context;
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+
 import com.google.android.gms.maps.model.LatLng;
+
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * Holds a representation of an Art object
@@ -24,6 +35,10 @@ public class Art {
     private Boolean visited;
     private String dateVisited;
 
+    private Drawable drawableInspired;
+    private Drawable drawableStreet;
+
+
     /**
      * main constructor passing through art information -
      * @param name Name of the artwork
@@ -40,7 +55,7 @@ public class Art {
      * @param webLinks array of extra links associated to the artist
      * @param  dateVisited date once the art work is visited
      */
-    public Art(String name, String artistName, String inspirationTitle, String inspirationArtist, String desc, String pic, String inspiredPic, LatLng loc, String fbLink, String artAddress, Boolean visited, String[] webLinks, String dateVisited){
+    public Art(Context context,String name, String artistName, String inspirationTitle, String inspirationArtist, String desc, String pic, String inspiredPic, LatLng loc, String fbLink, String artAddress, Boolean visited, String[] webLinks, String dateVisited){
         this.name=name;
         this.artistName = artistName;
         this.desc=desc;
@@ -54,6 +69,29 @@ public class Art {
         this.visited = visited;
         this.webLinks=webLinks;
         this.dateVisited = dateVisited;
+
+        try {
+            this.drawableInspired=getAssetImage(context,inspiredPic);
+            this.drawableStreet=getAssetImage(context,pic);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Drawable getDrawableInspired() {
+        return drawableInspired;
+    }
+
+    public Drawable getDrawableStreet() {
+        return drawableStreet;
+    }
+
+    public static Drawable getAssetImage(Context context, String filename) throws IOException {
+        AssetManager assets = context.getResources().getAssets();
+        InputStream buffer = new BufferedInputStream((assets.open("" + filename + ".jpg")));
+        Bitmap bitmap = BitmapFactory.decodeStream(buffer);
+        return new BitmapDrawable(context.getResources(), bitmap);
     }
 
     /**

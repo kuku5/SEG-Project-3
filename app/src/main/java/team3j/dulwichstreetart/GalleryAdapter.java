@@ -83,16 +83,9 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
     @Override
     public void onBindViewHolder(GalleryAdapter.MyViewHolder holder, int position) {
 
-        try {
-            holder.dynamicHeightImageView.setImageDrawable(getAssetImage(context,galleryData.get(position).getPic()));
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+       holder.dynamicHeightImageView.setImageDrawable(galleryData.get(position).getDrawableStreet());
        holder.txtLineOne.setText(galleryData.get(position).getName());
        holder.descriptionTextView.setText(galleryData.get(position).getDesc());
-
-
 
     }
     /**
