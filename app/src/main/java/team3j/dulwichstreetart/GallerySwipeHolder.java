@@ -13,7 +13,7 @@ import com.hannesdorfmann.swipeback.SwipeBack;
 
 /**
  * @author Team 3-J
- *         This class is the Holder for the Swipe Gallery
+ * This class is the Holder for the Swipe Gallery
  */
 
 public class GallerySwipeHolder extends FragmentActivity {
@@ -75,8 +75,6 @@ public class GallerySwipeHolder extends FragmentActivity {
                             }
                         });
 
-
-        //      setContentView(R.layout.view_pager);
 
         //creates fragment adapter to display all images
         viewPager = (ViewPager) findViewById(R.id.viewPager);
@@ -145,7 +143,7 @@ public class GallerySwipeHolder extends FragmentActivity {
                         (scaleFactor - MIN_SCALE) /
                                 (1 - MIN_SCALE) * (1 - MIN_ALPHA));
 
-            } else { // (1,+Infinity]
+            } else {
                 // This page is way off-screen to the right.
                 view.setAlpha(0);
             }
