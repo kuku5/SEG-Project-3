@@ -170,5 +170,6 @@
     <string name="logout">Logout</string>
     <string name="posthint"><i>Post a comment...</i></string>
     <string name="postbutton">Post</string>
+    <string name="howToUseVisited">The visited tab displays and keeps track of the artwork that you have visited and those yet to be visited.\n\nBe sure to open the app and have location services turned on when your near one of the artworks for it to be registered.</string>
 
 </resources>

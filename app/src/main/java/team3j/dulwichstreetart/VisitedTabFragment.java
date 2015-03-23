@@ -92,11 +92,8 @@ public class VisitedTabFragment extends Fragment  {
                 AlertDialog.Builder infoDialogBuilder = new AlertDialog.Builder( v.getContext());
                 infoDialogBuilder.setTitle("How To Use")
 
-                        .setMessage("The Visited tab displays and keeps track of the " +
-                                "arts that have been visited" +
-                                " and the ones that are " +
-                                "yet to be visited.")
-                        .setPositiveButton("Ok", null);
+                        .setMessage(getString(R.string.howToUseVisited))
+                        .setPositiveButton("OK", null);
                 AlertDialog infoAlert = infoDialogBuilder.create();
                 infoAlert.setCanceledOnTouchOutside(true);
                 infoAlert.show();
