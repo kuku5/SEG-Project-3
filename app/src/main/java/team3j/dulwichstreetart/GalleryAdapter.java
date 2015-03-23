@@ -29,7 +29,7 @@ import java.util.ArrayList;
 
 /**
  * @author Team 3-J
- *         This is the RecyclerView.Adapter for the Gallery recycler view and loads images in background thread
+ * This is the RecyclerView.Adapter for the Gallery recycler view and loads images in background thread
  */
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHolder> {
 
@@ -90,22 +90,6 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
         holder.descriptionTextView.setText(galleryData.get(position).getDesc());
 
     }
-
-    /**
-     * Reads the image from Assets and returns a bitmap drawable
-     *
-     * @param context  Context of Activity
-     * @param filename Filename of the image
-     * @return BitmapDrawable of the image
-     * @throws IOException If the image can not be found
-     */
-    public static Drawable getAssetImage(Context context, String filename) throws IOException {
-        AssetManager assets = context.getResources().getAssets();
-        InputStream buffer = new BufferedInputStream((assets.open("" + filename + ".jpg")));
-        Bitmap bitmap = BitmapFactory.decodeStream(buffer);
-        return new BitmapDrawable(context.getResources(), bitmap);
-    }
-
 
     /**
      * Returns number of items in the gallery
