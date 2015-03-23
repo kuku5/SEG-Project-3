@@ -41,6 +41,7 @@ public class Art {
 
     /**
      * main constructor passing through art information -
+     * @param context Required activity
      * @param name Name of the artwork
      * @param artistName Name of the artist
      * @param inspirationTitle Name of the inspiration art
