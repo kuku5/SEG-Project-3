@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 /**
  * @author Team 3-J
- *         This is the Fragment for the artist layout
+ * This is the Fragment for the artist layout
  */
 
 public class ArtistListFragment extends Fragment {
@@ -42,10 +42,10 @@ public class ArtistListFragment extends Fragment {
     /**
      * Creates the Artist fragment with the layouts and adapter
      *
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return layout
+     * @param inflater LayoutInflator
+     * @param container Viewgroup
+     * @param savedInstanceState bundle of instance
+     * @return layout view
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -72,10 +72,7 @@ public class ArtistListFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
-
         System.gc();
         super.onDestroyView();
-
-
     }
 }
