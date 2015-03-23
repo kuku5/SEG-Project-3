@@ -259,8 +259,7 @@ public class GoogleMapFragmentSmall extends Fragment {
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CameraUpdate update = CameraUpdateFactory.newLatLngZoom(locStart, 13);
-                googleMap.animateCamera(update);
+                zoom();
             }
         });
         googleMap.clear();
@@ -358,12 +357,25 @@ public class GoogleMapFragmentSmall extends Fragment {
      */
     public void zoom() {
 
+        int screenOrientation = this.getResources().getConfiguration().orientation;
+
+        if (screenOrientation == Surface.ROTATION_0 + 1) {
+            //For portrait mode
             locStart = new LatLng(51.454013, -0.080496);
 
-        CameraUpdate update = CameraUpdateFactory.newLatLngZoom(locStart, 12);
+            CameraUpdate update = CameraUpdateFactory.newLatLngZoom(locStart, 13);
 
             googleMap.animateCamera(update);
 
+        } else if (screenOrientation == Surface.ROTATION_90 + 1) {
+            //For landscape mode
+            locStart = new LatLng(51.454013, -0.080496);
+
+            CameraUpdate update = CameraUpdateFactory.newLatLngZoom(locStart, 12);
+
+            googleMap.animateCamera(update);
+
+        }
 
 
 
