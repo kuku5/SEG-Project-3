@@ -1,11 +1,7 @@
 package team3j.dulwichstreetart;
 
 
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,13 +12,12 @@ import android.view.LayoutInflater;
 import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 /**
  * @author Team 3-J
- *         Gallery Fragment for to be displayed in the tab Fragment
+ * Gallery Fragment for to be displayed in the tab Fragment
  */
 
 public class GalleryFragment extends Fragment {
@@ -49,10 +44,10 @@ public class GalleryFragment extends Fragment {
     /**
      * Creates the view of the gallery with the appropriate layouts and given adapter
      *
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return
+     * @param inflater Layout inflator
+     * @param container view group container
+     * @param savedInstanceState bundle of savedinstance
+     * @return view
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -134,9 +129,6 @@ public class GalleryFragment extends Fragment {
 
         System.gc();
         super.onDestroyView();
-
-
-        Log.d("testingRot", "onDestroyView11");
 
     }
 
