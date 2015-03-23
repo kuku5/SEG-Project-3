@@ -8,8 +8,8 @@ import team3j.artworkdisplay.GallerySwipeSingleFragment;
 
 /**
  * @author Team 3-J
- *         <p/>
- *         This is the Fragment Adapter for the Large Gallery Display
+ *
+ * This is the Fragment Adapter for the Large Gallery Display
  */
 public class FragmentAdapter extends FragmentStatePagerAdapter {
 
