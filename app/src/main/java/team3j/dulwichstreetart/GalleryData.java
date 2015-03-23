@@ -29,6 +29,8 @@ public class GalleryData {
 
     private ArrayList<Status> todaysTweets;
     private ArrayList<Art> artworkList;
+    private ArrayList<Artist> artistList;
+
     private static GalleryData mGalleryData;
     private Drawable mapButton;
     private Drawable aboutDulwich;
@@ -50,6 +52,7 @@ public class GalleryData {
      */
     public GalleryData(Context context) {
         artworkList = CreateGalleryData(context);
+        artistList=CreateArtistData();
 
         //setup homepage elements
         todaysTweets = new ArrayList<>();
@@ -63,6 +66,8 @@ public class GalleryData {
             e.printStackTrace();
         }
     }
+
+
 
 
     /**
@@ -116,13 +121,21 @@ public class GalleryData {
         return artworkList;
     }
 
+    /**
+     * This method returns all artist information
+     * @return
+     */
+    public ArrayList<Artist> getArtistList() {
+        return artistList;
+    }
 
     /**
-     * Gets data of all the artwork, by setting them into an arraylist to return
+     * Creates data of all the artwork, by setting them into an arraylist to return
      *
      * @param context context of activity
      * @return data of artwork
      */
+
 
 
     public ArrayList<Art> CreateGalleryData(Context context) {
@@ -181,10 +194,9 @@ public class GalleryData {
     /**
      * Gets data of all the artists, by setting them into an arraylist to return
      *
-     * @param context activity
      * @return array of artist information
      */
-    public static ArrayList<Artist> GetArtistsDataReal(Activity context) {
+    public ArrayList<Artist> CreateArtistData() {
         final ArrayList<Artist> data = new ArrayList<Artist>();
 
         //FORMAT: data.add(new Artist("artist","description","website", "artist image""));

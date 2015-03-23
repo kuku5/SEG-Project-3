@@ -55,7 +55,7 @@ public class ArtistListFragment extends Fragment {
         setRetainInstance(true);
 
         //get data for the List
-        ArrayList<Artist> artistData = GalleryData.GetArtistsDataReal(getActivity());
+        ArrayList<Artist> artistData = GalleryData.get().getArtistList();
 
         //get Adapter
         artistListAdapter = new ArtistListAdapter(getActivity(), artistData);

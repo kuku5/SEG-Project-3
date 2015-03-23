@@ -862,7 +862,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                                 output = new FileOutputStream(file);
 
                                 // Compress into png format image from 0% - 100%
-                                getBitmapAssetImage(context, galleryData.get(indexOfArtwork).getInspiredPic()).compress(Bitmap.CompressFormat.PNG, 100, output);
+                                getBitmapAssetImage(context,galleryData.get(indexOfArtwork).getInspiredPic()).compress(Bitmap.CompressFormat.PNG, 100, output);
                                 output.flush();
                                 output.close();
 
