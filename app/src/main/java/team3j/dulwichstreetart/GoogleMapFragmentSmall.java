@@ -189,6 +189,8 @@ public class GoogleMapFragmentSmall extends Fragment {
         try
         {
             ApplicationInfo info = getActivity().getPackageManager().getApplicationInfo("com.google.android.apps.maps", 0 );
+
+
             return true;
         }
         catch(PackageManager.NameNotFoundException e)
