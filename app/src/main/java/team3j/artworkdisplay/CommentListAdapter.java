@@ -488,8 +488,8 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
     /**
      * Opens a link in the facebook app if it is installed on the users phone else it will open on a web browser
      *
-     * @param link
-     * @param isPage
+     * @param link String representation of link
+     * @param isPage boolean true if is page
      */
     public void linkToFb(String link, boolean isPage) {
         String facebookUrl = "https://www.facebook.com/" + link;
