@@ -93,7 +93,7 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
         }
         else if(SplashActivity.artArrayList.get(position).getVisited() == false) {
             holder.visitedQuestion_textView.setText("Not Visited");
-            holder.visitedCard.setCardBackgroundColor(context.getResources().getColor(R.color.white));
+            holder.visitedCard.setCardBackgroundColor(context.getResources().getColor(R.color.visitedTabGrey));
             holder.txtLineOne.setTextColor(context.getResources().getColor(R.color.colorHighlight));
             holder.visitedQuestion_textView.setTextColor(context.getResources().getColor(R.color.colorHighlight));
         }

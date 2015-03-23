@@ -32,6 +32,6 @@
 
     <color name="list_item_pressed">#1A000000</color>
 
-    <color name="kevinsColour">#fffbfbfb</color>
+    <color name="visitedTabGrey">#fffbfbfb</color>
 
 </resources>
