@@ -59,13 +59,13 @@ import twitter4j.conf.ConfigurationBuilder;
 
 /**
  * @author Team 3-J
- *         This is the fragment of the Homepage to be displayed in the tab
+ * This is the fragment of the Homepage to be displayed in the tab
  */
 
 
 public class HomePageFragment extends Fragment {
 
-    Animation slide_in_left, slide_out_right;
+    private Animation slide_in_left, slide_out_right;
     private CardView cardView2;
     private LikeView likeView;
     private ViewFlipper viewFlipper;
@@ -82,10 +82,10 @@ public class HomePageFragment extends Fragment {
 
 
     /**
-     * return an instance of this Fragment with a bundle into the tab adapter
+     * returns an instance of the fragment
      *
-     * @param position
-     * @return myFragmentTab
+     * @param position position of tab
+     * @return the instance of the fragment
      */
 
     public static HomePageFragment getInstance(int position) {
@@ -99,11 +99,10 @@ public class HomePageFragment extends Fragment {
 
     /**
      * onCreateView sets up the layout
-     *
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return
+     * @param inflater LayoutInflator
+     * @param container Viewgroup
+     * @param savedInstanceState bundle of instance
+     * @return layout view
      */
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -117,7 +116,6 @@ public class HomePageFragment extends Fragment {
         likeView.setObjectId("https://www.facebook.com/DulwichOutdoorGallery");
         likeView.setForegroundColor(-256);
         likeView.setLikeViewStyle(LikeView.Style.STANDARD);
-//
         setRetainInstance(true);
 
         setupOnScreenElements(layout);
@@ -141,7 +139,6 @@ public class HomePageFragment extends Fragment {
 
         setupLibraryAnimations(layout);
 
-        setupForScreenSize();
 
         //  ---------- KEYHASH GENERATOR -----------//
         /*
@@ -161,34 +158,17 @@ public class HomePageFragment extends Fragment {
         }
         */
 
-        //slideDown();
         return layout;
     }
 
-    /**
-     * this detects the Screen Size so the correct elements are initiated
-     */
-    private void setupForScreenSize() {
-        if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE) {
-            Toast.makeText(getActivity(), "Large screen", Toast.LENGTH_LONG).show();
-
-        } else if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_NORMAL) {
-            Toast.makeText(getActivity(), "Normal sized screen", Toast.LENGTH_LONG).show();
-        } else if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_SMALL) {
-            Toast.makeText(getActivity(), "Small sized screen", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(getActivity(), "Screen size is neither large, normal or small", Toast.LENGTH_LONG).show();
-
-        }
-    }
 
 
     /**
      * Handles the web log in and likeview
      *
-     * @param requestCode
-     * @param resultCode
-     * @param data
+     * @param requestCode requestcode of the request
+     * @param resultCode result code of the request
+     * @param data intent data
      */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -200,7 +180,7 @@ public class HomePageFragment extends Fragment {
     /**
      * This method sets up all the onScreen Elements for the Home Page
      *
-     * @param layout
+     * @param layout view of the layout
      */
     private void setupOnScreenElements(View layout) {
         cardView2 = (CardView) layout.findViewById(R.id.car_view_22);
@@ -234,7 +214,7 @@ public class HomePageFragment extends Fragment {
     /**
      * Sets up the twitter animations and adds tweet listener to auto update
      *
-     * @param layout
+     * @param layout view of the layout
      */
     public void setupTweetsAnimations(View layout) {
 
@@ -265,7 +245,7 @@ public class HomePageFragment extends Fragment {
                 if (!todaysTweets.isEmpty()) {
                     if (i == todaysTweets.size()) i = 0;
 
-                    if (t1 == false) {
+                    if (!t1) {
                         twitView1.setText(todaysTweets.get(i).getText());
                         if (todaysTweets.get(i) != null) {
                             twitTime1.setText(df.format(todaysTweets.get(i).getCreatedAt()).toString());
@@ -314,7 +294,7 @@ public class HomePageFragment extends Fragment {
     /**
      * this method setups the animation and adds images to the image slider
      *
-     * @param layout
+     * @param layout View of the layout
      */
     private void setupLibraryAnimations(View layout) {
 
@@ -326,11 +306,10 @@ public class HomePageFragment extends Fragment {
         //file_maps - used to display images in the top homepage slider
         file_maps.put("Conor Harrington", R.drawable.lowresconorharrington);
         file_maps.put("Walter Kershaw", R.drawable.lowreswalterlandscape);
-        //    file_maps.put("Stik", R.drawable.lowresstikthreeboys);
-        //      file_maps.put("RUN", R.drawable.lowresrunstrita);
+        file_maps.put("Stik", R.drawable.lowresstikthreeboys);
+        file_maps.put("RUN", R.drawable.lowresrunstrita);
 
         BaseSliderView.ScaleType scale = BaseSliderView.ScaleType.Fit;
-        ;
         if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE) {
             Toast.makeText(getActivity(), "Large screen", Toast.LENGTH_LONG).show();
             scale = BaseSliderView.ScaleType.CenterInside;
@@ -380,7 +359,7 @@ public class HomePageFragment extends Fragment {
     }
 
     /**
-     * showMessagePictureGallery() - this method shows the about information about the picture gallery
+     * Shows the about information about the picture gallery
      */
     private void showMessagePictureGallery() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -406,7 +385,7 @@ public class HomePageFragment extends Fragment {
     }
 
     /**
-     * getTweets() - this method retrieves the latest 5 tweets from a twitterUser
+     * Retrieves the latest 5 tweets from a twitterUser
      */
     public void getTweets() {
 
@@ -460,7 +439,7 @@ public class HomePageFragment extends Fragment {
         ConnectivityManager cm =
                 (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        return netInfo != null && netInfo.isConnectedOrConnecting();
+        return netInfo != null && netInfo.isConnected();
     }
 
     @Override
