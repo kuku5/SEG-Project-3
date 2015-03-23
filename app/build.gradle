@@ -41,6 +41,7 @@ dependencies {
     compile 'com.daimajia.slider:library:1.1.2@aar'
     compile 'com.android.support:recyclerview-v7:21.0.0-rc1'
     compile 'de.hdodenhof:circleimageview:1.2.2'
+    compile 'com.melnykov:floatingactionbutton:1.2.0'
     compile project(':facebook')
 
 }

@@ -8,50 +8,58 @@
     tools:context=".MainActivity">
 
 
-    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/card_view_1_welcome1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="4dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:animateLayoutChanges="true"
-        android:padding="0dp"
-
-        card_view:cardBackgroundColor="@android:color/white"
-        card_view:cardCornerRadius="0dp">
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-
-            >
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:fab="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
 
-            <com.google.android.gms.maps.MapView xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/mapView"
+        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/card_view_1_welcome1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="4dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:animateLayoutChanges="true"
+            android:padding="0dp"
+
+            card_view:cardBackgroundColor="@android:color/white"
+            card_view:cardCornerRadius="0dp">
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:animateLayoutChanges="true"
-                android:padding="0dp" />
+                android:layout_height="match_parent"
+                android:orientation="vertical"
 
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
+                >
 
-    <ImageButton
-        android:id="@+id/fab_image_button"
-        android:layout_width="@dimen/fab_button_diameter"
-        android:layout_height="@dimen/fab_button_diameter"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/fab_button_margin_bottom"
-        android:layout_marginLeft="@dimen/fab_button_margin_right"
-        android:background="@drawable/fab_shape"
-        android:backgroundTint="@color/colorAccent"
-        android:src="@drawable/housewhitereal"
-        android:tint="@android:color/white" />
 
+                <com.google.android.gms.maps.MapView xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/mapView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:animateLayoutChanges="true"
+                    android:padding="0dp" />
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+        <com.melnykov.fab.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|left"
+            android:layout_margin="16dp"
+            android:src="@drawable/housewhitereal"
+            fab:fab_colorNormal="@color/colorAccentReal"
+            fab:fab_colorPressed="@color/colorAccentRealDarker"
+            fab:fab_colorRipple="@color/ripplegrey"
+
+            />
+    </FrameLayout>
 
 </RelativeLayout>

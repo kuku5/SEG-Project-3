@@ -7,6 +7,7 @@
     <color name="colorPrimaryLight">#ffffffff</color>
     <color name="colorAccent">#ffffffff</color>
     <color name="colorAccentReal">#009672</color>
+    <color name="colorAccentRealDarker">#ff00785b</color>
     <color name="colorHighlight">#00B78B</color>
     <color name="colorPrimaryText">#ffffffff</color>
     <color name="colorSecondaryText">#ffffffff</color>
@@ -20,6 +21,7 @@
     <color name="superlightgrey">#fffcfcfc</color>
     <color name="lightgrey">#ffdedede</color>
     <color name="grey">#fff4f4f4</color>
+    <color name="ripplegrey">#ffababab</color>
     <color name="artist_text_grey">#ffd1d1d1</color>
     <color name="green">#ff8dd304</color>
     <color name="blue">#ff82e0ff</color>

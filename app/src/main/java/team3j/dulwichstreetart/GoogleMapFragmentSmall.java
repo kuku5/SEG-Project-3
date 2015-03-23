@@ -13,8 +13,10 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -32,6 +34,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.melnykov.fab.FloatingActionButton;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -53,7 +56,7 @@ public class GoogleMapFragmentSmall extends Fragment {
     public MapView mMapView;
     private GoogleMap googleMap;
 
-    private ImageButton imageButton;
+    private FloatingActionButton imageButton;
     private LatLng locStart;
     private ArrayList<Art> artArrayList;
     public static boolean filter;
@@ -83,7 +86,7 @@ public class GoogleMapFragmentSmall extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        // mMapView.onSaveInstanceState(outState);
+         mMapView.onSaveInstanceState(outState);
     }
 
     /**
@@ -101,11 +104,20 @@ public class GoogleMapFragmentSmall extends Fragment {
         View v = inflater.inflate(R.layout.fragment_location_info, container, false);
 
         mMapView = (MapView) v.findViewById(R.id.mapView);
-        if (savedInstanceState == null) {
+
             // First incarnation of this activity.
             setRetainInstance(true);
             mMapView.onCreate(savedInstanceState);
-            imageButton = (ImageButton) v.findViewById(R.id.fab_image_button);
+            FloatingActionButton imageButton = (FloatingActionButton) v.findViewById(R.id.fab);
+
+
+         imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CameraUpdate update = CameraUpdateFactory.newLatLngZoom(locStart, 13);
+                googleMap.animateCamera(update);
+            }
+        });
 
             mMapView.onResume();// needed to get the map to display immediately
 
@@ -123,16 +135,7 @@ public class GoogleMapFragmentSmall extends Fragment {
 
                 setUpVisitedListener();
             }
-        } else {
-            // Reincarnated activity. The obtained map is the same map instance in the previous
-            // activity life cycle. There is no need to reinitialize it.
 
-            mMapView.onCreate(savedInstanceState);
-            mMapView.onResume();// needed to get the map to display immediately
-
-
-            googleMap = mMapView.getMap();
-        }
 
 
         // Perform any camera updates here
@@ -262,13 +265,6 @@ public class GoogleMapFragmentSmall extends Fragment {
         googleMap = mMapView.getMap();
         zoom();
         googleMap.setMyLocationEnabled(true);
-        imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CameraUpdate update = CameraUpdateFactory.newLatLngZoom(locStart, 13);
-                googleMap.animateCamera(update);
-            }
-        });
 
         googleMap.clear();
 
@@ -365,11 +361,13 @@ public class GoogleMapFragmentSmall extends Fragment {
      */
     public void zoom() {
 
-        locStart = new LatLng(51.454013, -0.080496);
+            locStart = new LatLng(51.454013, -0.080496);
 
-        CameraUpdate update = CameraUpdateFactory.newLatLngZoom(locStart, 13);
+            CameraUpdate update = CameraUpdateFactory.newLatLngZoom(locStart, 12);
 
-        googleMap.animateCamera(update);
+            googleMap.animateCamera(update);
+
+
 
 
     }
