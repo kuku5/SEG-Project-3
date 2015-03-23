@@ -140,8 +140,6 @@ public class HomePageFragment extends Fragment {
 
         setupLibraryAnimations(layout);
 
-        setupForScreenSize();
-
         //  ---------- KEYHASH GENERATOR -----------//
         /*
        try {
@@ -162,24 +160,6 @@ public class HomePageFragment extends Fragment {
 
         return layout;
     }
-
-    /**
-     * this detects the Screen Size so the correct elements are initiated
-     */
-    private void setupForScreenSize() {
-        if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE) {
-            Toast.makeText(getActivity(), "Large screen", Toast.LENGTH_LONG).show();
-
-        } else if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_NORMAL) {
-            Toast.makeText(getActivity(), "Normal sized screen", Toast.LENGTH_LONG).show();
-        } else if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_SMALL) {
-            Toast.makeText(getActivity(), "Small sized screen", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(getActivity(), "Screen size is neither large, normal or small", Toast.LENGTH_LONG).show();
-
-        }
-    }
-
 
     /**
      * Handles the web log in and likeview
