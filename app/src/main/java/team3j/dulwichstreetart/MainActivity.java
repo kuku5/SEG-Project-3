@@ -24,7 +24,7 @@ import it.neokree.materialtabs.MaterialTabListener;
 
 /**
  * @author Team 3-J
- *         This is the Main Activity this creates the tabview and adds the fragment for each tab
+ * This is the Main Activity this creates the tabview and adds the fragment for each tab
  */
 
 
@@ -59,7 +59,7 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
     }
 
     /**
-     * this method creates the tab layout and the viewpager which displays the fragments below the tabs
+     * Creates the tab layout and the viewpager which displays the fragments below the tabs
      */
     public void setUpTabsAdapter() {
         //fragment page adapter for the tabs displays a fragment and handles loading of fragments for each tab
@@ -95,7 +95,7 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
 
 
     /**
-     * this method makes the tab view pager go to the selected tab
+     * Makes the tab view pager go to the selected tab
      *
      * @param materialTab
      */
@@ -106,7 +106,7 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
 
 
     /**
-     * this method gets when a tab is reselected by the user
+     * Gets when a tab is reselected by the user
      *
      * @param materialTab
      */
@@ -126,6 +126,13 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
 
     }
 
+    /**
+     * Handles the web log in and likeview
+     *
+     * @param requestCode requestcode of the request
+     * @param resultCode result code of the request
+     * @param data intent data
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         LikeView.handleOnActivityResult(this, requestCode, resultCode, data);
@@ -153,8 +160,8 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
         /**
          * this returns a fragment for each tab space
          *
-         * @param num
-         * @return
+         * @param num position of tab
+         * @return fragment
          */
         public Fragment getItem(int num) {
 
@@ -184,7 +191,7 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
         /**
          * this gets the number of pages in the view pager
          *
-         * @return
+         * @return number of tabs
          */
         @Override
         public int getCount() {
@@ -211,7 +218,6 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
     @Override
     protected void onStop() {
         super.onStop();
-
         System.gc();
 
     }
