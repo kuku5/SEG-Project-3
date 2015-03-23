@@ -3,7 +3,7 @@
     <!--<color name="colorPrimary">#ffffb74a</color>-->
     <!--<color name="colorPrimaryDark">#F57C00</color>-->
     <color name="colorPrimary">#ffffffff</color>
-    <color name="colorPrimaryDark">#ffffffff</color>
+    <color name="colorPrimaryDark">#009672</color>
     <color name="colorPrimaryLight">#ffffffff</color>
     <color name="colorAccent">#ffffffff</color>
     <color name="colorAccentReal">#009672</color>
@@ -14,6 +14,7 @@
     <color name="colorDivider">#fffdfdfd</color>
     <color name="facebookblue">#ff3b5998</color>
     <color name="colorTertiary">#1a5f5f5f</color>
+    <color name="splashColour">#FFF</color>
 
     <color name="white">#ffffffff</color>
 

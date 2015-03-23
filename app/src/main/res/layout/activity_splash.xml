@@ -6,7 +6,7 @@ layout followed by an ImageView which holds the splash screen art-->
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_centerInParent="true"
-    android:background="@android:color/transparent"
+    android:background="@color/splashColour"
     tools:context=".SplashActivity">
 
 
