@@ -147,12 +147,6 @@ public class GoogleMapFragmentSmall extends Fragment {
                             if((googleMap.getMyLocation().getLongitude()<= artLoc.longitude + tolerance) &&(googleMap.getMyLocation().getLongitude()>= artLoc.longitude - tolerance) )
                             {
                                 //if the user is at the street art
-
-
-
-
-                                //artArrayList.get(i).setVisited();
-                                SplashActivity.artArrayList.get(i).setVisited(true);
                                 int date = currentDate.get(Calendar.DATE);
                                 int month = currentDate.get(Calendar.MONTH) +1;
                                 if(month == 13)
@@ -160,12 +154,13 @@ public class GoogleMapFragmentSmall extends Fragment {
                                     month = 1;
                                 }
                                 int year = currentDate.get(Calendar.YEAR);
-
-                                //String date = Integer.toString(currentDate.get(Calendar.DATE))+ "/" + Integer.toString(currentDate.get(Calendar.MONTH))+ "/" + Integer.toString(currentDate.get(Calendar.YEAR));
                                 String fullDate = date + "/" + month + "/" + year;
-                                SplashActivity.artArrayList.get(i).setDateVisited(fullDate);
-                                updateVisited(i, fullDate);
-
+                                //Haven't visited OR Have visited but the date is different
+                                if((!SplashActivity.artArrayList.get(i).getVisited()) || (SplashActivity.artArrayList.get(i).getVisited() && !fullDate.equals(SplashActivity.artArrayList.get(i).getDateVisited()))){
+                                    SplashActivity.artArrayList.get(i).setDateVisited(fullDate);
+                                    SplashActivity.artArrayList.get(i).setVisited(true);
+                                    updateVisited(i, fullDate);
+                                }
 
                             }
                         }
