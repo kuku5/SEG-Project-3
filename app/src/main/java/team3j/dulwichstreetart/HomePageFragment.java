@@ -307,7 +307,7 @@ public class HomePageFragment extends Fragment {
         file_maps.put("RUN", R.drawable.lowresrunstrita);
 
         BaseSliderView.ScaleType scale = BaseSliderView.ScaleType.Fit;
-        ;
+
         if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE) {
             Toast.makeText(getActivity(), "Large screen", Toast.LENGTH_LONG).show();
             scale = BaseSliderView.ScaleType.CenterInside;
