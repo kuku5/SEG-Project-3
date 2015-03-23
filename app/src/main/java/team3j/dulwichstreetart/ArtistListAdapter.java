@@ -23,8 +23,8 @@ import java.util.ArrayList;
 
 /**
  * @author Team 3-J
- *         <p/>
- *         This is the Recycle View Adapter for the Artist List in the artist tab
+ *
+ * This is the Recycle View Adapter for the Artist List in the artist tab
  */
 public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.MyViewHolder> {
 
