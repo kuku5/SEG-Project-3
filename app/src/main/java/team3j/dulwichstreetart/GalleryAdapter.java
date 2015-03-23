@@ -59,9 +59,9 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
     /**
      * This method inflates the layout for each individual ViewHolder item in the gallery cells
      *
-     * @param parent
-     * @param viewType
-     * @return
+     * @param parent viewgroup
+     * @param viewType position
+     * @return viewholder
      */
     @Override
     public GalleryAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
