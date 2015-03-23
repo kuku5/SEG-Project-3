@@ -374,17 +374,6 @@
             </LinearLayout>
 
 
-            //put the googlesmallfragment
-
-            <FrameLayout
-                android:id="@+id/small_map"
-                class="com.google.android.gms.maps.SupportMapFragment"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp">
-
-            </FrameLayout>
-
 
         </LinearLayout>
     </ScrollView>
