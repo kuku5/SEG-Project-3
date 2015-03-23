@@ -64,10 +64,10 @@ public class GoogleMapFragmentSmall extends Fragment {
 
 
     /**
-     * This method returns an instance of the GoogleMapFragmentSmall for the ViewPager
+     * returns an instance of the fragment
      *
-     * @param position
-     * @return
+     * @param position position of tab
+     * @return the instance of the fragment
      */
     public static GoogleMapFragmentSmall getInstance(int position) {
         GoogleMapFragmentSmall myFragmentTab = new GoogleMapFragmentSmall();
@@ -89,18 +89,16 @@ public class GoogleMapFragmentSmall extends Fragment {
     /**
      * Creates the google maps fragment with the correct layout
      *
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return
+     * @param inflater inflates layout
+     * @param container viewgroup container
+     * @param savedInstanceState bundle saved instance
+     * @return view
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // inflaet and return the layout
-        View v = inflater.inflate(R.layout.fragment_location_info, container,
-                false);
-
+        // inflate and return the layout
+        View v = inflater.inflate(R.layout.fragment_location_info, container, false);
 
         mMapView = (MapView) v.findViewById(R.id.mapView);
         if (savedInstanceState == null) {
@@ -142,21 +140,18 @@ public class GoogleMapFragmentSmall extends Fragment {
     }
 
     /**
+     * sets up the listener for visted tab
      */
     private void setUpVisitedListener() {
 
         googleMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
             @Override
             public void onMyLocationChange(Location location) {
-                if (googleMap.getMyLocation() == null) {
-
-                } else {
+                if (googleMap.getMyLocation() != null) {
                     for (int i = 0; i < artArrayList.size(); i++) {
-                        //TODO: the funcional tolerence level is for testing only, the commented one above is the actual tolerence level
-                        //TODO: change before sending off!
-                        // double tolerance=0.000250;
 
-                        double tolerance = 1000;
+                        double tolerance=0.000250;
+                        //double tolerance = 1000; Testing purposes only
 
                         //checks all locations
                         LatLng artLoc = artArrayList.get(i).getLoc();
@@ -191,7 +186,8 @@ public class GoogleMapFragmentSmall extends Fragment {
     }
 
     /**
-     * @return
+     * Checks if google maps is installed on the phone
+     * @return true if it is installed false if not
      */
     public boolean isGoogleMapsInstalled() {
         try {
@@ -205,7 +201,7 @@ public class GoogleMapFragmentSmall extends Fragment {
     }
 
     /**
-     *
+     * Handles onResume fragment
      */
     @Override
     public void onResume() {
@@ -227,7 +223,7 @@ public class GoogleMapFragmentSmall extends Fragment {
     }
 
     /**
-     *
+     * Handles onPause fragment
      */
     @Override
     public void onPause() {
@@ -238,7 +234,7 @@ public class GoogleMapFragmentSmall extends Fragment {
     }
 
     /**
-     *
+     * Handles onDestroy fragment
      */
     @Override
     public void onDestroy() {
@@ -248,7 +244,7 @@ public class GoogleMapFragmentSmall extends Fragment {
     }
 
     /**
-     *
+     * Handles onLowMemory fragment
      */
     @Override
     public void onLowMemory() {
@@ -257,15 +253,7 @@ public class GoogleMapFragmentSmall extends Fragment {
     }
 
     /**
-     *
-     */
-    public void setUpNoFilterMap() {
-        GallerySwipeSingleFragment.filt = false;
-        setUpMap();
-    }
-
-    /**
-     *
+     * Sets up the map and markers
      */
     public void setUpMap() {
 
@@ -282,46 +270,7 @@ public class GoogleMapFragmentSmall extends Fragment {
             }
         });
 
-        /*SharedPreferences preference = getActivity().getSharedPreferences("com.example.app", Context.MODE_PRIVATE);
-        filter = preference.getBoolean("filter",true);
-        index = preference.getInt("index", 0);
-        */
-
-
         googleMap.clear();
-
-
-       /* for (int i = 0; i < artArrayList.size(); i++) {
-            int pos = i + 1;
-            String title = pos + ". ";
-            System.out.println("filter is "+ GoogleMapFragmentSmall.filter);
-           // System.out.println(GoogleMapFragmentSmall.index);
-
-
-
-            if(filter==false) {
-                googleMap.addMarker(new MarkerOptions().position(new LatLng(51.445988, -0.0863601)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)).title("The Inspiration Dulwich Picture Gallery 1811"));
-            }
-            if(artArrayList.get(i).getName()==name && GoogleMapFragmentSmall.filter == true)
-            {
-                System.out.println("when filter works: filter is "+ GoogleMapFragmentSmall.filter +" name is: "+name);
-                googleMap.addMarker(new MarkerOptions().position(artArrayList.get(i).getLoc()).title(title));
-
-
-
-
-                break;
-            }else if(GoogleMapFragmentSmall.filter == false)
-            {
-
-                    googleMap.addMarker(new MarkerOptions().position(artArrayList.get(i).getLoc()).title(title));
-
-            }
-
-
-        }
-        */
-
 
         for (int i = 0; i < artArrayList.size(); i++) {
             int pos = i + 1;
@@ -399,7 +348,7 @@ public class GoogleMapFragmentSmall extends Fragment {
         });
 
 
-        if (filter == true) {
+        if (filter) {
 
             CameraUpdate update = CameraUpdateFactory.newLatLngZoom(filterMarker.getPosition(), 13);
             googleMap.animateCamera(update);
@@ -412,7 +361,7 @@ public class GoogleMapFragmentSmall extends Fragment {
     }
 
     /**
-     *
+     * Zooms into the map
      */
     public void zoom() {
 
@@ -427,10 +376,10 @@ public class GoogleMapFragmentSmall extends Fragment {
 
 
     /**
-     * @param context
-     * @param filename
-     * @return
-     * @throws IOException
+     * @param context Context of Activity
+     * @param filename filename of image
+     * @return bitmap drawable
+     * @throws IOException if filenames not found
      */
     public static Drawable getAssetImage(Context context, String filename) throws IOException {
         AssetManager assets = context.getResources().getAssets();
@@ -439,7 +388,11 @@ public class GoogleMapFragmentSmall extends Fragment {
         return new BitmapDrawable(context.getResources(), bitmap);
     }
 
-
+    /**
+     * Updates the visited list
+     * @param index index of artwork
+     * @param fullDate date visited
+     */
     public void updateVisited(int index, String fullDate) {
         artArrayList.get(index).setVisited(true);
         SharedPreferences visitedPref = getActivity().getSharedPreferences("VisitedList", Context.MODE_PRIVATE);
@@ -452,11 +405,8 @@ public class GoogleMapFragmentSmall extends Fragment {
 
     @Override
     public void onDestroyView() {
-
-
         System.gc();
         super.onDestroyView();
-
     }
 
 }
