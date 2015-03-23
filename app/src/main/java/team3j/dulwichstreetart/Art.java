@@ -80,14 +80,21 @@ public class Art {
         }
     }
 
-    public Drawable getDrawableInspired() {
-        return drawableInspired;
-    }
-
+    /**
+     * Gets the drawable street work
+     * @return drawable of the street art image
+     */
     public Drawable getDrawableStreet() {
         return drawableStreet;
     }
 
+    /**
+     * Gets the drawable asset image
+     * @param context activity being used on
+     * @param filename filename of image
+     * @return Bitmap drawable
+     * @throws IOException if the filename does not match an image
+     */
     public static Drawable getAssetImage(Context context, String filename) throws IOException {
         AssetManager assets = context.getResources().getAssets();
         InputStream buffer = new BufferedInputStream((assets.open("" + filename + ".jpg")));
