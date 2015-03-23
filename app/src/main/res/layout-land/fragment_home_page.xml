@@ -60,25 +60,12 @@
                             android:orientation="vertical">
 
 
-                            <!--<com.daimajia.slider.library.SliderLayout-->
-                                <!--android:id="@+id/slider"-->
-                                <!--android:layout_width="match_parent"-->
-                                <!--android:layout_height="@dimen/height"-->
-                                <!--/>-->
-
-                            <ImageView
-                            android:layout_width="match_parent"
+                            <com.daimajia.slider.library.SliderLayout
+                                android:id="@+id/slider"
+                                android:layout_width="match_parent"
                                 android:layout_height="@dimen/height"
-                            android:src="@drawable/lowresconorharrington"/>
+                                />
 
-                            <!--<FrameLayout-->
-                            <!--android:id="@+id/small_map"-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="100dp"-->
-                            <!--class="com.google.android.gms.maps.SupportMapFragment"-->
-                            <!-->-->
-
-                            <!--</FrameLayout>-->
 
 
 
