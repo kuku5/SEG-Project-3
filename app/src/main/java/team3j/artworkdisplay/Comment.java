@@ -210,6 +210,11 @@ public class Comment {
         return isPage;
     }
 
+    /**
+     * Returns string representation of Comment
+     *
+     * @return concatenation of poster name and message
+     */
     public String toString() {
         return posterName + " " + message;
     }
