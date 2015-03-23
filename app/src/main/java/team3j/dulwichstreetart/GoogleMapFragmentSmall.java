@@ -73,12 +73,12 @@ public class GoogleMapFragmentSmall extends Fragment {
      * @return the instance of the fragment
      */
     public static GoogleMapFragmentSmall getInstance(int position) {
+
         GoogleMapFragmentSmall myFragmentTab = new GoogleMapFragmentSmall();
         Bundle args = new Bundle();
         args.putInt("position", position);
         myFragmentTab.setArguments(args);
         return myFragmentTab;
-
 
     }
 
@@ -101,42 +101,33 @@ public class GoogleMapFragmentSmall extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // inflate and return the layout
-        View v = inflater.inflate(R.layout.fragment_location_info, container, false);
+        View v = inflater.inflate(R.layout.fragment_location_info, container,
+                false);
+        setRetainInstance(true);
 
         mMapView = (MapView) v.findViewById(R.id.mapView);
+        mMapView.onCreate(savedInstanceState);
+        imageButton = (FloatingActionButton) v.findViewById(R.id.fab);
 
-            // First incarnation of this activity.
-            setRetainInstance(true);
-            mMapView.onCreate(savedInstanceState);
-            FloatingActionButton imageButton = (FloatingActionButton) v.findViewById(R.id.fab);
-
-
-         imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CameraUpdate update = CameraUpdateFactory.newLatLngZoom(locStart, 13);
-                googleMap.animateCamera(update);
-            }
-        });
-
-            mMapView.onResume();// needed to get the map to display immediately
+        mMapView.onResume();// needed to get the map to display immediately
 
 
-            try {
-                MapsInitializer.initialize(getActivity().getApplicationContext());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
 
 
-            if (isGoogleMapsInstalled()) {
 
-                setUpMap();
+        try {
+            MapsInitializer.initialize(getActivity().getApplicationContext());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-                setUpVisitedListener();
-            }
 
+        if(isGoogleMapsInstalled()) {
 
+            setUpMap();
+
+            setUpVisitedListener();
+        }
 
         // Perform any camera updates here
         return v;
@@ -209,10 +200,9 @@ public class GoogleMapFragmentSmall extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (googleMap != null) {
             filter = GallerySwipeSingleFragment.filt;
             name = GallerySwipeSingleFragment.ind;
-            System.out.println("on resume filter: " + GoogleMapFragmentSmall.filter + " index: " + name);
+          //  System.out.println("on resume filter: " + GoogleMapFragmentSmall.filter + " index: " + name);
 
             if (isGoogleMapsInstalled()) {
 
@@ -222,7 +212,7 @@ public class GoogleMapFragmentSmall extends Fragment {
             mMapView.onResume();
 
             GoogleMapFragmentSmall.filter = false;
-        }
+
     }
 
     /**
@@ -266,6 +256,13 @@ public class GoogleMapFragmentSmall extends Fragment {
         zoom();
         googleMap.setMyLocationEnabled(true);
 
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CameraUpdate update = CameraUpdateFactory.newLatLngZoom(locStart, 13);
+                googleMap.animateCamera(update);
+            }
+        });
         googleMap.clear();
 
         for (int i = 0; i < artArrayList.size(); i++) {
@@ -363,7 +360,7 @@ public class GoogleMapFragmentSmall extends Fragment {
 
             locStart = new LatLng(51.454013, -0.080496);
 
-            CameraUpdate update = CameraUpdateFactory.newLatLngZoom(locStart, 12);
+        CameraUpdate update = CameraUpdateFactory.newLatLngZoom(locStart, 12);
 
             googleMap.animateCamera(update);
 
