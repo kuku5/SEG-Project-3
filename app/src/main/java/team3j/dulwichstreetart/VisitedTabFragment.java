@@ -17,7 +17,7 @@ import android.widget.Button;
 
 /**
  * @author Team 3-J
- *         Visited Tab Fragment for to be displayed in the tab Fragment
+ * Visited Tab Fragment for to be displayed in the tab Fragment
  */
 
 
@@ -29,10 +29,10 @@ public class VisitedTabFragment extends Fragment {
     private Button resetButton;
 
     /**
-     * this returns an instance of the visited tab fragment to be used in viewpager
+     * returns an instance of the fragment
      *
-     * @param position
-     * @return
+     * @param position position of tab
+     * @return the instance of the fragment
      */
     public static VisitedTabFragment getInstance(int position) {
         if (visitedTabFragment == null) {
@@ -50,10 +50,10 @@ public class VisitedTabFragment extends Fragment {
      * Sets onClickListener for both buttons - Information and Reset button.
      * Dialog box created for each button press.
      *
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return
+     * @param inflater LayoutInflator
+     * @param container Viewgroup
+     * @param savedInstanceState bundle of instance
+     * @return layout view
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -147,7 +147,7 @@ public class VisitedTabFragment extends Fragment {
     }
 
     /**
-     *
+     * Update the visited list onscreen
      */
     public void updateList() {
         if (visitedAdapter != null) {
@@ -155,9 +155,6 @@ public class VisitedTabFragment extends Fragment {
         }
     }
 
-    /**
-     *
-     */
     @Override
     public void onDestroyView() {
 

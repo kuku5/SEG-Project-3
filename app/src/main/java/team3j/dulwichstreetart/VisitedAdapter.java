@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 /**
  * @author Team 3-J
- *         This is the adapter that puts elements into the Gallery
+ * This is the adapter that puts elements into the Gallery
  */
 public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHolderVisited> {
 
@@ -49,9 +49,9 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
     /**
      * This method inflates the layout for each individual ViewHolder item in the visited tab cards
      *
-     * @param parent
-     * @param viewType
-     * @return
+     * @param parent Viewgroup parent
+     * @param viewType viewtype position
+     * @return viewholder
      */
     @Override
     public VisitedAdapter.MyViewHolderVisited onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -64,8 +64,9 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
     }
 
     /**
-     * @param position
-     * @return position
+     * Returns position
+     * @param position position of view type
+     * @return position of view type
      */
     @Override
     public int getItemViewType(int position) {
@@ -76,8 +77,8 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
     /**
      * onBindViewHolder is called to fill elements in each card in the visited tab with its respective information and design
      *
-     * @param holder
-     * @param position
+     * @param holder ViewHolder
+     * @param position position of view type
      */
     @Override
     public void onBindViewHolder(final VisitedAdapter.MyViewHolderVisited holder, final int position) {
@@ -85,13 +86,13 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
         //add image and description to the view for each gallery item
         holder.txtLineOne.setText("" + galleryData.get(position).getName());
 
-        if (SplashActivity.artArrayList.get(position).getVisited() == true) {
+        if (SplashActivity.artArrayList.get(position).getVisited()) {
             holder.visitedQuestion_textView.setText("Visited");
             holder.visitedCard.setCardBackgroundColor(context.getResources().getColor(R.color.colorHighlight));
             holder.txtLineOne.setTextColor(context.getResources().getColor(R.color.white));
             holder.visitedQuestion_textView.setTextColor(context.getResources().getColor(R.color.white));
 
-        } else if (SplashActivity.artArrayList.get(position).getVisited() == false) {
+        } else if (!SplashActivity.artArrayList.get(position).getVisited()) {
             holder.visitedQuestion_textView.setText("Not Visited");
             holder.visitedCard.setCardBackgroundColor(context.getResources().getColor(R.color.visitedTabGrey));
             holder.txtLineOne.setTextColor(context.getResources().getColor(R.color.colorHighlight));
@@ -104,21 +105,6 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
 
         holder.art_address.setText("Address: " + galleryData.get(position).getArtAddress());
 
-    }
-
-    /**
-     * Reads the image from Assets and returns a bitmap drawable
-     *
-     * @param context
-     * @param filename
-     * @return BitmapDrawable of the image
-     * @throws IOException If the image cannot be found
-     */
-    public static Drawable getAssetImage(Context context, String filename) throws IOException {
-        AssetManager assets = context.getResources().getAssets();
-        InputStream buffer = new BufferedInputStream((assets.open(filename + ".jpg")));
-        Bitmap bitmap = BitmapFactory.decodeStream(buffer);
-        return new BitmapDrawable(context.getResources(), bitmap);
     }
 
     /**
@@ -143,8 +129,6 @@ public class VisitedAdapter extends RecyclerView.Adapter<VisitedAdapter.MyViewHo
         ImageView image;
         RelativeLayout cardRelative;
         android.support.v7.widget.CardView visitedCard;
-//        Button infoButton;
-//        Button resetButton;
 
         boolean expanded = true;
 
