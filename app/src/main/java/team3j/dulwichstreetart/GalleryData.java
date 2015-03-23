@@ -20,16 +20,13 @@ import twitter4j.Status;
 
 /**
  * @author Team 3-J
- *         <p/>
- *         This returns the data for the specific artwork also stores array of images
- *         returns data from xml strings
+ *
+ * This returns the data for the specific artwork also stores array of images
+ * returns data from xml strings
  */
 
 public class GalleryData {
 
-
-    //    public static ArrayList<Art> visited = new ArrayList<>();
-//    public static ArrayList<Art> toVisit = new ArrayList<>();
     private ArrayList<Status> todaysTweets;
     private ArrayList<Art> artworkList;
     private static GalleryData mGalleryData;
@@ -40,7 +37,7 @@ public class GalleryData {
     /**
      * Gets the data of all the artworks
      *
-     * @return
+     * @return gallerydata
      */
     public static GalleryData get() {
         return mGalleryData;
@@ -49,7 +46,7 @@ public class GalleryData {
     /**
      * Constructs a GalleryData
      *
-     * @param context
+     * @param context context of applicationn
      */
     public GalleryData(Context context) {
         artworkList = CreateGalleryData(context);
@@ -98,7 +95,8 @@ public class GalleryData {
     }
 
     /**
-     * @return
+     * Creates the gallerydata
+     * @return newly created gallery data
      */
     public static GalleryData create(Context context) {
         if (mGalleryData == null) {
@@ -122,7 +120,7 @@ public class GalleryData {
     /**
      * Gets data of all the artwork, by setting them into an arraylist to return
      *
-     * @param context
+     * @param context context of activity
      * @return data of artwork
      */
 
@@ -254,7 +252,7 @@ public class GalleryData {
     /**
      * get drawable for map button homepage
      *
-     * @return
+     * @return map button
      */
     public Drawable getMapButton() {
         return mapButton;
@@ -263,7 +261,7 @@ public class GalleryData {
     /**
      * get drawable for about button homepage
      *
-     * @return
+     * @return gets about dulwich
      */
     public Drawable getAboutDulwich() {
         return aboutDulwich;
@@ -272,7 +270,7 @@ public class GalleryData {
     /**
      * get drawable for tweet bird homepage
      *
-     * @return
+     * @return twitter bird logo
      */
     public Drawable getTweetBird() {
         return tweetBird;
